@@ -8,6 +8,15 @@ templates:
       status: running
       restartPolicy: always
       version: 1.0
+  color-in-led:
+    main:
+      settings: 
+        image: songhui/color-led:{{COLOR}}
+        createOptions: "{\"HostConfig\": {\"Privileged\": true }}"
+      type: docker
+      status: running
+      restartPolicy: always
+      version: 1.0
 variants:
   text-red:
     template: color-in-text
@@ -21,3 +30,15 @@ variants:
     template: color-in-text
     parameter:
       COLOR: green
+  led-green:
+    template: color-in-led
+    parameter:
+      COLOR: green
+  led-blue:
+    template: color-in-led
+    parameter:
+      COLOR: blue
+  led-red:
+    template: color-in-led
+    parameter:
+      COLOR: red

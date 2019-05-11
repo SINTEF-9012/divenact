@@ -30,35 +30,36 @@ var resolve = function(input_pool){
 
 var candidates = resolve(pool);
 
-var createEdgeDeployment = function(done) {
-    console.log();
-    console.log('Set deploymment ' + productDeploymentId + ' to product' );
-    
-    registry.getConfiguration(baseDeploymentId, function(err, baseDeployment) {
-        if (err) {
-            console.log('getConfiguration failed: ' + err);
-        } else {
-            console.log(baseDeployment);
-            baseDeployment.id = productDeploymentId;
-            baseDeployment.content.modulesContent.$edgeAgent['properties.desired'].modules=candidates['text-red'];
-            baseDeployment.targetCondition = "tags.environment='product'";
-            console.log(baseDeployment);
-            registry.removeConfiguration(productDeploymentId, function(err) {
-                if(err){
-                    console.log(productDeploymentId + " not found");
-                }
-            });
-            registry.addConfiguration(baseDeployment, function(err) {
-                if (err) {
-                  console.log('add configuration failed: ' + err);
-                } else {
-                  console.log('add configuration succeeded');
-                }
-              });
+var createEdgeDeployment = function(deploymentId, modules, condition, done) {
+    console.log('Set deploymment ' + deploymentId + ' to product' );
+    var baseDeployment = require('./base_deployment.json')
+    baseDeployment.id = deploymentId;
+    baseDeployment.content.modulesContent.$edgeAgent['properties.desired'].modules=modules;
+    baseDeployment.targetCondition = condition; //"tags.environment='product'";
+    console.log(JSON.stringify( baseDeployment, null, 2));
+    registry.removeConfiguration(deploymentId, function(err) {
+        if(err){
+            console.log(deploymentId + " not found");
         }
-    });
+        registry.addConfiguration(baseDeployment, function(err) {
+            if (err) {
+                console.log('add configuration failed: ' + err);
+                if(done) { done(); };
+            } else {
+                console.log('add configuration succeeded');
+                if (done) { done(); }
+            }
+        });
+    }); 
 };
 
 //console.log(JSON.stringify(resolve(pool)))
-createEdgeDeployment()
+var setProduction = function(varname){
+    createEdgeDeployment(
+        'production',
+        candidates[varname],
+        "tags.environment='product'"
+    )
+}
 
+setProduction('led-red')
