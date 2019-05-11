@@ -1,0 +1,23 @@
+templates:
+  color-in-text:
+    main:
+      settings: 
+        image: songhui/color-in-text:{{COLOR}}
+        createOptions: ""
+      type: docker
+      status: running
+      restartPolicy: always
+      version: 1.0
+variants:
+  text-red:
+    template: color-in-text
+    parameter:
+      COLOR: red
+  text-blue:
+    template: color-in-text
+    parameter:
+      COLOR: blue
+  text-green:
+    template: color-in-text
+    parameter:
+      COLOR: green

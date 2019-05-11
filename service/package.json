@@ -1,0 +1,13 @@
+{
+  "name": "divenact-service",
+  "version": "0.0.1",
+  "private": true,
+  "main": "create_product",
+  "author": "Hui Song",
+  "license": "MIT",
+  "dependencies": {
+    "azure-iothub": "1.9.9",
+    "azure-storage": "^2.8.1",
+    "node-yaml": "^3.2.0"
+  }
+}
