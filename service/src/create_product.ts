@@ -12,7 +12,7 @@ let registry = Registry.fromConnectionString(connectionString);
 var pool = yaml.readSync('../pool.yaml')
 console.log(pool);
 
-var resolve = function(input_pool){
+var resolvePool = function(input_pool){
     var result = {}
     var variants = input_pool.variants;
     for (var varname in variants){
@@ -27,7 +27,7 @@ var resolve = function(input_pool){
     return result;
 }
 
-var candidates = resolve(pool);
+var candidates = resolvePool(pool);
 
 async function createEdgeDeployment (deploymentId: string, modules: object, condition: string): Promise<string> {
     return new Promise<string>((resolve, reject) => { 
@@ -59,8 +59,18 @@ async function setProduction (varname: string){
         'production',
         candidates[varname],
         "tags.environment='product'"
-    )
+    );
 }
+
+async function setPreview (varname: string){
+    await createEdgeDeployment(
+        'preview',
+        candidates[varname],
+        "tags.environment='preview'"
+    );
+}
+
+
 
 async function listDevices(): Promise<Device[]> {
     return new Promise<Device[]>((resolve, reject) => {

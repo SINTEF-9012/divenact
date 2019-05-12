@@ -10,6 +10,6 @@ We use KY-016. Follow this [tutorial](https://iotguider.in/raspberrypi/rgb-3-col
 
 Or, use songhui/color-led:[red|green|blue], from docker hub
 
-# Turn it on
+# Turn it on (in red)
 
 ```bash sudo docker run --rm --privileged=true songhui/color-led:red```
