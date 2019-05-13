@@ -113,7 +113,7 @@ async function tagTwin(deviceId: string, newtag: string): Promise<Twin>{
 
 
 (async()=>{
-    let newproduct = await setProduction('led-red');
+    let newproduct = await setProduction('led-green');
     //let devices = await listDevices();
     //let twin = await tagTwin('PiEdge1', 'preview');
     //console.log(twin);
