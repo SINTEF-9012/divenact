@@ -70,8 +70,6 @@ async function setPreview (varname: string){
     );
 }
 
-
-
 async function listDevices(): Promise<Device[]> {
     return new Promise<Device[]>((resolve, reject) => {
       registry.list((error: Error, deviceList: Device[]) => {
