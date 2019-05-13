@@ -22,3 +22,24 @@ Remember the following credentials:
 - ```npm install```
 - ```tsc```
 - ```node create_product.ts```
+
+# Features
+
+## Short term
+
+| id | name | dep | status |
+|---|---|---|---|
+| 1 | create a deployment| | done |
+| 2 | set tag to one device | | done |
+| 3 | update a deployment with condition | | |
+| 4 | create (or appoint) a production deployment | 1 | done? |
+| 5 | create a preview deployment | 1 | |
+| 6 | tag _n_ devices to preview | 2 | |
+| 7 | a separate daemon to send device info | | hard? |
+| 8 | a listener of device info | 7 | |
+| 9 | monitor lifecycle of devices | | |
+| 10 | keep _n_ devices for preview | 9 | | |
+| 11 | move all devices to product | 4, 6 | | |
+| 12 | command line UI in node | | |
+| 13 | track devices installed on edge | 7 | |
+| *14* | shuffle devices among diverse versions | 1, 2 | |
