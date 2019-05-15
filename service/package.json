@@ -8,6 +8,7 @@
   "dependencies": {
     "azure-iothub": "1.9.9",
     "azure-storage": "^2.8.1",
+    "commander": "^2.20.0",
     "node-yaml": "^3.2.0"
   },
   "devDependencies": {
