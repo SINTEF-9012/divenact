@@ -2,14 +2,19 @@
   "name": "divenact-service",
   "version": "0.0.1",
   "private": true,
-  "main": "create_product",
+  "main": "./build/main.js",
   "author": "Hui Song",
   "license": "MIT",
+  "scripts":{
+    "cmd": "node ./build/main.js"
+  },
   "dependencies": {
+    "@types/underscore": "^1.8.18",
     "azure-iothub": "1.9.9",
     "azure-storage": "^2.8.1",
     "commander": "^2.20.0",
-    "node-yaml": "^3.2.0"
+    "node-yaml": "^3.2.0",
+    "underscore": "^1.9.1"
   },
   "devDependencies": {
     "@types/node": "^12.0.0"

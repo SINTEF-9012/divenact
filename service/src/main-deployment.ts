@@ -1,17 +1,20 @@
 import * as program from "commander";
-import {createEdgeDeploymentByEnvironment} from './deployment'
+import {createEdgeDeploymentByEnvironment, listDeployments} from './deployment'
 
 program
     .version('0.1.0')
     .command('list').alias('ls')
-    .option('-d, --details', 'show details')
+    .option('-c, --conditions', 'show target conditions')
     .action((cmd)=>{
-        if(cmd.details){
-            console.log('show details');
-        }
-        else{
-            console.log('list all deployments');
-        }
+        listDeployments().then((result)=>{
+            if('conditions' in cmd){
+                console.log(result);
+            }
+            else{
+                console.log(Object.keys(result));
+            }
+        })
+        
     })
 
 program.version('0.1.0')

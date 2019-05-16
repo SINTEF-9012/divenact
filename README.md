@@ -17,9 +17,9 @@ Remember the following credentials:
 
 Alternative way:
 - SSH into the edge device
-- ```bash curl -L https://raw.githubusercontent.com/SINTEF-9012/divenact/master/edge/bootstrap/setup.sh -o setup.sh```
-- ```bash echo '<Your device connection string>'>connection.credential```
-- ```bash sudo bash ./setup.sh```
+- ```curl -L https://raw.githubusercontent.com/SINTEF-9012/divenact/master/edge/bootstrap/setup.sh -o setup.sh```
+- ```echo '<Your device connection string>'>connection.credential```
+- ```sudo bash ./setup.sh```
 
 # Execute diversity management services
 
@@ -28,6 +28,61 @@ Alternative way:
 - ```npm install```
 - ```tsc```
 - ```node create_product.ts```
+
+## Commandline interface
+
+```node ./build/main.js <command> [--version] [--help]```
+
+```
+Top level Commands:
+  device         Handle edge devices
+  deployment     Handle deployments
+  global         Handle devices and deployments together
+  help [cmd]     display help for [cmd]
+```
+
+```node .\build\main.js global <command>```
+
+```
+Commands:
+  production <variation>: set variant for production, and tag all devices into 'production'
+  preview [options] <variation>: set variant for preview, and tag all or random devices into 'preview'
+    Options:
+        -r, --random <N>  Preview on N random devices
+```
+
+```node ./build/main.js device <command>```
+
+```
+Commands:
+  list|ls [options] : List all edge devices
+    Options:
+        -d, --details        show details
+        -t, --tag <tagName>  show devices and their values of this tag
+        -h, --help           output usage information
+  tag [options] <id> [otherIds...]: Add/update tags to devices (appointed by id's, or randomly with a number)
+    Options:
+        -e, --environment <value>  set environment tag
+        -c, --capability <value>   set capability tag
+        -r, --random               tag randomly N devices
+        -h, --help                 output usage information
+```
+
+```node ./build/main.js deployment <command>```
+
+```
+Commands:
+  list|ls [options]
+    Options:
+        -c, --conditions  show target conditions
+        -h, --help        output usage information
+  add [options] <variation>: add the deployment variation into IoT Hub
+    Options:
+        -e, --environment <value>  set the environment tag
+        -h, --help                 output usage information
+```
+
+
 
 # Features
 
