@@ -1,5 +1,5 @@
 import * as program from "commander";
-import {createEdgeDeploymentByEnvironment, listDeployments} from './deployment'
+import {createEdgeDeploymentByEnvironment, listDeployments, triggerDeloyment} from './deployment'
 
 program
     .version('0.1.0')
@@ -24,6 +24,15 @@ program.version('0.1.0')
         if('environment' in cmd){
             createEdgeDeploymentByEnvironment(variation, cmd.environment)
         }
+    })
+program.parse(process.argv);
+
+program
+    .command('trigger <id>')
+    .action((id)=>{
+        triggerDeloyment(id).then((id)=>{
+            console.log(`${id} is updated and is waiting for redeployment on relevant devices`)
+        })
     })
 program.parse(process.argv);
 

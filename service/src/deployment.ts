@@ -97,3 +97,11 @@ export async function listDeployments(): Promise<object>{
     return Promise.resolve(result);
 }
 
+export async function triggerDeloyment(deploymentId: string): Promise<string>{
+    let deployment = (await registry.getConfiguration(deploymentId)).responseBody;
+    deployment.priority += 1;
+    
+    return Promise.resolve(<string>(await registry.updateConfiguration(deployment)).responseBody.id);
+
+}
+
