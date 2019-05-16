@@ -15,6 +15,12 @@ Remember the following credentials:
 - Create a empty ```connection.credential``` file, or ```cp connection.credential.bak connection.credential```. Copy the connection string into this file
 - ```sudo bash ./setup.sh```
 
+Alternative way:
+- SSH into the edge device
+- ```bash curl -L https://raw.githubusercontent.com/SINTEF-9012/divenact/master/edge/bootstrap/setup.sh -o setup.sh```
+- ```bash echo '<Your device connection string>'>connection.credential```
+- ```bash sudo bash ./setup.sh```
+
 # Execute diversity management services
 
 - Go to the [service] foler
