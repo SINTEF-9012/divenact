@@ -18,6 +18,6 @@ apt-get install -f
 
 connection=$(<connection.credential)
 # Check the indention
-sed -i.bak "s/.*device_connection_string:.*/  device_connection_string: $connection/" /etc/iotedge/config.yaml 
+sed -i.bak "s@.*device_connection_string:.*@  device_connection_string: $connection@" /etc/iotedge/config.yaml 
 
 systemctl restart iotedge
