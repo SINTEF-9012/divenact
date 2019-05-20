@@ -4,6 +4,7 @@ import * as fs from 'fs';
 
 //var iothub = require('azure-iothub');
 import * as yaml from 'node-yaml';
+import { results } from 'azure-iot-common';
 
 var credential = yaml.readSync('../../azureiot.credential');
 var connectionString = credential.iothub.connection;
@@ -29,7 +30,7 @@ var resolvePool = function(input_pool){
 
 var candidates = resolvePool(pool);
 
-async function removeDeployment(deploymentId: string){
+export async function removeDeployment(deploymentId: string){
     return new Promise<string>((resolve) => { 
         registry.removeConfiguration(deploymentId, function(err) {
             if(err){
@@ -44,12 +45,14 @@ async function removeDeployment(deploymentId: string){
     });
 }
 
-async function createEdgeDeployment (deploymentId: string, modules: object, condition: string): Promise<string> {
+async function createEdgeDeployment (deploymentId: string, modules: object, condition: string, priority:number = 1): Promise<string> {
     return new Promise<string>((resolve, reject) => { 
         let baseDeployment = JSON.parse(fs.readFileSync('./base_deployment.json', 'utf8'));
         baseDeployment.id = deploymentId;
         baseDeployment.content.modulesContent.$edgeAgent['properties.desired'].modules=modules;
         baseDeployment.targetCondition = condition; 
+        baseDeployment.priority = priority;
+        
         removeDeployment(deploymentId).then((id)=>{
             registry.addConfiguration(baseDeployment, function(err) {
                 if (err) {
@@ -65,26 +68,35 @@ async function createEdgeDeployment (deploymentId: string, modules: object, cond
 }
 
 export async function createEdgeDeploymentByEnvironment(varname: string, environment: string){
-    await createEdgeDeployment(
+    return createEdgeDeployment(
         `env_${environment}`,
         candidates[varname],
         `tags.environment='${environment}'`
-    )
-}
-
-export async function setProduction (varname: string){
-    await createEdgeDeployment(
-        'production',
-        candidates[varname],
-        "tags.environment='production'"
     );
 }
 
-export async function setPreview (varname: string){
-    await createEdgeDeployment(
-        'preview',
+async function removeEdgeDeploymentForDevice(deviceId: string): Promise<String>{
+    let deployments = await listDeployments();
+    let removed = [];
+    for(let deployment of Object.keys(deployments)){
+        if(deployment.startsWith(`device_${deviceId}_`)){
+            removed.push(removeDeployment(deployment))
+        }
+    }
+    let finallyRemoved = await Promise.all(removed);
+    return Promise.resolve(finallyRemoved.pop());
+}
+
+export async function createEdgeDeploymentByDevice(varname: string, deviceId: string){
+    let removed = await removeEdgeDeploymentForDevice(deviceId);
+    if(removed){
+        console.log(`Deployment ${removed} removed first`)
+    }
+    return createEdgeDeployment(
+        `device_${deviceId}_${varname}`.toLowerCase(),
         candidates[varname],
-        "tags.environment='preview'"
+        `deviceId='${deviceId}'`,
+        10
     );
 }
 
@@ -104,4 +116,15 @@ export async function triggerDeloyment(deploymentId: string): Promise<string>{
     return Promise.resolve(<string>(await registry.updateConfiguration(deployment)).responseBody.id);
 
 }
+
+export async function clearDeployments(): Promise<string[]>{
+    let deployments = await listDeployments();
+    let result: Promise<string>[] = [];
+    for(let id of Object.keys(deployments)){
+        result.push(removeDeployment(id))
+    }
+    return Promise.all(result);
+}
+
+
 

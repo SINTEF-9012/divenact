@@ -1,6 +1,6 @@
 import {Device, Twin} from 'azure-iothub';
 import {listDevices} from './device';
-import {setProduction} from './deployment';
+
 
 import * as program from "commander";
 

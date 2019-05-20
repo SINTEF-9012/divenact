@@ -1,33 +1,29 @@
 import * as program from "commander";
 import {listEdgeIds, tagTwinAll, tagTwinRandom} from './device'
 import {createEdgeDeploymentByEnvironment} from './deployment'
+import {shuffleProduction, production, preview} from './global'
 
 program
-    .version('0.1.0')
     .command('production <variation>')
     .action((variation, cmd)=>{
-        createEdgeDeploymentByEnvironment(variation, 'production')
-        tagTwinAll('environment', 'production')
+        production(variation);
     });
 
 program
-    .version('0.1.0')
     .command('preview <variation>')
     .option('-r, --random <N>', 'Preview on N random devices', parseInt)
     .action((variation, cmd)=>{
-        createEdgeDeploymentByEnvironment(variation, 'preview');
-        if('random' in cmd){
-            tagTwinRandom('environment', 'preview', cmd.random).then((result)=>{
-                console.log(`Preview on ${result}`);
-            });
-        }
-        else{
-            tagTwinAll('environment', 'preview').then((result)=>{
-                console.log(`Preview on ${result}`);
-            });
-        }
+        preview(variation, cmd.random);
     })
 
+program
+    .command('shuffle <variation> [variantions...]')
+    .action((variation, variations)=>{
+        variations.push(variation);
+        shuffleProduction(variations).then((result)=>{
+            console.log(result);
+        })
+    });
 
 program.version('0.1.0')
     .command('add <variation>')
