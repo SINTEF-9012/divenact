@@ -30,6 +30,5 @@ program.version('0.1.0')
     .action((variation)=>{
         console.log('show ')
     })
-program.parse(process.argv);
 
-//program.parse(process.argv);
+program.parse(process.argv);

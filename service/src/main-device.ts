@@ -59,6 +59,5 @@ program.version('0.1.0')
         }
         
     })
-program.parse(process.argv);
 
-//program.parse(process.argv);
+program.parse(process.argv);
