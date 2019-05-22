@@ -1,10 +1,32 @@
-import { listDevices, tagTwinShuffled, listEdgeIds, tagTwinAll, tagTwinRandom } from "./device";
-import { createEdgeDeploymentByEnvironment } from "./deployment";
+import { listDevices, tagTwinShuffled, listEdgeIds, tagTwinAll, tagTwinRandom, listTagValue } from "./device";
+import { createEdgeDeploymentByEnvironment, getCapabilityFromVariant } from "./deployment";
 
 export async function shuffleProduction(variants: string[]){
+    let group = {}
+    for(let variant of variants){
+        let capability = getCapabilityFromVariant(variant);
+        if(!capability)
+            capability = 'ANY';
+        if(! (capability in group)){
+            group[capability] = <string[]>[];
+        }
+        group[capability].push(variant)
+    }
+
+    //let devices = {PiEdge1: 'ky016', PiEdge2: 'ky016', PiEdge3: 'ky016', PiEdge4: 'ky016', PiEdge5: 'sensehat'} //
+    let devices = await listTagValue('capability');
+    let isDeviceWithCapability = (device:string, capability:string) => devices[device] == capability || (capability=='ANY' && !devices[device])
+    //console.log(group);
     let toTag = (value: string)=> `shuffle_${value}`;
-    let devices = await listEdgeIds();
-    let taggedDevices = await tagTwinShuffled('environment', variants.map(toTag), devices);
+    let taggedDevices = []
+    for(let capability in group){
+        let subvariants = group[capability];
+        let subdevices = Object.keys(devices).filter((device) => isDeviceWithCapability(device, capability));
+        //console.log(`====> ${subvariants}, ${subdevices}`)
+        taggedDevices.push(tagTwinShuffled('environment', subvariants.map(toTag), subdevices));
+    }
+
+    //await Promise.all(taggedDevices);
 
     let deployed: Promise<string>[] = [];
     for(let variant of variants){
@@ -22,7 +44,8 @@ export async function production(variant: string){
 export async function preview(variant: string, numberToPreview: number){
     let result = null;
     if(numberToPreview){
-        result = await tagTwinRandom('environment', 'preview', numberToPreview);
+        let capability = getCapabilityFromVariant(variant);
+        result = await tagTwinRandom('environment', 'preview', numberToPreview, capability);
     }
     else{
         result = await tagTwinAll('environment', 'preview');
