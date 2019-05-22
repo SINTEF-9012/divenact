@@ -17,6 +17,20 @@ templates:
       status: running
       restartPolicy: always
       version: 1.0
+  color-in-hat:
+    main:
+      settings: 
+        image: songhui/color-hat:{{COLOR}}
+        createOptions: "{\"HostConfig\": {\"Privileged\": true }}"
+      type: docker
+      status: running
+      restartPolicy: always
+      version: 1.0
+predefinedtags:
+  color-in-led: 
+    capability: ky016
+  color-in-hat: 
+    capability: sensehat
 variants:
   text-red:
     template: color-in-text
@@ -42,3 +56,15 @@ variants:
     template: color-in-led
     parameter:
       COLOR: red
+  hat-red:
+    template: color-in-hat
+    parameter:
+      COLOR: red
+  hat-green:
+    template: color-in-hat
+    parameter:
+      COLOR: green
+  hat-blue:
+    template: color-in-hat
+    parameter:
+      COLOR: blue

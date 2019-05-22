@@ -62,13 +62,18 @@ export async function tagTwinAll(tagName: string, tagValue: string): Promise<str
     })
 }
 
-export async function tagTwinRandom(tagName: string, tagValue: string, numberToTag: number): Promise<string[]>{
+export async function tagTwinRandom(tagName: string, tagValue: string, numberToTag: number, capability:string = undefined): Promise<string[]>{
     let tagedDevices = await listTagValue(tagName);
     let untagedIds: string[] = [];
     for(let id in tagedDevices){
         if(tagedDevices[id] != tagValue){
             untagedIds.push(id);
         }
+    }
+
+    if(capability){
+        let capabilities = await listTagValue('capability');
+        untagedIds = untagedIds.filter((id) => capabilities[id]==capability);
     }
     
     let shuffled = <string[]> shuffle(untagedIds)
@@ -82,7 +87,6 @@ export async function tagTwinRandom(tagName: string, tagValue: string, numberToT
 }
 
 export async function tagTwinShuffled(tagName: string, tagValues: string[], deviceIds: string[]): Promise<object>{
-    console.log(tagValues);
     let ids = <string[]> shuffle(deviceIds);
     let tagged: Promise<string>[] = [];
     let taggedValues: string[] = [];

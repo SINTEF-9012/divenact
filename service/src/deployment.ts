@@ -6,8 +6,8 @@ import * as fs from 'fs';
 import * as yaml from 'node-yaml';
 import { results } from 'azure-iot-common';
 
-var credential = yaml.readSync('../../azureiot.credential');
-var connectionString = credential.iothub.connection;
+let credential = yaml.readSync('../../azureiot.credential');
+let connectionString = credential.iothub.connection;
 let registry = Registry.fromConnectionString(connectionString);
 
 var pool = yaml.readSync('../pool.yaml')
@@ -45,12 +45,43 @@ export async function removeDeployment(deploymentId: string){
     });
 }
 
-async function createEdgeDeployment (deploymentId: string, modules: object, condition: string, priority:number = 1): Promise<string> {
+function joinConditions(condition1: string, condition2: string, operation:string = 'and'): string{
+    if(condition1 && condition2){
+        return `${condition1} ${operation} ${condition2}`
+    }
+    else if(condition1){
+        return condition1
+    }
+    else{
+        return condition2
+    }
+}
+
+function getPredefinedConditions(varname: string): string{
+    let predefinedtags = pool.predefinedtags
+    if(!predefinedtags)
+        return undefined;
+    let tags = undefined;
+    if(varname in pool.predefinedtags){
+        tags = predefinedtags[varname]
+    }
+    else{
+        tags = predefinedtags[pool.variants[varname].template]
+    }
+    if('capability' in tags){
+        return `tags.capability='${tags.capability}'`
+    }
+    else
+        return undefined 
+}
+
+async function createEdgeDeployment (deploymentId: string, varname: string, condition: string, priority:number = 1): Promise<string> {
     return new Promise<string>((resolve, reject) => { 
         let baseDeployment = JSON.parse(fs.readFileSync('./base_deployment.json', 'utf8'));
         baseDeployment.id = deploymentId;
-        baseDeployment.content.modulesContent.$edgeAgent['properties.desired'].modules=modules;
-        baseDeployment.targetCondition = condition; 
+        baseDeployment.content.modulesContent.$edgeAgent['properties.desired'].modules = candidates[varname];
+        baseDeployment.targetCondition = joinConditions(condition, getPredefinedConditions(varname)); 
+        console.log(baseDeployment.targetCondition)
         baseDeployment.priority = priority;
         
         removeDeployment(deploymentId).then((id)=>{
@@ -70,9 +101,17 @@ async function createEdgeDeployment (deploymentId: string, modules: object, cond
 export async function createEdgeDeploymentByEnvironment(varname: string, environment: string){
     return createEdgeDeployment(
         `env_${environment}`,
-        candidates[varname],
+        varname,
         `tags.environment='${environment}'`
     );
+}
+
+export function getCapabilityFromVariant(varname: string): string{
+    if(varname in pool.predefinedtags){
+        return pool.predefinedtags[varname].capability
+    }
+    else
+        return pool.predefinedtags[pool.variants[varname].template].capability
 }
 
 async function removeEdgeDeploymentForDevice(deviceId: string): Promise<String>{
@@ -94,7 +133,7 @@ export async function createEdgeDeploymentByDevice(varname: string, deviceId: st
     }
     return createEdgeDeployment(
         `device_${deviceId}_${varname}`.toLowerCase(),
-        candidates[varname],
+        varname,
         `deviceId='${deviceId}'`,
         10
     );
