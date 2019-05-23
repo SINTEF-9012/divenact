@@ -64,7 +64,7 @@ program
     .command('query-modules <id>')    
     .action((id)=>{        
         queryModules(id).then((result)=>{ 
-            console.log("MODULES DEPLOYED ON " + id + ":");
+            console.log("Modules deployed on " + id + ":");
             Object.entries(result).forEach(
                 ([key, value]) => console.log(key + ": " + value)
             );                        
@@ -76,11 +76,11 @@ program
     .action((cmd)=>{
         queryDevices().then((result)=>{            
             console.log("Devices deployed in the hub:");
+            //console.log(Object.keys(result));
             Object.entries(result).forEach(
-                ([key, value]) => console.log(key + ": " + value)
+                ([key, value]) => console.log(key + ": last updated on " + value)
             );          
-        })
-        
+        })        
     })
 
 
