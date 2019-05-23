@@ -100,7 +100,7 @@ async function createEdgeDeployment (deploymentId: string, varname: string, cond
 
 export async function createEdgeDeploymentByEnvironment(varname: string, environment: string){
     return createEdgeDeployment(
-        `env_${environment}`,
+        `env_${environment}_${varname}`,
         varname,
         `tags.environment='${environment}'`
     );
