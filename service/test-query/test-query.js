@@ -1,6 +1,6 @@
 'use strict';
      var iothub = require('azure-iothub');
-     var connectionString = 'HostName=enact-hub.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=ZdWIIJU7ti/SkMw8T7fCLX8bPP9SlLVht8/4h1k0wfQ=';
+     var connectionString = '';
      var registry = iothub.Registry.fromConnectionString(connectionString);
 
      /* registry.getRegistryStatistics(function(err, twin){        

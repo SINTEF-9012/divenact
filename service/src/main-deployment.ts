@@ -1,5 +1,5 @@
 import * as program from "commander";
-import {createEdgeDeploymentByEnvironment, listDeployments, triggerDeloyment, createEdgeDeploymentByDevice, clearDeployments, removeDeployment} from './deployment'
+import {createEdgeDeploymentByEnvironment, listDeployments, triggerDeployment, createEdgeDeploymentByDevice, clearDeployments, removeDeployment, queryModules, queryDevices} from './deployment'
 
 program
     .command('list').alias('ls')
@@ -39,7 +39,7 @@ program
 program
     .command('trigger <id>')
     .action((id)=>{
-        triggerDeloyment(id).then((id)=>{
+        triggerDeployment(id).then((id)=>{
             console.log(`${id} is updated and is waiting for redeployment on relevant devices`)
         })
     })
@@ -60,7 +60,28 @@ program
         
     })
 
+program
+    .command('query-modules <id>')    
+    .action((id)=>{        
+        queryModules(id).then((result)=>{ 
+            console.log("Modules deployed on " + id + ":");
+            Object.entries(result).forEach(
+                ([key, value]) => console.log(key + ": " + value)
+            );                        
+        })    
+    })
+
+program
+    .command('query-devices')    
+    .action((cmd)=>{
+        queryDevices().then((result)=>{            
+            console.log("Devices deployed in the hub:");
+            //console.log(Object.keys(result));
+            Object.entries(result).forEach(
+                ([key, value]) => console.log(key + ": last updated on " + value)
+            );          
+        })        
+    })
+
 
 program.parse(process.argv);
-
-//program.parse(process.argv);

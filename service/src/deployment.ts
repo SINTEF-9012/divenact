@@ -148,7 +148,7 @@ export async function listDeployments(): Promise<object>{
     return Promise.resolve(result);
 }
 
-export async function triggerDeloyment(deploymentId: string): Promise<string>{
+export async function triggerDeployment(deploymentId: string): Promise<string>{
     let deployment = (await registry.getConfiguration(deploymentId)).responseBody;
     deployment.priority += 1;
     
@@ -164,6 +164,63 @@ export async function clearDeployments(): Promise<string[]>{
     }
     return Promise.all(result);
 }
+
+export async function queryModules(deviceId: string): Promise<object>{
+    let modules = (await registry.getModulesOnDevice(deviceId)).responseBody;
+    let result = {};
+    for(let module of modules){
+        result[module.moduleId] = module.connectionState;
+    }
+    return Promise.resolve(result);
+}
+
+export async function queryDevices(): Promise<object>{
+
+    return new Promise<Object>((resolve, reject) => {
+
+        let query = registry.createQuery("SELECT * FROM devices", 100);
+        query.nextAsTwin(function(err, results) {        
+        if (err) {
+            reject(err);
+        } else {  
+            let result = {}; 
+            results.forEach(function(device) {                    
+                //console.log("-- " + device.deviceId + " properties:" + device.properties);
+                result[device.deviceId] = device.properties.desired.$metadata.$lastUpdated;
+                //console.log(Object.keys(result));
+            });          
+            resolve(result);
+            }
+        });
+    });
+    /* console.log(Object.keys(result));
+
+        registry.getTwin(deviceId, (error: Error, twin: Twin) => {
+          if (error) {
+            reject(error);
+          } else {
+            resolve(twin);
+          }
+        });
+      });
+
+    let result = {}; */
+
+    /* let query = registry.createQuery("SELECT * FROM devices", 100);
+        query.nextAsTwin(function(err, results) {        
+        if (err) {
+            console.error('Failed to fetch the results: ' + err.message);
+        } else {            
+            results.forEach(function(device) {                    
+                //console.log("-- " + device.deviceId + " properties:" + device.properties);
+                result[device.deviceId] = device.tags;
+                //console.log(Object.keys(result));
+            });
+        } */
+    
+    //return Promise.resolve(result);
+} 
+
 
 
 
