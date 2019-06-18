@@ -93,14 +93,16 @@ Commands:
   - Select how you want to assign devices to hubs: Static configuration
   - Select the IoT hubs this device can be assigned to: *{your_existing_iot_hub}*
   - In the Initial Device Twin State it is possible to include target conditions using tags, so that the provisioned device gets immediately affected by a deployment. For example:
-    ```{
-        "tags": {
-         "environment": "test"
-        },
-        "properties": {
-         "desired": {}
-        }
-       }```
+    ```
+    {
+      "tags": {
+       "environment": "test"
+      },
+      "properties": {
+       "desired": {}
+      }
+    }
+    ```
 - Keep note of device registration ID ```registration_id```, primary key ```symmetric_key```, and DPS ID Scope```scope_id```, which will be used below.
 
 - SSH into the edge device and open ```config.yaml```:
