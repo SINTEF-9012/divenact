@@ -23,7 +23,7 @@ Alternative way:
 
 # Execute diversity management services
 
-- Go to the [service] foler
+- Go to the [service] folder
 - Copy the hub connection string into the ```azureiot.credential``` file
 - ```npm install```
 - ```tsc```
@@ -82,7 +82,49 @@ Commands:
         -h, --help                 output usage information
 ```
 
+# Auto-provisioning via Azure Device Provisioning Service (using symmetric keys)
 
+- Create an instance of Device Provisioning Service (DPS) and link it your existing Iot Hub as described [here](https://docs.microsoft.com/en-us/azure/iot-dps/quick-setup-auto-provision)
+- Create and save an individual enrollment with the following parameters:
+  - Mechanism: Symmetric Key
+  - Auto-generate keys: Yes
+  - Registration ID: *{registration_id}*
+  - IoT Hub Device ID (optional): *{device_id}* 
+  - Select how you want to assign devices to hubs: Static configuration
+  - Select the IoT hubs this device can be assigned to: *{your_existing_iot_hub}*
+  - In the Initial Device Twin State it is possible to include target conditions using tags, so that the provisioned device gets immediately affected by a deployment. For example:
+    ```{
+        "tags": {
+         "environment": "test"
+        },
+        "properties": {
+         "desired": {}
+        }
+       }```
+- Keep note of device registration ID ```registration_id```, primary key ```symmetric_key```, and DPS ID Scope```scope_id```, which will be used below.
+
+- SSH into the edge device and open ```config.yaml```:
+```sudo nano /etc/iotedge/config.yaml```
+- Modify and save ```config.yaml``` as follows using previously noted values (pay attention to spaces in yaml!):
+```
+# provisioning:
+#  source: "manual"
+#  device_connection_string: "{connection_string}"
+
+# DPS symmetric key provisioning configuration
+provisioning:
+ source: "dps"
+ global_endpoint: "https://global.azure-devices-provisioning.net"
+ scope_id: "{scope_id}"
+ attestation:
+  method: "symmetric_key"
+  registration_id: "{registration_id}"
+  symmetric_key: "{symmetric_key}"
+```
+- Restart the IoT Edge service:
+```systemctl restart iotedge```
+- After some time your device will be registered in your IoT Hub (using either ```registration_id``` or ```device_id```). 
+- If specified tags match one of the deployments target conditions, the device will also be assigned with that deployment.
 
 # Features
 
