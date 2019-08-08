@@ -1,7 +1,7 @@
-import * as program from "commander";
+import program from "commander";
 import {listEdgeIds, tagTwinAll, tagTwinRandom} from './device'
 import {createEdgeDeploymentByEnvironment} from './deployment'
-import {shuffleProduction, production, preview} from './global'
+import {shuffleProduction, production, preview, query} from './global'
 
 program
     .command('production <variation>')
@@ -29,6 +29,12 @@ program.version('0.1.0')
     .command('add <variation>')
     .action((variation)=>{
         console.log('show ')
+    })
+
+program
+    .command('query <queryString>')    
+    .action((queryString)=>{
+          query(queryString);
     })
 
 program.parse(process.argv);

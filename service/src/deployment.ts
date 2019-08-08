@@ -4,11 +4,9 @@ import * as fs from 'fs';
 
 //var iothub = require('azure-iothub');
 import * as yaml from 'node-yaml';
-import { results } from 'azure-iot-common';
+//import { results } from 'azure-iot-common';
+import {registry} from './registry'
 
-let credential = yaml.readSync('../../azureiot.credential');
-let connectionString = credential.iothub.connection;
-let registry = Registry.fromConnectionString(connectionString);
 
 var pool = yaml.readSync('../pool.yaml')
 //console.log(pool);
@@ -163,6 +161,10 @@ export async function clearDeployments(): Promise<string[]>{
         result.push(removeDeployment(id))
     }
     return Promise.all(result);
+}
+
+export async function getDeployment(id: string){
+    return registry.getConfiguration(id);
 }
 
 export async function queryModules(deviceId: string): Promise<object>{

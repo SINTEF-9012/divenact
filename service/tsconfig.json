@@ -8,6 +8,7 @@
       "sourceMap": true,
       "rootDir": "src",
       "outDir": "build",
+      "esModuleInterop": true,
       "lib": [
         "es2017",
         "dom"

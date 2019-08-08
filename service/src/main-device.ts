@@ -1,4 +1,4 @@
-import * as program from "commander";
+import program from "commander";
 import {listEdgeIds, tagTwin, listTagValue, tagTwinRandom} from './device'
 
 const const_environment = 'environment'

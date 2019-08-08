@@ -68,3 +68,7 @@ variants:
     template: color-in-hat
     parameter:
       COLOR: blue
+  hat-rotate:
+    template: color-in-hat
+    parameter:
+      COLOR: rotate

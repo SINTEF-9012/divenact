@@ -2,7 +2,7 @@ import {Device, Twin} from 'azure-iothub';
 import {listDevices} from './device';
 
 
-import * as program from "commander";
+import program from "commander";
 
 
 program.version('0.1.0')

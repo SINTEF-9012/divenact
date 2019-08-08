@@ -1,4 +1,4 @@
-import * as program from "commander";
+import program from "commander";
 import {createEdgeDeploymentByEnvironment, listDeployments, triggerDeployment, createEdgeDeploymentByDevice, clearDeployments, removeDeployment, queryModules, queryDevices} from './deployment'
 
 program
