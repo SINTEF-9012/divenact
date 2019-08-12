@@ -6,19 +6,27 @@
   "author": "Hui Song",
   "license": "MIT",
   "scripts": {
-    "cmd": "node ./build/main.js"
+    "cmd": "node ./build/main.js",
+    "start": "tsc && cd client && npm run build && cd .. && node ./build/api/server",
+    "backend": "tsc && node ./build/api/server"
   },
   "dependencies": {
     "@azure/event-hubs": "^2.0.0",
     "@types/async-lock": "^1.1.1",
     "@types/express": "^4.17.0",
+    "@types/mongoose": "^5.5.12",
     "@types/underscore": "^1.8.18",
     "azure-iothub": "1.9.9",
     "azure-storage": "^2.8.1",
+    "babel-eslint": "10.0.1",
+    "body-parser": "^1.19.0",
     "commander": "^2.20.0",
     "dotenv": "^8.0.0",
     "express": "^4.17.1",
+    "mongoose": "^5.6.7",
     "node-yaml": "^3.2.0",
+    "react-scripts": "^3.0.1",
+    "typescript": "^3.5.3",
     "underscore": "^1.9.1"
   },
   "devDependencies": {

@@ -136,3 +136,23 @@ export async function listEdgeIds(): Promise<string[]>{
     }
     return result;
 }
+
+export async function listIdTags(){
+    let deviceIds = await listEdgeIds();
+    let twinPromises = [] ;
+    for(let id of deviceIds){
+        twinPromises.push(getTwin(id));
+    }
+    let twins = await Promise.all(twinPromises);
+    let result = [];
+    for(let twin of twins){
+        let twinT = twin as Twin;
+        result.push({
+            id: twinT.deviceId,
+            tags: twinT.tags
+        })
+    }
+    return new Promise<object>((resolve)=>{
+        resolve(result);
+    })
+}

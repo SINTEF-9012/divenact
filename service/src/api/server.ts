@@ -1,5 +1,5 @@
 require('dotenv').config();
-//require('./server/db-conn');
+require('../db-conn');
 const express = require('express');
 const bodyParser = require('body-parser');
 
@@ -11,11 +11,15 @@ app.use(express.static('./client/build/'));
 
 // mount routes
 app.use('/api/global/', require('./global-route').router);
-
+app.use('/api/device/', require('./device-route').router);
+app.use('/api/deployment', require('./deployment-route').router);
+app.use('/api/util', require('./util-route').router);
+app.use('/api/template', require('./template-route').router);
 // the asterisk is very important!! as it allows client side routing
 // with react-router or w/e client side routing package you use
 app.get('/*', (req, res) => {
-    res.sendFile('index.html', { root: __dirname + '/client/build/' });
+    console.log(__dirname);
+    res.sendFile('index.html', { root: __dirname + '../../../client/build/' });
   });
 
 const port = process.env.PORT || 8001;
