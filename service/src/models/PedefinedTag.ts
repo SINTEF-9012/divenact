@@ -1,15 +1,15 @@
 import {Document, Schema, model} from 'mongoose';
 
 export interface IPredefinedTag extends Document{
-    template: string;
     tagName: string;
     value: string;
 }
 
-export const PredefinedTagSchema = new Schema({
-    template: String,
+export const PredefinedTagSeed = {
     tagName: String,
     value: String
-})
+}
+
+export const PredefinedTagSchema = new Schema(PredefinedTagSeed);
 
 export const PredefinedTag = model<IPredefinedTag>('PredefinedTag', PredefinedTagSchema);

@@ -1,7 +1,7 @@
 
 import * as yaml from 'node-yaml';
 import {Template} from './models/Template';
-import {PredefinedTag} from './models/PedefinedTag';
+import {PredefinedTag, IPredefinedTag} from './models/PedefinedTag';
 import {Variant} from './models/Variant';
 
 function onInsert(err, docs) {
@@ -12,31 +12,35 @@ function onInsert(err, docs) {
     }
 }
 
+function onDelete(err, docs) {
+    if (err) {
+        console.log(err);
+    } else {
+        console.info('%d items were successfully deleted.', docs.length);
+    }
+}
+
 export function resetDatabase(){
-    Template.collection.deleteMany({});
-    PredefinedTag.deleteMany({});
-    Variant.deleteMany({});
+    Template.collection.deleteMany({}, onDelete);
+    PredefinedTag.collection.deleteMany({}, onDelete);
+    Variant.collection.deleteMany({}, onDelete);
 }
 
 export function initDatabase(){
     let pool = yaml.readSync('../pool.yaml');
     let templates = Object.entries(pool.templates).map(([key, value])=>{
+        let properties = {}
+        if(key in pool.predefinedtags){
+            properties['predefinedtag'] = pool.predefinedtags[key]
+        }
         return{
             id: key,
-            content: value
+            content: value,
+            property: properties
         }
     })
 
-    let pts = Object.entries(pool.predefinedtags).map(([key, value])=>{
-        let [tagName, tagValue] = Object.entries(value)[0];
-        return {
-            template: key,
-            tagName: tagName,
-            value: tagValue
-        }
-    });
-
-    let variants = Object.entries(pool.templates).map(([key, value])=>{
+    let variants = Object.entries(pool.variants).map(([key, value])=>{
         return {
             id: key,
             template: value['template'],
@@ -45,7 +49,6 @@ export function initDatabase(){
     })
 
     Template.collection.insertMany(templates, onInsert);
-    PredefinedTag.collection.insertMany(pts, onInsert);
     Variant.collection.insertMany(variants, onInsert);
     
 }

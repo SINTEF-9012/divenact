@@ -15,6 +15,7 @@ app.use('/api/device/', require('./device-route').router);
 app.use('/api/deployment', require('./deployment-route').router);
 app.use('/api/util', require('./util-route').router);
 app.use('/api/template', require('./template-route').router);
+app.use('/api/variant', require('./variant-route').router);
 // the asterisk is very important!! as it allows client side routing
 // with react-router or w/e client side routing package you use
 app.get('/*', (req, res) => {

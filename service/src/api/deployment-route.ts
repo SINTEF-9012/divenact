@@ -1,6 +1,6 @@
 import Router from "express";
 import { listDevices, listIdTags } from "../device"
-import { getDeployment, listDeployments } from "../deployment";
+import { getDeployment, listDeployments, clearDeployments } from "../deployment";
 
 export let router = Router();
 
@@ -16,5 +16,9 @@ router.get('/', async (req, res)=>{
     }
     res.json(result);
 });
+
+router.delete('/', async (req, res)=>{
+    res.json(await clearDeployments());
+})
 
 
