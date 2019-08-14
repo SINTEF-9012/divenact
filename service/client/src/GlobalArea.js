@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Layout, List, Col, Row } from 'antd';
 import axios from 'axios';
-import {ContentAreaEnum, DeploymentDeviceArea} from './ContentAreas'
+import {ContentAreaEnum, DeploymentDeviceArea, SelectVariantArea} from './ContentAreas'
 
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -38,6 +38,7 @@ export class GlobalArea extends Component {
             
             <Content>
               {this.state.contentarea == ContentAreaEnum.DEPLOYMENTDEVICE && <DeploymentDeviceArea />}
+              {this.state.contentarea == ContentAreaEnum.SELECTVARIANT && <SelectVariantArea />}  
               {this.state.contentarea == ContentAreaEnum.DEFAULT && <Button>Hey</Button>}            
             </Content>
           </Layout>
@@ -56,10 +57,8 @@ export class GlobalArea extends Component {
     }
 
     production = async () => {
-        const variant = prompt('Variant name');
-        let result = await axios.put(`api/global/production/${variant}`);
         this.setState({
-          contentarea: ContentAreaEnum.DEPLOYMENTDEVICE
+          contentarea: ContentAreaEnum.SELECTVARIANT
         })
     }
 
