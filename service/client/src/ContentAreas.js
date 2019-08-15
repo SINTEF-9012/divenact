@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Layout, List, Col, Row, Select, Typography, Slider} from 'antd';
+import { Button, Layout, List, Col, Row, Select, Typography, InputNumber} from 'antd';
 import axios from 'axios';
 
 const { Text } = Typography;
@@ -145,9 +145,7 @@ export class PreviewArea extends Component {
           <Text>Preview variant </Text>
           <SingleVariantSelect onSelectionChange={this.onSelectionChange} />
           <Text> on </Text>
-          <div  style={{width: 50}}>
-          <Slider min={1} max={devices.length} onChange={this.onNumberChange} tooltipVisible={true}/>
-          </div>
+          <InputNumber min={1} max={devices.length} onChange={this.onNumberChange} />
           <Text> devices. </Text>
           <Button onClick={this.onGoButton}> Go </Button>
         </Row>

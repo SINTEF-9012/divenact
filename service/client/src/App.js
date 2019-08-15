@@ -10,18 +10,19 @@ import { Typography } from 'antd';
 import { Menu } from 'antd';
 import { Icon } from 'antd';
 
-import {GlobalArea} from './GlobalArea';
+import {ControlArea} from './ControlArea';
+import {ModelArea} from './ModelArea';
 
 const { Header, Footer, Sider, Content } = Layout;
 const { Paragraph } = Typography;
 
 var AreaEnum = {
-  GLOBAL: 1,
-  VARIANTS: 2,
+  CONTROL: 1,
+  MODEL: 2,
   RESERVED: 3,
   properties: {
-    1: {name: "global", value: 1, code: "G"},
-    2: {name: "variants", value: 2, code: "V"},
+    1: {name: "control", value: 1, code: "C"},
+    2: {name: "model", value: 2, code: "M"},
     3: {name: "reserved", value: 3, code: "R"}
   }
 };
@@ -80,14 +81,15 @@ class App extends Component {
               defaultSelectedKeys={['1']}
               style={{ lineHeight: '64px' }}
             >
-              <Menu.Item key="1" onClick={this.global}><Icon type="control" />Control</Menu.Item>
-              <Menu.Item key="2" onClick={this.op1}><Icon type="profile" />Repository</Menu.Item>
+              <Menu.Item key="1" onClick={this.controlarea}><Icon type="control" />Control</Menu.Item>
+              <Menu.Item key="2" onClick={this.modelarea}><Icon type="profile" />Repository</Menu.Item>
               <Menu.Item key="3" onClick={this.op2}>TODO</Menu.Item>
             </Menu>          
         </Header>
 
         <div>
-          {this.state.area == AreaEnum.GLOBAL && <GlobalArea />}
+          {this.state.area == AreaEnum.CONTROL && <ControlArea />}
+          {this.state.area == AreaEnum.MODEL && <ModelArea /> }
           {this.state.area == AreaEnum.RESERVED && <Option2 />}
         </div>  
           
@@ -159,13 +161,12 @@ class App extends Component {
     window.confirm("op1")
     this.setState({ option: 'op1'})
   }
-  op2 = ()=>{
-    console.log("op2")
-    this.setState( {area: AreaEnum.RESERVED} );
+  modelarea = ()=>{
+    this.setState( {area: AreaEnum.MODEL} );
   }
 
-  global = ()=>{
-    this.setState( {area: AreaEnum.GLOBAL} );
+  controlarea = ()=>{
+    this.setState( {area: AreaEnum.CONTROL} );
   }
 
 }
