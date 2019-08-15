@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Layout, List, Col, Row } from 'antd';
 import axios from 'axios';
-import {ContentAreaEnum, DeploymentDeviceArea, SelectVariantArea} from './ContentAreas'
+import {ContentAreaEnum, DeploymentDeviceArea, ProductionArea, PreviewArea} from './ContentAreas'
 
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -29,7 +29,7 @@ export class GlobalArea extends Component {
               <div>
                 <Button type="primary" onClick={this.production} block>Production</Button> <br /> <br/>
                 
-                <Button type="primary" onClick={this.deleteAllDeployments} block>Delete deployments</Button> <br /> <br />
+                <Button type="primary" onClick={this.preview} block>Delete deployments</Button> <br /> <br />
                 
                 <Button type="primary" onClick={this.seedDeployments} block>Seed deployments</Button> <br /> <br />
                 
@@ -38,7 +38,8 @@ export class GlobalArea extends Component {
             
             <Content>
               {this.state.contentarea == ContentAreaEnum.DEPLOYMENTDEVICE && <DeploymentDeviceArea />}
-              {this.state.contentarea == ContentAreaEnum.SELECTVARIANT && <SelectVariantArea />}  
+              {this.state.contentarea == ContentAreaEnum.PRODUCTION && <ProductionArea />}  
+              {this.state.contentarea == ContentAreaEnum.PREVIEW && <PreviewArea />}
               {this.state.contentarea == ContentAreaEnum.DEFAULT && <Button>Hey</Button>}            
             </Content>
           </Layout>
@@ -58,12 +59,14 @@ export class GlobalArea extends Component {
 
     production = async () => {
         this.setState({
-          contentarea: ContentAreaEnum.SELECTVARIANT
+          contentarea: ContentAreaEnum.PRODUCTION
         })
     }
 
     preview = async ()=> {
-
+      this.setState({
+        contentarea: ContentAreaEnum.PREVIEW
+      })
     }
 
     deleteAllDeployments = async () =>{

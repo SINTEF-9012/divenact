@@ -1,33 +1,36 @@
 import React, { Component } from 'react';
-import { Button, Layout, List, Col, Row, Select } from 'antd';
+import { Button, Layout, List, Col, Row, Select, Typography, Slider} from 'antd';
 import axios from 'axios';
 
+const { Text } = Typography;
 const { Header, Footer, Sider, Content } = Layout;
 
 export var ContentAreaEnum = {
   DEPLOYMENTDEVICE: 1,
-  SELECTVARIANT: 2,
-  DEFAULT: 3,
+  PRODUCTION: 2,
+  PREVIEW: 3,
+  DEFAULT: 4,
   properties: {
     1: { name: "deploymentdevice", value: 1, code: "D" },
-    2: { name: "selectvariant", value: 2, code: "V" },
-    3: { name: "default", value: 3, code: "F" }
+    2: { name: "production", value: 2, code: "P" },
+    3: { name: "preview", value: 2, code: "R"},
+    4: { name: "default", value: 4, code: "F" }
   }
 };
 
-export class SelectVariantArea extends Component {
-  constructor(props) {
+export class SingleVariantSelect extends Component{
+  constructor(props){
     super(props);
     this.state = {
       variants: [],
-      selected: null,
-      contentarea: -1
+      selected: null
     };
-    this.deploymentdevice = React.createRef();
   }
-
   componentDidMount() {
-    this.getVariantIds().then(result => this.setState({ variants: result }))
+    this.getVariantIds().then(result => {
+      this.setState({ variants: result });
+    })
+    
   }
 
   async getVariantIds() {
@@ -35,9 +38,34 @@ export class SelectVariantArea extends Component {
       return item.id;
     });
   }
+  render(){
+    return(
+      <Select style={{ width: 150 }} onChange={this.props.onSelectionChange} placeholder="Select a variant">
+            {this.state.variants.map((value, index) => {
+              return <Select.Option value={value}>{value}</Select.Option>
+            })}
+      </Select> 
+    )
+  }
+}
 
+export class ProductionArea extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      selected: null,
+      contentarea: -1
+    };
+    this.deploymentdevice = React.createRef();
+  }
+
+  componentDidMount(){
+
+  }
+  
   onSelectionChange = async (value) => {
-    this.setState({ selected: value })
+    this.setState({ selected: value });
+    window.confirm(`changed to ${this.state.selected}`);
   }
 
   onGoButton = async () => {
@@ -54,26 +82,81 @@ export class SelectVariantArea extends Component {
   }
 
   render() {
-    const { variants, selected } = this.state;
     return (
       <div>
-        <Row>Select a variant and press Go</Row>
         <Row>
-          <Select style={{ width: 250 }} onChange={this.onSelectionChange}>
-            {variants.map((value, index) => {
-              return <Select.Option value={value}>{value}</Select.Option>
-            })}
-          </Select>
+          <Text>Put variant </Text>
+          <SingleVariantSelect onSelectionChange={this.onSelectionChange} />
+          <Text> into production. </Text>
           <Button onClick={this.onGoButton}> Go </Button>
         </Row>
         {this.state.contentarea == ContentAreaEnum.DEPLOYMENTDEVICE && <Row><DeploymentDeviceArea ref={this.deploymentdevice}/></Row>}
       </div>
     )
   }
-
-
-
 }
+
+export class PreviewArea extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      selected: null,
+      number: 1,
+      devices: [],
+      contentarea: -1
+    };
+    this.deploymentdevice = React.createRef();
+  }
+
+  componentDidMount(){
+    this.getDevices().then(result =>{this.setState({ devices: result })});
+  }
+  
+  onSelectionChange = async (value) => {
+    this.setState({ selected: value });
+  }
+
+  onNumberChange = async (value) =>{
+    this.setState( { number: value});
+  }
+
+  getDevices = async() =>{
+    return (await axios.get('api/device/')).data;
+  }
+
+  onGoButton = async () => {
+    const variant = this.state.selected;
+    if(!variant){
+      window.confirm("Please select a variant first");
+      return;
+    }
+    let result = await axios.put(`api/global/preview/${variant}`, {random: this.state.number});
+    this.setState({
+      contentarea: ContentAreaEnum.DEPLOYMENTDEVICE
+    })
+    this.deploymentdevice.current.componentDidMount();
+  }
+
+  render() {
+    const devices = this.state.devices;
+    return (
+      <div>
+        <Row>
+          <Text>Preview variant </Text>
+          <SingleVariantSelect onSelectionChange={this.onSelectionChange} />
+          <Text> on </Text>
+          <div  style={{width: 50}}>
+          <Slider min={1} max={devices.length} onChange={this.onNumberChange} tooltipVisible={true}/>
+          </div>
+          <Text> devices. </Text>
+          <Button onClick={this.onGoButton}> Go </Button>
+        </Row>
+        {this.state.contentarea == ContentAreaEnum.DEPLOYMENTDEVICE && <Row><DeploymentDeviceArea ref={this.deploymentdevice}/></Row>}
+      </div>
+    )
+  }
+}
+
 
 export class DeploymentDeviceArea extends Component {
   constructor(props) {
