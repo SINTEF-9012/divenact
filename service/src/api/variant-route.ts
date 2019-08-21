@@ -9,3 +9,10 @@ router.get('/', (req, res, next) =>{
         else res.json(variants);
     })
 })
+
+router.delete('/:variant', (req, res, next)=>{
+    Variant.deleteOne({id: req.params['variant']}, err=>{
+        if(err) next(err);
+        else res.send({message: 'Deleted'});
+    })
+})

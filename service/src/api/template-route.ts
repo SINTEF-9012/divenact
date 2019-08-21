@@ -9,3 +9,12 @@ router.get('/', (req, res, next) =>{
         else res.json(templates);
     })
 })
+
+router.put('/:template', async (req, res, next) => {
+    let value = req.body;
+    let query = value._id ? {_id: value._id} : {id: value.id}
+    let options = {upsert: true, new: true, setDefaultsOnInsert: true, useFindAndModify: false};
+    console.log({value: value, query: query});
+    let result = await Template.findOneAndUpdate(query, value, options);
+    res.json(result);
+})
