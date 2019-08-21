@@ -4,8 +4,6 @@ import axios from 'axios';
 import { JsonEditor as Editor } from 'jsoneditor-react';
 import 'jsoneditor-react/es/editor.min.css';
 
-
-
 export var ModelContentAreaEnum = {
   TEMPLATE: 1,
   VARIANT: 2,
@@ -33,9 +31,10 @@ export class TemplateArea extends Component {
         title: '',
         render: (text, record) => (
           <div>
-          <Button type="link" onClick={() => this.editTemplate(record)}> Edit </Button>
-          <Button type="link">Copy</Button>
-          <Button type="link">Delete</Button>
+          <a onClick={() => this.editTemplate(record)}>edit </a>
+          <a onClick={() => this.copyTemplate(record)}>copy </a>
+          <Popconfirm title="Sure to delete?" onConfirm={() => this.deleteTemplate(record.id)}>
+          <a>delete</a></Popconfirm>
           </div>
         )
       }
@@ -60,7 +59,7 @@ export class TemplateArea extends Component {
     return (await axios.get('api/template/')).data;
   }
 
-  saveJason = async () =>{
+  saveTemplate = async () =>{
     const {edited} = this.state
     if(edited){
       let result = await axios.put(`api/template/${edited.id}`, edited)
@@ -79,6 +78,23 @@ export class TemplateArea extends Component {
     
   }
 
+  copyTemplate = async (record) => {
+    const id = prompt('Enter new id');
+    
+    if(!id) return;
+    let newTemplate = {...record, id: id};
+    delete newTemplate._id;
+    this.setState({
+      templates: [...this.state.templates, newTemplate],
+      edited: newTemplate,
+      foredit: newTemplate
+    })
+  }
+
+  deleteTemplate = (templateid) => {
+    axios.delete(`api/template/${templateid}`);
+  }
+
   render() {
     const { templates, forEdit } = this.state
     return (
@@ -94,7 +110,7 @@ export class TemplateArea extends Component {
           <Col span={12}>
             {forEdit!=null && 
             <div>
-              <Button onClick={()=>{this.saveJason()}}>Save</Button><br />
+              <Button onClick={()=>{this.saveTemplate()}}>Save</Button><br />
               <Editor value={forEdit} ref={this.editor} onChange={this.handleChange}/>
             </div>}
           </Col>
@@ -123,23 +139,28 @@ export class VariantArea extends Component {
         title: 'Actions',
         render: (text, record) => (
           <div>
-          <a onClick={() => this.editVariant(record)}>Edit </a>
-          <a>Copy </a>
-          <Popconfirm title="Sure to cancel?" onConfirm={() => this.deleteVariant(record.id)}>
-          <a>Delete</a></Popconfirm>
+          <a onClick={() => this.editVariant(record)}>edit </a>
+          <a>copy </a>
+          <Popconfirm title="Sure to delete?" onConfirm={() => this.deleteVariant(record.id)}>
+          <a>delete</a></Popconfirm>
           </div>
         )
       }
     ]
     this.state = {
       variants: [],
-      forEdit: null
+      forEdit: null, 
+      edited: null
     };
     this.editor = React.createRef();
   }
 
   componentDidMount() {
     this.getVariants().then(result => { this.setState({ variants: result }) });
+  }
+
+  handleChange = (value) => {
+    this.setState({edited: value});
   }
 
   getVariants = async () => {
@@ -156,6 +177,17 @@ export class VariantArea extends Component {
     axios.delete(`api/variant/${variantid}`);
   }
 
+  saveVariant = async () =>{
+    const {edited} = this.state
+    if(edited){
+      let result = await axios.put(`api/variant/${edited.id}`, edited)
+      this.componentDidMount()
+    }
+    else{
+      window.confirm("No change to save");
+    }
+  }
+
   render() {
     const { variants, forEdit } = this.state
     return (
@@ -169,7 +201,13 @@ export class VariantArea extends Component {
             />
           </Col>
           <Col span={12}>
-            {forEdit!=null && <Editor value={forEdit} ref={this.editor}/>}
+
+            {forEdit!=null && 
+            <div>
+              <Button onClick={()=>{this.saveVariant()}}>Save</Button>
+              <Editor value={forEdit} ref={this.editor} onChange={this.handleChange}/>
+            </div>
+            }
           </Col>
         </Row>
       </div>

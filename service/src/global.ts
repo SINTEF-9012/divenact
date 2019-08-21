@@ -5,7 +5,7 @@ import {registry} from "./registry"
 export async function shuffleProduction(variants: string[]){
     let group = {}
     for(let variant of variants){
-        let capability = getCapabilityFromVariant(variant);
+        let capability = await getCapabilityFromVariant(variant);
         if(!capability)
             capability = 'ANY';
         if(! (capability in group)){
@@ -45,7 +45,7 @@ export async function production(variant: string){
 export async function preview(variant: string, numberToPreview: number){
     let result = null;
     if(numberToPreview){
-        let capability = getCapabilityFromVariant(variant);
+        let capability = await getCapabilityFromVariant(variant);
         result = await tagTwinRandom('environment', 'preview', numberToPreview, capability);
     }
     else{

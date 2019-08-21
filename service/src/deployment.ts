@@ -1,4 +1,6 @@
 import { Registry, Device, Twin } from 'azure-iothub';
+import {Variant} from './models/Variant';
+import {Template} from './models/Template';
 
 import * as fs from 'fs';
 
@@ -8,25 +10,24 @@ import * as yaml from 'node-yaml';
 import {registry} from './registry'
 
 
-var pool = yaml.readSync('../pool.yaml')
-//console.log(pool);
-
-var resolvePool = function(input_pool){
-    var result = {}
-    var variants = input_pool.variants;
-    for (var varname in variants){
-        var variant = variants[varname];
-        var valuestr = JSON.stringify(input_pool.templates[variant.template])
-        for (var param in variant.parameter){
-            valuestr = valuestr.replace('{{'+param+'}}', variant.parameter[param])
-        }
-        JSON.parse(valuestr)
-        result[varname] = JSON.parse(valuestr)
+async function resolve(varname: string){
+    let variant = await Variant.findOne({id: varname});
+    let template = await Template.findOne({id: variant.template});
+    let valuestr = JSON.stringify(template.content);
+    for (let [key, value] of Object.entries(variant.parameter)){
+        valuestr = valuestr.replace('{{'+key+'}}', value)
+    }
+    let result = {
+        ...variant, 
+        content: JSON.parse(valuestr),
+        property: {...template.property, ...variant.property}
     }
     return result;
 }
-
-var candidates = resolvePool(pool);
+async function getCandidate(varname: string){
+    return resolve(varname);
+}
+//var candidates = resolvePool(pool);
 
 export async function removeDeployment(deploymentId: string){
     return new Promise<string>((resolve) => { 
@@ -55,17 +56,9 @@ function joinConditions(condition1: string, condition2: string, operation:string
     }
 }
 
-function getPredefinedConditions(varname: string): string{
-    let predefinedtags = pool.predefinedtags
-    if(!predefinedtags)
-        return undefined;
-    let tags = undefined;
-    if(varname in pool.predefinedtags){
-        tags = predefinedtags[varname]
-    }
-    else{
-        tags = predefinedtags[pool.variants[varname].template]
-    }
+async function getPredefinedConditions(varname: string): Promise<string>{
+    let variant = await getCandidate(varname);
+    let tags = variant.property.predefinedtag;
     if('capability' in tags){
         return `tags.capability='${tags.capability}'`
     }
@@ -74,26 +67,17 @@ function getPredefinedConditions(varname: string): string{
 }
 
 async function createEdgeDeployment (deploymentId: string, varname: string, condition: string, priority:number = 1): Promise<string> {
-    return new Promise<string>((resolve, reject) => { 
+    
         let baseDeployment = JSON.parse(fs.readFileSync('./base_deployment.json', 'utf8'));
         baseDeployment.id = deploymentId;
-        baseDeployment.content.modulesContent.$edgeAgent['properties.desired'].modules = candidates[varname];
-        baseDeployment.targetCondition = joinConditions(condition, getPredefinedConditions(varname)); 
+        baseDeployment.content.modulesContent.$edgeAgent['properties.desired'].modules = (await getCandidate(varname)).content;
+        baseDeployment.targetCondition = joinConditions(condition, await getPredefinedConditions(varname)); 
         console.log(baseDeployment.targetCondition)
         baseDeployment.priority = priority;
         
-        removeDeployment(deploymentId).then((id)=>{
-            registry.addConfiguration(baseDeployment, function(err) {
-                if (err) {
-                    console.log('add configuration failed: ' + err);
-                    reject(err);
-                } else {
-                    console.log('add configuration succeeded: ' + deploymentId);
-                    resolve(deploymentId);
-                }
-            }); 
-        });
-    });
+        await removeDeployment(deploymentId);
+        await registry.addConfiguration(baseDeployment);
+        return deploymentId;
 }
 
 export async function createEdgeDeploymentByEnvironment(varname: string, environment: string){
@@ -104,12 +88,13 @@ export async function createEdgeDeploymentByEnvironment(varname: string, environ
     );
 }
 
-export function getCapabilityFromVariant(varname: string): string{
-    if(varname in pool.predefinedtags){
-        return pool.predefinedtags[varname].capability
-    }
+export async function getCapabilityFromVariant(varname: string): Promise<string>{
+    let variant = await getCandidate(varname);
+    let tags = variant.property.predefinedtag;
+    if(!tags) 
+        return null;
     else
-        return pool.predefinedtags[pool.variants[varname].template].capability
+        return tags.capability;
 }
 
 async function removeEdgeDeploymentForDevice(deviceId: string): Promise<String>{

@@ -18,3 +18,10 @@ router.put('/:template', async (req, res, next) => {
     let result = await Template.findOneAndUpdate(query, value, options);
     res.json(result);
 })
+
+router.delete('/:template', async(req, res, next)=>{
+    Template.deleteOne({id: req.params['template']}, err=>{
+        if(err) next(err);
+        else res.send({message: 'Deleted'});
+    })
+})

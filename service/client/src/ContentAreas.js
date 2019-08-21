@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Button, Layout, List, Col, Row, Select, Typography, InputNumber} from 'antd';
+import { Button, Layout, List, Col, Row, Select, Typography, InputNumber, Icon, Popover} from 'antd';
 import axios from 'axios';
+import ReactJson from 'react-json-view'
 
 const { Text } = Typography;
 const { Header, Footer, Sider, Content } = Layout;
@@ -65,7 +66,6 @@ export class ProductionArea extends Component {
   
   onSelectionChange = async (value) => {
     this.setState({ selected: value });
-    window.confirm(`changed to ${this.state.selected}`);
   }
 
   onGoButton = async () => {
@@ -170,6 +170,14 @@ export class DeploymentDeviceArea extends Component {
     this.getDevices().then(result => this.setState({ devices: result }))
   }
 
+  getHover = (title, record)=>{
+    return (
+      <Popover content={(<ReactJson src={record} />)} title={title}>
+        <a>{title}</a>
+      </Popover>
+    )
+  }
+
   render() {
 
     const { deployments, devices } = this.state;
@@ -185,7 +193,7 @@ export class DeploymentDeviceArea extends Component {
             //footer={<div>Footer</div>}
             bordered
             dataSource={deployments}
-            renderItem={deployment => <List.Item>{deployment.id}</List.Item>}
+            renderItem={deployment => <List.Item><Icon type="deployment-unit"/>{this.getHover(deployment.id, deployment)}</List.Item>}
           />
         </Col>
         <Col span={10}>
@@ -195,7 +203,7 @@ export class DeploymentDeviceArea extends Component {
             //footer={<div>Footer</div>}
             bordered
             dataSource={devices}
-            renderItem={device => <List.Item>{device.id}</List.Item>}
+            renderItem={device => <List.Item><Icon type="gateway"/>{this.getHover(device.id, device)}</List.Item>}
           />
         </Col>
         <Col span={4}>
