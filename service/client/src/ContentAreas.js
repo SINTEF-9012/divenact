@@ -193,7 +193,7 @@ export class DeploymentDeviceArea extends Component {
             //footer={<div>Footer</div>}
             bordered
             dataSource={deployments}
-            renderItem={deployment => <List.Item><Icon type="deployment-unit"/>{this.getHover(deployment.id, deployment)}</List.Item>}
+            renderItem={deployment => <List.Item><Icon type="deployment-unit"/> {this.getHover(deployment.id, deployment)}</List.Item>}
           />
         </Col>
         <Col span={10}>
@@ -203,7 +203,7 @@ export class DeploymentDeviceArea extends Component {
             //footer={<div>Footer</div>}
             bordered
             dataSource={devices}
-            renderItem={device => <List.Item><Icon type="gateway"/>{this.getHover(device.id, device)}</List.Item>}
+            renderItem={device => <List.Item><Icon type="gateway"/> {this.getHover(device.id, device)}</List.Item>}
           />
         </Col>
         <Col span={4}>
