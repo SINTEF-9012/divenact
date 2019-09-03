@@ -120,9 +120,6 @@ export class TemplateArea extends Component {
   }
 }
 
-
-
-
 export class VariantArea extends Component {
   constructor(props) {
     super(props);

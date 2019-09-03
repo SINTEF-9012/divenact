@@ -43,7 +43,6 @@ class Option2 extends Component{
   }
 }
 
-
 class App extends Component {
   constructor(props) {
     super(props);
@@ -64,42 +63,40 @@ class App extends Component {
     return (
       <div className="App">
 
-        <img src="logo.png" />
+        {/* <img src="logo.png" />
         <PageHeader title="Welcome to Divenact">                     
           <Paragraph>
             This tool is part of the ENACT project and is used to automatically diversify and manage IoT fleets.
           </Paragraph>                 
-        </PageHeader>
+    </PageHeader> */}
 
-        <Layout>
+        <Layout style={{ minHeight: '100vh' }}>
           
-        <Header>
-          <div className="logo" />
-            <Menu
-              theme="dark"
-              mode="horizontal"
-              defaultSelectedKeys={['1']}
-              style={{ lineHeight: '64px' }}
-            >
+        <Header style={{ background: '#fff', padding: 0, textAlign: 'left' }}>
+          
+            <Menu theme="light" mode="horizontal" defaultSelectedKeys={['1']} style={{ lineHeight: '64px', padding: '10px 0 10 0' }} >
+              <Menu.Item key="logo" onClick={window.location.href='#'}><img style={{ height: '60px', padding: '15px'}} src="https://enact-project.eu/img/logo-enact-blue2.png" alt="logo enact" /></Menu.Item>              
               <Menu.Item key="1" onClick={this.controlarea}><Icon type="control" />Control</Menu.Item>
               <Menu.Item key="2" onClick={this.modelarea}><Icon type="profile" />Repository</Menu.Item>
-              <Menu.Item key="3" onClick={this.op2}>TODO</Menu.Item>
+              {/* <Menu.Item key="3" onClick={this.op2}>TODO</Menu.Item> */}
             </Menu>          
         </Header>
 
-        <div>
-          {this.state.area == AreaEnum.CONTROL && <ControlArea />}
-          {this.state.area == AreaEnum.MODEL && <ModelArea /> }
-          {this.state.area == AreaEnum.RESERVED && <Option2 />}
-        </div>  
+        <Layout>
+          <div>
+            {this.state.area == AreaEnum.CONTROL && <ControlArea />}
+            {this.state.area == AreaEnum.MODEL && <ModelArea /> }
+            {this.state.area == AreaEnum.RESERVED && <Option2 />}
+          </div> 
+        </Layout>
           
         <Footer>
           <p>This work is supported by <a href="https://www.enact-project.eu/">ENACT</a>.</p>
-          <p> Please visit <a href="https://github.com/SINTEF-9012/divenact-azure"><Icon type="github" /></a> for further details.</p>
+          <p> Please visit <a href="https://github.com/SINTEF-9012/divenact"><Icon type="github" /></a> for further details.</p>
         </Footer>
+        
         </Layout>    
-        
-        
+                
       </div>
     );
   }
@@ -136,8 +133,6 @@ class App extends Component {
       })
       .catch(alert);
   };
-
-
 
   async getDevices(){
     return (await axios.get('api/device/')).data;

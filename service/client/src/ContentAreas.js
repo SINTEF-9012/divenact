@@ -142,7 +142,7 @@ export class PreviewArea extends Component {
     return (
       <div>
         <Row>
-          <Text>Preview variant </Text>
+          <Text>Preview variant</Text>
           <SingleVariantSelect onSelectionChange={this.onSelectionChange} />
           <Text> on </Text>
           <InputNumber min={1} max={devices.length} onChange={this.onNumberChange} />

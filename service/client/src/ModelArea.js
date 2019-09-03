@@ -30,11 +30,11 @@ export class ModelArea extends Component {
             <Menu defaultSelectedKeys={['1']} mode="inline" theme="dark">
               <Menu.Item key="1" onClick={this.templates}>
                 <Icon type="book" />
-                <span>Template</span>
+                <span>Templates</span>
               </Menu.Item>
               <Menu.Item key="2" onClick={this.variants}>
                 <Icon type="branches" />
-                <span>Variant</span>
+                <span>Variants</span>
               </Menu.Item>
               <Menu.Item key="3">
                 <Icon type="deployment-unit" />
