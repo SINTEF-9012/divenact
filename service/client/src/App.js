@@ -9,12 +9,14 @@ import { PageHeader } from 'antd';
 import { Typography } from 'antd';
 import { Menu } from 'antd';
 import { Icon } from 'antd';
+import {Tabs} from 'antd';
 
 import {ControlArea} from './ControlArea';
 import {ModelArea} from './ModelArea';
 
 const { Header, Footer, Sider, Content } = Layout;
 const { Paragraph } = Typography;
+const { TabPane } = Tabs;
 
 var AreaEnum = {
   CONTROL: 1,
@@ -74,21 +76,31 @@ class App extends Component {
           
         <Header style={{ background: '#fff', padding: 0, textAlign: 'left' }}>
           
-            <Menu theme="light" mode="horizontal" defaultSelectedKeys={['1']} style={{ lineHeight: '64px', padding: '10px 0 10 0' }} >
+            {/* <Menu theme="light" mode="horizontal" defaultSelectedKeys={['1']} style={{ lineHeight: '64px', padding: '10px 0 10 0' }} >
               <Menu.Item key="logo" onClick={window.location.href='#'}><img style={{ height: '60px', padding: '15px'}} src="https://enact-project.eu/img/logo-enact-blue2.png" alt="logo enact" /></Menu.Item>              
               <Menu.Item key="1" onClick={this.controlarea}><Icon type="control" />Control</Menu.Item>
-              <Menu.Item key="2" onClick={this.modelarea}><Icon type="profile" />Repository</Menu.Item>
-              {/* <Menu.Item key="3" onClick={this.op2}>TODO</Menu.Item> */}
-            </Menu>          
+              <Menu.Item key="2" onClick={this.modelarea}><Icon type="profile" />Repository</Menu.Item>              
+            </Menu> */}
+
+            <Tabs defaultActiveKey="1">
+              <TabPane disabled key="logo" tab={<span><img style={{ height: '40px'}} src="https://enact-project.eu/img/logo-enact-blue2.png" alt="logo enact" /></span>}>Tab 1</TabPane>
+              <TabPane key="1" tab={<span><Icon type="control" />Control</span>}>
+                <ControlArea />              
+              </TabPane>
+              <TabPane key="2" tab={<span><Icon type="profile" />Repository</span>}>
+                <ModelArea />
+              </TabPane>
+            </Tabs>  
+
         </Header>
 
-        <Layout>
+        <Content>
           <div>
             {this.state.area == AreaEnum.CONTROL && <ControlArea />}
             {this.state.area == AreaEnum.MODEL && <ModelArea /> }
             {this.state.area == AreaEnum.RESERVED && <Option2 />}
           </div> 
-        </Layout>
+        </Content>
           
         <Footer>
           <p>This work is supported by <a href="https://www.enact-project.eu/">ENACT</a>.</p>
@@ -156,6 +168,7 @@ class App extends Component {
     window.confirm("op1")
     this.setState({ option: 'op1'})
   }
+
   modelarea = ()=>{
     this.setState( {area: AreaEnum.MODEL} );
   }
