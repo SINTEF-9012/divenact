@@ -13,6 +13,8 @@ import {Tabs} from 'antd';
 
 import {ControlArea} from './ControlArea';
 import {ModelArea} from './ModelArea';
+import {TemplateArea2} from './TemplateArea2';
+import {VariantArea2} from './VariantArea2';
 
 const { Header, Footer, Sider, Content } = Layout;
 const { Paragraph } = Typography;
@@ -21,11 +23,15 @@ const { TabPane } = Tabs;
 var AreaEnum = {
   CONTROL: 1,
   MODEL: 2,
-  RESERVED: 3,
+  TEMPLATE: 3,
+  VARIANT: 4,
+  RESERVED: 5,
   properties: {
     1: {name: "control", value: 1, code: "C"},
-    2: {name: "model", value: 2, code: "M"},
-    3: {name: "reserved", value: 3, code: "R"}
+    2: {name: "model", value: 2, code: "M"},    
+    3: {name: "template", value: 3, code: "T"},
+    4: {name: "variant", value: 4, code: "V"},
+    5: {name: "reserved", value: 5, code: "R"}
   }
 };
 
@@ -73,8 +79,10 @@ class App extends Component {
     </PageHeader> */}
 
         <Layout style={{ minHeight: '100vh' }}>
+
+        <Header></Header>
           
-        <Header style={{ background: '#fff', padding: 0, textAlign: 'left' }}>
+        <Content style={{ background: '#fff', padding: 0, textAlign: 'left' }}>
           
             {/* <Menu theme="light" mode="horizontal" defaultSelectedKeys={['1']} style={{ lineHeight: '64px', padding: '10px 0 10 0' }} >
               <Menu.Item key="logo" onClick={window.location.href='#'}><img style={{ height: '60px', padding: '15px'}} src="https://enact-project.eu/img/logo-enact-blue2.png" alt="logo enact" /></Menu.Item>              
@@ -85,22 +93,28 @@ class App extends Component {
             <Tabs defaultActiveKey="1">
               <TabPane disabled key="logo" tab={<span><img style={{ height: '40px'}} src="https://enact-project.eu/img/logo-enact-blue2.png" alt="logo enact" /></span>}>Tab 1</TabPane>
               <TabPane key="1" tab={<span><Icon type="control" />Control</span>}>
-                <ControlArea />              
+                <ControlArea />
               </TabPane>
               <TabPane key="2" tab={<span><Icon type="profile" />Repository</span>}>
                 <ModelArea />
               </TabPane>
+              <TabPane key="3" tab={<span><Icon type="book" />Templates</span>}>
+                <TemplateArea2 />
+              </TabPane>
+              <TabPane key="4" tab={<span><Icon type="branches" />Variants</span>}>
+                <VariantArea2 />
+              </TabPane>
             </Tabs>  
 
-        </Header>
+        </Content>
 
-        <Content>
+        {/* <Content>
           <div>
             {this.state.area == AreaEnum.CONTROL && <ControlArea />}
             {this.state.area == AreaEnum.MODEL && <ModelArea /> }
             {this.state.area == AreaEnum.RESERVED && <Option2 />}
           </div> 
-        </Content>
+        </Content> */}
           
         <Footer>
           <p>This work is supported by <a href="https://www.enact-project.eu/">ENACT</a>.</p>
@@ -175,6 +189,14 @@ class App extends Component {
 
   controlarea = ()=>{
     this.setState( {area: AreaEnum.CONTROL} );
+  }
+
+  templatearea = ()=>{
+    this.setState( {area: AreaEnum.TEMPLATE} );
+  }
+
+  vairuantarea = ()=>{
+    this.setState( {area: AreaEnum.VARIANT} );
   }
 
 }

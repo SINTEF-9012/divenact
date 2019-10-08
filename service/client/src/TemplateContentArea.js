@@ -4,7 +4,7 @@ import axios from 'axios';
 import { JsonEditor as Editor } from 'jsoneditor-react';
 import 'jsoneditor-react/es/editor.min.css';
 
-export var ModelContentAreaEnum = {
+export var TemplateContentAreaEnum = {
   TEMPLATE: 1,
   VARIANT: 2,
   PREVIEW: 3,
