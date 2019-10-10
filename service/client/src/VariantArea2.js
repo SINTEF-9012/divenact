@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Layout, List, Col, Row, Menu, Icon, Table, Collapse, Popconfirm } from 'antd';
+import { Button, Layout, List, Col, Row, Menu, Dropdown, Icon, Table, Collapse, Popconfirm, Tooltip } from 'antd';
 import axios from 'axios';
 import { ContentAreaEnum, DeploymentDeviceArea, ProductionArea, PreviewArea } from './ContentAreas'
 import { TemplateContentAreaEnum, TemplateArea, VariantArea} from './TemplateContentArea';
@@ -9,65 +9,117 @@ import 'jsoneditor-react/es/editor.min.css';
 const { Header, Footer, Sider, Content } = Layout;
 const { Panel } = Collapse;
 
+const ButtonGroup = Button.Group;
+
+const menu = (
+  <Menu>
+    <Menu.Item key="0">
+      <a href="#">Production</a>
+    </Menu.Item>
+    <Menu.Divider />
+    <Menu.Item key="1">
+      <a href="#">Preview</a>
+    </Menu.Item>
+    <Menu.Divider />
+    <Menu.Item key="3">
+      <a href="#">Testing</a></Menu.Item>
+    <Menu.Divider />
+    <Menu.Item key="4">
+      <a href="#">Safe mode</a>
+    </Menu.Item>
+  </Menu>
+);
+
 export class VariantArea2 extends Component {
   constructor(props) {
     super(props);
-    this.columns = [
+    this.columns = [      
       {
-        title: 'ID',
-        dataIndex: 'id',
+        title: 'Variant ID',
+        dataIndex: 'id',        
       },
       {
         title: 'Template',
         dataIndex: 'template',
       },
       {
+        dataIndex: 'push',
+        render: () => (
+          <span>
+            <Dropdown overlay={menu}>
+              <a>
+                Push to ... <Icon type="down" />
+              </a>
+            </Dropdown>
+          </span>
+        ),
+      },
+      {
         title: 'Actions',
+        width: 150,
+        align: 'center',
         render: (text, record) => (
-          <div>
-          {/* <a onClick={() => this.editVariant(record)}>edit </a> */}
-          <a>save </a>
-          <a>copy </a>
-          <Popconfirm title="Sure to delete?" onConfirm={() => this.deleteVariant(record.id)}>
-          <a>delete</a></Popconfirm>
-          </div>
+          <span style={{float: 'right'}}>
+            <ButtonGroup size='small' type="dashed">
+              <Tooltip title="Edit variant"><Button type="primary" icon="edit" onClick={() => this.editVariant(record)} ghost /></Tooltip>
+              <Tooltip title="Copy variant"><Button type="primary" icon="copy" ghost disabled /></Tooltip>
+              <Tooltip title="Save variant"><Button type="primary" icon="save" onClick={()=>{this.saveVariant()}} ghost /></Tooltip>
+              <Tooltip title="Delete variant"><Popconfirm title="Sure to delete?" onConfirm={() => this.deleteVariant(record.id)}><Button type="primary" icon="delete" ghost /></Popconfirm></Tooltip>
+              {/* <Tooltip title="Push variant"><Button type="primary" icon="rocket" onClick={()=>{this.pushVariant()}} ghost /></Tooltip> */}
+            </ButtonGroup>
+          </span>
+          // {/* <a onClick={() => this.editVariant(record)}>edit </a> 
+          // <a onClick={()=>{this.saveVariant()}}>save </a>
+          // <a>copy </a>
+          // <Popconfirm title="Sure to delete?" onConfirm={() => this.deleteVariant(record.id)}>
+          // <a>delete</a></Popconfirm>
+          // </div> */}
         )
-      }
+      }    
     ]
     this.state = {
       variants: [],
       forEdit: null, 
-      edited: null
+      edited: null,
+      expandedRows: []
     };
     this.editor = React.createRef();
   }
 
   render() {
 
-    const { variants, forEdit } = this.state;
-    
+    const { variants, forEdit, expandedRows } = this.state; 
+
     return (
       
         <Layout>
 
-        <Content>
-
-        
+        <Content>        
           <Row>
-            <Col>
+            <Col span={6}>
               <Table
-                bordered 
+                //bordered 
+                rowKey={record => record.id}
                 size='small'
                 dataSource={variants}
                 columns={this.columns}
-                expandedRowRender={record => <p style={{ margin: 0 }}><div>
-                  <Button onClick={()=>{this.saveVariant()}}>Save</Button>
-                  <Editor value={forEdit} ref={this.editor} onChange={this.handleChange}/>
-                  </div></p>}
+                // expandedRowKeys={expandedRows} 
+                // onExpand={(expanded, record) => {this.handleExpandRow(expanded, record) && this.editVariant(record)}}
+                // expandedRowRender={record => <p style={{ margin: 0 }}><div>
+                //   <div>
+                //     <ButtonGroup>
+                //       <Button type="dashed" icon="edit" />
+                //       <Button type="dashed" icon="copy" />
+                //       <Button type="dashed" icon="save" onClick={()=>{this.saveVariant()}} />
+                //       <Popconfirm title="Sure to delete?" onConfirm={() => this.deleteVariant(record.id)}><Button type="dashed" icon="delete" /></Popconfirm>
+                //     </ButtonGroup>
+                //   </div>
+                //   {/* <Editor mode='form' history='true' value={forEdit} ref={this.editor} onChange={this.handleChange}/> */}
+                //   </div></p>}
                 pagination={{ pageSize: 50 }} 
                 // scroll={{ y: 1240 }}
-                onExpand={(expanded, record) => {
-                  this.editVariant(record);   }}
+                // onExpand={(expanded, record) => {
+                //   this.editVariant(record); }}
               />
             </Col>
             {/* <Col>
@@ -77,8 +129,17 @@ export class VariantArea2 extends Component {
               <Editor value={forEdit} ref={this.editor} onChange={this.handleChange}/>
             </div>
             }
-            </Col> */}
-          </Row>       
+            </Col> */}            
+          <Col span={18}>
+            {/* <ButtonGroup>
+              <Button type="dashed" icon="edit" />
+              <Button type="dashed" icon="copy" />
+              <Button type="dashed" icon="save" onClick={()=>{this.saveVariant()}} />
+              <Popconfirm title="Sure to delete?" onConfirm={() => this.deleteVariant(record.id)}><Button type="dashed" icon="delete" /></Popconfirm>
+            </ButtonGroup> */}            
+            <Editor history='true' value={forEdit} ref={this.editor} onChange={this.handleChange} />            
+          </Col> 
+          </Row>    
         </Content>
 
           {/* <Sider> */}
@@ -109,12 +170,21 @@ export class VariantArea2 extends Component {
     );
   }
 
+  handleExpandRow = (expanded, record) => {
+    const expandedRows = [];
+    if (expanded) {
+      expandedRows.push(record.id);
+    }
+    this.setState({ expandedRows });    
+    //this.editVariant(record)    
+  };
+
   componentDidMount() {
     this.getVariants().then(result => { this.setState({ variants: result }) });
   }
 
   handleChange = (value) => {
-    this.setState({edited: value});
+    this.setState({edited: value})    
   }
 
   getVariants = async () => {
@@ -141,6 +211,20 @@ export class VariantArea2 extends Component {
       window.confirm("No change to save");
     }
   }
+
+  //push variant to production or preview
+  pushVariant = async () =>{
+    const variant = this.state.selected;
+    if(!variant){
+      window.confirm("Please select a variant first");
+      return;
+    }
+    let result = await axios.put(`api/global/production/${variant}`);
+    this.setState({
+      contentarea: ContentAreaEnum.DEPLOYMENTDEVICE
+    })
+    this.deploymentdevice.current.componentDidMount();
+  }  
 
   templates = () =>{
     this.setState({

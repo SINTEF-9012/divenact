@@ -15,6 +15,7 @@ import {ControlArea} from './ControlArea';
 import {ModelArea} from './ModelArea';
 import {TemplateArea2} from './TemplateArea2';
 import {VariantArea2} from './VariantArea2';
+import {DeploymentArea} from './DeploymentArea';
 
 const { Header, Footer, Sider, Content } = Layout;
 const { Paragraph } = Typography;
@@ -25,13 +26,13 @@ var AreaEnum = {
   MODEL: 2,
   TEMPLATE: 3,
   VARIANT: 4,
-  RESERVED: 5,
+  DEPLOYMENT: 5,
   properties: {
     1: {name: "control", value: 1, code: "C"},
     2: {name: "model", value: 2, code: "M"},    
     3: {name: "template", value: 3, code: "T"},
     4: {name: "variant", value: 4, code: "V"},
-    5: {name: "reserved", value: 5, code: "R"}
+    5: {name: "deployment", value: 5, code: "R"}
   }
 };
 
@@ -80,7 +81,7 @@ class App extends Component {
 
         <Layout style={{ minHeight: '100vh' }}>
 
-        <Header></Header>
+        {/* <Header></Header> */}
           
         <Content style={{ background: '#fff', padding: 0, textAlign: 'left' }}>
           
@@ -92,17 +93,20 @@ class App extends Component {
 
             <Tabs defaultActiveKey="1">
               <TabPane disabled key="logo" tab={<span><img style={{ height: '40px'}} src="https://enact-project.eu/img/logo-enact-blue2.png" alt="logo enact" /></span>}>Tab 1</TabPane>
-              <TabPane key="1" tab={<span><Icon type="control" />Control</span>}>
-                <ControlArea />
-              </TabPane>
-              <TabPane key="2" tab={<span><Icon type="profile" />Repository</span>}>
-                <ModelArea />
-              </TabPane>
-              <TabPane key="3" tab={<span><Icon type="book" />Templates</span>}>
+              <TabPane key="1" tab={<span><Icon type="branches" />Variants</span>}>
+                <VariantArea2 />
+              </TabPane>              
+              <TabPane key="2" tab={<span><Icon type="book" />Templates</span>}>
                 <TemplateArea2 />
               </TabPane>
-              <TabPane key="4" tab={<span><Icon type="branches" />Variants</span>}>
-                <VariantArea2 />
+              <TabPane key="3" tab={<span><Icon type="deployment-unit" />Deployments</span>}>
+                <DeploymentArea />
+              </TabPane>
+              <TabPane key="4" tab={<span><Icon type="control" />Control</span>}>
+                <ControlArea />
+              </TabPane>
+              <TabPane key="5" tab={<span><Icon type="profile" />Repository</span>}>
+                <ModelArea />
               </TabPane>
             </Tabs>  
 
