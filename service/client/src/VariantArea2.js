@@ -8,7 +8,6 @@ import 'jsoneditor-react/es/editor.min.css';
 
 const { Header, Footer, Sider, Content } = Layout;
 const { Panel } = Collapse;
-
 const ButtonGroup = Button.Group;
 
 const menu = (
@@ -42,29 +41,30 @@ export class VariantArea2 extends Component {
         title: 'Template',
         dataIndex: 'template',
       },
-      {
-        dataIndex: 'push',
-        render: () => (
-          <span>
-            <Dropdown overlay={menu}>
-              <a>
-                Push to ... <Icon type="down" />
-              </a>
-            </Dropdown>
-          </span>
-        ),
-      },
+      // {
+      //   dataIndex: 'push',
+      //   render: () => (
+      //     <span>
+      //       <Dropdown overlay={menu}>
+      //         <a>
+      //           Push to ... <Icon type="down" />
+      //         </a>
+      //       </Dropdown>
+      //     </span>
+      //   ),
+      // },
       {
         title: 'Actions',
-        width: 150,
+        width: 180,
         align: 'center',
         render: (text, record) => (
           <span style={{float: 'right'}}>
             <ButtonGroup size='small' type="dashed">
-              <Tooltip title="Edit variant"><Button type="primary" icon="edit" onClick={() => this.editVariant(record)} ghost /></Tooltip>
-              <Tooltip title="Copy variant"><Button type="primary" icon="copy" ghost disabled /></Tooltip>
-              <Tooltip title="Save variant"><Button type="primary" icon="save" onClick={()=>{this.saveVariant()}} ghost /></Tooltip>
-              <Tooltip title="Delete variant"><Popconfirm title="Sure to delete?" onConfirm={() => this.deleteVariant(record.id)}><Button type="primary" icon="delete" ghost /></Popconfirm></Tooltip>
+              <Dropdown overlay={menu}><Tooltip title="Push to ..."><Button type="primary" icon="rocket" onClick={() => this.editVariant(record)} ghost /></Tooltip></Dropdown>
+              <Tooltip title="View & Edit"><Button type="primary" icon="edit" onClick={() => this.editVariant(record)} ghost /></Tooltip>
+              <Tooltip title="Copy"><Button type="primary" icon="copy" ghost /></Tooltip>
+              <Tooltip title="Save"><Button type="primary" icon="save" onClick={()=>{this.saveVariant()}} ghost /></Tooltip>
+              <Tooltip title="Delete"><Popconfirm title="Sure to delete?" onConfirm={() => this.deleteVariant(record.id)}><Button type="primary" icon="delete" ghost /></Popconfirm></Tooltip>
               {/* <Tooltip title="Push variant"><Button type="primary" icon="rocket" onClick={()=>{this.pushVariant()}} ghost /></Tooltip> */}
             </ButtonGroup>
           </span>

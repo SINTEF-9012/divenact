@@ -115,15 +115,16 @@ export class TemplateArea2 extends Component {
       },   
       {
         title: 'Actions',
-        width: 150,
+        width: 180,
         align: 'center',
         render: (text, record) => (
           <span style={{float: 'right'}}>
-            <ButtonGroup size='small' type="dashed">
-              <Tooltip title="Edit variant"><Button type="primary" icon="edit" onClick={() => this.editTemplate(record)} ghost /></Tooltip>
-              <Tooltip title="Copy variant"><Button type="primary" icon="copy" onClick={() => this.copyTemplate(record)} ghost /></Tooltip>
-              <Tooltip title="Save variant"><Button type="primary" icon="save" onClick={()=>{this.saveTemplate()}} ref={this.saveButton} ghost /></Tooltip>
-              <Tooltip title="Delete variant"><Popconfirm title="Are you sure?" onConfirm={() => this.deleteTemplate(record.id)}><Button type="primary" icon="delete" ghost /></Popconfirm></Tooltip>
+            <ButtonGroup size='small' type="dashed">              
+              <Tooltip title="Create variant"><Button type="primary" icon="fork" onClick={() => this.createVariant(record)} ghost /></Tooltip>
+              <Tooltip title="View & Edit"><Button type="primary" icon="edit" onClick={() => this.editTemplate(record)} ghost /></Tooltip>
+              <Tooltip title="Copy"><Button type="primary" icon="copy" onClick={() => this.copyTemplate(record)} ghost /></Tooltip>
+              <Tooltip title="Save "><Button type="primary" icon="save" onClick={()=>{this.saveTemplate()}} ref={this.saveButton} ghost /></Tooltip>
+              <Tooltip title="Delete"><Popconfirm title="Are you sure?" onConfirm={() => this.deleteTemplate(record.id)}><Button type="primary" icon="delete" ghost /></Popconfirm></Tooltip>
             </ButtonGroup>
             </span>
           // {/* <a onClick={() => this.editVariant(record)}>edit </a> 
@@ -280,7 +281,13 @@ export class TemplateArea2 extends Component {
     return (await axios.get('api/variant/')).data;
   }
 
-  templates = () =>{
+  //TODO - create new variant for the given template
+  createVariant = () => {    
+    //let Tabs = React.createRef();
+    //this.Tabs.current.activeKey="2";
+  }
+
+  templates = () => {
     this.setState({
       contentarea: TemplateContentAreaEnum.TEMPLATE
     })

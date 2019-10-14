@@ -36,21 +36,21 @@ var AreaEnum = {
   }
 };
 
-class Option1 extends Component{
-  render(){
-    return(
-      <div>I'm One</div>
-    )
-  }
-}
+// class Option1 extends Component{
+//   render(){
+//     return(
+//       <div>I'm One</div>
+//     )
+//   }
+// }
 
-class Option2 extends Component{
-  render(){
-    return(
-      <div>I'm Two</div>
-    )
-  }
-}
+// class Option2 extends Component{
+//   render(){
+//     return(
+//       <div>I'm Two</div>
+//     )
+//   }
+// }
 
 class App extends Component {
   constructor(props) {
@@ -58,6 +58,7 @@ class App extends Component {
     this.state = {
       area: AreaEnum.GLOBAL
     };
+    this.Tabs = React.createRef();
   }
 
   componentDidMount() {
@@ -91,13 +92,13 @@ class App extends Component {
               <Menu.Item key="2" onClick={this.modelarea}><Icon type="profile" />Repository</Menu.Item>              
             </Menu> */}
 
-            <Tabs defaultActiveKey="1">
+            <Tabs defaultActiveKey="1" id="Tabs" ref={this.Tabs}>
               <TabPane disabled key="logo" tab={<span><img style={{ height: '40px'}} src="https://enact-project.eu/img/logo-enact-blue2.png" alt="logo enact" /></span>}>Tab 1</TabPane>
-              <TabPane key="1" tab={<span><Icon type="branches" />Variants</span>}>
-                <VariantArea2 />
-              </TabPane>              
-              <TabPane key="2" tab={<span><Icon type="book" />Templates</span>}>
+              <TabPane key="1" tab={<span><Icon type="book" />Templates</span>}>
                 <TemplateArea2 />
+              </TabPane>
+              <TabPane key="2" tab={<span><Icon type="branches" />Variants</span>}>
+                <VariantArea2 />
               </TabPane>
               <TabPane key="3" tab={<span><Icon type="deployment-unit" />Deployments</span>}>
                 <DeploymentArea />
