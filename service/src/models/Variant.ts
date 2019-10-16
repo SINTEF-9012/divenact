@@ -1,5 +1,6 @@
 import {Document, Schema, model} from 'mongoose';
 import uniqueValidator from 'mongoose-unique-validator';
+
 export interface IVariant extends Document{
     id: string;
     template: string;
@@ -13,6 +14,7 @@ export const VariantSchema = new Schema({
     parameter: {},
     property: {}
 })
+
 VariantSchema.plugin(uniqueValidator);
 
 export const Variant = model<IVariant>('Variant', VariantSchema);

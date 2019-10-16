@@ -16,6 +16,7 @@ import {ModelArea} from './ModelArea';
 import {TemplateArea2} from './TemplateArea2';
 import {VariantArea2} from './VariantArea2';
 import {DeploymentArea} from './DeploymentArea';
+import {DeviceArea} from './DeviceArea';
 
 const { Header, Footer, Sider, Content } = Layout;
 const { Paragraph } = Typography;
@@ -103,10 +104,13 @@ class App extends Component {
               <TabPane key="3" tab={<span><Icon type="deployment-unit" />Deployments</span>}>
                 <DeploymentArea />
               </TabPane>
-              <TabPane key="4" tab={<span><Icon type="control" />Control</span>}>
+              <TabPane key="4" tab={<span><Icon type="deployment-unit" />Devices</span>}>
+                <DeviceArea />
+              </TabPane>
+              <TabPane key="5" tab={<span><Icon type="control" />Control</span>}>
                 <ControlArea />
               </TabPane>
-              <TabPane key="5" tab={<span><Icon type="profile" />Repository</span>}>
+              <TabPane key="6" tab={<span><Icon type="profile" />Repository</span>}>
                 <ModelArea />
               </TabPane>
             </Tabs>  

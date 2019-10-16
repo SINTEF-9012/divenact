@@ -9,7 +9,6 @@ import * as yaml from 'node-yaml';
 //import { results } from 'azure-iot-common';
 import {registry} from './registry'
 
-
 async function resolve(varname: string){
     let variant = await Variant.findOne({id: varname});
     let template = await Template.findOne({id: variant.template});
@@ -24,6 +23,7 @@ async function resolve(varname: string){
     }
     return result;
 }
+
 async function getCandidate(varname: string){
     return resolve(varname);
 }
@@ -136,7 +136,6 @@ export async function triggerDeployment(deploymentId: string): Promise<string>{
     deployment.priority += 1;
     
     return Promise.resolve(<string>(await registry.updateConfiguration(deployment)).responseBody.id);
-
 }
 
 export async function clearDeployments(): Promise<string[]>{
@@ -148,10 +147,22 @@ export async function clearDeployments(): Promise<string[]>{
     return Promise.all(result);
 }
 
-export async function getDeployment(id: string){
+export async function getDeployment(id: string) {
     return registry.getConfiguration(id);
 }
 
+/**
+ * Get all the deployments from the IoT hub.
+ */
+export async function getDeployments(): Promise<object> {
+    return Promise.resolve(registry.getConfigurations());
+}
+
+/**
+ * Query modules on a device.
+ * 
+ * @param deviceId device ID
+ */
 export async function queryModules(deviceId: string): Promise<object>{
     let modules = (await registry.getModulesOnDevice(deviceId)).responseBody;
     let result = {};
@@ -207,7 +218,3 @@ export async function queryDevices(): Promise<object>{
     
     //return Promise.resolve(result);
 } 
-
-
-
-

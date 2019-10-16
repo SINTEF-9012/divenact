@@ -15,7 +15,10 @@ export class DeploymentArea extends Component {
     this.columns = [      
       {
         title: 'Deployment ID',
-        dataIndex: 'id',        
+        dataIndex: 'id',  
+        render: (record) => (
+          <Badge count={1}>{record}</Badge>
+        )   
       },      
       {
         title: 'Actions',
@@ -144,9 +147,7 @@ export class DeploymentArea extends Component {
       .delete('/api/deployments/')
       .then(res => this.setState({ deployments: [] }))
       .catch(err => alert(`Failed to delete all deployments\n${JSON.stringify(err)}`));
-  };
-
-  
+  };  
 
   seedDeployments = () => {
     const doSeed = window.confirm('Do you want to seed random data?');
