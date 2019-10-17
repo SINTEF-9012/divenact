@@ -9,12 +9,6 @@ import 'jsoneditor-react/es/editor.min.css';
 const { Header, Footer, Sider, Content } = Layout;
 const { Panel } = Collapse;
 
-// const Option = Select.Option;
-// const children = [];
-// for (let i = 10; i < 36; i++) {
-//   children.push(<Option key={i.toString(36) + i}>{i.toString(36) + i}</Option>);
-// }
-
 const ButtonGroup = Button.Group;
 
 export class EditableTagGroup extends Component {
@@ -107,9 +101,11 @@ export class TemplateArea2 extends Component {
       {
         title: 'Tags',
         dataIndex: 'tags',
-        render: (text, record) => (
+        render: (text, record) => (  
           <span>
-            <EditableTagGroup />            
+            <Tag closable>Capability: {record.property.predefinedtag.capability}</Tag>           
+            <Tag closable>Environment: {record.property.predefinedtag.environment}</Tag>
+            <Tag closable>Status: {record.property.predefinedtag.status}</Tag>
           </span>
         ),
       },   

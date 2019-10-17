@@ -20,29 +20,29 @@ export class DeploymentArea extends Component {
           <Badge count={1}>{record}</Badge>
         )   
       },      
-      {
-        title: 'Actions',
-        width: 180,
-        align: 'center',
-        render: (text, record) => (
-          <span style={{float: 'right'}}>
-            <ButtonGroup size='small' type="dashed">              
-              <Tooltip title="View & Edit"><Button type="primary" icon="edit" onClick={() => this.editDeployment(record)} ghost /></Tooltip>
-              <Tooltip title="Copy"><Button type="primary" icon="copy" ghost /></Tooltip>
-              <Tooltip title="Save"><Button type="primary" icon="save" onClick={()=>{this.saveDeployment()}} ghost /></Tooltip>
-              <Tooltip title="Delete"><Popconfirm title="Sure to delete?" onConfirm={() => this.deleteDeployment(record.id)}><Button type="primary" icon="delete" ghost /></Popconfirm></Tooltip>
-              {/* <Tooltip title="Push variant"><Button type="primary" icon="rocket" onClick={()=>{this.pushVariant()}} ghost /></Tooltip> */}
-            </ButtonGroup>
-          </span>          
-        )
-      }    
+      // {
+      //   title: 'Actions',
+      //   width: 180,
+      //   align: 'center',
+      //   render: (text, record) => (
+      //     <span style={{float: 'right'}}>
+      //       <ButtonGroup size='small' type="dashed">              
+      //         <Tooltip title="View & Edit"><Button type="primary" icon="edit" onClick={() => this.editDeployment(record)} ghost /></Tooltip>
+      //         <Tooltip title="Copy"><Button type="primary" icon="copy" ghost /></Tooltip>
+      //         <Tooltip title="Save"><Button type="primary" icon="save" onClick={()=>{this.saveDeployment()}} ghost /></Tooltip>
+      //         <Tooltip title="Delete"><Popconfirm title="Sure to delete?" onConfirm={() => this.deleteDeployment(record.id)}><Button type="primary" icon="delete" ghost /></Popconfirm></Tooltip>
+      //         {/* <Tooltip title="Push variant"><Button type="primary" icon="rocket" onClick={()=>{this.pushVariant()}} ghost /></Tooltip> */}
+      //       </ButtonGroup>
+      //     </span>          
+      //   )
+      // }    
     ]
     this.nestedColumns = [      
       {
         title: 'Affected devices',
         dataIndex: 'id',
         render: (text, record) => (
-          <span><Icon type='laptop'></Icon> {record.id}</span>
+          <span><Icon type='bulb'></Icon> {record.id}</span>
         )      
       }   
     ]
@@ -65,13 +65,14 @@ export class DeploymentArea extends Component {
 
       <Content>        
         <Row>
-          <Col span={12}>
+          <Col span={24}>
             <Table
               //bordered 
               rowKey={record => record.id}
               size='small'
               dataSource={deployments}
               columns={this.columns}
+              expandRowByClick={true}
               expandedRowRender={record => 
                 <span><ReactJson src={record} enableClipboard={false} />
                 <Table columns={this.nestedColumns} dataSource={devices} pagination={false}/></span>}
@@ -102,9 +103,9 @@ export class DeploymentArea extends Component {
           </div>
           }
           </Col> */}            
-        <Col span={12}>                     
+        {/* <Col span={12}>                     
           <Editor history='true' value={forEdit} ref={this.editor} onChange={this.handleChange} />            
-        </Col> 
+        </Col>  */}
         </Row>    
       </Content>
        
@@ -115,6 +116,8 @@ export class DeploymentArea extends Component {
   componentDidMount() {
     this.getDeployments().then(result => this.setState({ deployments: result }))
     this.getDevices().then(result => this.setState({ devices: result }))
+
+    this.findMatchingDevices();
   }  
 
   editDeployment = (record) => {
@@ -163,15 +166,43 @@ export class DeploymentArea extends Component {
       .catch(alert);
   };
 
-  async getDevices() {
+  getDevices = async () => {
     return (await axios.get('api/device/')).data;
   }
 
-  async getDeployments() {
+  getDeployments = async () => {
     return (await axios.get('api/deployment')).data;
   }
 
-  production = async ()=>{
+  findMatchingDevices = async (deployment) => {
+    var deployments = (await this.getDeployments());
+    var devices = (await this.getDevices());
+    
+    console.log(await axios.get('api/deployment/env_production_genesis_nodered/applied').data);
+    
+    Array.from(deployments).forEach(deployment => {
+      console.log(deployment.condition);
+      var conditions = deployment.condition.split(" AND ");
+      Array.from(conditions).forEach((condition) => {
+        console.log(condition);
+      });      
+    });
+
+    Array.from(devices).forEach(device => {
+      console.log(device.tags.environment);
+    });
+
+    Array.from(devices).forEach(device => {
+      console.log(device.tags.environment);
+    });
+  }
+
+  parseTargetConditions = (conditions) => {
+    var cond = conditions.split(" AND ");
+
+  }
+
+  production = async () => {
     this.setState({ deployments: [] });
     const variant = prompt('Variant name');
     let result = await axios.put(`api/global/production/${variant}`);
@@ -180,6 +211,8 @@ export class DeploymentArea extends Component {
       deployments: await this.getDeployments()
     })
   }
+
+  
   
 }
 

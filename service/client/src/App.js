@@ -104,7 +104,7 @@ class App extends Component {
               <TabPane key="3" tab={<span><Icon type="deployment-unit" />Deployments</span>}>
                 <DeploymentArea />
               </TabPane>
-              <TabPane key="4" tab={<span><Icon type="deployment-unit" />Devices</span>}>
+              <TabPane key="4" tab={<span><Icon type="bulb" />Devices</span>}>
                 <DeviceArea />
               </TabPane>
               <TabPane key="5" tab={<span><Icon type="control" />Control</span>}>

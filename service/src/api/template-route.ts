@@ -3,8 +3,8 @@ import {Template} from "../models/Template"
 
 export let router = Router();
 
-router.get('/', (req, res, next) =>{
-    Template.find({}, (err, templates)=>{
+router.get('/', (req, res, next) => {
+    Template.find({}, (err, templates) => {
         if(err) next(err);
         else res.json(templates);
     })
@@ -19,8 +19,8 @@ router.put('/:template', async (req, res, next) => {
     res.json(result);
 })
 
-router.delete('/:template', async(req, res, next)=>{
-    Template.deleteOne({id: req.params['template']}, err=>{
+router.delete('/:template', async(req, res, next) => {
+    Template.deleteOne({id: req.params['template']}, err => {
         if(err) next(err);
         else res.send({message: 'Deleted'});
     })

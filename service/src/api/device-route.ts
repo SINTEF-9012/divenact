@@ -4,8 +4,7 @@ import { getDeployment } from "../deployment";
 
 export let router = Router();
 
-
-router.get('/', async (req, res)=>{
+router.get('/', async (req, res) => {
     res.json(await listIdTags());
 });
 

@@ -165,11 +165,50 @@ export async function getDeployments(): Promise<object> {
  */
 export async function queryModules(deviceId: string): Promise<object>{
     let modules = (await registry.getModulesOnDevice(deviceId)).responseBody;
-    let result = {};
-    for(let module of modules){
-        result[module.moduleId] = module.connectionState;
+    //let result = {};
+    let result : object[] = [];
+    for(let module of modules) {
+        result.push(module); 
+        //[module.moduleId] = module.connectionState;
     }
     return Promise.resolve(result);
+}
+
+/** 
+ * Query devices to which a deployment was applied
+ * 
+ */
+export async function queryAppliedDevices(deploymentId: string): Promise<object> {
+    
+    return new Promise<Object>((resolve, reject) => {
+
+        let query = registry.createQuery("SELECT * FROM devices.modules WHERE moduleId = '$edgeAgent' and configurations.[[" + deploymentId + "]].status = 'Applied'", 100);
+        query.nextAsTwin(function(err, results) {        
+        if (err) {
+            reject(err);
+        } else {  
+            let result = {}; 
+            results.forEach(function(device) {                    
+                result[device.deviceId] = device;
+            });   
+            console.log(result);  
+            //console.log(Object.keys(result));     
+            resolve(result);
+            }
+        });
+    });
+
+    // var result = [] ;     
+    // let query = registry.createQuery("SELECT deviceId FROM devices.modules WHERE moduleId = '$edgeAgent' and configurations.[[env_production_genesis_nodered]].status = 'Applied'", 100); // WHERE moduleId = '$edgeAgent' and configurations.[[env_production_genesis_nodered]].status = 'Applied'", 100);
+    
+    // query.nextAsTwin(function(err, results) {        
+    //     results.forEach(function(device) {  
+    //         console.log(device);                  
+    //         result.push(device); //[device.deviceId] = [device];
+    //     });
+    // });        
+    // console.log(result[0]);    
+    // return Promise.resolve(result);    
 }
 
 export async function queryDevices(): Promise<object>{

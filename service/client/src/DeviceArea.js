@@ -15,29 +15,29 @@ export class DeviceArea extends Component {
         title: 'Device ID',
         dataIndex: 'id'
       },      
-      {
-        title: 'Actions',
-        width: 180,
-        align: 'center',
-        render: (text, record) => (
-          <span style={{float: 'right'}}>
-            <ButtonGroup size='small' type="dashed">              
-              <Tooltip title="View & Edit"><Button type="primary" icon="edit" onClick={() => this.editDeployment(record)} ghost /></Tooltip>
-              <Tooltip title="Copy"><Button type="primary" icon="copy" ghost /></Tooltip>
-              <Tooltip title="Save"><Button type="primary" icon="save" onClick={()=>{this.saveDeployment()}} ghost /></Tooltip>
-              <Tooltip title="Delete"><Popconfirm title="Sure to delete?" onConfirm={() => this.deleteDeployment(record.id)}><Button type="primary" icon="delete" ghost /></Popconfirm></Tooltip>
-              {/* <Tooltip title="Push variant"><Button type="primary" icon="rocket" onClick={()=>{this.pushVariant()}} ghost /></Tooltip> */}
-            </ButtonGroup>
-          </span>          
-        )
-      }    
+      // {
+      //   title: 'Actions',
+      //   width: 180,
+      //   align: 'center',
+      //   render: (text, record) => (
+      //     <span style={{float: 'right'}}>
+      //       <ButtonGroup size='small' type="dashed">              
+      //         <Tooltip title="View & Edit"><Button type="primary" icon="edit" onClick={() => this.editDeployment(record)} ghost /></Tooltip>
+      //         <Tooltip title="Copy"><Button type="primary" icon="copy" ghost /></Tooltip>
+      //         <Tooltip title="Save"><Button type="primary" icon="save" onClick={()=>{this.saveDeployment()}} ghost /></Tooltip>
+      //         <Tooltip title="Delete"><Popconfirm title="Sure to delete?" onConfirm={() => this.deleteDeployment(record.id)}><Button type="primary" icon="delete" ghost /></Popconfirm></Tooltip>
+      //         {/* <Tooltip title="Push variant"><Button type="primary" icon="rocket" onClick={()=>{this.pushVariant()}} ghost /></Tooltip> */}
+      //       </ButtonGroup>
+      //     </span>          
+      //   )
+      // }    
     ]
     this.nestedColumns = [      
       {
-        title: 'Affected devices',
+        title: 'Deployments',
         dataIndex: 'id',
         render: (text, record) => (
-          <span><Icon type='laptop'></Icon> {record.id}</span>
+          <span><Icon type='deployment-unit'></Icon> {record.id}</span>
         )      
       }   
     ]
@@ -67,6 +67,7 @@ export class DeviceArea extends Component {
               size='small'
               dataSource={devices}
               columns={this.columns}
+              expandRowByClick={true}
               expandedRowRender={record => 
                 <span><ReactJson src={record} enableClipboard={false} />
                 <Table columns={this.nestedColumns} dataSource={devices} pagination={false}/></span>
