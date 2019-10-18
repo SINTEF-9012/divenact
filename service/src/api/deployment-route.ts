@@ -20,6 +20,10 @@ router.get('/:deployment/applied', async (req, res) => {
     res.json(await queryAppliedDevices(req.params['deployment']));
 });
 
+router.get('/:deployment/targeted', async (req, res) => {    
+    res.json(await queryAppliedDevices(req.params['deployment']));
+});
+
 router.delete('/', async (req, res)=>{
     res.json(await clearDeployments());
 })

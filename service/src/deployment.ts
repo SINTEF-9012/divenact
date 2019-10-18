@@ -174,41 +174,46 @@ export async function queryModules(deviceId: string): Promise<object>{
     return Promise.resolve(result);
 }
 
-/** 
+/**
  * Query devices to which a deployment was applied
  * 
+ * @param deploymentId deployment ID
  */
-export async function queryAppliedDevices(deploymentId: string): Promise<object> {
+export async function queryAppliedDevices(deploymentId: string): Promise<Twin[]> {
     
-    return new Promise<Object>((resolve, reject) => {
+    return new Promise<Twin[]>((resolve, reject) => {
 
         let query = registry.createQuery("SELECT * FROM devices.modules WHERE moduleId = '$edgeAgent' and configurations.[[" + deploymentId + "]].status = 'Applied'", 100);
-        query.nextAsTwin(function(err, results) {        
+        query.nextAsTwin(function(err, results: Twin[]) {        
         if (err) {
             reject(err);
-        } else {  
-            let result = {}; 
-            results.forEach(function(device) {                    
-                result[device.deviceId] = device;
-            });   
-            console.log(result);  
-            //console.log(Object.keys(result));     
-            resolve(result);
+        } else {                
+            console.log("Applied devices: " + results);     
+            resolve(results);
             }
         });
-    });
+    });   
+}
 
-    // var result = [] ;     
-    // let query = registry.createQuery("SELECT deviceId FROM devices.modules WHERE moduleId = '$edgeAgent' and configurations.[[env_production_genesis_nodered]].status = 'Applied'", 100); // WHERE moduleId = '$edgeAgent' and configurations.[[env_production_genesis_nodered]].status = 'Applied'", 100);
+/**
+ * Query devices to which a deployment was targeted
+ * 
+ * @param deploymentId deployment ID
+ */
+export async function queryTargetedDevices(deploymentId: string): Promise<Twin[]> {
     
-    // query.nextAsTwin(function(err, results) {        
-    //     results.forEach(function(device) {  
-    //         console.log(device);                  
-    //         result.push(device); //[device.deviceId] = [device];
-    //     });
-    // });        
-    // console.log(result[0]);    
-    // return Promise.resolve(result);    
+    return new Promise<Twin[]>((resolve, reject) => {
+
+        let query = registry.createQuery("SELECT * FROM devices.modules WHERE moduleId = '$edgeAgent' and configurations.[[" + deploymentId + "]].status = 'Targeted'", 100);
+        query.nextAsTwin(function(err, results: Twin[]) {        
+        if (err) {
+            reject(err);
+        } else {              
+            console.log("Targeted devices: " + results);    
+            resolve(results);
+            }
+        });
+    });   
 }
 
 export async function queryDevices(): Promise<object>{

@@ -17,10 +17,11 @@ export class DeploymentArea extends Component {
         title: 'Deployment ID',
         dataIndex: 'id',  
         render: (record) => (
-          <Badge count={1}>{record}</Badge>
+          <Badge count={this.state.appliedDevices.length}>{record}</Badge>
         )   
       },      
-      // {
+      
+      //{
       //   title: 'Actions',
       //   width: 180,
       //   align: 'center',
@@ -37,27 +38,38 @@ export class DeploymentArea extends Component {
       //   )
       // }    
     ]
-    this.nestedColumns = [      
+    this.nestedColumnsApplied = [      
       {
-        title: 'Affected devices',
-        dataIndex: 'id',
+        title: 'Applied devices',
+        dataIndex: 'applied',
         render: (text, record) => (
-          <span><Icon type='bulb'></Icon> {record.id}</span>
+          <span><Icon type='bulb'></Icon> {record.deviceId} </span>
         )      
-      }   
+      }       
+    ]
+    this.nestedColumnsTargeted = [      
+      {
+        title: 'Targeted devices',
+        dataIndex: 'targeted',
+        render: (text, record) => (
+          <span><Icon type='bulb'></Icon> {record.deviceId} </span>
+        )      
+      }       
     ]
     this.state = {
       deployments: [],
       devices: [],
-      forEdit: null, 
-      edited: null
+      //forEdit: null, 
+      //edited: null,
+      appliedDevices: new Object(),
+      targetedDevices: []
     };
     this.editor = React.createRef();
   }
 
   render() {
 
-    const { deployments, devices, forEdit, expandedRows } = this.state;    
+    const { deployments, devices, appliedDevices, targetedDevices } = this.state;    
 
     return (
       
@@ -75,7 +87,8 @@ export class DeploymentArea extends Component {
               expandRowByClick={true}
               expandedRowRender={record => 
                 <span><ReactJson src={record} enableClipboard={false} />
-                <Table columns={this.nestedColumns} dataSource={devices} pagination={false}/></span>}
+                <Table columns={this.nestedColumnsApplied} dataSource={appliedDevices[record.id]} pagination={false}/>
+                <Table columns={this.nestedColumnsTargeted} dataSource={targetedDevices} pagination={false}/></span>}
               //expandedRowKeys={expandedRowRender} 
               // onExpand={(expanded, record) => {this.handleExpandRow(expanded, record) && this.editVariant(record)}}
               // expandedRowRender={record => <p style={{ margin: 0 }}><div>
@@ -114,14 +127,14 @@ export class DeploymentArea extends Component {
   }  
   
   componentDidMount() {
-    this.getDeployments().then(result => this.setState({ deployments: result }))
-    this.getDevices().then(result => this.setState({ devices: result }))
-
-    this.findMatchingDevices();
+    this.getDeployments().then(result => this.setState({ deployments: result }));
+    this.getDevices().then(result => this.setState({ devices: result }));    
+    this.getAppliedDevices('env_production_genesis_nodered').then(result => this.setState({ appliedDevices: result }));
+    this.getTargetedDevices('env_production_genesis_nodered').then(result => this.setState({ targetedDevices: result }));
   }  
 
   editDeployment = (record) => {
-    this.setState({forEdit: record}, ()=>{
+    this.setState({forEdit: record}, ()=> {
       this.editor.current.componentDidMount()
     })
   }
@@ -171,36 +184,39 @@ export class DeploymentArea extends Component {
   }
 
   getDeployments = async () => {
+
+    let deployments = (await axios.get('api/deployment')).data;
+    let applDevices = {};
+    deployments.forEach(deployment => {
+      let queryResults = (await axios.get('api/deployment/' + deployment.id + '/applied')).data;
+      var array = [];
+      Array.from(queryResults).forEach(device => {
+        array.push(device);
+      })     
+      applDevices[deployment.id] = array;      
+    })    
+    this.setState({ appliedDevices: applDevices });
+
     return (await axios.get('api/deployment')).data;
   }
 
-  findMatchingDevices = async (deployment) => {
-    var deployments = (await this.getDeployments());
-    var devices = (await this.getDevices());
-    
-    console.log(await axios.get('api/deployment/env_production_genesis_nodered/applied').data);
-    
-    Array.from(deployments).forEach(deployment => {
-      console.log(deployment.condition);
-      var conditions = deployment.condition.split(" AND ");
-      Array.from(conditions).forEach((condition) => {
-        console.log(condition);
-      });      
-    });
-
-    Array.from(devices).forEach(device => {
-      console.log(device.tags.environment);
-    });
-
-    Array.from(devices).forEach(device => {
-      console.log(device.tags.environment);
-    });
+  getAppliedDevices = async (deploymentId) => {       
+    let result = {};
+    let appliedDevices = (await axios.get('api/deployment/' + deploymentId + '/applied')).data;
+    var array = [];
+    Array.from(appliedDevices).forEach(device => {
+      array.push(device);
+    })     
+    result[deploymentId] = array;
+    console.log(result);
+    return result;
+    //return appliedDevices;    
   }
 
-  parseTargetConditions = (conditions) => {
-    var cond = conditions.split(" AND ");
-
-  }
+  getTargetedDevices = async (deploymentId) => {       
+    let appliedDevices = (await axios.get('api/deployment/' + deploymentId + '/targeted')).data; 
+    return appliedDevices;    
+  }  
 
   production = async () => {
     this.setState({ deployments: [] });
@@ -211,8 +227,6 @@ export class DeploymentArea extends Component {
       deployments: await this.getDeployments()
     })
   }
-
-  
   
 }
 
