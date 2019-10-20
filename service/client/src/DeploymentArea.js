@@ -14,9 +14,9 @@ export class DeploymentArea extends Component {
       {
         title: 'Deployment ID',
         dataIndex: 'id',  
-        render: (record) => (
-          <Badge count={this.state.targetedDevices.length}>{record}</Badge>
-        )   
+        render: (record) => (          
+           <Badge count={(Object.keys(this.state.appliedDevices).length > 0) ? this.state.appliedDevices[record].length : 0}>{record}</Badge>
+        )  
       },      
       
       //{
@@ -125,9 +125,9 @@ export class DeploymentArea extends Component {
   }  
   
   componentDidMount() {
-    this.getDeployments().then(result => this.setState({ deployments: result }));
-    this.getDevices().then(result => this.setState({ devices: result }));
-    //this.getAppliedDevices2(this.state.deployments).then(result => this.setState({ appliedDevices: result }));    
+    this.getAppliedDevices().then(result => this.setState({ appliedDevices: result }));  
+    this.getDeployments().then(result => this.setState({ deployments: result }));    
+    this.getDevices().then(result => this.setState({ devices: result }));      
     //this.getAppliedDevices('env_production_genesis_nodered').then(result => this.setState({ appliedDevices: result }));
     this.getTargetedDevices('env_production_genesis_nodered').then(result => this.setState({ targetedDevices: result }));
   }  
@@ -209,33 +209,16 @@ export class DeploymentArea extends Component {
     return (await axios.get('api/deployment')).data;
   }
 
-  getAppliedDevices2 = async () => {       
-    let result = new Object();
+  getAppliedDevices = async () => {       
+    let result = {};
     let deployments = (await axios.get('api/deployment')).data;
     deployments.forEach(async (deployment) => {
-      // let queryResults = axios.get('api/deployment/' + deployment.id + '/applied').data;
-      // console.log("TESTING");
-      // console.log(queryResults);
-      //var array = [];
       result[deployment.id] = (await axios.get('api/deployment/' + deployment.id + '/applied')).data;
-      //Array.from((await axios.get('api/deployment/' + deployment.id + '/applied')).data).forEach(async (device) => {
-        // console.log("TESTING");
-        // console.log(await this.getAppliedDevices2(deployment.id));
-        // array = 
-        // console.log(array);
-      //  result[deployment.id] = device;  
-      //});
-      //   array.push(device);
-      // })           
-      //applDevices[deployment.id] = array;      
-    })    
-    console.log("TESTING");
-    console.log(result);   
-    console.log(Object.values(result));    
+    });
     return result;    
   }
 
-  getAppliedDevices = async (deploymentId) => {       
+  getAppliedDevices2 = async (deploymentId) => {       
     let result = {};
     let appliedDevices = (await axios.get('api/deployment/' + deploymentId + '/applied')).data;
     var array = [];
