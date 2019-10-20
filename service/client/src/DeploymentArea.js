@@ -4,8 +4,6 @@ import axios from 'axios';
 import { JsonEditor as Editor } from 'jsoneditor-react';
 import ReactJson from 'react-json-view'
 
-const { Text } = Typography;
-
 const { Content } = Layout;
 const ButtonGroup = Button.Group;
 
@@ -17,7 +15,7 @@ export class DeploymentArea extends Component {
         title: 'Deployment ID',
         dataIndex: 'id',  
         render: (record) => (
-          <Badge count={this.state.appliedDevices.length}>{record}</Badge>
+          <Badge count={this.state.targetedDevices.length}>{record}</Badge>
         )   
       },      
       
@@ -61,7 +59,7 @@ export class DeploymentArea extends Component {
       devices: [],
       //forEdit: null, 
       //edited: null,
-      appliedDevices: new Object(),
+      appliedDevices: {},
       targetedDevices: []
     };
     this.editor = React.createRef();
@@ -87,7 +85,7 @@ export class DeploymentArea extends Component {
               expandRowByClick={true}
               expandedRowRender={record => 
                 <span><ReactJson src={record} enableClipboard={false} />
-                <Table columns={this.nestedColumnsApplied} dataSource={appliedDevices[record.id]} pagination={false}/>
+                <Table columns={this.nestedColumnsApplied} dataSource={targetedDevices} pagination={false}/>
                 <Table columns={this.nestedColumnsTargeted} dataSource={targetedDevices} pagination={false}/></span>}
               //expandedRowKeys={expandedRowRender} 
               // onExpand={(expanded, record) => {this.handleExpandRow(expanded, record) && this.editVariant(record)}}
@@ -128,8 +126,9 @@ export class DeploymentArea extends Component {
   
   componentDidMount() {
     this.getDeployments().then(result => this.setState({ deployments: result }));
-    this.getDevices().then(result => this.setState({ devices: result }));    
-    this.getAppliedDevices('env_production_genesis_nodered').then(result => this.setState({ appliedDevices: result }));
+    this.getDevices().then(result => this.setState({ devices: result }));
+    //this.getAppliedDevices2(this.state.deployments).then(result => this.setState({ appliedDevices: result }));    
+    //this.getAppliedDevices('env_production_genesis_nodered').then(result => this.setState({ appliedDevices: result }));
     this.getTargetedDevices('env_production_genesis_nodered').then(result => this.setState({ targetedDevices: result }));
   }  
 
@@ -185,19 +184,55 @@ export class DeploymentArea extends Component {
 
   getDeployments = async () => {
 
-    let deployments = (await axios.get('api/deployment')).data;
-    let applDevices = {};
-    deployments.forEach(deployment => {
-      let queryResults = (await axios.get('api/deployment/' + deployment.id + '/applied')).data;
-      var array = [];
-      Array.from(queryResults).forEach(device => {
-        array.push(device);
-      })     
-      applDevices[deployment.id] = array;      
-    })    
-    this.setState({ appliedDevices: applDevices });
+    // let deployments = (await axios.get('api/deployment')).data;
+    // let applDevices = {};
+    // deployments.forEach(async (deployment) => {
+    //   // let queryResults = axios.get('api/deployment/' + deployment.id + '/applied').data;
+    //   // console.log("TESTING");
+    //   // console.log(queryResults);
+    //   var array = [];
+
+    //   Array.from((await axios.get('api/deployment/' + deployment.id + '/applied')).data).forEach(async (device) => {
+    //     // console.log("TESTING");
+    //     // console.log(await this.getAppliedDevices2(deployment.id));
+    //     // array = 
+    //     // console.log(array);
+    //     applDevices[deployment.id] = (await this.getAppliedDevices2(deployment.id));  
+    //   });
+    //   //   array.push(device);
+    //   // })           
+    //   //applDevices[deployment.id] = array;      
+    // })    
+    // this.setState({ appliedDevices: applDevices });
+    // console.log(this.state.appliedDevices);
 
     return (await axios.get('api/deployment')).data;
+  }
+
+  getAppliedDevices2 = async () => {       
+    let result = new Object();
+    let deployments = (await axios.get('api/deployment')).data;
+    deployments.forEach(async (deployment) => {
+      // let queryResults = axios.get('api/deployment/' + deployment.id + '/applied').data;
+      // console.log("TESTING");
+      // console.log(queryResults);
+      //var array = [];
+      result[deployment.id] = (await axios.get('api/deployment/' + deployment.id + '/applied')).data;
+      //Array.from((await axios.get('api/deployment/' + deployment.id + '/applied')).data).forEach(async (device) => {
+        // console.log("TESTING");
+        // console.log(await this.getAppliedDevices2(deployment.id));
+        // array = 
+        // console.log(array);
+      //  result[deployment.id] = device;  
+      //});
+      //   array.push(device);
+      // })           
+      //applDevices[deployment.id] = array;      
+    })    
+    console.log("TESTING");
+    console.log(result);   
+    console.log(Object.values(result));    
+    return result;    
   }
 
   getAppliedDevices = async (deploymentId) => {       
@@ -214,19 +249,19 @@ export class DeploymentArea extends Component {
   }
 
   getTargetedDevices = async (deploymentId) => {       
-    let appliedDevices = (await axios.get('api/deployment/' + deploymentId + '/targeted')).data; 
-    return appliedDevices;    
+    let targetedDevices = (await axios.get('api/deployment/' + deploymentId + '/targeted')).data; 
+    return targetedDevices;    
   }  
 
-  production = async () => {
-    this.setState({ deployments: [] });
-    const variant = prompt('Variant name');
-    let result = await axios.put(`api/global/production/${variant}`);
-    this.setState({
-      devices: await this.getDevices(),
-      deployments: await this.getDeployments()
-    })
-  }
+  // production = async () => {
+  //   this.setState({ deployments: [] });
+  //   const variant = prompt('Variant name');
+  //   let result = await axios.put(`api/global/production/${variant}`);
+  //   this.setState({
+  //     devices: await this.getDevices(),
+  //     deployments: await this.getDeployments()
+  //   })
+  // }
   
 }
 
