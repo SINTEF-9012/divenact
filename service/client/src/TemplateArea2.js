@@ -8,6 +8,7 @@ import 'jsoneditor-react/es/editor.min.css';
 
 const { Header, Footer, Sider, Content } = Layout;
 const { Panel } = Collapse;
+const colors = ["blue","red","green"];
 
 const ButtonGroup = Button.Group;
 
@@ -16,7 +17,7 @@ export class EditableTagGroup extends Component {
   //TODO: save tags on the fly
   //TODO: fetch existing tags from the template
   state = {
-    tags: ['Production', 'Preview'],
+    //tags: ['Production', 'Preview'],
     inputVisible: false,
     inputValue: '',
   };
@@ -101,12 +102,9 @@ export class TemplateArea2 extends Component {
       {
         title: 'Tags',
         dataIndex: 'tags',
-        render: (text, record) => (  
-          <span>
-            <Tag closable>Capability: {record.property.predefinedtag.capability}</Tag>           
-            <Tag closable>Environment: {record.property.predefinedtag.environment}</Tag>
-            <Tag closable>Status: {record.property.predefinedtag.status}</Tag>
-          </span>
+        render: (text, record) => (
+          (this.state.tags[record.id]) &&
+            Object.keys(this.state.tags[record.id]).map((key, i) => <Tag closable color={colors[i]}>{key}: {this.state.tags[record.id][key]}</Tag>)      
         ),
       },   
       {
@@ -134,6 +132,7 @@ export class TemplateArea2 extends Component {
     ]
     this.state = {
       templates: [],
+      tags: {},
       forEdit: null, 
       edited: null
     };
@@ -142,7 +141,7 @@ export class TemplateArea2 extends Component {
 
   render() {
 
-    const { templates, forEdit } = this.state; 
+    const { templates, forEdit, tags } = this.state; 
 
     return (
       
@@ -226,6 +225,7 @@ export class TemplateArea2 extends Component {
 
   componentDidMount() {
     this.getTemplates().then(result => { this.setState({ templates: result }) });
+    this.getTags().then(result => {this.setState({tags: result})});
   }
 
   handleChange = (value) => {
@@ -234,6 +234,15 @@ export class TemplateArea2 extends Component {
 
   getTemplates = async () => {
     return (await axios.get('api/template/')).data;
+  }
+
+  getTags = async () => {
+    let result = {};
+    let templates = (await axios.get('api/template/')).data;
+    templates.forEach((template) => {
+      result[template.id] = template.property.predefinedtag;      
+    });
+    return result;
   }
 
   saveTemplate = async () =>{
@@ -270,7 +279,7 @@ export class TemplateArea2 extends Component {
   deleteTemplate = (templateid) => {
     axios.delete(`api/template/${templateid}`);
     this.componentDidMount()
-  }
+  }  
 
   //TODO - check if there are any linked variants before deleting
   getVariants = async () => {
