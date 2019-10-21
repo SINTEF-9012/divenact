@@ -97,8 +97,9 @@ export class TemplateArea2 extends Component {
     this.columns = [      
       {
         title: 'Template ID',
-        dataIndex: 'id',
-      },   
+        dataIndex: 'id',  
+        width: 200,     
+      },      
       {
         title: 'Tags',
         dataIndex: 'tags',
@@ -106,6 +107,7 @@ export class TemplateArea2 extends Component {
           (this.state.tags[record.id]) &&
             Object.keys(this.state.tags[record.id]).map((key, i) => <Tag closable color={colors[i]}>{key}: {this.state.tags[record.id][key]}</Tag>)      
         ),
+        width: 1000,
       },   
       {
         title: 'Actions',
