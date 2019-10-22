@@ -42,22 +42,15 @@ export class DeviceArea extends Component {
       }   
     ]
     this.state = {
-      deployments: [],
-      devices: [],
-      forEdit: null, 
-      edited: null
+      //add if needed
     };
     this.editor = React.createRef();
   }
 
   render() {
 
-    const { deployments, devices } = this.state;    
-
-    return (
-      
+    return (      
       <Layout>
-
       <Content>        
         <Row>
           <Col span={24}>
@@ -65,42 +58,28 @@ export class DeviceArea extends Component {
               //bordered 
               rowKey={record => record.id}
               size='small'
-              dataSource={devices}
+              dataSource={this.props.devices}
               columns={this.columns}
               expandRowByClick={true}
               expandedRowRender={record => 
-                <span><ReactJson src={record} enableClipboard={false} />
-                <Table columns={this.nestedColumns} dataSource={devices} pagination={false}/></span>
+                <span>
+                  <ReactJson src={record} enableClipboard={false} />
+                  <Table columns={this.nestedColumns} dataSource={this.props.deployments} pagination={false}/>
+                  </span>
                 }              
               pagination={{ pageSize: 50 }} 
-              // scroll={{ y: 1240 }}
-              // onExpand={(expanded, record) => {
-              //   this.editVariant(record); }}
             />
-          </Col>                   
-        {/* <Col span={12}>                     
-          <Editor history='true' value={forEdit} ref={this.editor} onChange={this.handleChange} />            
-        </Col>  */}
+          </Col> 
         </Row>    
-      </Content>
-       
+      </Content>       
       </Layout>   
     );
   }  
   
   componentDidMount() {
-    this.getDeployments().then(result => this.setState({ deployments: result }))
-    this.getDevices().then(result => this.setState({ devices: result }))
+    //add if needed
   } 
 
-  async getDevices() {
-    return (await axios.get('api/device/')).data;
-  }
-
-  async getDeployments() {
-    return (await axios.get('api/deployment')).data;
-  }  
-  
 }
 
 

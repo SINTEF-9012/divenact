@@ -22,20 +22,22 @@ const { Header, Footer, Sider, Content } = Layout;
 const { Paragraph } = Typography;
 const { TabPane } = Tabs;
 
-var AreaEnum = {
-  CONTROL: 1,
-  MODEL: 2,
-  TEMPLATE: 3,
-  VARIANT: 4,
-  DEPLOYMENT: 5,
-  properties: {
-    1: {name: "control", value: 1, code: "C"},
-    2: {name: "model", value: 2, code: "M"},    
-    3: {name: "template", value: 3, code: "T"},
-    4: {name: "variant", value: 4, code: "V"},
-    5: {name: "deployment", value: 5, code: "R"}
-  }
-};
+const operations = <Button>Extra Action</Button>;
+
+// var AreaEnum = {
+//   CONTROL: 1,
+//   MODEL: 2,
+//   TEMPLATE: 3,
+//   VARIANT: 4,
+//   DEPLOYMENT: 5,
+//   properties: {
+//     1: {name: "control", value: 1, code: "C"},
+//     2: {name: "model", value: 2, code: "M"},    
+//     3: {name: "template", value: 3, code: "T"},
+//     4: {name: "variant", value: 4, code: "V"},
+//     5: {name: "deployment", value: 5, code: "R"}
+//   }
+// };
 
 // class Option1 extends Component{
 //   render(){
@@ -54,58 +56,56 @@ var AreaEnum = {
 // }
 
 class App extends Component {
+
   constructor(props) {
     super(props);
     this.state = {
-      area: AreaEnum.GLOBAL
+      //area: AreaEnum.GLOBAL,
+      deployments: [],
+      templates: [],
+      variants: [],
+      //forEdit: null, 
+      //edited: null,
+      appliedDevices: {},
+      targetedDevices: {}
     };
     this.Tabs = React.createRef();
   }
 
   componentDidMount() {
-    this.getDeployments().then(result => this.setState( { deployments: result }))
-    this.getDevices().then(result => this.setState({ devices: result}))
+    this.getDeployments().then(result => this.setState({ deployments: result }))
+      .then(() => this.getAppliedDevices()).then(result => this.setState({ appliedDevices: result }))
+      .then(() => this.getTargetedDevices()).then(result => this.setState({ targetedDevices: result }));    
+    this.getDevices().then(result => this.setState({ devices: result }));
+    this.getTemplates().then(result => { this.setState({ templates: result }) });
+    this.getVariants().then(result => { this.setState({ variants: result }) });
   }
 
   render() {
 
-    const { deployments, devices } = this.state;
+    const { deployments, devices, templates, variants, appliedDevices, targetedDevices } = this.state;
 
     return (
       <div className="App">
-
-        {/* <img src="logo.png" />
-        <PageHeader title="Welcome to Divenact">                     
-          <Paragraph>
-            This tool is part of the ENACT project and is used to automatically diversify and manage IoT fleets.
-          </Paragraph>                 
-    </PageHeader> */}
 
         <Layout style={{ minHeight: '100vh' }}>
 
         {/* <Header></Header> */}
           
-        <Content style={{ background: '#fff', padding: 0, textAlign: 'left' }}>
-          
-            {/* <Menu theme="light" mode="horizontal" defaultSelectedKeys={['1']} style={{ lineHeight: '64px', padding: '10px 0 10 0' }} >
-              <Menu.Item key="logo" onClick={window.location.href='#'}><img style={{ height: '60px', padding: '15px'}} src="https://enact-project.eu/img/logo-enact-blue2.png" alt="logo enact" /></Menu.Item>              
-              <Menu.Item key="1" onClick={this.controlarea}><Icon type="control" />Control</Menu.Item>
-              <Menu.Item key="2" onClick={this.modelarea}><Icon type="profile" />Repository</Menu.Item>              
-            </Menu> */}
-
-            <Tabs defaultActiveKey="1" id="Tabs" ref={this.Tabs}>
+        <Content style={{ background: '#fff', padding: 0, textAlign: 'left' }}>          
+            <Tabs defaultActiveKey="1" id="Tabs" ref={this.Tabs} tabBarExtraContent={operations} >
               <TabPane disabled key="logo" tab={<span><img style={{ height: '40px'}} src="https://enact-project.eu/img/logo-enact-blue2.png" alt="logo enact" /></span>}>Tab 1</TabPane>
               <TabPane key="1" tab={<span><Icon type="book" />Templates</span>}>
-                <TemplateArea2 />
+                <TemplateArea2 templates={templates} variants={variants} />
               </TabPane>
               <TabPane key="2" tab={<span><Icon type="branches" />Variants</span>}>
-                <VariantArea2 />
+                <VariantArea2 variants={variants} templates={templates} />
               </TabPane>
               <TabPane key="3" tab={<span><Icon type="deployment-unit" />Deployments</span>}>
-                <DeploymentArea />
+                <DeploymentArea deployments={deployments} appliedDevices={appliedDevices} targetedDevices={targetedDevices} />
               </TabPane>
               <TabPane key="4" tab={<span><Icon type="bulb" />Devices</span>}>
-                <DeviceArea />
+                <DeviceArea devices={devices} deployments={deployments} />
               </TabPane>
               <TabPane key="5" tab={<span><Icon type="control" />Control</span>}>
                 <ControlArea />
@@ -113,28 +113,18 @@ class App extends Component {
               <TabPane key="6" tab={<span><Icon type="profile" />Repository</span>}>
                 <ModelArea />
               </TabPane>
-            </Tabs>  
-
-        </Content>
-
-        {/* <Content>
-          <div>
-            {this.state.area == AreaEnum.CONTROL && <ControlArea />}
-            {this.state.area == AreaEnum.MODEL && <ModelArea /> }
-            {this.state.area == AreaEnum.RESERVED && <Option2 />}
-          </div> 
-        </Content> */}
+            </Tabs> 
+        </Content>        
           
         <Footer>
           <p>This work is supported by <a href="https://www.enact-project.eu/">ENACT</a>.</p>
           <p> Please visit <a href="https://github.com/SINTEF-9012/divenact"><Icon type="github" /></a> for further details.</p>
         </Footer>
         
-        </Layout>    
-                
+        </Layout>
       </div>
     );
-  }
+  }  
 
   createDeployment = () => {
     const deployment = prompt('Enter your deployment: ');
@@ -155,58 +145,117 @@ class App extends Component {
       .catch(err => alert(`Failed to delete all deployments\n${JSON.stringify(err)}`));
   };
 
-  seedDeployments = () => {
-    const doSeed = window.confirm('Do you want to seed random data?');
-    if (!doSeed) return;
-    axios
-      .post('/api/deployments/seed', {})
-      .then(() => {
-        axios
-          .get('/api/deployments/')
-          .then(res => this.setState({ deployments: res.data }))
-          .catch(alert);
-      })
-      .catch(alert);
-  };
+  // seedDeployments = () => {
+  //   const doSeed = window.confirm('Do you want to seed random data?');
+  //   if (!doSeed) return;
+  //   axios
+  //     .post('/api/deployments/seed', {})
+  //     .then(() => {
+  //       axios
+  //         .get('/api/deployments/')
+  //         .then(res => this.setState({ deployments: res.data }))
+  //         .catch(alert);
+  //     })
+  //     .catch(alert);
+  // };
 
-  async getDevices(){
+  /**
+   * Get edge devices in the IoT Hub
+   */
+  getDevices = async () => {
     return (await axios.get('api/device/')).data;
   }
 
-  async getDeployments(){
+  /**
+   * Get deployments in the IoT Hub
+   */
+  getDeployments = async () => {
     return (await axios.get('api/deployment')).data;
   }
 
-  production = async ()=>{
-    this.setState({ deployments: [] });
-    const variant = prompt('Variant name');
-    let result = await axios.put(`api/global/production/${variant}`);
-    this.setState({
-      devices: await this.getDevices(),
-      deployments: await this.getDeployments()
-    })
+  /**
+   * Get variants stored in MongoDB
+   */
+  getVariants = async () => {
+    return (await axios.get('api/variant/')).data;
   }
 
-  op1 = ()=>{
-    window.confirm("op1")
-    this.setState({ option: 'op1'})
+  /**
+   * Get variants stored in MongoDB
+   */
+  getTemplates = async () => {
+    return (await axios.get('api/template/')).data;
   }
 
-  modelarea = ()=>{
-    this.setState( {area: AreaEnum.MODEL} );
+  // /**
+  //  * Get a map of deployments and devices to which they apply
+  //  */
+  // getTemplateVariants = async () => {       
+  //   let result = {};
+  //   //let deployments = (await axios.get('api/deployment')).data;
+  //   this.state.templates.forEach(async (template) => {
+  //     this.state.variants.forEach(async (variant) => {
+  //       variant.template == template.id && 
+  //     }
+  //     result[template.id] = (await axios.get('api/deployment/' + deployment.id + '/applied')).data;
+  //   });
+  //   return result;    
+  // }
+
+  /**
+   * Get a map of deployments and devices to which they apply
+   */
+  getAppliedDevices = async () => {       
+    let result = {};
+    //let deployments = (await axios.get('api/deployment')).data;
+    this.state.deployments.forEach(async (deployment) => {
+      result[deployment.id] = (await axios.get('api/deployment/' + deployment.id + '/applied')).data;
+    });
+    return result;    
   }
 
-  controlarea = ()=>{
-    this.setState( {area: AreaEnum.CONTROL} );
+  /**
+   * Get a map of deployments and devices at which they target (but not necessarily applied yet)
+   */
+  getTargetedDevices = async () => {       
+    let result = {};
+    //let deployments = (await axios.get('api/deployment')).data;
+    this.state.deployments.forEach(async (deployment) => {
+      result[deployment.id] = (await axios.get('api/deployment/' + deployment.id + '/targeted')).data;
+    });
+    return result;    
   }
 
-  templatearea = ()=>{
-    this.setState( {area: AreaEnum.TEMPLATE} );
-  }
+  // production = async ()=>{
+  //   this.setState({ deployments: [] });
+  //   const variant = prompt('Variant name');
+  //   let result = await axios.put(`api/global/production/${variant}`);
+  //   this.setState({
+  //     devices: await this.getDevices(),
+  //     deployments: await this.getDeployments()
+  //   })
+  // }
 
-  vairuantarea = ()=>{
-    this.setState( {area: AreaEnum.VARIANT} );
-  }
+  // op1 = ()=>{
+  //   window.confirm("op1")
+  //   this.setState({ option: 'op1'})
+  // }
+
+  // modelarea = ()=>{
+  //   this.setState( {area: AreaEnum.MODEL} );
+  // }
+
+  // controlarea = ()=>{
+  //   this.setState( {area: AreaEnum.CONTROL} );
+  // }
+
+  // templatearea = ()=>{
+  //   this.setState( {area: AreaEnum.TEMPLATE} );
+  // }
+
+  // vairuantarea = ()=>{
+  //   this.setState( {area: AreaEnum.VARIANT} );
+  // }
 
 }
 

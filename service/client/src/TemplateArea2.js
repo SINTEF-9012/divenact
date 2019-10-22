@@ -7,89 +7,86 @@ import { JsonEditor as Editor } from 'jsoneditor-react';
 import 'jsoneditor-react/es/editor.min.css';
 
 const { Header, Footer, Sider, Content } = Layout;
-const { Panel } = Collapse;
 const colors = ["blue","red","green"];
 
 const ButtonGroup = Button.Group;
 
-export class EditableTagGroup extends Component {
+// export class EditableTagGroup extends Component {
   
-  //TODO: save tags on the fly
-  //TODO: fetch existing tags from the template
-  state = {
-    //tags: ['Production', 'Preview'],
-    inputVisible: false,
-    inputValue: '',
-  };
+//   //TODO: save tags on the fly
+//   //TODO: fetch existing tags from the template
+//   state = {
+//     inputVisible: false,
+//     inputValue: '',
+//   };
 
-  handleClose = (removedTag) => {
-    const tags = this.state.tags.filter(tag => tag !== removedTag);
-    console.log(tags);
-    this.setState({ tags });
-  }
+//   handleClose = (removedTag) => {
+//     const tags = this.state.tags.filter(tag => tag !== removedTag);
+//     console.log(tags);
+//     this.setState({ tags });
+//   }
+  
+//   showInput = () => {
+//     this.setState({ inputVisible: true }, () => this.input.focus());
+//   }
+  
+//   handleInputChange = (e) => {
+//     this.setState({ inputValue: e.target.value });
+//   }
+  
+//   handleInputConfirm = () => {
+//     const state = this.state;
+//     const inputValue = state.inputValue;
+//     let tags = state.tags;
+//     if (inputValue && tags.indexOf(inputValue) === -1) {
+//       tags = [...tags, inputValue];
+//     }
+//     console.log(tags);
+//     this.setState({
+//       tags,
+//       inputVisible: false,
+//       inputValue: '',
+//     });
+//   }
+  
+//   saveInputRef = (input) => {
+//     this.input = input;
+//   }
 
-  showInput = () => {
-    this.setState({ inputVisible: true }, () => this.input.focus());
-  }
-
-  handleInputChange = (e) => {
-    this.setState({ inputValue: e.target.value });
-  }
-
-  handleInputConfirm = () => {
-    const state = this.state;
-    const inputValue = state.inputValue;
-    let tags = state.tags;
-    if (inputValue && tags.indexOf(inputValue) === -1) {
-      tags = [...tags, inputValue];
-    }
-    console.log(tags);
-    this.setState({
-      tags,
-      inputVisible: false,
-      inputValue: '',
-    });
-  }
-
-  saveInputRef = input => this.input = input
-
-  render() {
-    const { tags, inputVisible, inputValue } = this.state;
-    return (
-      <div>
-        {tags.map((tag, index) => {
-          const isLongTag = tag.length > 20;
-          const tagElem = (
-            <Tag key={tag} closable afterClose={() => this.handleClose(tag)}>
-              {isLongTag ? `${tag.slice(0, 20)}...` : tag}
-            </Tag>
-          );
-          return isLongTag ? <Tooltip title={tag} key={tag}>{tagElem}</Tooltip> : tagElem;
-        })}
-        {inputVisible && (
-          <Input
-            ref={this.saveInputRef}
-            type="text"
-            size="small"
-            style={{ width: 78 }}
-            value={inputValue}
-            onChange={this.handleInputChange}
-            onBlur={this.handleInputConfirm}
-            onPressEnter={this.handleInputConfirm}
-          />
-        )}
-        {!inputVisible && (
-          <Tag
-            onClick={this.showInput}
-            style={{ background: '#fff', borderStyle: 'dashed' }}
-          >
-            <Icon type="plus" /> New Tag
-          </Tag>
-        )}
-      </div>
-    );
-  }
-}
+//   render() {
+//     const { tags, inputVisible, inputValue } = this.state;
+//     return (
+//       <div>
+//         {tags.map((tag, index) => {
+//           const isLongTag = tag.length > 20;
+//           const tagElem = (
+//             <Tag key={tag} closable afterClose={() => this.handleClose(tag)}>
+//               {isLongTag ? `${tag.slice(0, 20)}...` : tag}
+//             </Tag>
+//           );
+//           return isLongTag ? <Tooltip title={tag} key={tag}>{tagElem}</Tooltip> : tagElem;
+//         })}
+//         {inputVisible && (
+//           <Input
+//             ref={this.saveInputRef}
+//             type="text"
+//             size="small"
+//             style={{ width: 78 }}
+//             value={inputValue}
+//             onChange={this.handleInputChange}
+//             onBlur={this.handleInputConfirm}
+//             onPressEnter={this.handleInputConfirm}
+//           />
+//         )}
+//         {!inputVisible && (
+//           <Tag onClick={this.showInput} style={{ background: '#fff', borderStyle: 'dashed' }} >
+//             <Icon type="plus" /> New Tag
+//           </Tag>
+//         )}
+//       </div>
+//     );
+//   }
+// }
 
 export class TemplateArea2 extends Component {
   constructor(props) {
@@ -111,7 +108,7 @@ export class TemplateArea2 extends Component {
       },   
       {
         title: 'Actions',
-        width: 180,
+        width: 200,
         align: 'center',
         render: (text, record) => (
           <span style={{float: 'right'}}>
@@ -122,18 +119,21 @@ export class TemplateArea2 extends Component {
               <Tooltip title="Save "><Button type="primary" icon="save" onClick={()=>{this.saveTemplate()}} ref={this.saveButton} ghost /></Tooltip>
               <Tooltip title="Delete"><Popconfirm title="Are you sure?" onConfirm={() => this.deleteTemplate(record.id)}><Button type="primary" icon="delete" ghost /></Popconfirm></Tooltip>
             </ButtonGroup>
-            </span>
-          // {/* <a onClick={() => this.editVariant(record)}>edit </a> 
-          // <a onClick={()=>{this.saveVariant()}}>save </a>
-          // <a>copy </a>
-          // <Popconfirm title="Sure to delete?" onConfirm={() => this.deleteVariant(record.id)}>
-          // <a>delete</a></Popconfirm>
-          // </div> */}
+            </span>          
         )
       }    
     ]
+    this.nestedColumnsVariants = [      
+      {
+        title: 'Existing variants',
+        dataIndex: 'id',
+        render: (text, record) => (
+          <Button type="link" icon='branches' href='#'>{record.id}</Button>          
+        )      
+      }       
+    ]
     this.state = {
-      templates: [],
+      //templates: [],
       tags: {},
       forEdit: null, 
       edited: null
@@ -143,12 +143,10 @@ export class TemplateArea2 extends Component {
 
   render() {
 
-    const { templates, forEdit, tags } = this.state; 
+    const { forEdit } = this.state; 
 
-    return (
-      
+    return (      
         <Layout>
-
         <Content>        
           <Row>
             <Col span={12}>
@@ -156,94 +154,42 @@ export class TemplateArea2 extends Component {
                 //bordered 
                 rowKey={record => record.id}
                 size='small'
-                dataSource={templates}
+                dataSource={this.props.templates}
                 columns={this.columns}
-                // expandedRowKeys={expandedRows} 
-                // onExpand={(expanded, record) => {this.handleExpandRow(expanded, record) && this.editVariant(record)}}
-                // expandedRowRender={record => <p style={{ margin: 0 }}><div>
-                //   <div>
-                //     <ButtonGroup>
-                //       <Button type="dashed" icon="edit" />
-                //       <Button type="dashed" icon="copy" />
-                //       <Button type="dashed" icon="save" onClick={()=>{this.saveVariant()}} />
-                //       <Popconfirm title="Sure to delete?" onConfirm={() => this.deleteVariant(record.id)}><Button type="dashed" icon="delete" /></Popconfirm>
-                //     </ButtonGroup>
-                //   </div>
-                //   {/* <Editor mode='form' history='true' value={forEdit} ref={this.editor} onChange={this.handleChange}/> */}
-                //   </div></p>}
-                pagination={{ pageSize: 50 }} 
-                // scroll={{ y: 1240 }}
-                // onExpand={(expanded, record) => {
-                //   this.editVariant(record); }}
+                expandedRowRender={record => 
+                  <span>
+                    <Table columns={this.nestedColumnsVariants} dataSource={this.props.variants.filter((item) => {return item.template == record.id})} pagination={false}/>
+                  </span>} 
+                pagination={{ pageSize: 50 }}
+                scroll={{ y: true }}               
               />
-            </Col>
-            {/* <Col>
-            {forEdit!=null && 
-            <div>
-              <Button onClick={()=>{this.saveVariant()}}>Save</Button>
-              <Editor value={forEdit} ref={this.editor} onChange={this.handleChange}/>
-            </div>
-            }
-            </Col> */}            
-          <Col span={12}>
-            {/* <ButtonGroup>
-              <Button type="dashed" icon="edit" />
-              <Button type="dashed" icon="copy" />
-              <Button type="dashed" icon="save" onClick={()=>{this.saveVariant()}} />
-              <Popconfirm title="Sure to delete?" onConfirm={() => this.deleteVariant(record.id)}><Button type="dashed" icon="delete" /></Popconfirm>
-            </ButtonGroup> */}            
-            <Editor history='true' value={forEdit} ref={this.editor} onChange={this.handleChange} />            
-          </Col> 
+            </Col>                      
+            <Col span={12}>                       
+              <Editor history='true' value={forEdit} ref={this.editor} onChange={this.handleChange} />            
+            </Col> 
           </Row>    
-        </Content>
-
-          {/* <Sider> */}
-            {/* Buttons to interact with API */}
-           {/*  <Menu defaultSelectedKeys={['1']} mode="inline" theme="dark">
-              <Menu.Item key="1" onClick={this.templates}>
-                <Icon type="book" />
-                <span>Templates</span>
-              </Menu.Item>
-              <Menu.Item key="2" onClick={this.variants}>
-                <Icon type="branches" />
-                <span>Variants</span>
-              </Menu.Item>
-              <Menu.Item key="3">
-                <Icon type="deployment-unit" />
-                <span>Diversify</span>
-              </Menu.Item>
-            </Menu>
-          </Sider>
-
-          <Content>
-            {contentarea == TemplateContentAreaEnum.TEMPLATE&& <TemplateArea />}
-            {contentarea == TemplateContentAreaEnum.VARIANT && <VariantArea />}
-            {contentarea == TemplateContentAreaEnum.PREVIEW && <PreviewArea />}
-            {contentarea == TemplateContentAreaEnum.DEFAULT && <Button>Hey</Button>}
-          </Content> */}
+        </Content>          
         </Layout>   
     );
   }
 
   componentDidMount() {
-    this.getTemplates().then(result => { this.setState({ templates: result }) });
+    //this.getTemplates().then(result => { this.setState({ templates: result }) });
     this.getTags().then(result => {this.setState({tags: result})});
+    console.log(this.state.tags);
   }
 
   handleChange = (value) => {
     this.setState({edited: value});
   }
 
-  getTemplates = async () => {
-    return (await axios.get('api/template/')).data;
-  }
-
   getTags = async () => {
     let result = {};
-    let templates = (await axios.get('api/template/')).data;
-    templates.forEach((template) => {
+    //let templates = (await axios.get('api/template/')).data;
+    this.props.templates.forEach((template) => {
       result[template.id] = template.property.predefinedtag;      
     });
+    console.log(result);
     return result;
   }
 
@@ -261,8 +207,7 @@ export class TemplateArea2 extends Component {
   editTemplate = (record) => {
     this.setState({forEdit: record}, ()=>{
       this.editor.current.componentDidMount()
-    })
-    
+    })    
   }
 
   copyTemplate = async (record) => {

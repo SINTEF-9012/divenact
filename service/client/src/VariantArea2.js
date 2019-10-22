@@ -40,19 +40,7 @@ export class VariantArea2 extends Component {
       {
         title: 'Template',
         dataIndex: 'template',
-      },
-      // {
-      //   dataIndex: 'push',
-      //   render: () => (
-      //     <span>
-      //       <Dropdown overlay={menu}>
-      //         <a>
-      //           Push to ... <Icon type="down" />
-      //         </a>
-      //       </Dropdown>
-      //     </span>
-      //   ),
-      // },
+      },      
       {
         title: 'Actions',
         width: 180,
@@ -96,7 +84,7 @@ export class VariantArea2 extends Component {
 
         <Content>        
           <Row>
-            <Col span={6}>
+            <Col span={12}>
               <Table
                 //bordered 
                 rowKey={record => record.id}
@@ -117,7 +105,7 @@ export class VariantArea2 extends Component {
                 //   {/* <Editor mode='form' history='true' value={forEdit} ref={this.editor} onChange={this.handleChange}/> */}
                 //   </div></p>}
                 pagination={{ pageSize: 50 }} 
-                // scroll={{ y: 1240 }}
+                scroll={{ y: true }}
                 // onExpand={(expanded, record) => {
                 //   this.editVariant(record); }}
               />
@@ -130,7 +118,7 @@ export class VariantArea2 extends Component {
             </div>
             }
             </Col> */}            
-          <Col span={18}>
+          <Col span={12}>
             {/* <ButtonGroup>
               <Button type="dashed" icon="edit" />
               <Button type="dashed" icon="copy" />
