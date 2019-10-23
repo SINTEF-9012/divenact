@@ -40,6 +40,9 @@ export class VariantArea2 extends Component {
       {
         title: 'Template',
         dataIndex: 'template',
+        render: (text, record) => (
+          <Button type="link" onClick={() => this.props.callbackFromParent('1')}>{record.id}</Button> 
+        )
       },      
       {
         title: 'Actions',

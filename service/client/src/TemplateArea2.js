@@ -128,7 +128,7 @@ export class TemplateArea2 extends Component {
         title: 'Existing variants',
         dataIndex: 'id',
         render: (text, record) => (
-          <Button type="link" icon='branches' href='#'>{record.id}</Button>          
+          <Button type="link" icon='branches' onClick={() => this.props.callbackFromParent('2')}>{record.id}</Button>          
         )      
       }       
     ]

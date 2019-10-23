@@ -67,7 +67,8 @@ class App extends Component {
       //forEdit: null, 
       //edited: null,
       appliedDevices: {},
-      targetedDevices: {}
+      targetedDevices: {},
+      activeTab: '1'
     };
     this.Tabs = React.createRef();
   }
@@ -81,9 +82,13 @@ class App extends Component {
     this.getVariants().then(result => { this.setState({ variants: result }) });
   }
 
+  handleTableChange = (tabNo) => {
+    this.setState({ activeTab: tabNo });
+  }
+
   render() {
 
-    const { deployments, devices, templates, variants, appliedDevices, targetedDevices } = this.state;
+    const { deployments, devices, templates, variants, appliedDevices, targetedDevices, activeTab } = this.state;
 
     return (
       <div className="App">
@@ -93,19 +98,19 @@ class App extends Component {
         {/* <Header></Header> */}
           
         <Content style={{ background: '#fff', padding: 0, textAlign: 'left' }}>          
-            <Tabs defaultActiveKey="1" id="Tabs" ref={this.Tabs} tabBarExtraContent={operations} >
-              <TabPane disabled key="logo" tab={<span><img style={{ height: '40px'}} src="https://enact-project.eu/img/logo-enact-blue2.png" alt="logo enact" /></span>}>Tab 1</TabPane>
+            <Tabs id="Tabs" activeKey={activeTab} ref={this.Tabs} onTabClick={(tab) => this.handleTableChange(tab)} tabBarExtraContent={operations} >
+              <TabPane disabled key="logo" tab={<span><img style={{ height: '40px'}} src="https://enact-project.eu/img/logo-enact-blue2.png" alt="logo enact" /></span>}></TabPane>
               <TabPane key="1" tab={<span><Icon type="book" />Templates</span>}>
-                <TemplateArea2 templates={templates} variants={variants} />
+                <TemplateArea2 templates={templates} variants={variants} callbackFromParent={this.handleTableChange} />
               </TabPane>
               <TabPane key="2" tab={<span><Icon type="branches" />Variants</span>}>
-                <VariantArea2 variants={variants} templates={templates} />
+                <VariantArea2 variants={variants} templates={templates} callbackFromParent={this.handleTableChange} />
               </TabPane>
               <TabPane key="3" tab={<span><Icon type="deployment-unit" />Deployments</span>}>
-                <DeploymentArea deployments={deployments} appliedDevices={appliedDevices} targetedDevices={targetedDevices} />
+                <DeploymentArea deployments={deployments} appliedDevices={appliedDevices} targetedDevices={targetedDevices} callbackFromParent={this.handleTableChange} />
               </TabPane>
               <TabPane key="4" tab={<span><Icon type="bulb" />Devices</span>}>
-                <DeviceArea devices={devices} deployments={deployments} />
+                <DeviceArea devices={devices} deployments={deployments} callbackFromParent={this.handleTableChange} />
               </TabPane>
               <TabPane key="5" tab={<span><Icon type="control" />Control</span>}>
                 <ControlArea />

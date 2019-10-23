@@ -36,8 +36,8 @@ export class DeviceArea extends Component {
       {
         title: 'Deployments',
         dataIndex: 'id',
-        render: (text, record) => (
-          <span><Icon type='deployment-unit'></Icon> {record.id}</span>
+        render: (text, record) => (          
+          <Button type="link" icon='deployment-unit' onClick={() => this.props.callbackFromParent('3')}>{record.id}</Button> 
         )      
       }   
     ]

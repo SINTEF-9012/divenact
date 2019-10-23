@@ -23,7 +23,7 @@ export class DeploymentArea extends Component {
         title: 'Applied devices',
         dataIndex: 'deviceId',
         render: (text, record) => (
-          <span><Icon type='bulb'></Icon> {record.deviceId} </span>
+          <Button type='link' icon='bulb' onClick={() => this.props.callbackFromParent('4')}>{record.deviceId}</Button> 
         )      
       }       
     ]
@@ -32,7 +32,7 @@ export class DeploymentArea extends Component {
         title: 'Targeted devices',
         dataIndex: 'deviceId',
         render: (text, record) => (
-          <span><Icon type='bulb'></Icon> {record.deviceId} </span>
+          <Button type='link' icon='bulb' onClick={() => this.props.callbackFromParent('4')}>{record.deviceId}</Button> 
         )      
       }       
     ]
