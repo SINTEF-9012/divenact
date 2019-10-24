@@ -64,10 +64,14 @@ class App extends Component {
       deployments: [],
       templates: [],
       variants: [],
+      devices : [],
       //forEdit: null, 
       //edited: null,
       appliedDevices: {},
       targetedDevices: {},
+      templateTags: {},
+      deviceTags: {},
+      activeDeployments: {},
       activeTab: '1'
     };
     this.Tabs = React.createRef();
@@ -75,11 +79,15 @@ class App extends Component {
 
   componentDidMount() {
     this.getDeployments().then(result => this.setState({ deployments: result }))
-      .then(() => this.getAppliedDevices()).then(result => this.setState({ appliedDevices: result }))
-      .then(() => this.getTargetedDevices()).then(result => this.setState({ targetedDevices: result }));    
-    this.getDevices().then(result => this.setState({ devices: result }));
-    this.getTemplates().then(result => { this.setState({ templates: result }) });
+      .then(() => this.getAppliedDevices()).then(result => this.setState({ appliedDevices: result }))      
+      .then(() => this.getTargetedDevices()).then(result => this.setState({ targetedDevices: result }))
+      .then(() => this.getActiveDeployments()).then(result => this.setState({ activeDeployments: result }));    
+    this.getDevices().then(result => this.setState({ devices: result }))
+      .then(() => this.getDeviceTags()).then(result => this.setState({ deviceTags: result }));
+    this.getTemplates().then(result => { this.setState({ templates: result }) })
+      .then(() => this.getTemplateTags()).then(result => this.setState({ templateTags: result }));
     this.getVariants().then(result => { this.setState({ variants: result }) });
+    //this.getActiveDeployments();
   }
 
   handleTableChange = (tabNo) => {
@@ -88,7 +96,7 @@ class App extends Component {
 
   render() {
 
-    const { deployments, devices, templates, variants, appliedDevices, targetedDevices, activeTab } = this.state;
+    const { deployments, devices, templates, variants, appliedDevices, targetedDevices, activeDeployments, templateTags, deviceTags, activeTab } = this.state;
 
     return (
       <div className="App">
@@ -101,7 +109,7 @@ class App extends Component {
             <Tabs id="Tabs" activeKey={activeTab} ref={this.Tabs} onTabClick={(tab) => this.handleTableChange(tab)} tabBarExtraContent={operations} >
               <TabPane disabled key="logo" tab={<span><img style={{ height: '40px'}} src="https://enact-project.eu/img/logo-enact-blue2.png" alt="logo enact" /></span>}></TabPane>
               <TabPane key="1" tab={<span><Icon type="book" />Templates</span>}>
-                <TemplateArea2 templates={templates} variants={variants} callbackFromParent={this.handleTableChange} />
+                <TemplateArea2 templates={templates} variants={variants} templateTags={templateTags} callbackFromParent={this.handleTableChange} />
               </TabPane>
               <TabPane key="2" tab={<span><Icon type="branches" />Variants</span>}>
                 <VariantArea2 variants={variants} templates={templates} callbackFromParent={this.handleTableChange} />
@@ -110,14 +118,14 @@ class App extends Component {
                 <DeploymentArea deployments={deployments} appliedDevices={appliedDevices} targetedDevices={targetedDevices} callbackFromParent={this.handleTableChange} />
               </TabPane>
               <TabPane key="4" tab={<span><Icon type="bulb" />Devices</span>}>
-                <DeviceArea devices={devices} deployments={deployments} callbackFromParent={this.handleTableChange} />
+                <DeviceArea devices={devices} deployments={deployments} activeDeployments={activeDeployments} deviceTags={deviceTags} callbackFromParent={this.handleTableChange} />
               </TabPane>
-              <TabPane key="5" tab={<span><Icon type="control" />Control</span>}>
+              {/* <TabPane key="5" tab={<span><Icon type="control" />Control</span>}>
                 <ControlArea />
               </TabPane>
               <TabPane key="6" tab={<span><Icon type="profile" />Repository</span>}>
                 <ModelArea />
-              </TabPane>
+              </TabPane> */}
             </Tabs> 
         </Content>        
           
@@ -208,7 +216,24 @@ class App extends Component {
   // }
 
   /**
-   * Get a map of deployments and devices to which they apply
+   * Get a map of devices and active deployments.
+   */
+  getActiveDeployments = async () => {       
+    let result = {};
+    //let deployments = (await axios.get('api/deployment')).data;
+    this.state.deployments.forEach(async (deployment) => {
+      //result[deployment.id] 
+      let devices = (await axios.get('api/deployment/' + deployment.id + '/applied')).data;
+      devices.forEach((device) => {
+        result[device.deviceId] = deployment;
+      });
+    });
+    console.log(result);
+    return result;    
+  }
+
+  /**
+   * Get a map of deployments and devices to which they apply.
    */
   getAppliedDevices = async () => {       
     let result = {};
@@ -220,7 +245,7 @@ class App extends Component {
   }
 
   /**
-   * Get a map of deployments and devices at which they target (but not necessarily applied yet)
+   * Get a map of deployments and devices at which they target (but not necessarily applied yet).
    */
   getTargetedDevices = async () => {       
     let result = {};
@@ -231,36 +256,29 @@ class App extends Component {
     return result;    
   }
 
-  // production = async ()=>{
-  //   this.setState({ deployments: [] });
-  //   const variant = prompt('Variant name');
-  //   let result = await axios.put(`api/global/production/${variant}`);
-  //   this.setState({
-  //     devices: await this.getDevices(),
-  //     deployments: await this.getDeployments()
-  //   })
-  // }
+  /**
+   * Get tags for each template in the MongoDB.
+   */
+  getTemplateTags = async () => {
+    let result = {};
+    this.state.templates.forEach((template) => {
+      result[template.id] = template.property.predefinedtag;      
+    });
+    return result;
+  }
 
-  // op1 = ()=>{
-  //   window.confirm("op1")
-  //   this.setState({ option: 'op1'})
-  // }
-
-  // modelarea = ()=>{
-  //   this.setState( {area: AreaEnum.MODEL} );
-  // }
-
-  // controlarea = ()=>{
-  //   this.setState( {area: AreaEnum.CONTROL} );
-  // }
-
-  // templatearea = ()=>{
-  //   this.setState( {area: AreaEnum.TEMPLATE} );
-  // }
-
-  // vairuantarea = ()=>{
-  //   this.setState( {area: AreaEnum.VARIANT} );
-  // }
+  /**
+   * Get tags for each device in the IoT hub.
+   */
+  getDeviceTags = async () => {
+    let result = {};
+    this.state.devices.forEach((device) => {
+      result[device.id] = device.tags;      
+    });
+    //console.log(result);
+    return result;
+  }
+  
 
 }
 

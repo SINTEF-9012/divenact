@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Layout, List, Col, Row, Menu, Icon, Table, Collapse, Popconfirm, Tooltip, Tag, Input } from 'antd';
 import axios from 'axios';
-import { ContentAreaEnum, DeploymentDeviceArea, ProductionArea, PreviewArea } from './ContentAreas'
-import { TemplateContentAreaEnum, TemplateArea, VariantArea} from './TemplateContentArea';
 import { JsonEditor as Editor } from 'jsoneditor-react';
 import 'jsoneditor-react/es/editor.min.css';
 
@@ -100,9 +98,9 @@ export class TemplateArea2 extends Component {
       {
         title: 'Tags',
         dataIndex: 'tags',
-        render: (text, record) => (
-          (this.state.tags[record.id]) &&
-            Object.keys(this.state.tags[record.id]).map((key, i) => <Tag closable color={colors[i]}>{key}: {this.state.tags[record.id][key]}</Tag>)      
+        render: (text, record) => (          
+          (this.props.templateTags[record.id]) &&
+            Object.keys(this.props.templateTags[record.id]).map((key, i) => <Tag color={colors[i]}>{key}: {this.props.templateTags[record.id][key]}</Tag>)      
         ),
         width: 1000,
       },   
@@ -175,23 +173,12 @@ export class TemplateArea2 extends Component {
 
   componentDidMount() {
     //this.getTemplates().then(result => { this.setState({ templates: result }) });
-    this.getTags().then(result => {this.setState({tags: result})});
-    console.log(this.state.tags);
+    //this.getTags().then(result => {this.setState({tags: result})});    
   }
 
   handleChange = (value) => {
     this.setState({edited: value});
-  }
-
-  getTags = async () => {
-    let result = {};
-    //let templates = (await axios.get('api/template/')).data;
-    this.props.templates.forEach((template) => {
-      result[template.id] = template.property.predefinedtag;      
-    });
-    console.log(result);
-    return result;
-  }
+  }  
 
   saveTemplate = async () =>{
     const {edited} = this.state
@@ -239,17 +226,17 @@ export class TemplateArea2 extends Component {
     //this.Tabs.current.activeKey="2";
   }
 
-  templates = () => {
-    this.setState({
-      contentarea: TemplateContentAreaEnum.TEMPLATE
-    })
-  }
+  // templates = () => {
+  //   this.setState({
+  //     contentarea: TemplateContentAreaEnum.TEMPLATE
+  //   })
+  // }
 
-  variants = () =>{
-    this.setState({
-      contentarea: TemplateContentAreaEnum.VARIANT
-    })
-  }  
+  // variants = () =>{
+  //   this.setState({
+  //     contentarea: TemplateContentAreaEnum.VARIANT
+  //   })
+  // }  
 
 }
 

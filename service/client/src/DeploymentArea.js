@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Layout, List, Col, Row, Menu, Dropdown, Icon, Table, Typography, Popconfirm, Tooltip, Popover, Badge } from 'antd';
+import { Button, Layout, List, Col, Row, Menu, Dropdown, Icon, Table, Popconfirm, Tooltip, Popover, Badge } from 'antd';
 import axios from 'axios';
 import ReactJson from 'react-json-view'
 
@@ -44,7 +44,7 @@ export class DeploymentArea extends Component {
 
   render() {
 
-    const { deployments, appliedDevices, targetedDevices } = this.state;    
+    //const { deployments, appliedDevices, targetedDevices } = this.state;    
 
     return (      
       <Layout>
@@ -60,8 +60,8 @@ export class DeploymentArea extends Component {
               expandRowByClick={true}
               expandedRowRender={record => 
                 <span><ReactJson src={record} enableClipboard={false} />
-                <Table columns={this.nestedColumnsApplied} dataSource={this.props.appliedDevices[record.id]} pagination={false}/>
-                <Table columns={this.nestedColumnsTargeted} dataSource={this.props.targetedDevices[record.id]} pagination={false}/></span>}              
+                <Table rowKey={record => record.id} columns={this.nestedColumnsApplied} dataSource={this.props.appliedDevices[record.id]} pagination={false}/>
+                <Table rowKey={record => record.id} columns={this.nestedColumnsTargeted} dataSource={this.props.targetedDevices[record.id]} pagination={false}/></span>}              
               pagination={{ pageSize: 50 }} 
               // scroll={{ y: 1240 }}              
             />

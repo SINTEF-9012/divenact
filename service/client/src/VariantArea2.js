@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Button, Layout, List, Col, Row, Menu, Dropdown, Icon, Table, Collapse, Popconfirm, Tooltip } from 'antd';
 import axios from 'axios';
-import { ContentAreaEnum, DeploymentDeviceArea, ProductionArea, PreviewArea } from './ContentAreas'
-import { TemplateContentAreaEnum, TemplateArea, VariantArea} from './TemplateContentArea';
+//import { ContentAreaEnum, DeploymentDeviceArea, ProductionArea, PreviewArea } from './ContentAreas'
+//import { TemplateContentAreaEnum, TemplateArea, VariantArea} from './TemplateContentArea';
 import { JsonEditor as Editor } from 'jsoneditor-react';
 import 'jsoneditor-react/es/editor.min.css';
 
@@ -41,7 +41,7 @@ export class VariantArea2 extends Component {
         title: 'Template',
         dataIndex: 'template',
         render: (text, record) => (
-          <Button type="link" onClick={() => this.props.callbackFromParent('1')}>{record.id}</Button> 
+          <Button type="link" onClick={() => this.props.callbackFromParent('1')}>{record.template}</Button> 
         )
       },      
       {
@@ -204,39 +204,39 @@ export class VariantArea2 extends Component {
   }
 
   //push variant to production or preview
-  pushVariant = async () =>{
-    const variant = this.state.selected;
-    if(!variant){
-      window.confirm("Please select a variant first");
-      return;
-    }
-    let result = await axios.put(`api/global/production/${variant}`);
-    this.setState({
-      contentarea: ContentAreaEnum.DEPLOYMENTDEVICE
-    })
-    this.deploymentdevice.current.componentDidMount();
-  }  
+  // pushVariant = async () =>{
+  //   const variant = this.state.selected;
+  //   if(!variant){
+  //     window.confirm("Please select a variant first");
+  //     return;
+  //   }
+  //   let result = await axios.put(`api/global/production/${variant}`);
+  //   this.setState({
+  //     contentarea: ContentAreaEnum.DEPLOYMENTDEVICE
+  //   })
+  //   this.deploymentdevice.current.componentDidMount();
+  // }  
 
-  templates = () =>{
-    this.setState({
-      contentarea: TemplateContentAreaEnum.TEMPLATE
-    })
-  }
+  // templates = () =>{
+  //   this.setState({
+  //     contentarea: TemplateContentAreaEnum.TEMPLATE
+  //   })
+  // }
 
-  variants = () =>{
-    this.setState({
-      contentarea: TemplateContentAreaEnum.VARIANT
-    })
-  }
+  // variants = () =>{
+  //   this.setState({
+  //     contentarea: TemplateContentAreaEnum.VARIANT
+  //   })
+  // }
 
-  async getDevices() {
-    return (await axios.get('api/device/')).data;
-  }
+  // async getDevices() {
+  //   return (await axios.get('api/device/')).data;
+  // }
 
-  production = async () => {
-    this.setState({
-      contentarea: ContentAreaEnum.PRODUCTION
-    })
-  }
+  // production = async () => {
+  //   this.setState({
+  //     contentarea: ContentAreaEnum.PRODUCTION
+  //   })
+  // }
 
 }
