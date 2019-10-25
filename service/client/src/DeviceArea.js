@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Button, Layout, List, Col, Row, Menu, Dropdown, Icon, Table, Typography, Popconfirm, Tooltip, Popover, Badge, Tag } from 'antd';
 import { JsonEditor as Editor } from 'jsoneditor-react';
 import ReactJson from 'react-json-view'
+import axios from 'axios';
 
 const { Content } = Layout;
 const ButtonGroup = Button.Group;
@@ -35,7 +36,7 @@ export class DeviceArea extends Component {
         render: (text, record) => (
           <span style={{float: 'right'}}>
             <ButtonGroup size='small' type="dashed"> 
-              <Tooltip title="Put this device into a safe mode"><Button type={this.props.deviceTags[record.id] && this.props.deviceTags[record.id].status == 'failed' ? 'danger' : 'primary'} icon="alert" ghost onClick={() => console.log("SAFE MODE!")} /></Tooltip>
+              <Tooltip title="Put this device into a safe mode"><Button type={this.props.deviceTags[record.id] && this.props.deviceTags[record.id].status == 'failed' ? 'danger' : 'primary'} icon="alert" ghost onClick={() => this.tagDevice(record.id, {environment : 'safe-mode'})} /></Tooltip>
               <Tooltip title="Put all devices affected by this deployment into a safe mode"><Button type={this.props.deviceTags[record.id] && this.props.deviceTags[record.id].status == 'failed' ? 'danger' : 'primary'} icon="alert" ghost onClick={() => console.log("SAFE MODE!")} /></Tooltip>         
               {/* <Tooltip title="View & Edit"><Button type="primary" icon="edit" onClick={() => this.editDeployment(record)} ghost /></Tooltip> */}
               {/* <Tooltip title="Copy"><Button type="primary" icon="copy" ghost /></Tooltip>
@@ -62,9 +63,7 @@ export class DeviceArea extends Component {
     this.editor = React.createRef();
   }
 
-  render() {
-
-    console.log(this.props.activeDeployments);
+  render() {    
 
     return (      
       <Layout>
@@ -81,7 +80,7 @@ export class DeviceArea extends Component {
               expandedRowRender={record => 
                 <span>
                   <ReactJson src={record} enableClipboard={false} />
-                  <Table columns={this.nestedColumns} dataSource={Object.this.props.activeDeployments[record.id]} pagination={false}/>
+                  <Table columns={this.nestedColumns} dataSource={this.props.activeDeployments[record.id] ? Object.values(this.props.activeDeployments[record.id]) : []} pagination={false}/>
                   </span>
                 }              
               pagination={{ pageSize: 50 }} 
@@ -96,6 +95,13 @@ export class DeviceArea extends Component {
   componentDidMount() {
     //add if needed
   } 
+
+  /**
+   * Tag selected device (e.g. to put it into a safe mode)
+   */
+  tagDevice = async (device, tags) => {
+    return (await axios.put('api/device/' + device, tags));
+  }
 }
 
 

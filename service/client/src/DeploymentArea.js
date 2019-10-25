@@ -27,15 +27,15 @@ export class DeploymentArea extends Component {
         )      
       }       
     ]
-    this.nestedColumnsTargeted = [      
-      {
-        title: 'Targeted devices',
-        dataIndex: 'deviceId',
-        render: (text, record) => (
-          <Button type='link' icon='bulb' onClick={() => this.props.callbackFromParent('4')}>{record.deviceId}</Button> 
-        )      
-      }       
-    ]
+    // this.nestedColumnsTargeted = [      
+    //   {
+    //     title: 'Targeted devices',
+    //     dataIndex: 'deviceId',
+    //     render: (text, record) => (
+    //       <Button type='link' icon='bulb' onClick={() => this.props.callbackFromParent('4')}>{record.deviceId}</Button> 
+    //     )      
+    //   }       
+    // ]
     this.state = {
       //add if needed
     };
@@ -61,7 +61,8 @@ export class DeploymentArea extends Component {
               expandedRowRender={record => 
                 <span><ReactJson src={record} enableClipboard={false} />
                 <Table rowKey={record => record.id} columns={this.nestedColumnsApplied} dataSource={this.props.appliedDevices[record.id]} pagination={false}/>
-                <Table rowKey={record => record.id} columns={this.nestedColumnsTargeted} dataSource={this.props.targetedDevices[record.id]} pagination={false}/></span>}              
+                {/* <Table rowKey={record => record.id} columns={this.nestedColumnsTargeted} dataSource={this.props.targetedDevices[record.id]} pagination={false}/> */}
+                </span>}              
               pagination={{ pageSize: 50 }} 
               // scroll={{ y: 1240 }}              
             />

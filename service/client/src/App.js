@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import './App.css';
 import axios from 'axios';
-import { Button } from 'antd';
-import { Layout } from 'antd';
-import { List } from 'antd';
-import { Row, Col } from 'antd';
-import { PageHeader } from 'antd';
-import { Typography } from 'antd';
-import { Menu } from 'antd';
-import { Icon } from 'antd';
-import {Tabs} from 'antd';
+import { Button, Layout, Tabs, Icon } from 'antd';
+import {  } from 'antd';
+// import { List } from 'antd';
+// import { Row, Col } from 'antd';
+// import { PageHeader } from 'antd';
+// import { Typography } from 'antd';
+// import { Menu } from 'antd';
+// import { Icon } from 'antd';
+// import {Tabs} from 'antd';
 
 import {ControlArea} from './ControlArea';
 import {ModelArea} from './ModelArea';
@@ -18,11 +18,11 @@ import {VariantArea2} from './VariantArea2';
 import {DeploymentArea} from './DeploymentArea';
 import {DeviceArea} from './DeviceArea';
 
-const { Header, Footer, Sider, Content } = Layout;
-const { Paragraph } = Typography;
+const { Footer, Content } = Layout;
+// const { Paragraph } = Typography;
 const { TabPane } = Tabs;
 
-const operations = <Button>Extra Action</Button>;
+const operations = <Button type='danger'>Extra Action</Button>;
 
 // var AreaEnum = {
 //   CONTROL: 1,
@@ -225,7 +225,7 @@ class App extends Component {
       //result[deployment.id] 
       let devices = (await axios.get('api/deployment/' + deployment.id + '/applied')).data;
       devices.forEach((device) => {
-        result[device.deviceId] = deployment;
+        result[device.deviceId] = [deployment.id];
       });
     });
     console.log(result);
