@@ -118,7 +118,7 @@ class App extends Component {
                 <DeploymentArea deployments={deployments} appliedDevices={appliedDevices} targetedDevices={targetedDevices} callbackFromParent={this.handleTableChange} />
               </TabPane>
               <TabPane key="4" tab={<span><Icon type="bulb" />Devices</span>}>
-                <DeviceArea devices={devices} deployments={deployments} activeDeployments={activeDeployments} deviceTags={deviceTags} callbackFromParent={this.handleTableChange} />
+                <DeviceArea devices={devices} deployments={deployments} activeDeployments={activeDeployments} appliedDevices={appliedDevices} deviceTags={deviceTags} callbackFromParent={this.handleTableChange} />
               </TabPane>
               {/* <TabPane key="5" tab={<span><Icon type="control" />Control</span>}>
                 <ControlArea />

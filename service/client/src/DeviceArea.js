@@ -37,7 +37,7 @@ export class DeviceArea extends Component {
           <span style={{float: 'right'}}>
             <ButtonGroup size='small' type="dashed"> 
               <Tooltip title="Put this device into a safe mode"><Button type={this.props.deviceTags[record.id] && this.props.deviceTags[record.id].status == 'failed' ? 'danger' : 'primary'} icon="alert" ghost onClick={() => this.tagDevice(record.id, {environment : 'safe-mode'})} /></Tooltip>
-              <Tooltip title="Put all devices affected by this deployment into a safe mode"><Button type={this.props.deviceTags[record.id] && this.props.deviceTags[record.id].status == 'failed' ? 'danger' : 'primary'} icon="alert" ghost onClick={() => console.log("SAFE MODE!")} /></Tooltip>         
+              <Tooltip title="Put all devices affected by this deployment into a safe mode"><Button type={this.props.deviceTags[record.id] && this.props.deviceTags[record.id].status == 'failed' ? 'danger' : 'primary'} icon="alert" ghost onClick={() => this.suspendDevices(record.id)} /></Tooltip>         
               {/* <Tooltip title="View & Edit"><Button type="primary" icon="edit" onClick={() => this.editDeployment(record)} ghost /></Tooltip> */}
               {/* <Tooltip title="Copy"><Button type="primary" icon="copy" ghost /></Tooltip>
               <Tooltip title="Save"><Button type="primary" icon="save" onClick={()=>{this.saveDeployment()}} ghost /></Tooltip>
@@ -101,6 +101,19 @@ export class DeviceArea extends Component {
    */
   tagDevice = async (device, tags) => {
     return (await axios.put('api/device/' + device, tags));
+  }
+
+  suspendDevices = async (device) => {
+    let faultyDeployments = this.props.activeDeployments[device];
+    console.log("deployments" + JSON.stringify(faultyDeployments));
+    faultyDeployments.forEach(deployment => {
+      let faultyDevices = this.props.appliedDevices[deployment];
+      faultyDevices.forEach(device => {
+        this.tagDevice(device, {environment: 'safe-mode'});
+        console.log(device);
+      })
+    });
+    
   }
 }
 
