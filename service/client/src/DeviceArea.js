@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Button, Layout, List, Col, Row, Menu, Dropdown, Icon, Table, Typography, Popconfirm, Tooltip, Popover, Badge, Tag } from 'antd';
-import { JsonEditor as Editor } from 'jsoneditor-react';
+import { Button, Layout, Col, Row, Table, Tooltip, Badge, Tag } from 'antd';
+//import { JsonEditor as Editor } from 'jsoneditor-react';
 import ReactJson from 'react-json-view'
 import axios from 'axios';
 
@@ -17,7 +17,7 @@ export class DeviceArea extends Component {
         dataIndex: 'id',
         width: 200,
         render: (text, record) => (
-        this.props.deviceTags[record.id].status == 'failed' ? <span><Badge status="error"/>{record.id}</span> : <span><Badge status="success"/>{record.id}</span>
+        this.props.deviceTags[record.id].status === 'failed' ? <span><Badge status="error"/>{record.id}</span> : <span><Badge status="success"/>{record.id}</span>
         )
       },
       {
@@ -36,8 +36,8 @@ export class DeviceArea extends Component {
         render: (text, record) => (
           <span style={{float: 'right'}}>
             <ButtonGroup size='small' type="dashed"> 
-              <Tooltip title="Put this device into a safe mode"><Button type={this.props.deviceTags[record.id] && this.props.deviceTags[record.id].status == 'failed' ? 'danger' : 'primary'} icon="alert" ghost onClick={() => this.tagDevice(record.id, {environment : 'safe-mode'})} /></Tooltip>
-              <Tooltip title="Put all devices affected by this deployment into a safe mode"><Button type={this.props.deviceTags[record.id] && this.props.deviceTags[record.id].status == 'failed' ? 'danger' : 'primary'} icon="alert" ghost onClick={() => this.suspendDevices(record.id)} /></Tooltip>         
+              <Tooltip title="Put this device into a safe mode"><Button type={this.props.deviceTags[record.id] && this.props.deviceTags[record.id].status === 'failed' ? 'danger' : 'primary'} icon="alert" ghost onClick={() => this.tagDevice(record.id, {environment : 'safe-mode'})} /></Tooltip>
+              <Tooltip title="Put all devices affected by this deployment into a safe mode"><Button type={this.props.deviceTags[record.id] && this.props.deviceTags[record.id].status === 'failed' ? 'danger' : 'primary'} icon="alert" ghost onClick={() => this.suspendDevices(record.id)} /></Tooltip>         
               {/* <Tooltip title="View & Edit"><Button type="primary" icon="edit" onClick={() => this.editDeployment(record)} ghost /></Tooltip> */}
               {/* <Tooltip title="Copy"><Button type="primary" icon="copy" ghost /></Tooltip>
               <Tooltip title="Save"><Button type="primary" icon="save" onClick={()=>{this.saveDeployment()}} ghost /></Tooltip>

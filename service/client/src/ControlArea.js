@@ -43,10 +43,10 @@ export class ControlArea extends Component {
           </Sider>
 
           <Content>
-            {this.state.contentarea == ContentAreaEnum.DEPLOYMENTDEVICE && <DeploymentDeviceArea />}
-            {this.state.contentarea == ContentAreaEnum.PRODUCTION && <ProductionArea />}
-            {this.state.contentarea == ContentAreaEnum.PREVIEW && <PreviewArea />}
-            {this.state.contentarea == ContentAreaEnum.DEFAULT && <Button>Hey</Button>}
+            {this.state.contentarea === ContentAreaEnum.DEPLOYMENTDEVICE && <DeploymentDeviceArea />}
+            {this.state.contentarea === ContentAreaEnum.PRODUCTION && <ProductionArea />}
+            {this.state.contentarea === ContentAreaEnum.PREVIEW && <PreviewArea />}
+            {this.state.contentarea === ContentAreaEnum.DEFAULT && <Button>Hey</Button>}
           </Content>
         </Layout>
       </div>

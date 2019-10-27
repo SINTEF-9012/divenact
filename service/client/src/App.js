@@ -11,8 +11,6 @@ import {  } from 'antd';
 // import { Icon } from 'antd';
 // import {Tabs} from 'antd';
 
-import {ControlArea} from './ControlArea';
-import {ModelArea} from './ModelArea';
 import {TemplateArea2} from './TemplateArea2';
 import {VariantArea2} from './VariantArea2';
 import {DeploymentArea} from './DeploymentArea';

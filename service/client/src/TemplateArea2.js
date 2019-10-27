@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { Button, Layout, List, Col, Row, Menu, Icon, Table, Collapse, Popconfirm, Tooltip, Tag, Input } from 'antd';
+import { Button, Layout, Col, Row, Table, Popconfirm, Tooltip, Tag } from 'antd';
 import axios from 'axios';
 import { JsonEditor as Editor } from 'jsoneditor-react';
 import 'jsoneditor-react/es/editor.min.css';
 
-const { Header, Footer, Sider, Content } = Layout;
+const { Content } = Layout;
 const colors = ["blue","red","green"];
 
 const ButtonGroup = Button.Group;
@@ -156,7 +156,7 @@ export class TemplateArea2 extends Component {
                 columns={this.columns}
                 expandedRowRender={record => 
                   <span>
-                    <Table columns={this.nestedColumnsVariants} dataSource={this.props.variants.filter((item) => {return item.template == record.id})} pagination={false}/>
+                    <Table columns={this.nestedColumnsVariants} dataSource={this.props.variants.filter((item) => {return item.template === record.id})} pagination={false}/>
                   </span>} 
                 pagination={{ pageSize: 50 }}
                 scroll={{ y: true }}               
@@ -181,14 +181,16 @@ export class TemplateArea2 extends Component {
   }  
 
   saveTemplate = async () =>{
+    let result;
     const {edited} = this.state
     if(edited){
-      let result = await axios.put(`api/template/${edited.id}`, edited)
+      result = await axios.put(`api/template/${edited.id}`, edited)
       this.componentDidMount()
     }
     else{
       window.confirm("No change to save");
     }
+    return result;
   }
 
   editTemplate = (record) => {

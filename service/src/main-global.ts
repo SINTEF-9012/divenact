@@ -1,7 +1,7 @@
 import program from "commander";
 import {listEdgeIds, tagTwinAll, tagTwinRandom} from './device'
 import {createEdgeDeploymentByEnvironment} from './deployment'
-import {shuffleProduction, production, preview, query} from './global'
+import {shuffleProduction, production, preview_old, query} from './global'
 
 program
     .command('production <variation>')
@@ -13,7 +13,7 @@ program
     .command('preview <variation>')
     .option('-r, --random <N>', 'Preview on N random devices', parseInt)
     .action((variation, cmd)=>{
-        preview(variation, cmd.random);
+        preview_old(variation, cmd.random);
     })
 
 program

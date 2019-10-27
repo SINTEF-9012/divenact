@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { Button, Layout, List, Col, Row, Menu, Dropdown, Icon, Table, Popconfirm, Tooltip, Popover, Badge } from 'antd';
-import axios from 'axios';
+import { Button, Layout, Col, Row, Table, Badge } from 'antd';
+//import axios from 'axios';
 import ReactJson from 'react-json-view'
 
 const { Content } = Layout;
-const ButtonGroup = Button.Group;
+//const ButtonGroup = Button.Group;
 
 export class DeploymentArea extends Component {
   constructor(props) {

@@ -42,7 +42,7 @@ export async function production(variant: string){
     return createEdgeDeploymentByEnvironment(variant, 'production')
 }
 
-export async function preview(variant: string, numberToPreview: number){
+export async function preview_old(variant: string, numberToPreview: number){
     let result = null;
     if(numberToPreview){
         let capability = await getCapabilityFromVariant(variant);
@@ -53,6 +53,21 @@ export async function preview(variant: string, numberToPreview: number){
     }
     console.log(`Preview on ${result}`);
     return createEdgeDeploymentByEnvironment(variant, 'preview');
+}
+
+export async function preview(variant: string){
+    await tagTwinAll('environment', 'preview')
+    return createEdgeDeploymentByEnvironment(variant, 'preview')
+}
+
+export async function safemode(variant: string){
+    await tagTwinAll('environment', 'safe-mode')
+    return createEdgeDeploymentByEnvironment(variant, 'safe-mode')
+}
+
+export async function testing(variant: string){
+    //await tagTwinAll('environment', 'testing')
+    return createEdgeDeploymentByEnvironment(variant, 'testing')
 }
 
 export async function query(queryString: string): Promise<object>{
