@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Layout, Col, Row, Table, Tooltip, Badge, Tag } from 'antd';
+import { Button, Layout, Col, Row, Table, Tooltip, Badge, Tag, Dropdown, Menu } from 'antd';
 //import { JsonEditor as Editor } from 'jsoneditor-react';
 import ReactJson from 'react-json-view'
 import axios from 'axios';
@@ -38,8 +38,46 @@ export class DeviceArea extends Component {
             <ButtonGroup size='small' type="dashed"> 
               <Tooltip title="Emulate device failure"><Button type="primary" icon="bug" onClick={() => this.tagDevice(record.id, {status: 'failed'})} ghost /></Tooltip>
               <Tooltip title="Fix device"><Button type="primary" icon="tool" onClick={() => this.tagDevice(record.id, {status: 'running'})} ghost /></Tooltip>
-              <Tooltip title="Put device into a safe mode"><Button type={this.props.deviceTags[record.id] && this.props.deviceTags[record.id].status === 'failed' ? 'danger' : 'primary'} icon="tag" ghost onClick={() => this.tagDevice(record.id, {environment : 'safe-mode'})} /></Tooltip>
-              <Tooltip title="Put all affected devices into a safe mode"><Button type={this.props.deviceTags[record.id] && this.props.deviceTags[record.id].status === 'failed' ? 'danger' : 'primary'} icon="tags" ghost onClick={() => this.suspendDevices(record.id)} /></Tooltip>         
+              
+              <Dropdown overlay={
+                <Menu>
+                <Menu.Item key="0">
+                  <Button type="link" onClick={() => this.tagDevice(record.id, {environment : 'production'})}>Production</Button>
+                </Menu.Item>
+                <Menu.Divider />
+                <Menu.Item key="1">
+                  <Button type="link" onClick={() => this.tagDevice(record.id, {environment : 'preview'})}>Preview</Button>
+                </Menu.Item>
+                <Menu.Divider />
+                <Menu.Item key="3">
+                  <Button type="link" onClick={() => this.tagDevice(record.id, {environment : 'testing'})}>Testing</Button>
+                </Menu.Item>
+                <Menu.Divider />
+                <Menu.Item key="4">
+                  <Button type="link" onClick={() => this.tagDevice(record.id, {environment : 'safe-mode'})}>Safe mode</Button>
+                </Menu.Item>
+              </Menu>
+              }><Tooltip title="Put device into ..."><Button type={this.props.deviceTags[record.id] && this.props.deviceTags[record.id].status === 'failed' ? 'danger' : 'primary'} icon="tag" ghost /></Tooltip></Dropdown>
+              
+              <Dropdown overlay={
+                <Menu>
+                <Menu.Item key="0">
+                  <Button type="link" onClick={() => this.tagDevices(record.id, {environment : 'production'})}>Production</Button>
+                </Menu.Item>
+                <Menu.Divider />
+                <Menu.Item key="1">
+                  <Button type="link" onClick={() => this.tagDevices(record.id, {environment : 'preview'})}>Preview</Button>
+                </Menu.Item>
+                <Menu.Divider />
+                <Menu.Item key="3">
+                  <Button type="link" onClick={() => this.tagDevices(record.id, {environment : 'testing'})}>Testing</Button>
+                </Menu.Item>
+                <Menu.Divider />
+                <Menu.Item key="4">
+                  <Button type="link" onClick={() => this.tagDevices(record.id, {environment : 'safe-mode'})}>Safe mode</Button>
+                </Menu.Item>
+              </Menu>
+              }><Tooltip title="Put all affected devices into ..."><Button type={this.props.deviceTags[record.id] && this.props.deviceTags[record.id].status === 'failed' ? 'danger' : 'primary'} icon="tags" ghost /></Tooltip></Dropdown>         
               
               {/* <Tooltip title="Copy"><Button type="primary" icon="copy" ghost /></Tooltip>
               <Tooltip title="Save"><Button type="primary" icon="save" onClick={()=>{this.saveDeployment()}} ghost /></Tooltip>
@@ -105,14 +143,18 @@ export class DeviceArea extends Component {
     return (await axios.put('api/device/' + device, tags));
   }
 
-  suspendDevices = async (device) => {
+  /**
+   * Tag all devices affected by a deployment (e.g. to put it into a safe mode)
+   */
+  tagDevices = async (device, tags) => {
     let faultyDeployments = this.props.activeDeployments[device];
     console.log("deployments" + JSON.stringify(faultyDeployments));
     faultyDeployments.forEach(deployment => {
       let faultyDevices = this.props.appliedDevices[deployment];
-      faultyDevices.forEach(device => {
-        this.tagDevice(device, {environment: 'safe-mode'});
-        console.log(device);
+      console.log(this.props.appliedDevices[deployment]);
+      faultyDevices.forEach(fDevice => {
+        console.log(fDevice.deviceId);
+        this.tagDevice(fDevice.deviceId, tags);        
       })
     });
     
