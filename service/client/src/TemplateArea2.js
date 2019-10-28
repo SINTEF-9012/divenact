@@ -126,7 +126,7 @@ export class TemplateArea2 extends Component {
         title: 'Existing variants',
         dataIndex: 'id',
         render: (text, record) => (
-          <Button type="link" icon='branches' onClick={() => this.props.callbackFromParent('2')}>{record.id}</Button>          
+          <Button type="link" icon='branches' onClick={() => this.props.callbackTabChange('2')}>{record.id}</Button>          
         )      
       }       
     ]
@@ -205,8 +205,9 @@ export class TemplateArea2 extends Component {
     if(!id) return;
     let newTemplate = {...record, id: id};
     delete newTemplate._id;
+    this.props.callbackAddTemplate(newTemplate);
     this.setState({
-      templates: [...this.state.templates, newTemplate],
+      //templates: [...this.state.templates, newTemplate],
       edited: newTemplate,
       foredit: newTemplate
     })
@@ -224,21 +225,8 @@ export class TemplateArea2 extends Component {
 
   //TODO - create new variant for the given template
   createVariant = () => {    
-    //let Tabs = React.createRef();
-    //this.Tabs.current.activeKey="2";
+    
   }
-
-  // templates = () => {
-  //   this.setState({
-  //     contentarea: TemplateContentAreaEnum.TEMPLATE
-  //   })
-  // }
-
-  // variants = () =>{
-  //   this.setState({
-  //     contentarea: TemplateContentAreaEnum.VARIANT
-  //   })
-  // }  
 
 }
 

@@ -126,7 +126,7 @@ export async function listDeployments(): Promise<object>{
     let deployments = (await registry.getConfigurations()).responseBody;
     let result = {};
     for(let dpl of deployments){
-        result[dpl.id] = dpl.targetCondition;
+        result[dpl.id] = dpl;
     }
     return Promise.resolve(result);
 }

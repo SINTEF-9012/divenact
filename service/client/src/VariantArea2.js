@@ -19,7 +19,7 @@ export class VariantArea2 extends Component {
         title: 'Template',
         dataIndex: 'template',
         render: (text, record) => (
-          <Button type="link" onClick={() => this.props.callbackFromParent('1')}>{record.template}</Button> 
+          <Button type="link" onClick={() => this.props.callbackTabChange('1')}>{record.template}</Button> 
         )
       },      
       {
@@ -49,7 +49,7 @@ export class VariantArea2 extends Component {
               </Menu>
               }><Tooltip title="Deploy to ..."><Button type="primary" icon="rocket" ghost /></Tooltip></Dropdown>
               <Tooltip title="View & Edit"><Button type="primary" icon="edit" onClick={() => this.editVariant(record)} ghost /></Tooltip>
-              <Tooltip title="Copy"><Button type="primary" icon="copy" ghost /></Tooltip>
+              <Tooltip title="Copy"><Button type="primary" icon="copy" onClick={() => this.copyVariant(record)} ghost /></Tooltip>
               <Tooltip title="Save"><Button type="primary" icon="save" onClick={()=>{this.saveVariant()}} ghost /></Tooltip>
               <Tooltip title="Delete"><Popconfirm title="Sure to delete?" onConfirm={() => this.deleteVariant(record.id)}><Button type="primary" icon="delete" ghost /></Popconfirm></Tooltip>
             </ButtonGroup>
@@ -58,7 +58,7 @@ export class VariantArea2 extends Component {
       }    
     ]
     this.state = {
-      variants: [],
+      //variants: [],
       forEdit: null, 
       edited: null
     };
@@ -67,7 +67,7 @@ export class VariantArea2 extends Component {
 
   render() {
 
-    const { variants, forEdit } = this.state; 
+    const { forEdit } = this.state; 
 
     return (
       
@@ -80,7 +80,7 @@ export class VariantArea2 extends Component {
                 //bordered 
                 rowKey={record => record.id}
                 size='small'
-                dataSource={variants}
+                dataSource={this.props.variants}
                 columns={this.columns}                
                 pagination={{ pageSize: 50 }} 
                 scroll={{ y: true }}               
@@ -135,6 +135,20 @@ export class VariantArea2 extends Component {
     else{
       window.confirm("No change to save");
     }
+  }
+
+  copyVariant = async (record) => {
+    const id = prompt('Enter new ID');
+    
+    if(!id) return;
+    let newVariant = {...record, id: id};
+    delete newVariant._id;
+    this.props.callbackAddVariant(newVariant);
+    this.setState({
+      //variants: [...this.state.variants, newVariant],
+      edited: newVariant,
+      foredit: newVariant
+    })
   }
 
   /**

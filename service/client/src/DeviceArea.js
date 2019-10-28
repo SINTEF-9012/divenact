@@ -36,9 +36,11 @@ export class DeviceArea extends Component {
         render: (text, record) => (
           <span style={{float: 'right'}}>
             <ButtonGroup size='small' type="dashed"> 
-              <Tooltip title="Put this device into a safe mode"><Button type={this.props.deviceTags[record.id] && this.props.deviceTags[record.id].status === 'failed' ? 'danger' : 'primary'} icon="alert" ghost onClick={() => this.tagDevice(record.id, {environment : 'safe-mode'})} /></Tooltip>
-              <Tooltip title="Put all devices affected by this deployment into a safe mode"><Button type={this.props.deviceTags[record.id] && this.props.deviceTags[record.id].status === 'failed' ? 'danger' : 'primary'} icon="alert" ghost onClick={() => this.suspendDevices(record.id)} /></Tooltip>         
-              {/* <Tooltip title="View & Edit"><Button type="primary" icon="edit" onClick={() => this.editDeployment(record)} ghost /></Tooltip> */}
+              <Tooltip title="Emulate device failure"><Button type="primary" icon="bug" onClick={() => this.tagDevice(record.id, {status: 'failed'})} ghost /></Tooltip>
+              <Tooltip title="Fix device"><Button type="primary" icon="tool" onClick={() => this.tagDevice(record.id, {status: 'running'})} ghost /></Tooltip>
+              <Tooltip title="Put device into a safe mode"><Button type={this.props.deviceTags[record.id] && this.props.deviceTags[record.id].status === 'failed' ? 'danger' : 'primary'} icon="tag" ghost onClick={() => this.tagDevice(record.id, {environment : 'safe-mode'})} /></Tooltip>
+              <Tooltip title="Put all affected devices into a safe mode"><Button type={this.props.deviceTags[record.id] && this.props.deviceTags[record.id].status === 'failed' ? 'danger' : 'primary'} icon="tags" ghost onClick={() => this.suspendDevices(record.id)} /></Tooltip>         
+              
               {/* <Tooltip title="Copy"><Button type="primary" icon="copy" ghost /></Tooltip>
               <Tooltip title="Save"><Button type="primary" icon="save" onClick={()=>{this.saveDeployment()}} ghost /></Tooltip>
               <Tooltip title="Delete"><Popconfirm title="Sure to delete?" onConfirm={() => this.deleteDeployment(record.id)}><Button type="primary" icon="delete" ghost /></Popconfirm></Tooltip> */}
@@ -53,7 +55,7 @@ export class DeviceArea extends Component {
         title: 'Active deployments',
         dataIndex: 'id',
         render: (text, record) => (          
-          <Button type="link" icon='deployment-unit' onClick={() => this.props.callbackFromParent('3')}>{record}</Button> 
+          <Button type="link" icon='deployment-unit' onClick={() => this.props.callbackTabChange('3')}>{record}</Button> 
         )      
       }      
     ]

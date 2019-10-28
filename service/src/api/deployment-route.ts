@@ -10,7 +10,7 @@ router.get('/', async (req, res)=>{
     for(let id of Object.keys(deployments)){
         result.push({
             id: id,
-            condition: deployments[id]
+            condition: deployments[id].condition
         })
     }
     res.json(result);

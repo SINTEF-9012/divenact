@@ -2,19 +2,13 @@ import React, { Component } from 'react';
 import './App.css';
 import axios from 'axios';
 import { Button, Layout, Tabs, Icon } from 'antd';
-import {  } from 'antd';
-// import { List } from 'antd';
-// import { Row, Col } from 'antd';
-// import { PageHeader } from 'antd';
-// import { Typography } from 'antd';
-// import { Menu } from 'antd';
-// import { Icon } from 'antd';
-// import {Tabs} from 'antd';
 
 import {TemplateArea2} from './TemplateArea2';
 import {VariantArea2} from './VariantArea2';
 import {DeploymentArea} from './DeploymentArea';
 import {DeviceArea} from './DeviceArea';
+import {ControlArea} from './ControlArea';
+import {ModelArea} from './ModelArea';
 
 const { Footer, Content } = Layout;
 // const { Paragraph } = Typography;
@@ -107,23 +101,23 @@ class App extends Component {
             <Tabs id="Tabs" activeKey={activeTab} ref={this.Tabs} onTabClick={(tab) => this.handleTableChange(tab)} tabBarExtraContent={operations} >
               <TabPane disabled key="logo" tab={<span><img style={{ height: '40px'}} src="https://enact-project.eu/img/logo-enact-blue2.png" alt="logo enact" /></span>}></TabPane>
               <TabPane key="1" tab={<span><Icon type="book" />Templates</span>}>
-                <TemplateArea2 templates={templates} variants={variants} templateTags={templateTags} callbackFromParent={this.handleTableChange} />
+                <TemplateArea2 templates={templates} variants={variants} templateTags={templateTags} callbackTabChange={this.handleTableChange} callbackAddTemplate={this.addTemplate} />
               </TabPane>
               <TabPane key="2" tab={<span><Icon type="branches" />Variants</span>}>
-                <VariantArea2 variants={variants} templates={templates} callbackFromParent={this.handleTableChange} />
+                <VariantArea2 variants={variants} templates={templates} callbackTabChange={this.handleTableChange} callbackAddVariant={this.addVariant} />
               </TabPane>
               <TabPane key="3" tab={<span><Icon type="deployment-unit" />Deployments</span>}>
-                <DeploymentArea deployments={deployments} appliedDevices={appliedDevices} targetedDevices={targetedDevices} callbackFromParent={this.handleTableChange} />
+                <DeploymentArea deployments={deployments} appliedDevices={appliedDevices} targetedDevices={targetedDevices} callbackTabChange={this.handleTableChange} />
               </TabPane>
               <TabPane key="4" tab={<span><Icon type="bulb" />Devices</span>}>
-                <DeviceArea devices={devices} deployments={deployments} activeDeployments={activeDeployments} appliedDevices={appliedDevices} deviceTags={deviceTags} callbackFromParent={this.handleTableChange} />
+                <DeviceArea devices={devices} deployments={deployments} activeDeployments={activeDeployments} appliedDevices={appliedDevices} deviceTags={deviceTags} callbackTabChange={this.handleTableChange} />
               </TabPane>
-              {/* <TabPane key="5" tab={<span><Icon type="control" />Control</span>}>
+              <TabPane key="5" tab={<span><Icon type="control" />Control</span>}>
                 <ControlArea />
               </TabPane>
               <TabPane key="6" tab={<span><Icon type="profile" />Repository</span>}>
                 <ModelArea />
-              </TabPane> */}
+              </TabPane>
             </Tabs> 
         </Content>        
           
@@ -196,22 +190,7 @@ class App extends Component {
    */
   getTemplates = async () => {
     return (await axios.get('api/template/')).data;
-  }
-
-  // /**
-  //  * Get a map of deployments and devices to which they apply
-  //  */
-  // getTemplateVariants = async () => {       
-  //   let result = {};
-  //   //let deployments = (await axios.get('api/deployment')).data;
-  //   this.state.templates.forEach(async (template) => {
-  //     this.state.variants.forEach(async (variant) => {
-  //       variant.template == template.id && 
-  //     }
-  //     result[template.id] = (await axios.get('api/deployment/' + deployment.id + '/applied')).data;
-  //   });
-  //   return result;    
-  // }
+  }  
 
   /**
    * Get a map of devices and active deployments.
@@ -275,6 +254,24 @@ class App extends Component {
     });
     //console.log(result);
     return result;
+  }
+
+  /**
+   * Add new template (either by copying or creating a new one)
+   */
+  addTemplate = async (newTemplate) => {
+    this.setState({
+      templates: [...this.state.templates, newTemplate]
+    })
+  }
+
+  /**
+   * Add new variant (either by copying or creating a new one)
+   */
+  addVariant = async (newVariant) => {
+    this.setState({
+      variants: [...this.state.variants, newVariant]
+    })
   }
   
 
