@@ -1,5 +1,5 @@
 import Router from "express";
-import { production, preview, safemode, testing, shuffleProduction } from "../global"
+import { production, preview, safemode, testing, shuffleProduction, preview_old } from "../global"
 import { getDeployment, createEdgeDeploymentByEnvironment } from "../deployment";
 
 export let router = Router();
@@ -13,12 +13,12 @@ router.put('/production/:variant', async (req, res) => {
     res.json((await getDeployment(pid)).responseBody);
 })
 
-// router.put('/preview/:variant', async (req, res)=>{
-//     let numberToPreview = req.body.random || 1;
-//     console.log(numberToPreview);
-//     let pid = await preview(req.params['variant'], numberToPreview);
-//     res.json((await getDeployment(pid)).responseBody);
-// })
+router.put('/previewold/:variant', async (req, res)=>{
+    let numberToPreview = req.body.random || 1;
+    console.log(numberToPreview);
+    let pid = await preview_old(req.params['variant'], numberToPreview);
+    res.json((await getDeployment(pid)).responseBody);
+})
 
 router.put('/preview/:variant', async (req, res) => {    
     let pid = await preview(req.params['variant']);

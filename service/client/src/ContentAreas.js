@@ -10,12 +10,14 @@ export var ContentAreaEnum = {
   DEPLOYMENTDEVICE: 1,
   PRODUCTION: 2,
   PREVIEW: 3,
-  DEFAULT: 4,
+  DIVERSIFY: 4,
+  DEFAULT: 5,
   properties: {
     1: { name: "deploymentdevice", value: 1, code: "D" },
     2: { name: "production", value: 2, code: "P" },
-    3: { name: "preview", value: 2, code: "R"},
-    4: { name: "default", value: 4, code: "F" }
+    3: { name: "preview", value: 3, code: "R"},
+    4: { name: "diversify", value:4, code: "V"},
+    5: { name: "default", value: 5, code: "F" }
   }
 };
 
@@ -42,6 +44,18 @@ export class SingleVariantSelect extends Component{
   render(){
     return(
       <Select style={{ width: 150 }} onChange={this.props.onSelectionChange} placeholder="Select a variant">
+            {this.state.variants.map((value, index) => {
+              return <Select.Option value={value}>{value}</Select.Option>
+            })}
+      </Select> 
+    )
+  }
+}
+
+export class MultiVariantSelect extends SingleVariantSelect{
+  render(){
+    return(
+      <Select mode="multiple" style={{ width: 150 }} onChange={this.props.onSelectionChange} placeholder="Select a variant">
             {this.state.variants.map((value, index) => {
               return <Select.Option value={value}>{value}</Select.Option>
             })}
@@ -130,7 +144,7 @@ export class PreviewArea extends Component {
       window.confirm("Please select a variant first");
       return;
     }
-    let result = await axios.put(`api/global/preview/${variant}`, {random: this.state.number});
+    let result = await axios.put(`api/global/previewold/${variant}`, {random: this.state.number});
     this.setState({
       contentarea: ContentAreaEnum.DEPLOYMENTDEVICE
     })
@@ -155,6 +169,52 @@ export class PreviewArea extends Component {
   }
 }
 
+export class DiversifyArea extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      selected: null,
+      contentarea: -1
+    };
+    this.deploymentdevice = React.createRef();
+  }
+
+  componentDidMount(){
+
+  }
+  
+  onSelectionChange = async (value) => {
+    this.setState({ selected: value });
+  }
+
+  onGoButton = async () => {
+    const variants = this.state.selected;
+    window.confirm(variants);
+    if(!variants){
+      window.confirm("Please select a variant first");
+      return;
+    }
+    let result = await axios.put(`api/global/shuffle`, {variants: variants});
+    this.setState({
+      contentarea: ContentAreaEnum.DEPLOYMENTDEVICE
+    })
+    this.deploymentdevice.current.componentDidMount();
+  }
+
+  render() {
+    return (
+      <div>
+        <Row>
+          <Text>Diversify variants </Text>
+          <MultiVariantSelect onSelectionChange={this.onSelectionChange} />
+          <Text> into all devices </Text>
+          <Button onClick={this.onGoButton}> Go </Button>
+        </Row>
+        {this.state.contentarea == ContentAreaEnum.DEPLOYMENTDEVICE && <Row><DeploymentDeviceArea ref={this.deploymentdevice}/></Row>}
+      </div>
+    )
+  }
+}
 
 export class DeploymentDeviceArea extends Component {
   constructor(props) {

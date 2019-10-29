@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Layout, List, Col, Row, Menu, Icon } from 'antd';
 import axios from 'axios';
-import { ContentAreaEnum, DeploymentDeviceArea, ProductionArea, PreviewArea } from './ContentAreas'
+import { ContentAreaEnum, DeploymentDeviceArea, ProductionArea, PreviewArea, DiversifyArea } from './ContentAreas'
 
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -35,7 +35,7 @@ export class ControlArea extends Component {
                 <Icon type="experiment" />
                 <span>Preview</span>
               </Menu.Item>
-              <Menu.Item key="3">
+              <Menu.Item key="3" onClick={this.diversify}>
                 <Icon type="deployment-unit" />
                 <span>Diversify</span>
               </Menu.Item>
@@ -46,6 +46,7 @@ export class ControlArea extends Component {
             {this.state.contentarea === ContentAreaEnum.DEPLOYMENTDEVICE && <DeploymentDeviceArea />}
             {this.state.contentarea === ContentAreaEnum.PRODUCTION && <ProductionArea />}
             {this.state.contentarea === ContentAreaEnum.PREVIEW && <PreviewArea />}
+            {this.state.contentarea === ContentAreaEnum.DIVERSIFY && <DiversifyArea />}
             {this.state.contentarea === ContentAreaEnum.DEFAULT && <Button>Hey</Button>}
           </Content>
         </Layout>
@@ -72,6 +73,12 @@ export class ControlArea extends Component {
   preview = async () => {
     this.setState({
       contentarea: ContentAreaEnum.PREVIEW
+    })
+  }
+
+  diversify = async () => {
+    this.setState({
+      contentarea: ContentAreaEnum.DIVERSIFY
     })
   }
 

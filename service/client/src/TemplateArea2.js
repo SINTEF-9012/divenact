@@ -102,11 +102,11 @@ export class TemplateArea2 extends Component {
           (this.props.templateTags[record.id]) &&
             Object.keys(this.props.templateTags[record.id]).map((key, i) => <Tag color={colors[i]}>{key}: {this.props.templateTags[record.id][key]}</Tag>)      
         ),
-        width: 1000,
+        width: 800,
       },   
       {
         title: 'Actions',
-        width: 200,
+        width: 400,
         align: 'center',
         render: (text, record) => (
           <span style={{float: 'right'}}>
@@ -147,7 +147,7 @@ export class TemplateArea2 extends Component {
         <Layout>
         <Content>        
           <Row>
-            <Col span={12}>
+            <Col span={14}>
               <Table
                 //bordered 
                 rowKey={record => record.id}
@@ -162,7 +162,7 @@ export class TemplateArea2 extends Component {
                 scroll={{ y: true }}               
               />
             </Col>                      
-            <Col span={12}>                       
+            <Col span={10}>                       
               <Editor history='true' value={forEdit} ref={this.editor} onChange={this.handleChange} />            
             </Col> 
           </Row>    

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Button, Layout, Col, Row, Table, Badge } from 'antd';
 //import axios from 'axios';
 import ReactJson from 'react-json-view'
+import Axios from 'axios';
 
 const { Content } = Layout;
 //const ButtonGroup = Button.Group;
@@ -66,6 +67,7 @@ export class DeploymentArea extends Component {
               pagination={{ pageSize: 50 }} 
               // scroll={{ y: 1240 }}              
             />
+            <Button onClick={this.onDelete}>Delect all</Button>
           </Col>          
         </Row>    
       </Content>       
@@ -73,6 +75,11 @@ export class DeploymentArea extends Component {
     );
   }  
   
+  onDelete = async ()=>{
+    let result = await Axios.delete('api/deployment');
+    return result;
+  }
+
   componentDidMount() {    
     //add if needed       
   } 

@@ -59,8 +59,9 @@ function joinConditions(condition1: string, condition2: string, operation:string
 async function getPredefinedConditions(varname: string): Promise<string>{
     let variant = await getCandidate(varname);
     let tags = variant.property.predefinedtag;
-    if('capability' in tags){
-        return `tags.capability='${tags.capability}'`
+    console.log(tags)
+    if(tags.has('capability')){
+        return `tags.capability='${tags.get('capability')}'`
     }
     else
         return undefined 
@@ -90,11 +91,14 @@ export async function createEdgeDeploymentByEnvironment(varname: string, environ
 
 export async function getCapabilityFromVariant(varname: string): Promise<string>{
     let variant = await getCandidate(varname);
-    let tags = variant.property.predefinedtag;
+    //console.log(variant);
+    let tags =  variant.property.predefinedtag;
+    console.log(tags)
+    console.log(tags.get('capability'))
     if(!tags) 
         return null;
     else
-        return tags.capability;
+        return tags.get('capability')
 }
 
 async function removeEdgeDeploymentForDevice(deviceId: string): Promise<String>{

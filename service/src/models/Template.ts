@@ -6,7 +6,7 @@ export interface ITemplate extends Document{
     id: string;
     content: object;
     property: {
-        predefinedtag: { [id: string] : string; }
+        predefinedtag: any
     }
 }
 

@@ -16,14 +16,16 @@ export async function shuffleProduction(variants: string[]){
 
     //let devices = {PiEdge1: 'ky016', PiEdge2: 'ky016', PiEdge3: 'ky016', PiEdge4: 'ky016', PiEdge5: 'sensehat'} //
     let devices = await listTagValue('capability');
+    console.log(devices)
     let isDeviceWithCapability = (device:string, capability:string) => devices[device] == capability || (capability=='ANY' && !devices[device])
     //console.log(group);
     let toTag = (value: string)=> `shuffle_${value}`;
     let taggedDevices = []
     for(let capability in group){
+        console.log(capability)
         let subvariants = group[capability];
         let subdevices = Object.keys(devices).filter((device) => isDeviceWithCapability(device, capability));
-        //console.log(`====> ${subvariants}, ${subdevices}`)
+        console.log(`====> ${subvariants}, subdevices: ${subdevices}`)
         taggedDevices.push(tagTwinShuffled('environment', subvariants.map(toTag), subdevices));
     }
 
