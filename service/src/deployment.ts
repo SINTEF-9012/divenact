@@ -192,7 +192,7 @@ export async function queryAppliedDevices(deploymentId: string): Promise<Twin[]>
         if (err) {
             reject(err);
         } else {                
-            console.log("Applied devices: " + results);     
+            //console.log("Applied devices: " + results);     
             resolve(results);
             }
         });
@@ -213,7 +213,7 @@ export async function queryTargetedDevices(deploymentId: string): Promise<Twin[]
         if (err) {
             reject(err);
         } else {              
-            console.log("Targeted devices: " + results);    
+            //console.log("Targeted devices: " + results);    
             resolve(results);
             }
         });

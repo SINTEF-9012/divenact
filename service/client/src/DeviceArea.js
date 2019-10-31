@@ -27,11 +27,11 @@ export class DeviceArea extends Component {
           (this.props.deviceTags[record.id]) &&
             Object.keys(this.props.deviceTags[record.id]).map((key, i) => <Tag color={colors[i]}>{key}: {this.props.deviceTags[record.id][key]}</Tag>)      
         ),
-        width: 1000
+        width: 600
       },     
       {
         title: 'Actions',
-        width: 80,
+        width: 400,
         align: 'center',
         render: (text, record) => (
           <span style={{float: 'right'}}>
@@ -140,7 +140,7 @@ export class DeviceArea extends Component {
    * Tag selected device (e.g. to put it into a safe mode)
    */
   tagDevice = async (device, tags) => {
-    return (await axios.put('api/device/' + device, tags));
+    let result = await axios.put('api/device/' + device, tags);
   }
 
   /**

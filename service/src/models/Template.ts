@@ -6,7 +6,8 @@ export interface ITemplate extends Document{
     id: string;
     content: object;
     property: {
-        predefinedtag: any
+        predefinedtag: any;
+        safemode: string
     }
 }
 
@@ -17,7 +18,8 @@ export const TemplateSchema = new Schema({
         predefinedtag: {
             type: Map,
             of: String
-        }
+        },
+        safemode: String
     }
 })
 

@@ -102,11 +102,11 @@ export class TemplateArea2 extends Component {
           (this.props.templateTags[record.id]) &&
             Object.keys(this.props.templateTags[record.id]).map((key, i) => <Tag color={colors[i]}>{key}: {this.props.templateTags[record.id][key]}</Tag>)      
         ),
-        width: 800,
+        width: 500,
       },   
       {
         title: 'Actions',
-        width: 400,
+        width: 700,
         align: 'center',
         render: (text, record) => (
           <span style={{float: 'right'}}>
