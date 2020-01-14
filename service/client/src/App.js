@@ -9,6 +9,7 @@ import {DeploymentArea} from './DeploymentArea';
 import {DeviceArea} from './DeviceArea';
 import {ControlArea} from './ControlArea';
 import {ModelArea} from './ModelArea';
+import DiversifyArea from './DiversifyArea';
 
 const { Footer, Content } = Layout;
 // const { Paragraph } = Typography;
@@ -117,6 +118,9 @@ class App extends Component {
               </TabPane>
               <TabPane key="6" tab={<span><Icon type="profile" />Repository</span>}>
                 <ModelArea />
+              </TabPane>
+              <TabPane key="7" tab={<span><Icon type="control" />Diversify</span>}>
+                <DiversifyArea />
               </TabPane>
             </Tabs> 
         </Content>        

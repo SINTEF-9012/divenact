@@ -6,6 +6,7 @@
     "antd": "^3.21.1",
     "axios": "^0.19.0",
     "babel-eslint": "10.0.1",
+    "cassowary": "0.0.2",
     "jsoneditor": "^6.3.0",
     "jsoneditor-react": "^1.0.1",
     "react": "^16.8.6",
