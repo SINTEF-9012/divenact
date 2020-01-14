@@ -61,7 +61,7 @@ class DiversifyArea extends Component {
         </Form.Item> */}
 
         <Form.Item label="Target environment" >
-          {getFieldDecorator('select-multiple', {
+          {getFieldDecorator('environment', {
             rules: [
               { required: true, message: 'Please select target environment(s) for a deployment', type: 'array' },
             ],
@@ -72,18 +72,21 @@ class DiversifyArea extends Component {
               <Option value="safe-mode">Safe mode</Option>
             </Select>           
           )}
-          
+          {getFieldDecorator('environment-level', 
+          {initialValue: 'required'},
+          {rules: [ { required: true, message: 'Please select target environment(s) for a deployment', type: 'string' }]})
+          (
           <Select placeholder="Please select a requirement level" defaultValue='required' style={{ width: '10%' }} >
               <Option value="required">Required</Option>
               <Option value="strong">Strong</Option>
               <Option value="medium">Medium</Option>
               <Option value="weak">Weak</Option>
           </Select> 
-           
+           )}
         </Form.Item>
         
         <Form.Item label="Target status" >
-          {getFieldDecorator('select-multiple1', {
+          {getFieldDecorator('status', {
             rules: [
               { required: true, message: 'Please select target status(es) for a deployment', type: 'array' },
             ],
@@ -94,18 +97,23 @@ class DiversifyArea extends Component {
               <Option value="suspended">Suspended</Option>
             </Select>
           )}
-
+          {getFieldDecorator('status-level', 
+          {initialValue: 'required'},
+          {rules: [
+            { required: true, message: 'Please select target environment(s) for a deployment', type: 'string' },
+          ],
+          })(
           <Select placeholder="Please select a requirement level" defaultValue='required' style={{ width: '10%' }} >
               <Option value="required">Required</Option>
               <Option value="strong">Strong</Option>
               <Option value="medium">Medium</Option>
               <Option value="weak">Weak</Option>
-          </Select>
-
+          </Select> 
+           )}
         </Form.Item>
 
         <Form.Item label="Target capability" >
-          {getFieldDecorator('select-multiple2', {
+          {getFieldDecorator('capability', {
             rules: [
               { required: true, message: 'Please select target device capability(ies) for a deployment', type: 'array' },
             ],
@@ -117,12 +125,19 @@ class DiversifyArea extends Component {
             </Select>
           )}
 
-          <Select placeholder="Please select a requirement level" defaultValue='required' style={{ width: '10%' }} >
+          {getFieldDecorator('capability-level', 
+            {initialValue: 'required'},
+            {rules: [
+              { required: true, message: 'Please select target environment(s) for a deployment', type: 'string' },
+            ],
+          })(
+          <Select placeholder="Please select a requirement level" style={{ width: '10%' }} >
               <Option value="required">Required</Option>
               <Option value="strong">Strong</Option>
               <Option value="medium">Medium</Option>
               <Option value="weak">Weak</Option>
-          </Select>
+          </Select> 
+           )}
 
         </Form.Item>
 
