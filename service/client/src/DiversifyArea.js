@@ -1,7 +1,24 @@
-import React, { Component } from 'react';
-import ReactJson from 'react-json-view'
-import axios from 'axios';
-import {Form, Select, InputNumber, Switch, Radio, Slider, Button, Upload, Icon, Rate, Checkbox, Row, Col} from 'antd';
+import React, { Component } from "react";
+import ReactJson from "react-json-view";
+import axios from "axios";
+import * as kiwi from "kiwi.js";
+import cassowary from "cassowary";
+//import {cube} from "./Solver";
+import {
+  Form,
+  Select,
+  InputNumber,
+  Switch,
+  Radio,
+  Slider,
+  Button,
+  Upload,
+  Icon,
+  Rate,
+  Checkbox,
+  Row,
+  Col
+} from "antd";
 
 const { Option } = Select;
 
@@ -10,20 +27,71 @@ const { Option } = Select;
 //const colors = ["blue","red","green"];
 
 class DiversifyArea extends Component {
-    
   constructor(props) {
-    super(props);    
+    super(props);
     this.state = {
-      //add if needed      
+      //add if needed
     };
   }
-  
 
-  handleSubmit = (e) => {
+  handleSubmit = e => {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values);
+        console.log("Received values of form: ", values);
+        console.log("Devices: " + this.props.devices);
+        //console.log(cube(3));
+
+        //var environment = this.props.deviceTags[record.id]
+
+        var solver = new kiwi.Solver();
+        
+        var target_environment = new kiwi.Variable();
+        var target_status = new kiwi.Variable();
+        var target_capability = new kiwi.Variable();
+
+        var environment = new kiwi.Variable();
+        var status = new kiwi.Variable();
+        var capability = new kiwi.Variable();
+
+        var range = new kiwi.Variable();
+        var number = new kiwi.Variable();
+        
+        solver.addEditVariable(range, kiwi.Strength.required);
+        solver.addEditVariable(number, kiwi.Strength.required);
+                
+        //solver.suggestValue(left, 100);
+        //solver.suggestValue(width, 400);
+
+        solver.addConstraint(new kiwi.Constraint(new kiwi.Expression([-1, environment], target_environment), kiwi.Operator.Eq));
+        solver.addConstraint(new kiwi.Constraint(new kiwi.Expression([-1, status], target_status), kiwi.Operator.Eq));
+        solver.addConstraint(new kiwi.Constraint(new kiwi.Expression([-1, capability], target_capability), kiwi.Operator.Eq));
+        
+        
+        console.log(target_environment.value);
+        console.log(target_status.value);
+        console.log(target_capability.value);
+
+        var constraints = [
+          new cassowary.Inequality(target_environment, cassowary.GEQ, 1, cassowary.Strength.required),
+          new cassowary.Inequality(target_environment, cassowary.LEQ, 1, cassowary.Strength.required),
+
+          new cassowary.Inequality(target_status, cassowary.GEQ, 1, cassowary.Strength.required),
+          new cassowary.Inequality(target_status, cassowary.LEQ, 1, cassowary.Strength.required),
+
+          new cassowary.Inequality(target_capability, cassowary.GEQ, 1, cassowary.Strength.required),
+          new cassowary.Inequality(target_capability, cassowary.LEQ, 1, cassowary.Strength.required),
+          //new c.Inequality(v1, c.LEQ, 5, c.Strength.required)
+        ];
+
+        //var eq = new cassowary.Equation(x, new cassowary.Expression(y));
+        solver.addConstraints(constraints);
+        solver.resolve();
+        console.log("TEST");
+        console.log(target_environment.value);
+        console.log(target_status.value);
+        console.log(target_capability.value);
+
       }
     });
   };
@@ -40,15 +108,14 @@ class DiversifyArea extends Component {
     const { getFieldDecorator } = this.props.form;
     const formItemLayout = {
       labelCol: { span: 6 },
-      wrapperCol: { span: 14 },      
+      wrapperCol: { span: 14 }
     };
     return (
       <Form {...formItemLayout} onSubmit={this.handleSubmit}>
-        
         {/* <Form.Item label="Plain Text">
           <span className="ant-form-text">China</span>
         </Form.Item> */}
-        
+
         {/* <Form.Item label="Select" hasFeedback>
           {getFieldDecorator('select', {
             rules: [{ required: true, message: 'Please select your country!' }],
@@ -60,93 +127,159 @@ class DiversifyArea extends Component {
           )}
         </Form.Item> */}
 
-        <Form.Item label="Target environment" >
-          {getFieldDecorator('environment', {
+        <Form.Item label="Target environment">
+          {getFieldDecorator("environment", {
             rules: [
-              { required: true, message: 'Please select target environment(s) for a deployment', type: 'array' },
-            ],
+              {
+                required: true,
+                message: "Please select target environment(s) for a deployment",
+                type: "array"
+              }
+            ]
           })(
-            <Select mode="multiple" placeholder="Please select target environment(s) for a deployment" style={{ width: '90%' }}>
+            <Select
+              mode="multiple"
+              placeholder="Please select target environment(s) for a deployment"
+              style={{ width: "90%" }}
+            >
               <Option value="production">Production</Option>
               <Option value="testing">Testing</Option>
               <Option value="safe-mode">Safe mode</Option>
-            </Select>           
+            </Select>
           )}
-          {getFieldDecorator('environment-level', 
-          {initialValue: 'required'},
-          {rules: [ { required: true, message: 'Please select target environment(s) for a deployment', type: 'string' }]})
-          (
-          <Select placeholder="Please select a requirement level" defaultValue='required' style={{ width: '10%' }} >
+          {getFieldDecorator(
+            "environment-level",
+            { initialValue: "required" },
+            {
+              rules: [
+                {
+                  required: true,
+                  message:
+                    "Please select target environment(s) for a deployment",
+                  type: "string"
+                }
+              ]
+            }
+          )(
+            <Select
+              placeholder="Please select a requirement level"
+              style={{ width: "10%" }}
+            >
               <Option value="required">Required</Option>
               <Option value="strong">Strong</Option>
               <Option value="medium">Medium</Option>
               <Option value="weak">Weak</Option>
-          </Select> 
-           )}
+            </Select>
+          )}
         </Form.Item>
-        
-        <Form.Item label="Target status" >
-          {getFieldDecorator('status', {
+
+        <Form.Item label="Target status">
+          {getFieldDecorator("status", {
             rules: [
-              { required: true, message: 'Please select target status(es) for a deployment', type: 'array' },
-            ],
+              {
+                required: true,
+                message: "Please select target status(es) for a deployment",
+                type: "array"
+              }
+            ]
           })(
-            <Select mode="multiple" placeholder="Please select target status(es) for a deployment" style={{ width: '90%' }}>
+            <Select
+              mode="multiple"
+              placeholder="Please select target status(es) for a deployment"
+              style={{ width: "90%" }}
+            >
               <Option value="running">Running</Option>
               <Option value="failed">Failed</Option>
               <Option value="suspended">Suspended</Option>
             </Select>
           )}
-          {getFieldDecorator('status-level', 
-          {initialValue: 'required'},
-          {rules: [
-            { required: true, message: 'Please select target environment(s) for a deployment', type: 'string' },
-          ],
-          })(
-          <Select placeholder="Please select a requirement level" defaultValue='required' style={{ width: '10%' }} >
+          {getFieldDecorator(
+            "status-level",
+            {
+              initialValue: "required"
+            },
+            {
+              rules: [
+                {
+                  required: true,
+                  message:
+                    "Please select target environment(s) for a deployment",
+                  type: "string"
+                }
+              ]
+            }
+          )(
+            <Select
+              placeholder="Please select a requirement level"
+              style={{ width: "10%" }}
+            >
               <Option value="required">Required</Option>
               <Option value="strong">Strong</Option>
               <Option value="medium">Medium</Option>
               <Option value="weak">Weak</Option>
-          </Select> 
-           )}
+            </Select>
+          )}
         </Form.Item>
 
-        <Form.Item label="Target capability" >
-          {getFieldDecorator('capability', {
+        <Form.Item label="Target capability">
+          {getFieldDecorator("capability", {
             rules: [
-              { required: true, message: 'Please select target device capability(ies) for a deployment', type: 'array' },
-            ],
+              {
+                required: true,
+                message:
+                  "Please select target device capability(ies) for a deployment",
+                type: "array"
+              }
+            ]
           })(
-            <Select mode="multiple" placeholder="Please select target device capability(ies) for a deployment" style={{ width: '90%' }}>
+            <Select
+              mode="multiple"
+              placeholder="Please select target device capability(ies) for a deployment"
+              style={{ width: "90%" }}
+            >
               <Option value="sensehat">SenseHat</Option>
               {/* <Option value="failed">Failed</Option>
               <Option value="suspended">Suspended</Option> */}
             </Select>
           )}
 
-          {getFieldDecorator('capability-level', 
-            {initialValue: 'required'},
-            {rules: [
-              { required: true, message: 'Please select target environment(s) for a deployment', type: 'string' },
-            ],
-          })(
-          <Select placeholder="Please select a requirement level" style={{ width: '10%' }} >
+          {getFieldDecorator(
+            "capability-level",
+            { initialValue: "required" },
+            {
+              rules: [
+                {
+                  required: true,
+                  message:
+                    "Please select target environment(s) for a deployment",
+                  type: "string"
+                }
+              ]
+            }
+          )(
+            <Select
+              placeholder="Please select a requirement level"
+              style={{ width: "10%" }}
+            >
               <Option value="required">Required</Option>
               <Option value="strong">Strong</Option>
               <Option value="medium">Medium</Option>
               <Option value="weak">Weak</Option>
-          </Select> 
-           )}
-
+            </Select>
+          )}
         </Form.Item>
 
-        <Form.Item label="Number of devices" >
-          {getFieldDecorator('input-number', { initialValue: 10, rules: [
-              { required: true, message: 'Please select the number of target devices', type: 'number' },
-            ]})(
-              <InputNumber min={1} max={100} />
-            )}
+        <Form.Item label="Number of devices">
+          {getFieldDecorator("number", {
+            initialValue: 10,
+            rules: [
+              {
+                required: true,
+                message: "Please select the number of target devices",
+                type: "number"
+              }
+            ]
+          })(<InputNumber min={1} max={100} />)}
           {/* <span className="ant-form-text"> machines</span> */}
         </Form.Item>
 
@@ -155,22 +288,22 @@ class DiversifyArea extends Component {
         </Form.Item> */}
 
         <Form.Item label="Deployment range">
-          {getFieldDecorator('slider')(
+          {getFieldDecorator("range")(
             <Slider
               marks={{
-                0: '0 km',
-                10: '10 km',
-                20: '20 km',
-                30: '30 km',
-                40: '40 km',
-                50: '50 km',
-                60: '60 km',
-                70: '70 km',
-                80: '80 km',
-                90: '90  km',
-                100: '100 km'
+                0: "0 km",
+                10: "10 km",
+                20: "20 km",
+                30: "30 km",
+                40: "40 km",
+                50: "50 km",
+                60: "60 km",
+                70: "70 km",
+                80: "80 km",
+                90: "90  km",
+                100: "100 km"
               }}
-            />,
+            />
           )}
         </Form.Item>
 
@@ -321,48 +454,45 @@ class DiversifyArea extends Component {
     );
   }
 
-  
+  // render() {
 
-
-  // render() {    
-
-  //   return (      
+  //   return (
   //     <Layout>
-  //     <Content>        
+  //     <Content>
   //       <Row>
   //         <Col span={24}>
   //           <Table
-  //             //bordered 
+  //             //bordered
   //             rowKey={record => record.id}
   //             size='small'
   //             dataSource={this.props.devices}
   //             columns={this.columns}
   //             //expandRowByClick={true}
-  //             expandedRowRender={record => 
+  //             expandedRowRender={record =>
   //               <span>
   //                 <ReactJson src={record} enableClipboard={false} />
   //                 <Table columns={this.nestedColumns} dataSource={this.props.activeDeployments[record.id] ? Object.values(this.props.activeDeployments[record.id]) : []} pagination={false}/>
   //                 </span>
-  //               }              
-  //             pagination={{ pageSize: 50 }} 
+  //               }
+  //             pagination={{ pageSize: 50 }}
   //           />
-  //         </Col> 
-  //       </Row>    
-  //     </Content>       
-  //     </Layout>   
+  //         </Col>
+  //       </Row>
+  //     </Content>
+  //     </Layout>
   //   );
-  // }  
-  
+  // }
+
   componentDidMount() {
-    //add if needed
-  } 
+    //add if needed    
+  }
 
   /**
    * Tag selected device (e.g. to put it into a safe mode)
    */
   tagDevice = async (device, tags) => {
-    let result = await axios.put('api/device/' + device, tags);
-  }
+    let result = await axios.put("api/device/" + device, tags);
+  };
 
   /**
    * Tag all devices affected by a deployment (e.g. to put it into a safe mode)
@@ -375,11 +505,10 @@ class DiversifyArea extends Component {
       console.log(this.props.appliedDevices[deployment]);
       faultyDevices.forEach(fDevice => {
         console.log(fDevice.deviceId);
-        this.tagDevice(fDevice.deviceId, tags);        
-      })
+        this.tagDevice(fDevice.deviceId, tags);
+      });
     });
-    
-  }
+  };
 }
 
 export default Form.create()(DiversifyArea);

@@ -163,7 +163,7 @@ export class TemplateArea2 extends Component {
               />
             </Col>                      
             <Col span={10}>                       
-              <Editor history='true' value={forEdit} ref={this.editor} onChange={this.handleChange} />            
+              <Editor history={true} value={forEdit} ref={this.editor} onChange={this.handleChange} />            
             </Col> 
           </Row>    
         </Content>          

@@ -9,6 +9,7 @@
     "cassowary": "0.0.2",
     "jsoneditor": "^6.3.0",
     "jsoneditor-react": "^1.0.1",
+    "kiwi.js": "^1.1.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-json-view": "^1.19.1",
