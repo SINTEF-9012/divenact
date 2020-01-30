@@ -26,6 +26,7 @@ var items = [
   { item: "device15", weight: 120, value: 240, pieces: 1 }
 ];
 
+//weight=range (needs to me smaller) value=some value (needs to be greater)
 var devices = [
     { item: "device1", weight: 70, value: 135, pieces: 1 },
     { item: "device2", weight: 73, value: 139, pieces: 1 },

@@ -9,7 +9,7 @@ import { DeploymentArea } from "./DeploymentArea";
 import { DeviceArea } from "./DeviceArea";
 import { ControlArea } from "./ControlArea";
 import { ModelArea } from "./ModelArea";
-import DiversifyArea from "./DiversifyArea";
+import SingleDeploymentArea from "./SingleDeploymentArea";
 
 const { Footer, Content } = Layout;
 // const { Paragraph } = Typography;
@@ -234,11 +234,11 @@ class App extends Component {
                 tab={
                   <span>
                     <Icon type="control" />
-                    Diversify
+                    Single Deployment
                   </span>
                 }
               >
-                <DiversifyArea
+                <SingleDeploymentArea
                   devices={devices}
                   deployments={deployments}
                   activeDeployments={activeDeployments}
