@@ -1,44 +1,47 @@
 import React, { Component } from "react";
-import ReactJson from "react-json-view";
 import axios from "axios";
-//import {cube} from "./Solver";
 import {
   Form,
+  Input,
   Select,
   InputNumber,
   DatePicker,
   Switch,
   Slider,
   Button,
-  Icon,
-  Rate,
-  Checkbox,
   Row,
   Col
 } from "antd";
 
 const { Option } = Select;
 
-//const { Content } = Layout;
-//const ButtonGroup = Button.Group;
-//const colors = ["blue","red","green"];
-
 class DiversifyArea extends Component {
   constructor(props) {
     super(props);
     this.state = {
       //add if needed
-      inputValue: 1,
+      valueEnvironment: 5,
+      valueStatus: 5,
+      valueCapability: 5,
+      valueLastActive: 5,
+      valueLastUpdate: 5,
+      valueCpu: 5,
+      valueRam: 5,
+      valueStorage: 5,
+      valueNumber: 5,
+      valueRange: 5,
       toggleEnvironment: false,
       toggleStatus: false,
+      toggleCapability: false,
       toggleLastActive: false,
       toggleLastUpdate: false,
-      toggleCapability: false,
       toggleCpu: false,
       toggleRam: false,
       toggleStorage: false,
       toggleNumber: false,
-      toggleRange: false
+      toggleRange: false,
+      myValidateHelp: "Validation help",
+      myValidateStatus: "Validation status"
     };
   }
 
@@ -53,17 +56,34 @@ class DiversifyArea extends Component {
   };
 
   render() {
-    //const { inputValue } = this.state;
     const { getFieldDecorator } = this.props.form;
+    const { myValidateHelp, myValidateStatus } = this.state;
     const formItemLayout = {
       labelCol: { span: 8 },
       wrapperCol: { span: 12 }
     };
     return (
       <Form {...formItemLayout} onSubmit={this.handleSubmit}>
-        <Form.Item label="Target environment">
+        <Form.Item
+          label={
+            <span>
+              <Switch
+                defaultChecked
+                size="small"
+                onClick={() => {
+                  this.setState({
+                    toggleEnvironment: !this.state.toggleEnvironment
+                  });
+                }}
+              />{" "}
+              Target environment
+            </span>
+          }
+          help={myValidateHelp}
+          validateStatus={myValidateStatus}
+        >
           <Row gutter={8}>
-            <Col span={22}>
+            <Col span={21}>
               {getFieldDecorator("environment", {
                 rules: [
                   {
@@ -85,23 +105,49 @@ class DiversifyArea extends Component {
               )}
             </Col>
             <Col span={2}>
-              {/* {getFieldDecorator("environmentToggle", { valuePropName: "checked" })( */}
-              <Switch defaultChecked 
-                size="small"
-                onClick={() => {
-                  this.setState({
-                    toggleEnvironment: !this.state.toggleEnvironment
-                  });
-                }}
-              />
-              {/* )} */}
+              {getFieldDecorator("weightEnvironment", {
+                initialValue: this.state.valueEnvironment,
+                rules: [
+                  {
+                    type: "number"
+                  }
+                ]
+              })(
+                <Slider
+                  min={1}
+                  max={10}
+                  disabled={this.state.toggleEnvironment}
+                  onChange={value =>
+                    this.setState({
+                      valueEnvironment: value
+                    })
+                  }
+                />
+              )}
             </Col>
           </Row>
         </Form.Item>
 
-        <Form.Item label="Target status">
+        <Form.Item
+          label={
+            <span>
+              <Switch
+                defaultChecked
+                size="small"
+                onClick={() => {
+                  this.setState({
+                    toggleStatus: !this.state.toggleStatus
+                  });
+                }}
+              />{" "}
+              Target status
+            </span>
+          }
+          help={myValidateHelp}
+          validateStatus={myValidateStatus}
+        >
           <Row gutter={8}>
-            <Col span={22}>
+            <Col span={21}>
               {getFieldDecorator("status", {
                 rules: [
                   {
@@ -122,19 +168,49 @@ class DiversifyArea extends Component {
               )}
             </Col>
             <Col span={2}>
-              <Switch defaultChecked 
-                size="small"
-                onClick={() => {
-                  this.setState({ toggleStatus: !this.state.toggleStatus });
-                }}
-              />
+              {getFieldDecorator("weightStatus", {
+                initialValue: this.state.valueStatus,
+                rules: [
+                  {
+                    type: "number"
+                  }
+                ]
+              })(
+                <Slider
+                  min={1}
+                  max={10}
+                  disabled={this.state.toggleStatus}
+                  onChange={value =>
+                    this.setState({
+                      valueStatus: value
+                    })
+                  }
+                />
+              )}
             </Col>
           </Row>
         </Form.Item>
 
-        <Form.Item label="Target capability">
+        <Form.Item
+          label={
+            <span>
+              <Switch
+                defaultChecked
+                size="small"
+                onClick={() => {
+                  this.setState({
+                    toggleCapability: !this.state.toggleCapability
+                  });
+                }}
+              />{" "}
+              Target capability
+            </span>
+          }
+          help={myValidateHelp}
+          validateStatus={myValidateStatus}
+        >
           <Row gutter={8}>
-            <Col span={22}>
+            <Col span={21}>
               {getFieldDecorator("capability", {
                 rules: [
                   {
@@ -154,117 +230,295 @@ class DiversifyArea extends Component {
               )}
             </Col>
             <Col span={2}>
-              <Switch defaultChecked 
-                size="small"
-                onClick={() => {
-                  this.setState({
-                    toggleCapability: !this.state.toggleCapability
-                  });
-                }}
-              />
+              {getFieldDecorator("weightCapability", {
+                initialValue: this.state.valueCapability,
+                rules: [
+                  {
+                    type: "number"
+                  }
+                ]
+              })(
+                <Slider
+                  min={1}
+                  max={10}
+                  disabled={this.state.toggleCapability}
+                  onChange={value =>
+                    this.setState({
+                      valueCapability: value
+                    })
+                  }
+                />
+              )}
             </Col>
           </Row>
         </Form.Item>
 
-        <Form.Item label="Last Update">
-          <Row gutter={8}>
-            <Col span={22}>
-              {getFieldDecorator("lastUpdate")(
-                <DatePicker onChange={this.onLastUpdateDateChange} 
-                disabled={this.state.toggleLastUpdate} />
-              )}
-            </Col>
-            <Col span={2}>
-              <Switch defaultChecked 
+        <Form.Item
+          label={
+            <span>
+              <Switch
+                defaultChecked
                 size="small"
                 onClick={() => {
                   this.setState({
                     toggleLastUpdate: !this.state.toggleLastUpdate
                   });
                 }}
-              />
+              />{" "}
+              Last Update
+            </span>
+          }
+          help={myValidateHelp}
+          validateStatus={myValidateStatus}
+        >
+          <Row gutter={8}>
+            <Col span={21}>
+              {getFieldDecorator("lastUpdate")(
+                <DatePicker
+                  onChange={this.onLastUpdateDateChange}
+                  disabled={this.state.toggleLastUpdate}
+                />
+              )}
+            </Col>
+            <Col span={2}>
+              {getFieldDecorator("weightLastUpdate", {
+                initialValue: this.state.valueLastUpdate,
+                rules: [
+                  {
+                    type: "number"
+                  }
+                ]
+              })(
+                <Slider
+                  min={1}
+                  max={10}
+                  disabled={this.state.toggleLastUpdate}
+                  onChange={value =>
+                    this.setState({
+                      valueLastUpdate: value
+                    })
+                  }
+                />
+              )}
             </Col>
           </Row>
         </Form.Item>
 
-        <Form.Item label="Last Active">
-          <Row gutter={8}>
-            <Col span={22}>
-              {getFieldDecorator("lastActive")(
-                <DatePicker onChange={this.onLastActiveDateChange} 
-                disabled={this.state.toggleLastActive} />
-              )}
-            </Col>
-            <Col span={2}>
-              <Switch defaultChecked 
+        <Form.Item
+          label={
+            <span>
+              <Switch
+                defaultChecked
                 size="small"
                 onClick={() => {
                   this.setState({
                     toggleLastActive: !this.state.toggleLastActive
                   });
                 }}
-              />
+              />{" "}
+              Last Active
+            </span>
+          }
+          help={myValidateHelp}
+          validateStatus={myValidateStatus}
+        >
+          <Row gutter={8}>
+            <Col span={21}>
+              {getFieldDecorator("lastActive")(
+                <DatePicker
+                  onChange={this.onLastActiveDateChange}
+                  disabled={this.state.toggleLastActive}
+                />
+              )}
+            </Col>
+            <Col span={2}>
+              {getFieldDecorator("weightLastActive", {
+                initialValue: this.state.valueLastActive,
+                rules: [
+                  {
+                    type: "number"
+                  }
+                ]
+              })(
+                <Slider
+                  min={1}
+                  max={10}
+                  disabled={this.state.toggleLastActive}
+                  onChange={value =>
+                    this.setState({
+                      valueLastActive: value
+                    })
+                  }
+                />
+              )}
             </Col>
           </Row>
         </Form.Item>
 
-        <Form.Item label="CPU">
+        <Form.Item
+          label={
+            <span>
+              <Switch
+                defaultChecked
+                size="small"
+                onClick={() => {
+                  this.setState({
+                    toggleCpu: !this.state.toggleCpu
+                  });
+                }}
+              />{" "}
+              CPU
+            </span>
+          }
+          help={myValidateHelp}
+          validateStatus={myValidateStatus}
+        >
           <Row gutter={8}>
-            <Col span={22}>
+            <Col span={21}>
               {getFieldDecorator("cpu", {
                 initialValue: 10
               })(<Slider disabled={this.state.toggleCpu} />)}
             </Col>
             <Col span={2}>
-              <Switch defaultChecked 
-                size="small"
-                onClick={() => {
-                  this.setState({ toggleCpu: !this.state.toggleCpu });
-                }}
-              />
+              {getFieldDecorator("weightCpu", {
+                initialValue: this.state.valueCpu,
+                rules: [
+                  {
+                    type: "number"
+                  }
+                ]
+              })(
+                <Slider
+                  min={1}
+                  max={10}
+                  disabled={this.state.toggleCpu}
+                  onChange={value =>
+                    this.setState({
+                      valueCpu: value
+                    })
+                  }
+                />
+              )}
             </Col>
           </Row>
         </Form.Item>
 
-        <Form.Item label="RAM">
+        <Form.Item
+          label={
+            <span>
+              <Switch
+                defaultChecked
+                size="small"
+                onClick={() => {
+                  this.setState({
+                    toggleRam: !this.state.toggleRam
+                  });
+                }}
+              />{" "}
+              RAM
+            </span>
+          }
+          help={myValidateHelp}
+          validateStatus={myValidateStatus}
+        >
           <Row gutter={8}>
-            <Col span={22}>
+            <Col span={21}>
               {getFieldDecorator("ram", {
                 initialValue: 20
               })(<Slider disabled={this.state.toggleRam} />)}
             </Col>
             <Col span={2}>
-              <Switch defaultChecked 
-                size="small"
-                onClick={() => {
-                  this.setState({ toggleRam: !this.state.toggleRam });
-                }}
-              />
+              {getFieldDecorator("weightRam", {
+                initialValue: this.state.valueRam,
+                rules: [
+                  {
+                    type: "number"
+                  }
+                ]
+              })(
+                <Slider
+                  min={1}
+                  max={10}
+                  disabled={this.state.toggleRam}
+                  onChange={value =>
+                    this.setState({
+                      valueRam: value
+                    })
+                  }
+                />
+              )}
             </Col>
           </Row>
         </Form.Item>
 
-        <Form.Item label="Storage">
+        <Form.Item
+          label={
+            <span>
+              <Switch
+                defaultChecked
+                size="small"
+                onClick={() => {
+                  this.setState({
+                    toggleStorage: !this.state.toggleStorage
+                  });
+                }}
+              />{" "}
+              Storage
+            </span>
+          }
+          help={myValidateHelp}
+          validateStatus={myValidateStatus}
+        >
           <Row gutter={8}>
-            <Col span={22}>
+            <Col span={21}>
               {getFieldDecorator("storage", {
                 initialValue: 30
-              })(<Slider disabled={this.state.toggleStorage}/>)}
+              })(<Slider disabled={this.state.toggleStorage} />)}
             </Col>
             <Col span={2}>
-              <Switch defaultChecked 
-                size="small"
-                onClick={() => {
-                  this.setState({ toggleStorage: !this.state.toggleStorage });
-                }}
-              />
+              {getFieldDecorator("weightStorage", {
+                initialValue: this.state.valueStorage,
+                rules: [
+                  {
+                    type: "number"
+                  }
+                ]
+              })(
+                <Slider
+                  min={1}
+                  max={10}
+                  disabled={this.state.toggleStorage}
+                  onChange={value =>
+                    this.setState({
+                      valueStorage: value
+                    })
+                  }
+                />
+              )}
             </Col>
           </Row>
         </Form.Item>
 
-        <Form.Item label="Number of devices">
+        <Form.Item
+          label={
+            <span>
+              <Switch
+                defaultChecked
+                size="small"
+                onClick={() => {
+                  this.setState({
+                    toggleNumber: !this.state.toggleNumber
+                  });
+                }}
+              />{" "}
+              Number of Devices
+            </span>
+          }
+          help={myValidateHelp}
+          validateStatus={myValidateStatus}
+        >
           <Row gutter={8}>
-            <Col span={22}>
+            <Col span={21}>
               {getFieldDecorator("number", {
                 initialValue: 10,
                 rules: [
@@ -273,22 +527,58 @@ class DiversifyArea extends Component {
                     type: "number"
                   }
                 ]
-              })(<InputNumber min={1} max={100} disabled={this.state.toggleNumber} />)}
+              })(
+                <InputNumber
+                  min={1}
+                  max={100}
+                  disabled={this.state.toggleNumber}
+                />
+              )}
             </Col>
             <Col span={2}>
-              <Switch defaultChecked 
-                size="small"
-                onClick={() => {
-                  this.setState({ toggleNumber: !this.state.toggleNumber });
-                }}
-              />
+              {getFieldDecorator("weightNumber", {
+                initialValue: this.state.valueNumber,
+                rules: [
+                  {
+                    type: "number"
+                  }
+                ]
+              })(
+                <Slider
+                  min={1}
+                  max={10}
+                  disabled={this.state.toggleNumber}
+                  onChange={value =>
+                    this.setState({
+                      valueNumber: value
+                    })
+                  }
+                />
+              )}
             </Col>
           </Row>
         </Form.Item>
 
-        <Form.Item label="Deployment range">
+        <Form.Item
+          label={
+            <span>
+              <Switch
+                defaultChecked
+                size="small"
+                onClick={() => {
+                  this.setState({
+                    toggleRange: !this.state.toggleRange
+                  });
+                }}
+              />{" "}
+              Deployment Range
+            </span>
+          }
+          help={myValidateHelp}
+          validateStatus={myValidateStatus}
+        >
           <Row gutter={8}>
-            <Col span={22}>
+            <Col span={21}>
               {getFieldDecorator("range")(
                 <Slider
                   marks={{
@@ -309,17 +599,30 @@ class DiversifyArea extends Component {
               )}
             </Col>
             <Col span={2}>
-              <Switch defaultChecked 
-                size="small"
-                onClick={() => {
-                  this.setState({ toggleRange: !this.state.toggleRange });
-                }}
-              />
+              {getFieldDecorator("weightRange", {
+                initialValue: this.state.valueRange,
+                rules: [
+                  {
+                    type: "number"
+                  }
+                ]
+              })(
+                <Slider
+                  min={1}
+                  max={10}
+                  disabled={this.state.toggleRange}
+                  onChange={value =>
+                    this.setState({
+                      valueRange: value
+                    })
+                  }
+                />
+              )}
             </Col>
           </Row>
         </Form.Item>
 
-        <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
+        <Form.Item wrapperCol={{ span: 10, offset: 8 }}>
           <Button type="primary" htmlType="submit">
             Diversify
           </Button>
