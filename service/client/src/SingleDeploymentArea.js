@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import axios from "axios";
 import {
   Form,
-  Input,
   Select,
   InputNumber,
   DatePicker,
@@ -12,24 +11,27 @@ import {
   Row,
   Col
 } from "antd";
+import { solve } from "./WeightedProductModelSolver";
 
 const { Option } = Select;
+const { RangePicker } = DatePicker;
 
 class DiversifyArea extends Component {
   constructor(props) {
     super(props);
     this.state = {
       //add if needed
-      valueEnvironment: 5,
-      valueStatus: 5,
-      valueCapability: 5,
-      valueLastActive: 5,
-      valueLastUpdate: 5,
-      valueCpu: 5,
-      valueRam: 5,
-      valueStorage: 5,
-      valueNumber: 5,
-      valueRange: 5,
+      environment: { weight: 5 },
+      status: { weight: 5 },
+      capability: { weight: 5 },
+      lastactive: { weight: 5 },
+      lastupdate: { weight: 5 },
+      cpu: { weight: 5 },
+      ram: { weight: 5 },
+      storage: { weight: 5 },
+      number: { weight: 5 },
+      range: { weight: 5 },
+
       toggleEnvironment: false,
       toggleStatus: false,
       toggleCapability: false,
@@ -40,8 +42,8 @@ class DiversifyArea extends Component {
       toggleStorage: false,
       toggleNumber: false,
       toggleRange: false,
-      myValidateHelp: "Validation help",
-      myValidateStatus: "Validation status"
+      myValidateHelp: "",
+      myValidateStatus: ""
     };
   }
 
@@ -49,8 +51,9 @@ class DiversifyArea extends Component {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        console.log("Received values of form: ", values);
-        console.log("Devices: " + this.props.devices);
+        console.log("Received form values: ", values);
+        console.log("Devices: ", this.props.devices);
+        solve(values, this.props.devices);
       }
     });
   };
@@ -61,6 +64,9 @@ class DiversifyArea extends Component {
     const formItemLayout = {
       labelCol: { span: 8 },
       wrapperCol: { span: 12 }
+    };
+    const rangeConfig = {
+      rules: [{ type: "array", message: "Please select time!" }]
     };
     return (
       <Form {...formItemLayout} onSubmit={this.handleSubmit}>
@@ -84,7 +90,7 @@ class DiversifyArea extends Component {
         >
           <Row gutter={8}>
             <Col span={21}>
-              {getFieldDecorator("environment", {
+              {getFieldDecorator("environment.value", {
                 rules: [
                   {
                     message:
@@ -105,8 +111,8 @@ class DiversifyArea extends Component {
               )}
             </Col>
             <Col span={2}>
-              {getFieldDecorator("weightEnvironment", {
-                initialValue: this.state.valueEnvironment,
+              {getFieldDecorator("environment.weight", {
+                initialValue: this.state.environment.weight,
                 rules: [
                   {
                     type: "number"
@@ -119,7 +125,7 @@ class DiversifyArea extends Component {
                   disabled={this.state.toggleEnvironment}
                   onChange={value =>
                     this.setState({
-                      valueEnvironment: value
+                      environment: { weight: value }
                     })
                   }
                 />
@@ -148,7 +154,7 @@ class DiversifyArea extends Component {
         >
           <Row gutter={8}>
             <Col span={21}>
-              {getFieldDecorator("status", {
+              {getFieldDecorator("status.value", {
                 rules: [
                   {
                     message: "Please select target status(es) for a deployment",
@@ -168,8 +174,8 @@ class DiversifyArea extends Component {
               )}
             </Col>
             <Col span={2}>
-              {getFieldDecorator("weightStatus", {
-                initialValue: this.state.valueStatus,
+              {getFieldDecorator("status.weight", {
+                initialValue: this.state.status.weight,
                 rules: [
                   {
                     type: "number"
@@ -182,7 +188,7 @@ class DiversifyArea extends Component {
                   disabled={this.state.toggleStatus}
                   onChange={value =>
                     this.setState({
-                      valueStatus: value
+                      status: { weight: value }
                     })
                   }
                 />
@@ -211,7 +217,7 @@ class DiversifyArea extends Component {
         >
           <Row gutter={8}>
             <Col span={21}>
-              {getFieldDecorator("capability", {
+              {getFieldDecorator("capability.value", {
                 rules: [
                   {
                     message:
@@ -230,8 +236,8 @@ class DiversifyArea extends Component {
               )}
             </Col>
             <Col span={2}>
-              {getFieldDecorator("weightCapability", {
-                initialValue: this.state.valueCapability,
+              {getFieldDecorator("capability.weight", {
+                initialValue: this.state.capability.weight,
                 rules: [
                   {
                     type: "number"
@@ -244,7 +250,7 @@ class DiversifyArea extends Component {
                   disabled={this.state.toggleCapability}
                   onChange={value =>
                     this.setState({
-                      valueCapability: value
+                      capability: { weight: value }
                     })
                   }
                 />
@@ -273,16 +279,22 @@ class DiversifyArea extends Component {
         >
           <Row gutter={8}>
             <Col span={21}>
-              {getFieldDecorator("lastUpdate")(
-                <DatePicker
-                  onChange={this.onLastUpdateDateChange}
+              {getFieldDecorator("lastupdate.value", {
+                rules: [{ type: "array" }]
+              })(
+                <RangePicker
                   disabled={this.state.toggleLastUpdate}
+                  onChange={value =>
+                    this.setState({
+                      lastupdate: { value: value }
+                    })
+                  }
                 />
               )}
             </Col>
             <Col span={2}>
-              {getFieldDecorator("weightLastUpdate", {
-                initialValue: this.state.valueLastUpdate,
+              {getFieldDecorator("lastupdate.weight", {
+                initialValue: this.state.lastupdate.weight,
                 rules: [
                   {
                     type: "number"
@@ -295,7 +307,7 @@ class DiversifyArea extends Component {
                   disabled={this.state.toggleLastUpdate}
                   onChange={value =>
                     this.setState({
-                      valueLastUpdate: value
+                      lastupdate: { weight: value }
                     })
                   }
                 />
@@ -324,16 +336,20 @@ class DiversifyArea extends Component {
         >
           <Row gutter={8}>
             <Col span={21}>
-              {getFieldDecorator("lastActive")(
-                <DatePicker
-                  onChange={this.onLastActiveDateChange}
+              {getFieldDecorator("lastactive.value")(
+                <RangePicker
                   disabled={this.state.toggleLastActive}
-                />
+                  onChange={value =>
+                    this.setState({
+                      lastactive: { value: value }
+                    })
+                  }
+                />                
               )}
             </Col>
             <Col span={2}>
-              {getFieldDecorator("weightLastActive", {
-                initialValue: this.state.valueLastActive,
+              {getFieldDecorator("lastactive.weight", {
+                initialValue: this.state.lastactive.weight,
                 rules: [
                   {
                     type: "number"
@@ -346,7 +362,7 @@ class DiversifyArea extends Component {
                   disabled={this.state.toggleLastActive}
                   onChange={value =>
                     this.setState({
-                      valueLastActive: value
+                      lastactive: { weight: value }
                     })
                   }
                 />
@@ -375,13 +391,13 @@ class DiversifyArea extends Component {
         >
           <Row gutter={8}>
             <Col span={21}>
-              {getFieldDecorator("cpu", {
+              {getFieldDecorator("cpu.value", {
                 initialValue: 10
               })(<Slider disabled={this.state.toggleCpu} />)}
             </Col>
             <Col span={2}>
-              {getFieldDecorator("weightCpu", {
-                initialValue: this.state.valueCpu,
+              {getFieldDecorator("cpu.weight", {
+                initialValue: this.state.cpu.weight,
                 rules: [
                   {
                     type: "number"
@@ -394,7 +410,7 @@ class DiversifyArea extends Component {
                   disabled={this.state.toggleCpu}
                   onChange={value =>
                     this.setState({
-                      valueCpu: value
+                      cpu: { weight: value }
                     })
                   }
                 />
@@ -423,13 +439,13 @@ class DiversifyArea extends Component {
         >
           <Row gutter={8}>
             <Col span={21}>
-              {getFieldDecorator("ram", {
+              {getFieldDecorator("ram.value", {
                 initialValue: 20
               })(<Slider disabled={this.state.toggleRam} />)}
             </Col>
             <Col span={2}>
-              {getFieldDecorator("weightRam", {
-                initialValue: this.state.valueRam,
+              {getFieldDecorator("ram.weight", {
+                initialValue: this.state.ram.weight,
                 rules: [
                   {
                     type: "number"
@@ -442,7 +458,7 @@ class DiversifyArea extends Component {
                   disabled={this.state.toggleRam}
                   onChange={value =>
                     this.setState({
-                      valueRam: value
+                      ram: { weight: value }
                     })
                   }
                 />
@@ -471,13 +487,13 @@ class DiversifyArea extends Component {
         >
           <Row gutter={8}>
             <Col span={21}>
-              {getFieldDecorator("storage", {
+              {getFieldDecorator("storage.value", {
                 initialValue: 30
               })(<Slider disabled={this.state.toggleStorage} />)}
             </Col>
             <Col span={2}>
-              {getFieldDecorator("weightStorage", {
-                initialValue: this.state.valueStorage,
+              {getFieldDecorator("storage.weight", {
+                initialValue: this.state.storage.weight,
                 rules: [
                   {
                     type: "number"
@@ -490,7 +506,7 @@ class DiversifyArea extends Component {
                   disabled={this.state.toggleStorage}
                   onChange={value =>
                     this.setState({
-                      valueStorage: value
+                      storage: { weight: value }
                     })
                   }
                 />
@@ -519,7 +535,7 @@ class DiversifyArea extends Component {
         >
           <Row gutter={8}>
             <Col span={21}>
-              {getFieldDecorator("number", {
+              {getFieldDecorator("number.value", {
                 initialValue: 10,
                 rules: [
                   {
@@ -536,8 +552,8 @@ class DiversifyArea extends Component {
               )}
             </Col>
             <Col span={2}>
-              {getFieldDecorator("weightNumber", {
-                initialValue: this.state.valueNumber,
+              {getFieldDecorator("number.weight", {
+                initialValue: this.state.number.weight,
                 rules: [
                   {
                     type: "number"
@@ -550,7 +566,7 @@ class DiversifyArea extends Component {
                   disabled={this.state.toggleNumber}
                   onChange={value =>
                     this.setState({
-                      valueNumber: value
+                      number: { weight: value }
                     })
                   }
                 />
@@ -579,7 +595,7 @@ class DiversifyArea extends Component {
         >
           <Row gutter={8}>
             <Col span={21}>
-              {getFieldDecorator("range")(
+              {getFieldDecorator("range.value")(
                 <Slider
                   marks={{
                     0: "0 km",
@@ -595,12 +611,17 @@ class DiversifyArea extends Component {
                     100: "100 km"
                   }}
                   disabled={this.state.toggleRange}
+                  onChange={value =>
+                    this.setState({
+                      range: { value: value }
+                    })
+                  }
                 />
               )}
             </Col>
             <Col span={2}>
-              {getFieldDecorator("weightRange", {
-                initialValue: this.state.valueRange,
+              {getFieldDecorator("range.weight", {
+                initialValue: this.state.range.weight,
                 rules: [
                   {
                     type: "number"
@@ -613,7 +634,7 @@ class DiversifyArea extends Component {
                   disabled={this.state.toggleRange}
                   onChange={value =>
                     this.setState({
-                      valueRange: value
+                      range: { weight: value }
                     })
                   }
                 />
