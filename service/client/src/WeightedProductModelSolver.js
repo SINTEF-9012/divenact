@@ -1,8 +1,8 @@
 import moment from "moment";
 
-const ENV_PRODUCTION = "production";
-const ENV_TESTING = "testing";
-const ENV_SAFEMODE = "safe-mode";
+// const ENV_PRODUCTION = "production";
+// const ENV_TESTING = "testing";
+// const ENV_SAFEMODE = "safe-mode";
 
 function solve(parameters, devices) {
   //console.log(parameters);
@@ -70,8 +70,13 @@ function solve(parameters, devices) {
   });
 
   matchingDevices.sort((a, b) => (a.weight > b.weight ? 1 : -1));
-  matchingDevices.length = number;
-  console.log("Mathcing devices sorted", matchingDevices);
+  if (matchingDevices.length > number) {
+    matchingDevices.length = number;
+  }
+
+  console.log("Matching devices sorted", matchingDevices);
+
+  return matchingDevices;
 }
 
 /**

@@ -10,6 +10,7 @@ import { DeviceArea } from "./DeviceArea";
 import { ControlArea } from "./ControlArea";
 import { ModelArea } from "./ModelArea";
 import SingleDeploymentArea from "./SingleDeploymentArea";
+import MultipleDeploymentArea from "./MultipleDeploymentArea";
 
 const { Footer, Content } = Layout;
 // const { Paragraph } = Typography;
@@ -239,6 +240,25 @@ class App extends Component {
                 }
               >
                 <SingleDeploymentArea
+                  devices={devices}
+                  variants={variants}
+                  deployments={deployments}
+                  activeDeployments={activeDeployments}
+                  appliedDevices={appliedDevices}
+                  deviceTags={deviceTags}
+                  callbackTabChange={this.handleTableChange}
+                />
+              </TabPane>
+              <TabPane
+                key="8"
+                tab={
+                  <span>
+                    <Icon type="control" />
+                    Multiple Deployments
+                  </span>
+                }
+              >
+                <MultipleDeploymentArea
                   devices={devices}
                   deployments={deployments}
                   activeDeployments={activeDeployments}
