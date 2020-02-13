@@ -3,7 +3,6 @@ import axios from "axios";
 import ReactJson from "react-json-view";
 import DeploymentForm from "./DeploymentForm";
 import {
-  PageHeader,
   Layout,
   Steps,
   Table,
@@ -11,20 +10,15 @@ import {
   Tag,
   Form,
   Select,
-  InputNumber,
   DatePicker,
-  Switch,
-  Slider,
   Button,
   Row,
   Col,
   message
 } from "antd";
 import { solve } from "./WeightedProductModelSolver";
+import { VariantArea } from "./ModelContentArea";
 
-const { Option } = Select;
-const { RangePicker } = DatePicker;
-const { Content } = Layout;
 const { Step } = Steps;
 const colors = ["blue", "red", "green"];
 
@@ -81,11 +75,12 @@ class SingleDeploymentArea extends Component {
       //add if needed
       matchingDevices: [],
       devices: this.props.devices,
-      currentStep: 0
+      currentStep: 0,
+      selectedVariantRowKeys: []
     };
   }
 
-  next() {
+  next = () => {
     if (this.state.currentStep == 1) {
       this.props.form.validateFields((err, values) => {
         if (!err) {
@@ -103,21 +98,15 @@ class SingleDeploymentArea extends Component {
     this.setState({ currentStep });
   }
 
-  prev() {
+  prev = () => {
     const currentStep = this.state.currentStep - 1;
     this.setState({ currentStep });
   }
 
-  // handleSubmit = e => {
-  //   e.preventDefault();
-  //   this.props.form.validateFields((err, values) => {
-  //     if (!err) {
-  //       console.log("Received form values: ", values);
-  //       console.log("Devices: ", this.props.devices);
-  //       solve(values, this.props.devices);
-  //     }
-  //   });
-  // };
+  onVariantSelectChange = selectedVariantRowKeys => {
+    console.log('selectedVariantRowKeys changed: ', selectedVariantRowKeys);
+    this.setState({ selectedVariantRowKeys });
+  };  
 
   render() {
     //const { getFieldDecorator } = this.props.form;
@@ -126,9 +115,12 @@ class SingleDeploymentArea extends Component {
     const formItemLayout = {
       labelCol: { span: 8 },
       wrapperCol: { span: 12 }
-    };
-    const rangeConfig = {
-      rules: [{ type: "array", message: "Please select time!" }]
+    };    
+    const { selectedVariantRowKeys } = this.state;
+    const variantRowSelection = {
+      selectedVariantRowKeys,
+      onChange: this.onVariantSelectChange,
+      type: 'radio'
     };
 
     const steps = [
@@ -138,6 +130,7 @@ class SingleDeploymentArea extends Component {
         content: (
           <Table
             //bordered
+            rowSelection={variantRowSelection}
             rowKey={record => record.id}
             size="small"
             dataSource={this.props.variants}
@@ -160,6 +153,7 @@ class SingleDeploymentArea extends Component {
         content: (
           <Table
             //bordered
+            //rowSelection={rowSelection}
             rowKey={record => record.id}
             size="small"
             dataSource={this.state.matchingDevices}
@@ -234,19 +228,8 @@ class SingleDeploymentArea extends Component {
 
   componentDidMount() {
     //add if needed
-  }
-
-  toggleSwitch = element => {
-    console.log(element);
-    this.setState({
-      element
-    });
-  };
-
-  onLastUpdateDateChange = (date, dateString) => {
-    console.log(date, dateString);
-  };
-
+  }  
+ 
   /**
    * Tag selected device (e.g. to put it into a safe mode)
    */

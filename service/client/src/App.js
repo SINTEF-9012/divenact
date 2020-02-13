@@ -260,6 +260,7 @@ class App extends Component {
               >
                 <MultipleDeploymentArea
                   devices={devices}
+                  variants={variants}
                   deployments={deployments}
                   activeDeployments={activeDeployments}
                   appliedDevices={appliedDevices}
