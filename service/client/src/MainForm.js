@@ -62,57 +62,81 @@ class MainForm extends Component {
       //formValues: {
       environment_value: [],
       environment_weight: 5,
+      environment_toggle: false,
+
       status_value: [],
       status_weight: 5,
+      status_toggle: false,
+
       capability_value: [],
       capability_weight: 5,
+      capability_toggle: false,
+
       lastactive_value: [moment(), moment()],
       lastactive_weight: 5,
+      lastactive_toggle: false,
+
       lastupdate_value: [moment(), moment()],
       lastupdate_weight: 5,
+      lastupdate_toggle: false,
+
       network_value: [],
       network_weight: 5,
+      network_toggle: false,
+
       cpu_value: 10,
       cpu_weight: 5,
+      cpu_toggle: false,
+
       ram_value: 10,
       ram_weight: 5,
+      ram_toggle: false,
+
       storage_value: 10,
       storage_weight: 5,
+      storage_toggle: false,
+
       number_value: 10,
       number_weight: 5,
+      number_toggle: false,
+
       range_value: 10,
       range_weight: 5,
+      range_toggle: false,
 
-      toggleEnvironment: false,
-      toggleStatus: false,
-      toggleCapability: false,
-      toggleLastActive: false,
-      toggleLastUpdate: false,
-      toggleCpu: false,
-      toggleRam: false,
-      toggleStorage: false,
-      toggleNumber: false,
-      toggleRange: false,
       myValidateHelp: "",
       myValidateStatus: ""
     };
   }
 
   next = () => {
-    if (this.state.currentStep == 1) {
-      this.props.form.validateFields((err, values) => {
-        if (!err) {
-          console.log("Received form values: ", values);
-          console.log("Devices: ", this.props.devices);
-          let matchingDevices = solve(values, this.props.devices);
-          console.log("Matching devices: ", matchingDevices);
-          this.setState({ matchingDevices: matchingDevices });
-          console.log(this.state.matchingDevices);
+    switch (this.state.currentStep) {
+      case 0:
+        if (
+          Array.isArray(this.state.selectedVariantRowKeys) &&
+          this.state.selectedVariantRowKeys.length > 0
+        ) {
+          const currentStep = this.state.currentStep + 1;
+          this.setState({ currentStep });
         }
-      });
+        break;
+      case 1:
+        this.props.form.validateFields((err, values) => {
+          if (!err) {
+            console.log("Received form values: ", values);
+            console.log("Devices: ", this.props.devices);
+            let matchingDevices = solve(values, this.props.devices);
+            console.log("Matching devices: ", matchingDevices);
+            this.setState({ matchingDevices: matchingDevices });
+            console.log(this.state.matchingDevices);
+          }
+        });
+        break;
+      case 2:
+          this.handleSubmit();
+        break;
+      default:
     }
-    const currentStep = this.state.currentStep + 1;
-    this.setState({ currentStep });
   };
 
   prev = () => {
@@ -123,6 +147,11 @@ class MainForm extends Component {
   onVariantSelectChange = selectedVariantRowKeys => {
     console.log("selectedVariantRowKeys changed: ", selectedVariantRowKeys);
     this.setState({ selectedVariantRowKeys });
+  };
+
+  handleSubmit = e => {
+    e.preventDefault();
+    //TODO deploy
   };
 
   render() {
@@ -180,7 +209,7 @@ class MainForm extends Component {
                     size="small"
                     onClick={() => {
                       this.setState({
-                        toggleEnvironment: !this.state.toggleEnvironment
+                        toggleEnvironment: !this.state.environment_toggle
                       });
                     }}
                   />{" "}
@@ -205,7 +234,7 @@ class MainForm extends Component {
                     <Select
                       mode="multiple"
                       placeholder="Please select target environment(s) for a deployment"
-                      disabled={this.state.toggleEnvironment}
+                      disabled={this.state.environment_toggle}
                       onChange={e => this.setState({ environment_value: e })}
                     >
                       <Option value="production">Production</Option>
@@ -226,7 +255,7 @@ class MainForm extends Component {
                     <Slider
                       min={1}
                       max={10}
-                      disabled={this.state.toggleEnvironment}
+                      disabled={this.state.environment_toggle}
                       onChange={value =>
                         this.setState({
                           environment_weight: value
@@ -244,9 +273,11 @@ class MainForm extends Component {
                   <Switch
                     defaultChecked
                     size="small"
-                    onClick={() => {this.setState({
-                      toggleStatus: !this.state.toggleStatus
-                    })}}
+                    onClick={() => {
+                      this.setState({
+                        toggleStatus: !this.state.status_toggle
+                      });
+                    }}
                   />{" "}
                   Target status
                 </span>
@@ -269,7 +300,7 @@ class MainForm extends Component {
                     <Select
                       mode="multiple"
                       placeholder="Please select target status(es) for a deployment"
-                      disabled={this.state.toggleStatus}
+                      disabled={this.state.status_toggle}
                       onChange={value => this.setState({ status_value: value })}
                     >
                       <Option value="running">Running</Option>
@@ -290,7 +321,7 @@ class MainForm extends Component {
                     <Slider
                       min={1}
                       max={10}
-                      disabled={this.state.toggleStatus}
+                      disabled={this.state.status_toggle}
                       onChange={value =>
                         this.setState({
                           status_weight: value
@@ -308,9 +339,11 @@ class MainForm extends Component {
                   <Switch
                     defaultChecked
                     size="small"
-                    onClick={() => {this.setState({
-                      toggleCapability: !this.state.toggleCapability
-                    })}}
+                    onClick={() => {
+                      this.setState({
+                        toggleCapability: !this.state.capability_toggle
+                      });
+                    }}
                   />{" "}
                   Target capability
                 </span>
@@ -333,8 +366,10 @@ class MainForm extends Component {
                     <Select
                       mode="multiple"
                       placeholder="Please select target device capability(ies) for a deployment"
-                      disabled={this.state.toggleCapability}
-                      onChange={value => this.setState({ capability_value: value })}
+                      disabled={this.state.capability_toggle}
+                      onChange={value =>
+                        this.setState({ capability_value: value })
+                      }
                     >
                       <Option value="sensehat">SenseHat</Option>
                     </Select>
@@ -352,7 +387,7 @@ class MainForm extends Component {
                     <Slider
                       min={1}
                       max={10}
-                      disabled={this.state.toggleCapability}
+                      disabled={this.state.capability_toggle}
                       onChange={value =>
                         this.setState({
                           capability_weight: value
@@ -372,7 +407,7 @@ class MainForm extends Component {
                     size="small"
                     onClick={() => {
                       this.setState({
-                        toggleLastUpdate: !this.state.toggleLastUpdate
+                        toggleLastUpdate: !this.state.lastupdate_toggle
                       });
                     }}
                   />{" "}
@@ -385,11 +420,11 @@ class MainForm extends Component {
               <Row gutter={8}>
                 <Col span={21}>
                   {getFieldDecorator("lastupdate.value", {
-                    initialValue: this.state.lastupdate_value,
+                    initialValue: this.state.lastupdate_value
                     //rules: [{ type: "array" }]
                   })(
                     <RangePicker
-                      disabled={this.state.toggleLastUpdate}
+                      disabled={this.state.lastupdate_toggle}
                       onChange={value =>
                         this.setState({
                           lastupdate_value: value
@@ -410,7 +445,7 @@ class MainForm extends Component {
                     <Slider
                       min={1}
                       max={10}
-                      disabled={this.state.toggleLastUpdate}
+                      disabled={this.state.lastupdate_toggle}
                       onChange={value =>
                         this.setState({
                           lastupdate_weight: value
@@ -430,7 +465,7 @@ class MainForm extends Component {
                     size="small"
                     onClick={() => {
                       this.setState({
-                        toggleLastActive: !this.state.toggleLastActive
+                        toggleLastActive: !this.state.lastactive_toggle
                       });
                     }}
                   />{" "}
@@ -443,11 +478,11 @@ class MainForm extends Component {
               <Row gutter={8}>
                 <Col span={21}>
                   {getFieldDecorator("lastactive.value", {
-                    initialValue: this.state.lastactive_value,
+                    initialValue: this.state.lastactive_value
                     //rules: [{ type: "array" }]
                   })(
                     <RangePicker
-                      disabled={this.state.toggleLastActive}
+                      disabled={this.state.lastactive_toggle}
                       onChange={value =>
                         this.setState({
                           lastactive_value: value
@@ -468,7 +503,7 @@ class MainForm extends Component {
                     <Slider
                       min={1}
                       max={10}
-                      disabled={this.state.toggleLastActive}
+                      disabled={this.state.lastactive_toggle}
                       onChange={value =>
                         this.setState({
                           lastactive_weight: value
@@ -488,7 +523,75 @@ class MainForm extends Component {
                     size="small"
                     onClick={() => {
                       this.setState({
-                        toggleCpu: !this.state.toggleCpu
+                        toggleNetwork: !this.state.toggleNetwork
+                      });
+                    }}
+                  />{" "}
+                  Target network connection
+                </span>
+              }
+              help={myValidateHelp}
+              validateStatus={myValidateStatus}
+            >
+              <Row gutter={8}>
+                <Col span={21}>
+                  {getFieldDecorator("network.value", {
+                    initialValue: this.state.network_value,
+                    rules: [
+                      {
+                        message: "Please select target network connection",
+                        type: "array"
+                      }
+                    ]
+                  })(
+                    <Select
+                      mode="multiple"
+                      placeholder="Please select target network connection"
+                      disabled={this.state.toggleNetwork}
+                      onChange={value =>
+                        this.setState({ network_value: value })
+                      }
+                    >
+                      <Option value="2g">2G</Option>
+                      <Option value="3g">3G</Option>
+                      <Option value="4g">4G</Option>
+                      <Option value="offline">Offline</Option>
+                    </Select>
+                  )}
+                </Col>
+                <Col span={2}>
+                  {getFieldDecorator("network.weight", {
+                    initialValue: this.state.network_weight,
+                    rules: [
+                      {
+                        type: "number"
+                      }
+                    ]
+                  })(
+                    <Slider
+                      min={1}
+                      max={10}
+                      disabled={this.state.toggleNetwork}
+                      onChange={value =>
+                        this.setState({
+                          network_weight: value
+                        })
+                      }
+                    />
+                  )}
+                </Col>
+              </Row>
+            </Form.Item>
+
+            <Form.Item
+              label={
+                <span>
+                  <Switch
+                    defaultChecked
+                    size="small"
+                    onClick={() => {
+                      this.setState({
+                        toggleCpu: !this.state.cpu_toggle
                       });
                     }}
                   />{" "}
@@ -502,8 +605,12 @@ class MainForm extends Component {
                 <Col span={21}>
                   {getFieldDecorator("cpu.value", {
                     initialValue: this.state.cpu_value
-                  })(<Slider disabled={this.state.toggleCpu}
-                    onChange={value => this.setState({ cpu_value: value })} />)}
+                  })(
+                    <Slider
+                      disabled={this.state.cpu_toggle}
+                      onChange={value => this.setState({ cpu_value: value })}
+                    />
+                  )}
                 </Col>
                 <Col span={2}>
                   {getFieldDecorator("cpu.weight", {
@@ -517,7 +624,7 @@ class MainForm extends Component {
                     <Slider
                       min={1}
                       max={10}
-                      disabled={this.state.toggleCpu}
+                      disabled={this.state.cpu_toggle}
                       onChange={value =>
                         this.setState({
                           cpu_weight: value
@@ -537,7 +644,7 @@ class MainForm extends Component {
                     size="small"
                     onClick={() => {
                       this.setState({
-                        toggleRam: !this.state.toggleRam
+                        toggleRam: !this.state.ram_toggle
                       });
                     }}
                   />{" "}
@@ -551,8 +658,12 @@ class MainForm extends Component {
                 <Col span={21}>
                   {getFieldDecorator("ram.value", {
                     initialValue: this.state.ram_value
-                  })(<Slider disabled={this.state.toggleRam}
-                    onChange={value => this.setState({ ram_value: value })} />)}
+                  })(
+                    <Slider
+                      disabled={this.state.ram_toggle}
+                      onChange={value => this.setState({ ram_value: value })}
+                    />
+                  )}
                 </Col>
                 <Col span={2}>
                   {getFieldDecorator("ram.weight", {
@@ -566,7 +677,7 @@ class MainForm extends Component {
                     <Slider
                       min={1}
                       max={10}
-                      disabled={this.state.toggleRam}
+                      disabled={this.state.ram_toggle}
                       onChange={value =>
                         this.setState({
                           ram_weight: value
@@ -586,7 +697,7 @@ class MainForm extends Component {
                     size="small"
                     onClick={() => {
                       this.setState({
-                        toggleStorage: !this.state.toggleStorage
+                        toggleStorage: !this.state.storage_toggle
                       });
                     }}
                   />{" "}
@@ -600,7 +711,14 @@ class MainForm extends Component {
                 <Col span={21}>
                   {getFieldDecorator("storage.value", {
                     initialValue: this.state.storage_value
-                  })(<Slider disabled={this.state.toggleStorage} onChange={value => this.setState({ storage_value: value })} />)}
+                  })(
+                    <Slider
+                      disabled={this.state.storage_toggle}
+                      onChange={value =>
+                        this.setState({ storage_value: value })
+                      }
+                    />
+                  )}
                 </Col>
                 <Col span={2}>
                   {getFieldDecorator("storage.weight", {
@@ -614,7 +732,7 @@ class MainForm extends Component {
                     <Slider
                       min={1}
                       max={10}
-                      disabled={this.state.toggleStorage}
+                      disabled={this.state.storage_toggle}
                       onChange={value =>
                         this.setState({
                           storage_weight: value
@@ -634,7 +752,7 @@ class MainForm extends Component {
                     size="small"
                     onClick={() => {
                       this.setState({
-                        toggleNumber: !this.state.toggleNumber
+                        toggleNumber: !this.state.number_toggle
                       });
                     }}
                   />{" "}
@@ -658,7 +776,7 @@ class MainForm extends Component {
                     <InputNumber
                       min={1}
                       max={100}
-                      disabled={this.state.toggleNumber}
+                      disabled={this.state.number_toggle}
                       onChange={value => this.setState({ number_value: value })}
                     />
                   )}
@@ -675,7 +793,7 @@ class MainForm extends Component {
                     <Slider
                       min={1}
                       max={10}
-                      disabled={this.state.toggleNumber}
+                      disabled={this.state.number_toggle}
                       onChange={value =>
                         this.setState({
                           number_weight: value
@@ -695,7 +813,7 @@ class MainForm extends Component {
                     size="small"
                     onClick={() => {
                       this.setState({
-                        toggleRange: !this.state.toggleRange
+                        toggleRange: !this.state.range_toggle
                       });
                     }}
                   />{" "}
@@ -729,7 +847,7 @@ class MainForm extends Component {
                         90: "90  km",
                         100: "100 km"
                       }}
-                      disabled={this.state.toggleRange}
+                      disabled={this.state.range_toggle}
                       onChange={value =>
                         this.setState({
                           range_value: value
@@ -750,7 +868,7 @@ class MainForm extends Component {
                     <Slider
                       min={1}
                       max={10}
-                      disabled={this.state.toggleRange}
+                      disabled={this.state.range_toggle}
                       onChange={value =>
                         this.setState({
                           range_weight: value

@@ -113,119 +113,76 @@ class SingleDeploymentArea extends Component {
     //const { getFieldDecorator } = this.props.form;
     //const { myValidateHelp, myValidateStatus } = this.state;
       
-    const { currentStep } = this.state;
-    const formItemLayout = {
-      labelCol: { span: 8 },
-      wrapperCol: { span: 12 }
-    };    
-    const { selectedVariantRowKeys } = this.state;
-    const variantRowSelection = {
-      selectedVariantRowKeys,
-      onChange: this.onVariantSelectChange,
-      type: 'radio'
-    };
+    // const { currentStep } = this.state;
+    // const formItemLayout = {
+    //   labelCol: { span: 8 },
+    //   wrapperCol: { span: 12 }
+    // };    
+    // const { selectedVariantRowKeys } = this.state;
+    // const variantRowSelection = {
+    //   selectedVariantRowKeys,
+    //   onChange: this.onVariantSelectChange,
+    //   type: 'radio'
+    // };
 
-    const steps = [
-      {
-        title: "Variants",
-        status: "process",
-        content: (
-          <Table
-            //bordered
-            rowSelection={variantRowSelection}
-            rowKey={record => record.id}
-            size="small"
-            dataSource={this.props.variants}
-            columns={this.variantColumns}
-            pagination={{ pageSize: 50 }}
-            scroll={{ y: true }}
-          />
-        )
-      },
-      {
-        title: "Deployment parameters",
-        status: "process",
-        content: (
-          <DeploymentForm devices={this.props.devices} form={this.props.form} />
-        )
-      },
-      {
-        title: "Affected devices",
-        status: "process",
-        content: (
-          <Table
-            //bordered
-            //rowSelection={rowSelection}
-            rowKey={record => record.id}
-            size="small"
-            dataSource={this.state.matchingDevices}
-            columns={this.deviceColumns}
-            //expandRowByClick={true}
-            expandedRowRender={record => (
-              <span>
-                <ReactJson src={record} enableClipboard={false} />
-                <Table
-                  columns={this.nestedColumns}
-                  dataSource={
-                    this.props.activeDeployments[record.id]
-                      ? Object.values(this.props.activeDeployments[record.id])
-                      : []
-                  }
-                  pagination={false}
-                />
-              </span>
-            )}
-            pagination={{ pageSize: 50 }}
-          />
-        )
-      }
-    ];
+    // const steps = [
+    //   {
+    //     title: "Variants",
+    //     status: "process",
+    //     content: (
+    //       <Table
+    //         //bordered
+    //         rowSelection={variantRowSelection}
+    //         rowKey={record => record.id}
+    //         size="small"
+    //         dataSource={this.props.variants}
+    //         columns={this.variantColumns}
+    //         pagination={{ pageSize: 50 }}
+    //         scroll={{ y: true }}
+    //       />
+    //     )
+    //   },
+    //   {
+    //     title: "Deployment parameters",
+    //     status: "process",
+    //     content: (
+    //       <DeploymentForm devices={this.props.devices} form={this.props.form} />
+    //     )
+    //   },
+    //   {
+    //     title: "Affected devices",
+    //     status: "process",
+    //     content: (
+    //       <Table
+    //         //bordered
+    //         //rowSelection={rowSelection}
+    //         rowKey={record => record.id}
+    //         size="small"
+    //         dataSource={this.state.matchingDevices}
+    //         columns={this.deviceColumns}
+    //         //expandRowByClick={true}
+    //         expandedRowRender={record => (
+    //           <span>
+    //             <ReactJson src={record} enableClipboard={false} />
+    //             <Table
+    //               columns={this.nestedColumns}
+    //               dataSource={
+    //                 this.props.activeDeployments[record.id]
+    //                   ? Object.values(this.props.activeDeployments[record.id])
+    //                   : []
+    //               }
+    //               pagination={false}
+    //             />
+    //           </span>
+    //         )}
+    //         pagination={{ pageSize: 50 }}
+    //       />
+    //     )
+    //   }
+    // ];
 
     return (
-      <MainForm variants={this.props.variants} devices={this.props.devices} tags={this.props.deviceTags} form={this.props.form}/>
-    /*   <div>
-        <Row type="flex" justify="center" style={{ marginBottom: 20 }}>
-          <Col span={20}>
-            <Steps
-              current={currentStep}
-              type="navigation"
-              onChange={this.onStepChange}
-            >
-              {steps.map(item => (
-                <Step key={item.title} title={item.title} />
-              ))}
-            </Steps>
-          </Col>
-        </Row>
-        <Row type="flex" justify="center">
-          <Col span={16}>
-            <div className="steps-content">{steps[currentStep].content}</div>
-            <div className="steps-action" align="center">
-              {currentStep > 0 && (
-                <Button onClick={() => this.prev()}>Previous</Button>
-              )}
-              {currentStep < steps.length - 1 && (
-                <Button
-                  style={{ marginLeft: 8 }}
-                  type="primary"
-                  onClick={() => this.next()}
-                >
-                  Next
-                </Button>
-              )}
-              {currentStep === steps.length - 1 && (
-                <Button
-                  style={{ marginLeft: 8 }}
-                  type="primary"
-                  onClick={() => message.success("Processing complete!")}
-                >
-                  Deploy
-                </Button>
-              )}
-            </div>
-          </Col>
-        </Row>
-      </div> */
+      <MainForm variants={this.props.variants} devices={this.props.devices} tags={this.props.deviceTags} form={this.props.form}/>    
     );
   }
 
