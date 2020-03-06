@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import ReactJson from "react-json-view";
 import DeploymentForm from "./DeploymentForm";
+import MainForm from "./MainForm";
 import {
   Layout,
   Steps,
@@ -111,6 +112,7 @@ class SingleDeploymentArea extends Component {
   render() {
     //const { getFieldDecorator } = this.props.form;
     //const { myValidateHelp, myValidateStatus } = this.state;
+      
     const { currentStep } = this.state;
     const formItemLayout = {
       labelCol: { span: 8 },
@@ -180,7 +182,8 @@ class SingleDeploymentArea extends Component {
     ];
 
     return (
-      <div>
+      <MainForm variants={this.props.variants} devices={this.props.devices} tags={this.props.deviceTags} form={this.props.form}/>
+    /*   <div>
         <Row type="flex" justify="center" style={{ marginBottom: 20 }}>
           <Col span={20}>
             <Steps
@@ -222,7 +225,7 @@ class SingleDeploymentArea extends Component {
             </div>
           </Col>
         </Row>
-      </div>
+      </div> */
     );
   }
 
@@ -254,5 +257,5 @@ class SingleDeploymentArea extends Component {
   };
 }
 
-const MainForm = Form.create({})(SingleDeploymentArea);
-export default MainForm;
+const SingleDeploymentForm = Form.create({})(SingleDeploymentArea);
+export default SingleDeploymentForm;

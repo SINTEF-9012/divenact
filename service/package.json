@@ -19,7 +19,7 @@
     "@types/underscore": "^1.8.18",
     "azure-iothub": "1.9.9",
     "azure-storage": "^2.8.1",
-    "babel-eslint": "10.0.1",
+    "babel-eslint": "10.0.3",
     "body-parser": "^1.19.0",
     "commander": "^2.20.0",
     "dotenv": "^8.0.0",
