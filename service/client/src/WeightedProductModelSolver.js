@@ -50,7 +50,7 @@ function solve(parameters, devices) {
     }
   });
 
-  console.log("Mathcing devices", matchingDevices);
+  console.log("Matching devices", matchingDevices);
 
   //var result = {};
 

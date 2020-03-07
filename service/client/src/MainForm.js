@@ -72,6 +72,10 @@ class MainForm extends Component {
       capability_weight: 5,
       capability_toggle: false,
 
+      network_value: [],
+      network_weight: 5,
+      network_toggle: false,
+
       lastactive_value: [moment(), moment()],
       lastactive_weight: 5,
       lastactive_toggle: false,
@@ -79,10 +83,6 @@ class MainForm extends Component {
       lastupdate_value: [moment(), moment()],
       lastupdate_weight: 5,
       lastupdate_toggle: false,
-
-      network_value: [],
-      network_weight: 5,
-      network_toggle: false,
 
       cpu_value: 10,
       cpu_weight: 5,
@@ -124,16 +124,23 @@ class MainForm extends Component {
         this.props.form.validateFields((err, values) => {
           if (!err) {
             console.log("Received form values: ", values);
+            values = this.removeDisabledFields(values);
+            console.log("Removed from values: ", values);
+
             console.log("Devices: ", this.props.devices);
             let matchingDevices = solve(values, this.props.devices);
             console.log("Matching devices: ", matchingDevices);
             this.setState({ matchingDevices: matchingDevices });
             console.log(this.state.matchingDevices);
+
+            const currentStep = this.state.currentStep + 1;
+            this.setState({ currentStep });
           }
         });
+
         break;
       case 2:
-          this.handleSubmit();
+        this.handleSubmit();
         break;
       default:
     }
@@ -142,11 +149,12 @@ class MainForm extends Component {
   prev = () => {
     const currentStep = this.state.currentStep - 1;
     this.setState({ currentStep });
+    console.log("SELECTED VARIANT", this.state.selectedVariantRowKeys);
   };
 
-  onVariantSelectChange = selectedVariantRowKeys => {
-    console.log("selectedVariantRowKeys changed: ", selectedVariantRowKeys);
-    this.setState({ selectedVariantRowKeys });
+  onVariantSelectChange = value => {
+    console.log("selectedVariantRowKeys changed: ", value);
+    this.setState({ selectedVariantRowKeys: value });
   };
 
   handleSubmit = e => {
@@ -154,9 +162,25 @@ class MainForm extends Component {
     //TODO deploy
   };
 
+  removeDisabledFields = values => {
+    //TODO
+    if (this.state.environment_toggle) delete values.environment;
+    if (this.state.status_toggle) delete values.status;
+    if (this.state.capability_toggle) delete values.capability;
+    if (this.state.network_toggle) delete values.network;
+    if (this.state.lastactive_toggle) delete values.lastactive;
+    if (this.state.lastupdate_toggle) delete values.lastupdate;
+    if (this.state.cpu_toggle) delete values.cpu;
+    if (this.state.ram_toggle) delete values.ram;
+    if (this.state.storage_toggle) delete values.storage;
+    if (this.state.number_toggle) delete values.number;
+    if (this.state.range_toggle) delete values.range;
+    return values;
+  };
+
   render() {
     const { getFieldDecorator } = this.props.form;
-    const { myValidateHelp, myValidateStatus } = this.state;
+    //const { myValidateHelp, myValidateStatus } = this.state;
     const { currentStep } = this.state;
     const formItemLayout = {
       labelCol: { span: 8 },
@@ -167,9 +191,12 @@ class MainForm extends Component {
     };
     const { selectedVariantRowKeys } = this.state;
     const variantRowSelection = {
-      selectedVariantRowKeys,
+      selectedRowKeys: selectedVariantRowKeys,
       onChange: this.onVariantSelectChange,
       type: "radio"
+    };
+    const validateMessages = {
+      required: "'${name}' is a required field!"
     };
 
     const steps = [
@@ -195,38 +222,42 @@ class MainForm extends Component {
         content: (
           <Form
             {...formItemLayout}
+            validateMessages={validateMessages}
             // onSubmit={this.handleSubmit}
             // onChange = { e =>
             //     console.log("changed", e.target.value)
             // }
-            style={{ backgroundColor: "#fff" }}
+            //style={{ backgroundColor: "#fff" }}
           >
             <Form.Item
               label={
                 <span>
                   <Switch
-                    defaultChecked
+                    //defaultChecked
+                    checked={!this.state.environment_toggle}
                     size="small"
                     onClick={() => {
                       this.setState({
-                        toggleEnvironment: !this.state.environment_toggle
+                        environment_toggle: !this.state.environment_toggle
                       });
                     }}
                   />{" "}
                   Target environment
                 </span>
               }
-              help={myValidateHelp}
-              validateStatus={myValidateStatus}
+              //help={myValidateHelp}
+              //validateStatus={myValidateStatus}
             >
               <Row gutter={8}>
                 <Col span={21}>
                   {getFieldDecorator("environment.value", {
+                    hidden: this.state.environment_toggle,
                     initialValue: this.state.environment_value,
                     rules: [
                       {
-                        message:
-                          "Please select target environment(s) for a deployment",
+                        required: true,
+                        // message:
+                        //   "Please select target environment(s) for a deployment",
                         type: "array"
                       }
                     ]
@@ -271,28 +302,30 @@ class MainForm extends Component {
               label={
                 <span>
                   <Switch
-                    defaultChecked
+                    checked={!this.state.status_toggle}
                     size="small"
                     onClick={() => {
                       this.setState({
-                        toggleStatus: !this.state.status_toggle
+                        status_toggle: !this.state.status_toggle
                       });
                     }}
                   />{" "}
                   Target status
                 </span>
               }
-              help={myValidateHelp}
-              validateStatus={myValidateStatus}
+              //help={myValidateHelp}
+              //validateStatus={myValidateStatus}
             >
               <Row gutter={8}>
                 <Col span={21}>
                   {getFieldDecorator("status.value", {
+                    hidden: this.state.status_toggle,
                     initialValue: this.state.status_value,
                     rules: [
                       {
-                        message:
-                          "Please select target status(es) for a deployment",
+                        required: true,
+                        // message:
+                        //   "Please select target status(es) for a deployment",
                         type: "array"
                       }
                     ]
@@ -337,28 +370,30 @@ class MainForm extends Component {
               label={
                 <span>
                   <Switch
-                    defaultChecked
+                    checked={!this.state.capability_toggle}
                     size="small"
                     onClick={() => {
                       this.setState({
-                        toggleCapability: !this.state.capability_toggle
+                        capability_toggle: !this.state.capability_toggle
                       });
                     }}
                   />{" "}
                   Target capability
                 </span>
               }
-              help={myValidateHelp}
-              validateStatus={myValidateStatus}
+              //help={myValidateHelp}
+              //validateStatus={myValidateStatus}
             >
               <Row gutter={8}>
                 <Col span={21}>
                   {getFieldDecorator("capability.value", {
+                    hidden: this.state.capability_toggle,
                     initialValue: this.state.capability_value,
                     rules: [
                       {
-                        message:
-                          "Please select target device capability(ies) for a deployment",
+                        required: true,
+                        // message:
+                        //   "Please select target device capability(ies) for a deployment",
                         type: "array"
                       }
                     ]
@@ -403,25 +438,96 @@ class MainForm extends Component {
               label={
                 <span>
                   <Switch
-                    defaultChecked
+                    checked={!this.state.network_toggle}
                     size="small"
                     onClick={() => {
                       this.setState({
-                        toggleLastUpdate: !this.state.lastupdate_toggle
+                        network_toggle: !this.state.network_toggle
+                      });
+                    }}
+                  />{" "}
+                  Target network connection
+                </span>
+              }
+              //help={myValidateHelp}
+              //validateStatus={myValidateStatus}
+            >
+              <Row gutter={8}>
+                <Col span={21}>
+                  {getFieldDecorator("network.value", {
+                    hidden: this.state.network_toggle,
+                    initialValue: this.state.network_value,
+                    rules: [
+                      {
+                        required: true,
+                        // message: "Please select target network connection",
+                        type: "array"
+                      }
+                    ]
+                  })(
+                    <Select
+                      mode="multiple"
+                      placeholder="Please select target network connection"
+                      disabled={this.state.network_toggle}
+                      onChange={value =>
+                        this.setState({ network_value: value })
+                      }
+                    >
+                      <Option value="2g">2G</Option>
+                      <Option value="3g">3G</Option>
+                      <Option value="4g">4G</Option>
+                      <Option value="offline">Offline</Option>
+                    </Select>
+                  )}
+                </Col>
+                <Col span={2}>
+                  {getFieldDecorator("network.weight", {
+                    initialValue: this.state.network_weight,
+                    rules: [
+                      {
+                        type: "number"
+                      }
+                    ]
+                  })(
+                    <Slider
+                      min={1}
+                      max={10}
+                      disabled={this.state.network_toggle}
+                      onChange={value =>
+                        this.setState({
+                          network_weight: value
+                        })
+                      }
+                    />
+                  )}
+                </Col>
+              </Row>
+            </Form.Item>
+
+            <Form.Item
+              label={
+                <span>
+                  <Switch
+                    checked={!this.state.lastupdate_toggle}
+                    size="small"
+                    onClick={() => {
+                      this.setState({
+                        lastupdate_toggle: !this.state.lastupdate_toggle
                       });
                     }}
                   />{" "}
                   Last Update
                 </span>
               }
-              help={myValidateHelp}
-              validateStatus={myValidateStatus}
+              //help={myValidateHelp}
+              //validateStatus={myValidateStatus}
             >
               <Row gutter={8}>
                 <Col span={21}>
                   {getFieldDecorator("lastupdate.value", {
-                    initialValue: this.state.lastupdate_value
-                    //rules: [{ type: "array" }]
+                    hidden: this.state.lastupdate_toggle,
+                    initialValue: this.state.lastupdate_value,
+                    rules: [{ required: true, type: "array" }]
                   })(
                     <RangePicker
                       disabled={this.state.lastupdate_toggle}
@@ -461,25 +567,26 @@ class MainForm extends Component {
               label={
                 <span>
                   <Switch
-                    defaultChecked
+                    checked={!this.state.lastactive_toggle}
                     size="small"
                     onClick={() => {
                       this.setState({
-                        toggleLastActive: !this.state.lastactive_toggle
+                        lastactive_toggle: !this.state.lastactive_toggle
                       });
                     }}
                   />{" "}
                   Last Active
                 </span>
               }
-              help={myValidateHelp}
-              validateStatus={myValidateStatus}
+              //help={myValidateHelp}
+              //validateStatus={myValidateStatus}
             >
               <Row gutter={8}>
                 <Col span={21}>
                   {getFieldDecorator("lastactive.value", {
-                    initialValue: this.state.lastactive_value
-                    //rules: [{ type: "array" }]
+                    hidden: this.state.lastactive_toggle,
+                    initialValue: this.state.lastactive_value,
+                    rules: [{ required: true, type: "array" }]
                   })(
                     <RangePicker
                       disabled={this.state.lastactive_toggle}
@@ -519,92 +626,26 @@ class MainForm extends Component {
               label={
                 <span>
                   <Switch
-                    defaultChecked
+                    checked={!this.state.cpu_toggle}
                     size="small"
                     onClick={() => {
                       this.setState({
-                        toggleNetwork: !this.state.toggleNetwork
-                      });
-                    }}
-                  />{" "}
-                  Target network connection
-                </span>
-              }
-              help={myValidateHelp}
-              validateStatus={myValidateStatus}
-            >
-              <Row gutter={8}>
-                <Col span={21}>
-                  {getFieldDecorator("network.value", {
-                    initialValue: this.state.network_value,
-                    rules: [
-                      {
-                        message: "Please select target network connection",
-                        type: "array"
-                      }
-                    ]
-                  })(
-                    <Select
-                      mode="multiple"
-                      placeholder="Please select target network connection"
-                      disabled={this.state.toggleNetwork}
-                      onChange={value =>
-                        this.setState({ network_value: value })
-                      }
-                    >
-                      <Option value="2g">2G</Option>
-                      <Option value="3g">3G</Option>
-                      <Option value="4g">4G</Option>
-                      <Option value="offline">Offline</Option>
-                    </Select>
-                  )}
-                </Col>
-                <Col span={2}>
-                  {getFieldDecorator("network.weight", {
-                    initialValue: this.state.network_weight,
-                    rules: [
-                      {
-                        type: "number"
-                      }
-                    ]
-                  })(
-                    <Slider
-                      min={1}
-                      max={10}
-                      disabled={this.state.toggleNetwork}
-                      onChange={value =>
-                        this.setState({
-                          network_weight: value
-                        })
-                      }
-                    />
-                  )}
-                </Col>
-              </Row>
-            </Form.Item>
-
-            <Form.Item
-              label={
-                <span>
-                  <Switch
-                    defaultChecked
-                    size="small"
-                    onClick={() => {
-                      this.setState({
-                        toggleCpu: !this.state.cpu_toggle
+                        cpu_toggle: !this.state.cpu_toggle
                       });
                     }}
                   />{" "}
                   CPU
                 </span>
               }
-              help={myValidateHelp}
-              validateStatus={myValidateStatus}
+              //help={myValidateHelp}
+              //validateStatus={myValidateStatus}
             >
               <Row gutter={8}>
                 <Col span={21}>
                   {getFieldDecorator("cpu.value", {
-                    initialValue: this.state.cpu_value
+                    hidden: this.state.cpu_toggle,
+                    initialValue: this.state.cpu_value,
+                    rules: [{ required: true, type: "number" }]
                   })(
                     <Slider
                       disabled={this.state.cpu_toggle}
@@ -640,24 +681,26 @@ class MainForm extends Component {
               label={
                 <span>
                   <Switch
-                    defaultChecked
+                    checked={!this.state.ram_toggle}
                     size="small"
                     onClick={() => {
                       this.setState({
-                        toggleRam: !this.state.ram_toggle
+                        ram_toggle: !this.state.ram_toggle
                       });
                     }}
                   />{" "}
                   RAM
                 </span>
               }
-              help={myValidateHelp}
-              validateStatus={myValidateStatus}
+              //help={myValidateHelp}
+              //validateStatus={myValidateStatus}
             >
               <Row gutter={8}>
                 <Col span={21}>
                   {getFieldDecorator("ram.value", {
-                    initialValue: this.state.ram_value
+                    hidden: this.state.ram_toggle,
+                    initialValue: this.state.ram_value,
+                    rules: [{ required: true, type: "number" }]
                   })(
                     <Slider
                       disabled={this.state.ram_toggle}
@@ -693,24 +736,26 @@ class MainForm extends Component {
               label={
                 <span>
                   <Switch
-                    defaultChecked
+                    checked={!this.state.storage_toggle}
                     size="small"
                     onClick={() => {
                       this.setState({
-                        toggleStorage: !this.state.storage_toggle
+                        storage_toggle: !this.state.storage_toggle
                       });
                     }}
                   />{" "}
                   Storage
                 </span>
               }
-              help={myValidateHelp}
-              validateStatus={myValidateStatus}
+              //help={myValidateHelp}
+              //validateStatus={myValidateStatus}
             >
               <Row gutter={8}>
                 <Col span={21}>
                   {getFieldDecorator("storage.value", {
-                    initialValue: this.state.storage_value
+                    hidden: this.state.storage_toggle,
+                    initialValue: this.state.storage_value,
+                    rules: [{ required: true, type: "number" }]
                   })(
                     <Slider
                       disabled={this.state.storage_toggle}
@@ -748,27 +793,29 @@ class MainForm extends Component {
               label={
                 <span>
                   <Switch
-                    defaultChecked
+                    checked={!this.state.number_toggle}
                     size="small"
                     onClick={() => {
                       this.setState({
-                        toggleNumber: !this.state.number_toggle
+                        number_toggle: !this.state.number_toggle
                       });
                     }}
                   />{" "}
                   Number of Devices
                 </span>
               }
-              help={myValidateHelp}
-              validateStatus={myValidateStatus}
+              //help={myValidateHelp}
+              //validateStatus={myValidateStatus}
             >
               <Row gutter={8}>
                 <Col span={21}>
                   {getFieldDecorator("number.value", {
+                    hidden: this.state.lnumber_toggle,
                     initialValue: this.state.number_value,
                     rules: [
                       {
-                        message: "Please select the number of target devices",
+                        // message: "Please select the number of target devices",
+                        required: true,
                         type: "number"
                       }
                     ]
@@ -809,26 +856,28 @@ class MainForm extends Component {
               label={
                 <span>
                   <Switch
-                    defaultChecked
+                    checked={!this.state.range_toggle}
                     size="small"
                     onClick={() => {
                       this.setState({
-                        toggleRange: !this.state.range_toggle
+                        range_toggle: !this.state.range_toggle
                       });
                     }}
                   />{" "}
                   Deployment Range
                 </span>
               }
-              help={myValidateHelp}
-              validateStatus={myValidateStatus}
+              //help={myValidateHelp}
+              //validateStatus={myValidateStatus}
             >
               <Row gutter={8}>
                 <Col span={21}>
                   {getFieldDecorator("range.value", {
+                    hidden: this.state.range_toggle,
                     initialValue: this.state.range_value,
                     rules: [
                       {
+                        required: true,
                         type: "number"
                       }
                     ]
@@ -889,7 +938,7 @@ class MainForm extends Component {
         )
       },
       {
-        title: "Affected devices",
+        title: "Matching devices",
         status: "process",
         content: (
           <Table
@@ -920,14 +969,14 @@ class MainForm extends Component {
             </Steps>
           </Col>
         </Row>
-        <Row type="flex" justify="center">
+        <Row type="flex" justify="center" style={{ marginBottom: 40 }}>
           <Col span={16}>
             <div className="steps-content">{steps[currentStep].content}</div>
             <div className="steps-action" align="center">
               {currentStep > 0 && (
                 <Button onClick={() => this.prev()}>Previous</Button>
               )}
-              {currentStep < steps.length - 1 && (
+              {currentStep < 2 && (
                 <Button
                   style={{ marginLeft: 8 }}
                   type="primary"
@@ -936,7 +985,7 @@ class MainForm extends Component {
                   Next
                 </Button>
               )}
-              {currentStep === steps.length - 1 && (
+              {currentStep === 2 && (
                 <Button
                   style={{ marginLeft: 8 }}
                   type="primary"
