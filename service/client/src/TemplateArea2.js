@@ -1,16 +1,35 @@
-import React, { Component } from 'react';
-import { Button, Layout, Col, Row, Table, Popconfirm, Tooltip, Tag } from 'antd';
-import axios from 'axios';
-import { JsonEditor as Editor } from 'jsoneditor-react';
-import 'jsoneditor-react/es/editor.min.css';
+import React, { Component } from "react";
+import {
+  Button,
+  Layout,
+  Col,
+  Row,
+  Table,
+  Popconfirm,
+  Tooltip,
+  Tag
+} from "antd";
+import axios from "axios";
+import { JsonEditor as Editor } from "jsoneditor-react";
+import "jsoneditor-react/es/editor.min.css";
 
 const { Content } = Layout;
-const colors = ["blue","red","green"];
+const colors = [
+  "blue",
+  "red",
+  "green",
+  "blue",
+  "red",
+  "green",
+  "blue",
+  "red",
+  "green"
+];
 
 const ButtonGroup = Button.Group;
 
 // export class EditableTagGroup extends Component {
-  
+
 //   //TODO: save tags on the fly
 //   //TODO: fetch existing tags from the template
 //   state = {
@@ -23,15 +42,15 @@ const ButtonGroup = Button.Group;
 //     console.log(tags);
 //     this.setState({ tags });
 //   }
-  
+
 //   showInput = () => {
 //     this.setState({ inputVisible: true }, () => this.input.focus());
 //   }
-  
+
 //   handleInputChange = (e) => {
 //     this.setState({ inputValue: e.target.value });
 //   }
-  
+
 //   handleInputConfirm = () => {
 //     const state = this.state;
 //     const inputValue = state.inputValue;
@@ -46,7 +65,7 @@ const ButtonGroup = Button.Group;
 //       inputValue: '',
 //     });
 //   }
-  
+
 //   saveInputRef = (input) => {
 //     this.input = input;
 //   }
@@ -89,144 +108,197 @@ const ButtonGroup = Button.Group;
 export class TemplateArea2 extends Component {
   constructor(props) {
     super(props);
-    this.columns = [      
+    this.columns = [
       {
-        title: 'Template ID',
-        dataIndex: 'id',  
-        width: 200,     
-      },      
+        title: "Template ID",
+        dataIndex: "id",
+        width: 200
+      },
       {
-        title: 'Tags',
-        dataIndex: 'tags',
-        render: (text, record) => (          
-          (this.props.templateTags[record.id]) &&
-            Object.keys(this.props.templateTags[record.id]).map((key, i) => <Tag color={colors[i]}>{key}: {this.props.templateTags[record.id][key]}</Tag>)      
-        ),
-        width: 500,
-      },   
+        title: "Tags",
+        dataIndex: "tags",
+        render: (text, record) =>
+          this.props.templateTags[record.id] &&
+          Object.keys(this.props.templateTags[record.id]).map((key, i) => (
+            <Tag color={colors[i]}>
+              {key}: {this.props.templateTags[record.id][key]}
+            </Tag>
+          )),
+        width: 500
+      },
       {
-        title: 'Actions',
+        title: "Actions",
         width: 700,
-        align: 'center',
+        align: "center",
         render: (text, record) => (
-          <span style={{float: 'right'}}>
-            <ButtonGroup size='small' type="dashed">              
-              <Tooltip title="Create variant"><Button type="primary" icon="fork" onClick={() => this.createVariant(record)} ghost /></Tooltip>
-              <Tooltip title="View & Edit"><Button type="primary" icon="edit" onClick={() => this.editTemplate(record)} ghost /></Tooltip>
-              <Tooltip title="Copy"><Button type="primary" icon="copy" onClick={() => this.copyTemplate(record)} ghost /></Tooltip>
-              <Tooltip title="Save "><Button type="primary" icon="save" onClick={()=>{this.saveTemplate()}} ref={this.saveButton} ghost /></Tooltip>
-              <Tooltip title="Delete"><Popconfirm title="Are you sure?" onConfirm={() => this.deleteTemplate(record.id)}><Button type="primary" icon="delete" ghost /></Popconfirm></Tooltip>
+          <span style={{ float: "right" }}>
+            <ButtonGroup size="small" type="dashed">
+              <Tooltip title="Create variant">
+                <Button
+                  type="primary"
+                  icon="fork"
+                  onClick={() => this.createVariant(record)}
+                  ghost
+                />
+              </Tooltip>
+              <Tooltip title="View & Edit">
+                <Button
+                  type="primary"
+                  icon="edit"
+                  onClick={() => this.editTemplate(record)}
+                  ghost
+                />
+              </Tooltip>
+              <Tooltip title="Copy">
+                <Button
+                  type="primary"
+                  icon="copy"
+                  onClick={() => this.copyTemplate(record)}
+                  ghost
+                />
+              </Tooltip>
+              <Tooltip title="Save ">
+                <Button
+                  type="primary"
+                  icon="save"
+                  onClick={() => {
+                    this.saveTemplate();
+                  }}
+                  ref={this.saveButton}
+                  ghost
+                />
+              </Tooltip>
+              <Tooltip title="Delete">
+                <Popconfirm
+                  title="Are you sure?"
+                  onConfirm={() => this.deleteTemplate(record.id)}
+                >
+                  <Button type="primary" icon="delete" ghost />
+                </Popconfirm>
+              </Tooltip>
             </ButtonGroup>
-            </span>          
+          </span>
         )
-      }    
-    ]
-    this.nestedColumnsVariants = [      
+      }
+    ];
+    this.nestedColumnsVariants = [
       {
-        title: 'Existing variants',
-        dataIndex: 'id',
+        title: "Existing variants",
+        dataIndex: "id",
         render: (text, record) => (
-          <Button type="link" icon='branches' onClick={() => this.props.callbackTabChange('2')}>{record.id}</Button>          
-        )      
-      }       
-    ]
+          <Button
+            type="link"
+            icon="branches"
+            onClick={() => this.props.callbackTabChange("2")}
+          >
+            {record.id}
+          </Button>
+        )
+      }
+    ];
     this.state = {
       //templates: [],
       tags: {},
-      forEdit: null, 
+      forEdit: null,
       edited: null
     };
     this.editor = React.createRef();
   }
 
   render() {
+    const { forEdit } = this.state;
 
-    const { forEdit } = this.state; 
-
-    return (      
-        <Layout>
-        <Content>        
+    return (
+      <Layout>
+        <Content>
           <Row>
             <Col span={14}>
               <Table
-                //bordered 
+                //bordered
                 rowKey={record => record.id}
-                size='small'
+                size="small"
                 dataSource={this.props.templates}
                 columns={this.columns}
-                expandedRowRender={record => 
+                expandedRowRender={record => (
                   <span>
-                    <Table columns={this.nestedColumnsVariants} dataSource={this.props.variants.filter((item) => {return item.template === record.id})} pagination={false}/>
-                  </span>} 
+                    <Table
+                      columns={this.nestedColumnsVariants}
+                      dataSource={this.props.variants.filter(item => {
+                        return item.template === record.id;
+                      })}
+                      pagination={false}
+                    />
+                  </span>
+                )}
                 pagination={{ pageSize: 50 }}
-                scroll={{ y: true }}               
+                scroll={{ y: true }}
               />
-            </Col>                      
-            <Col span={10}>                       
-              <Editor history={true} value={forEdit} ref={this.editor} onChange={this.handleChange} />            
-            </Col> 
-          </Row>    
-        </Content>          
-        </Layout>   
+            </Col>
+            <Col span={10}>
+              <Editor
+                history={true}
+                value={forEdit}
+                ref={this.editor}
+                onChange={this.handleChange}
+              />
+            </Col>
+          </Row>
+        </Content>
+      </Layout>
     );
   }
 
   componentDidMount() {
     //this.getTemplates().then(result => { this.setState({ templates: result }) });
-    //this.getTags().then(result => {this.setState({tags: result})});    
+    //this.getTags().then(result => {this.setState({tags: result})});
   }
 
-  handleChange = (value) => {
-    this.setState({edited: value});
-  }  
+  handleChange = value => {
+    this.setState({ edited: value });
+  };
 
-  saveTemplate = async () =>{
+  saveTemplate = async () => {
     let result;
-    const {edited} = this.state
-    if(edited){
-      result = await axios.put(`api/template/${edited.id}`, edited)
-      this.componentDidMount()
-    }
-    else{
+    const { edited } = this.state;
+    if (edited) {
+      result = await axios.put(`api/template/${edited.id}`, edited);
+      this.componentDidMount();
+    } else {
       window.confirm("No change to save");
     }
     return result;
-  }
+  };
 
-  editTemplate = (record) => {
-    this.setState({forEdit: record}, ()=>{
-      this.editor.current.componentDidMount()
-    })    
-  }
+  editTemplate = record => {
+    this.setState({ forEdit: record }, () => {
+      this.editor.current.componentDidMount();
+    });
+  };
 
-  copyTemplate = async (record) => {
-    const id = prompt('Enter new id');
-    
-    if(!id) return;
-    let newTemplate = {...record, id: id};
+  copyTemplate = async record => {
+    const id = prompt("Enter new id");
+
+    if (!id) return;
+    let newTemplate = { ...record, id: id };
     delete newTemplate._id;
     this.props.callbackAddTemplate(newTemplate);
     this.setState({
       //templates: [...this.state.templates, newTemplate],
       edited: newTemplate,
       foredit: newTemplate
-    })
-  }
+    });
+  };
 
-  deleteTemplate = (templateid) => {
+  deleteTemplate = templateid => {
     axios.delete(`api/template/${templateid}`);
-    this.componentDidMount()
-  }  
+    this.componentDidMount();
+  };
 
   //TODO - check if there are any linked variants before deleting
   getVariants = async () => {
-    return (await axios.get('api/variant/')).data;
-  }
+    return (await axios.get("api/variant/")).data;
+  };
 
   //TODO - create new variant for the given template
-  createVariant = () => {    
-    
-  }
-
+  createVariant = () => {};
 }
-

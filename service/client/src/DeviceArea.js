@@ -17,7 +17,17 @@ import axios from "axios";
 
 const { Content } = Layout;
 const ButtonGroup = Button.Group;
-const colors = ["blue", "red", "green"];
+const colors = [
+  "blue",
+  "red",
+  "green",
+  "blue",
+  "red",
+  "green",
+  "blue",
+  "red",
+  "green"
+];
 
 export class DeviceArea extends Component {
   constructor(props) {

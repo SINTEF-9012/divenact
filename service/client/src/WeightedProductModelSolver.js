@@ -80,6 +80,17 @@ function solve(parameters, devices) {
 }
 
 /**
+ * Dummy function without any checks.
+ * 
+ * @param {*} parameters 
+ * @param {*} devices 
+ */
+function solveDummy(parameters, devices) { 
+
+  return devices;
+}
+
+/**
  * Checks if the device date is within the the specified target date range.
  *
  * @param {*} startDate target start date
@@ -114,4 +125,4 @@ function checkNumber(parameter, tag) {
   return numTag >= parameter;
 }
 
-export { solve };
+export { solve, solveDummy };

@@ -18,12 +18,22 @@ import {
 } from "antd";
 import ReactJson from "react-json-view";
 import moment from "moment";
-import { solve } from "./WeightedProductModelSolver";
+import { solve, solveDummy } from "./WeightedProductModelSolver";
 
 const { Option } = Select;
 const { RangePicker } = DatePicker;
 const { Step } = Steps;
-const colors = ["blue", "red", "green"];
+const colors = [
+    "blue",
+    "red",
+    "green",
+    "blue",
+    "red",
+    "green",
+    "blue",
+    "red",
+    "green"
+  ];
 
 class MainForm extends Component {
   constructor(props) {
@@ -45,19 +55,64 @@ class MainForm extends Component {
       }
     ];
     this.deviceColumns = [
-      {
-        title: "Device ID",
-        dataIndex: "id",
-        width: 200,
-        render: (text, record) => <span>{record.id}</span>
-      }
+        {
+            title: "Device ID",
+            dataIndex: "id",
+            width: 200,
+            render: (text, record) =>
+              this.props.deviceTags[record.id].status === "failed" ? (
+                <span>
+                  <Badge status="error" />
+                  {record.id}
+                </span>
+              ) : (
+                <span>
+                  <Badge status="success" />
+                  {record.id}
+                </span>
+              )
+          },
+          {
+            title: "Tags",
+            dataIndex: "tags",
+            render: (text, record) =>
+              this.props.deviceTags[record.id] &&
+              Object.keys(this.props.deviceTags[record.id]).map((key, i) => (
+                <Tag color={colors[i]}>
+                  {key}: {this.props.deviceTags[record.id][key]}
+                </Tag>
+              )),
+            width: 600
+          }
+    //   {
+    //     title: "Device ID",
+    //     dataIndex: "id",
+    //     width: 200,
+    //     render: (text, record) => <span>{record.id}</span>
+    //   }
     ];
+    this.nestedDeviceColumns = [
+        {
+          title: "Active deployments",
+          dataIndex: "id",
+          render: (text, record) => (
+            <Button
+              type="link"
+              icon="deployment-unit"
+              onClick={() => this.props.callbackTabChange("3")}
+            >
+              {record}
+            </Button>
+          )
+        }
+      ];
     this.state = {
       //add if needed
       matchingDevices: [],
       devices: this.props.devices,
       currentStep: 0,
       selectedVariantRowKeys: [],
+      selectedDeviceRowKeys: [],
 
       //formValues: {
       environment_value: [],
@@ -110,6 +165,8 @@ class MainForm extends Component {
   }
 
   next = () => {
+    //const { selectedVariantRowKeys } = this.state;
+    //const { matchingDevices } = this.state;
     switch (this.state.currentStep) {
       case 0:
         if (
@@ -118,29 +175,44 @@ class MainForm extends Component {
         ) {
           const currentStep = this.state.currentStep + 1;
           this.setState({ currentStep });
+        } else {
+          message.warning("Please select a variant!");
         }
         break;
       case 1:
         this.props.form.validateFields((err, values) => {
           if (!err) {
-            console.log("Received form values: ", values);
             values = this.removeDisabledFields(values);
-            console.log("Removed from values: ", values);
+            let devices = solveDummy(values, this.props.devices);
+            this.setState({ matchingDevices: devices });
 
-            console.log("Devices: ", this.props.devices);
-            let matchingDevices = solve(values, this.props.devices);
-            console.log("Matching devices: ", matchingDevices);
-            this.setState({ matchingDevices: matchingDevices });
-            console.log(this.state.matchingDevices);
+            let selected_devices = [];
+            devices.forEach(device => selected_devices.push(device.id));
+            this.setState({ selectedDeviceRowKeys: selected_devices });
+
+            console.log("Matching devices 1: ", devices);
+            console.log("Matching devices 2: ", this.state.matchingDevices);
+            console.log(
+              "Selected matching devices: ",
+              this.state.selectedDeviceRowKeys
+            );
 
             const currentStep = this.state.currentStep + 1;
             this.setState({ currentStep });
+          } else {
+            message.warning("Please specify the deployment parameters!");
           }
         });
 
         break;
       case 2:
-        this.handleSubmit();
+        if (this.state.selectedDeviceRowKeys.length > 0) {
+          //TODO deploy selected variant to selected devices
+          console.log(this.state.selectedDeviceRowKeys.length);
+          this.handleSubmit();
+        } else {
+          message.warning("Please select at least one matching device!");
+        }
         break;
       default:
     }
@@ -157,10 +229,15 @@ class MainForm extends Component {
     this.setState({ selectedVariantRowKeys: value });
   };
 
-  handleSubmit = e => {
-    e.preventDefault();
-    //TODO deploy
+  onDeviceSelectChange = value => {
+    console.log("selectedDeviceRowKeys changed: ", value);
+    this.setState({ selectedDeviceRowKeys: value });
   };
+
+//   handleSubmit = e => {
+//     e.preventDefault();
+//     //TODO deploy selected variant to selected devices
+//   };
 
   removeDisabledFields = values => {
     //TODO
@@ -194,6 +271,12 @@ class MainForm extends Component {
       selectedRowKeys: selectedVariantRowKeys,
       onChange: this.onVariantSelectChange,
       type: "radio"
+    };
+    const { selectedDeviceRowKeys } = this.state;
+    const deviceRowSelection = {
+      selectedRowKeys: selectedDeviceRowKeys,
+      onChange: this.onDeviceSelectChange
+      //type: "radio"
     };
     const validateMessages = {
       required: "'${name}' is a required field!"
@@ -943,11 +1026,27 @@ class MainForm extends Component {
         content: (
           <Table
             //bordered
-            //rowSelection={rowSelection}
+            rowSelection={deviceRowSelection}
             rowKey={record => record.id}
             size="small"
             dataSource={this.state.matchingDevices}
             columns={this.deviceColumns}
+            expandedRowRender={record => (
+                <span>
+                  <ReactJson src={record} enableClipboard={false} />
+                  <Table
+                    columns={this.nestedDeviceColumns}
+                    dataSource={
+                      this.props.activeDeployments[record.id]
+                        ? Object.values(
+                            this.props.activeDeployments[record.id]
+                          )
+                        : []
+                    }
+                    pagination={false}
+                  />
+                </span>
+              )}
             pagination={{ pageSize: 50 }}
           />
         )
@@ -969,10 +1068,14 @@ class MainForm extends Component {
             </Steps>
           </Col>
         </Row>
-        <Row type="flex" justify="center" style={{ marginBottom: 40 }}>
+        <Row type="flex" justify="center">
           <Col span={16}>
             <div className="steps-content">{steps[currentStep].content}</div>
-            <div className="steps-action" align="center">
+            <div
+              className="steps-action"
+              align="center"
+              style={{ marginTop: 20, marginBottom: 40 }}
+            >
               {currentStep > 0 && (
                 <Button onClick={() => this.prev()}>Previous</Button>
               )}
@@ -989,7 +1092,7 @@ class MainForm extends Component {
                 <Button
                   style={{ marginLeft: 8 }}
                   type="primary"
-                  onClick={() => message.success("Processing complete!")}
+                  onClick={() => this.next()}
                 >
                   Deploy
                 </Button>

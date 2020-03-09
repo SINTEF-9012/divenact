@@ -76,8 +76,9 @@ class SingleDeploymentArea extends Component {
       //add if needed
       matchingDevices: [],
       devices: this.props.devices,
-      currentStep: 0,
-      selectedVariantRowKeys: []
+      variants: this.props.variants
+      //currentStep: 0,
+      //selectedVariantRowKeys: []
     };
   }
 
@@ -97,27 +98,41 @@ class SingleDeploymentArea extends Component {
 
     const currentStep = this.state.currentStep + 1;
     this.setState({ currentStep });
-  }
+  };
 
   prev = () => {
     const currentStep = this.state.currentStep - 1;
     this.setState({ currentStep });
-  }
+  };
 
   onVariantSelectChange = selectedVariantRowKeys => {
-    console.log('selectedVariantRowKeys changed: ', selectedVariantRowKeys);
+    console.log("selectedVariantRowKeys changed: ", selectedVariantRowKeys);
     this.setState({ selectedVariantRowKeys });
-  };  
+  };
 
   render() {
+    return (
+      <MainForm
+        variants={this.props.variants}
+        devices={this.props.devices}
+        tags={this.props.deviceTags}
+        form={this.props.form}
+        deployments={this.props.deployments}
+        activeDeployments={this.props.activeDeployments}
+        appliedDevices={this.props.appliedDevices}
+        deviceTags={this.props.deviceTags}
+        callbackTabChange={this.props.callbackTabChange}
+      />
+    );
+
     //const { getFieldDecorator } = this.props.form;
     //const { myValidateHelp, myValidateStatus } = this.state;
-      
+
     // const { currentStep } = this.state;
     // const formItemLayout = {
     //   labelCol: { span: 8 },
     //   wrapperCol: { span: 12 }
-    // };    
+    // };
     // const { selectedVariantRowKeys } = this.state;
     // const variantRowSelection = {
     //   selectedVariantRowKeys,
@@ -180,16 +195,12 @@ class SingleDeploymentArea extends Component {
     //     )
     //   }
     // ];
-
-    return (
-      <MainForm variants={this.props.variants} devices={this.props.devices} tags={this.props.deviceTags} form={this.props.form}/>    
-    );
   }
 
   componentDidMount() {
     //add if needed
-  }  
- 
+  }
+
   /**
    * Tag selected device (e.g. to put it into a safe mode)
    */
