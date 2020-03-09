@@ -1057,7 +1057,7 @@ class MainForm extends Component {
     return (
       <div>
         <Row type="flex" justify="center" style={{ marginBottom: 20 }}>
-          <Col span={20}>
+          <Col span={22}>
             <Steps 
               current={currentStep}
               size="small"
@@ -1070,12 +1070,11 @@ class MainForm extends Component {
           </Col>
         </Row>
         <Row type="flex" justify="center">
-          <Col span={16}>
+          <Col span={22}>
             <div className="steps-content">{steps[currentStep].content}</div>
             <div
               className="steps-action"
               align="center"
-              style={{ marginTop: 20, marginBottom: 40 }}
             >
               {currentStep > 0 && (
                 <Button onClick={() => this.prev()}>Previous</Button>

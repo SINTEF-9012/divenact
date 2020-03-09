@@ -235,12 +235,11 @@ class MultipleDeploymentArea extends Component {
     return (
       <div>
         <Row type="flex" justify="center" style={{ marginBottom: 20 }}>
-          <Col span={20}>
+          <Col span={22}>
             <Steps
               current={currentStep}
               type="navigation"
               onChange={currentStep == 0 ? this.next : this.prev}
-              className="site-navigation-steps"
             >
               {steps.map(item => (
                 <Step key={item.title} title={item.title} />
@@ -249,8 +248,8 @@ class MultipleDeploymentArea extends Component {
           </Col>
         </Row>
         <Row type="flex" justify="center">
-          <Col span={16}>
-            <div className="steps-content">{steps[currentStep].content}</div>
+          <Col span={22}>
+            <div>{steps[currentStep].content}</div>
           </Col>
         </Row>
       </div>
