@@ -208,8 +208,9 @@ class MainForm extends Component {
       case 2:
         if (this.state.selectedDeviceRowKeys.length > 0) {
           //TODO deploy selected variant to selected devices
-          console.log(this.state.selectedDeviceRowKeys.length);
-          this.handleSubmit();
+          //console.log(this.state.selectedDeviceRowKeys.length);
+          message.success("Deployment complete!");
+          //this.handleSubmit;
         } else {
           message.warning("Please select at least one matching device!");
         }
@@ -234,10 +235,10 @@ class MainForm extends Component {
     this.setState({ selectedDeviceRowKeys: value });
   };
 
-//   handleSubmit = e => {
-//     e.preventDefault();
-//     //TODO deploy selected variant to selected devices
-//   };
+  handleSubmit = e => {
+    e.preventDefault();
+    //TODO deploy selected variant to selected devices
+  };
 
   removeDisabledFields = values => {
     //TODO
@@ -1057,10 +1058,10 @@ class MainForm extends Component {
       <div>
         <Row type="flex" justify="center" style={{ marginBottom: 20 }}>
           <Col span={20}>
-            <Steps
+            <Steps 
               current={currentStep}
-              type="navigation"
-              onChange={this.onStepChange}
+              size="small"
+              //onChange={this.next}
             >
               {steps.map(item => (
                 <Step key={item.title} title={item.title} />

@@ -2,7 +2,11 @@ import React, { Component } from "react";
 import axios from "axios";
 import ReactJson from "react-json-view";
 import DeploymentForm from "./DeploymentForm";
+import MainForm from "./MainForm";
 import {
+  Tabs,
+  Icon,
+  Collapse,
   Layout,
   Steps,
   Table,
@@ -19,56 +23,76 @@ import {
 import { solve } from "./WeightedProductModelSolver";
 import { VariantArea } from "./ModelContentArea";
 
+const { Panel } = Collapse;
+const { Option } = Select;
 const { Step } = Steps;
+const { TabPane } = Tabs;
+
 const colors = ["blue", "red", "green"];
 
-class SingleDeploymentArea extends Component {
+function callback(key) {
+  console.log(key);
+}
+
+const text = `
+  A dog is a type of domesticated animal.
+  Known for its loyalty and faithfulness,
+  it can be found as a welcome guest in many households across the world.
+`;
+
+const genExtra = () => (
+  <Icon
+    type="SettingOutlined "
+    onClick={event => {
+      // If you don't want click extra trigger collapse, you can prevent this:
+      event.stopPropagation();
+    }}
+  />
+);
+
+class MultipleDeploymentArea extends Component {
   constructor(props) {
     super(props);
+    this.newTabIndex = 0;
     this.variantColumns = [
       {
         title: "Variant ID",
-        dataIndex: "id"
-      },
+        dataIndex: "id",
+        width: 500
+      }
+    ];
+    this.nestedDeviceColumns = [
       {
-        title: "Template",
-        dataIndex: "template",
+        title: "Matching devices",
+        dataIndex: "id",
         render: (text, record) => (
-          <Button type="link" onClick={() => this.props.callbackTabChange("1")}>
-            {record.template}
+          <Button
+            type="link"
+            icon="branches"
+            onClick={() => this.props.callbackTabChange("2")}
+          >
+            {record.id}
           </Button>
         )
       }
     ];
-    this.deviceColumns = [
+    const panes = [
       {
-        title: "Device ID",
-        dataIndex: "id",
-        width: 200,
-        render: (text, record) =>
-          this.props.deviceTags[record.id].status === "failed" ? (
-            <span>
-              <Badge status="error" />
-              {record.id}
-            </span>
-          ) : (
-            <span>
-              <Badge status="success" />
-              {record.id}
-            </span>
-          )
-      },
-      {
-        title: "Tags",
-        dataIndex: "tags",
-        render: (text, record) =>
-          this.props.deviceTags[record.id] &&
-          Object.keys(this.props.deviceTags[record.id]).map((key, i) => (
-            <Tag color={colors[i]}>
-              {key}: {this.props.deviceTags[record.id][key]}
-            </Tag>
-          )),
-        width: 600
+        title: "Deployment 1",
+        content: (
+          <MainForm
+            variants={this.props.variants}
+            devices={this.props.devices}
+            tags={this.props.deviceTags}
+            form={this.props.form}
+            deployments={this.props.deployments}
+            activeDeployments={this.props.activeDeployments}
+            appliedDevices={this.props.appliedDevices}
+            deviceTags={this.props.deviceTags}
+            callbackTabChange={this.props.callbackTabChange}
+          />
+        ),
+        key: "1"
       }
     ];
     this.state = {
@@ -76,98 +100,128 @@ class SingleDeploymentArea extends Component {
       matchingDevices: [],
       devices: this.props.devices,
       currentStep: 0,
-      selectedVariantRowKeys: []
+      selectedVariantRowKeys: [],
+      expandIconPosition: "left",
+      activeKey: panes[0].key,
+      panes
     };
   }
 
   next = () => {
-    if (this.state.currentStep == 1) {
-      this.props.form.validateFields((err, values) => {
-        if (!err) {
-          console.log("Received form values: ", values);
-          console.log("Devices: ", this.props.devices);
-          let matchingDevices = solve(values, this.props.devices);
-          console.log("Matching devices: ", matchingDevices);
-          this.setState({ matchingDevices: matchingDevices });
-          console.log(this.state.matchingDevices);
-        }
-      });
+    //const { selectedVariantRowKeys } = this.state;
+    //const { matchingDevices } = this.state;
+    switch (this.state.currentStep) {
+      case 0:
+        const currentStep = this.state.currentStep + 1;
+        this.setState({ currentStep });
+        break;
+      case 1:
+        break;
+      default:
     }
-
-    const currentStep = this.state.currentStep + 1;
-    this.setState({ currentStep });
-  }
+  };
 
   prev = () => {
     const currentStep = this.state.currentStep - 1;
     this.setState({ currentStep });
-  }
+  };
 
-  onVariantSelectChange = selectedVariantRowKeys => {
-    console.log('selectedVariantRowKeys changed: ', selectedVariantRowKeys);
-    this.setState({ selectedVariantRowKeys });
-  };  
+  onChange = activeKey => {
+    this.setState({ activeKey });
+  };
+
+  onEdit = (targetKey, action) => {
+    this[action](targetKey);
+  };
+
+  add = () => {
+    const { panes } = this.state;
+    const activeKey = `newTab${this.newTabIndex++}`;
+    panes.push({
+      title: "Deployment " + (panes.length + 1),
+      content: (
+        <MainForm
+          variants={this.props.variants}
+          devices={this.props.devices}
+          tags={this.props.deviceTags}
+          form={this.props.form}
+          deployments={this.props.deployments}
+          activeDeployments={this.props.activeDeployments}
+          appliedDevices={this.props.appliedDevices}
+          deviceTags={this.props.deviceTags}
+          callbackTabChange={this.props.callbackTabChange}
+        />
+      ),
+      key: activeKey
+    });
+    this.setState({ panes, activeKey });
+  };
+
+  remove = targetKey => {
+    let { activeKey } = this.state;
+    let lastIndex;
+    this.state.panes.forEach((pane, i) => {
+      if (pane.key === targetKey) {
+        lastIndex = i - 1;
+      }
+    });
+    const panes = this.state.panes.filter(pane => pane.key !== targetKey);
+    if (panes.length && activeKey === targetKey) {
+      if (lastIndex >= 0) {
+        activeKey = panes[lastIndex].key;
+      } else {
+        activeKey = panes[0].key;
+      }
+    }
+    this.setState({ panes, activeKey });
+  };
 
   render() {
-    //const { getFieldDecorator } = this.props.form;
-    //const { myValidateHelp, myValidateStatus } = this.state;
     const { currentStep } = this.state;
-    const formItemLayout = {
-      labelCol: { span: 8 },
-      wrapperCol: { span: 12 }
-    };    
-    const { selectedVariantRowKeys } = this.state;
-    const variantRowSelection = {
-      selectedVariantRowKeys,
-      onChange: this.onVariantSelectChange
-    };
-
     const steps = [
       {
-        title: "Variants",
+        title: "Configure multiple deployments",
+        status: "process",
+        content: (
+          <Tabs
+            onChange={this.onChange}
+            activeKey={this.state.activeKey}
+            type="editable-card"
+            onEdit={this.onEdit}
+          >
+            {this.state.panes.map(pane => (
+              <TabPane
+                tab={
+                  <span>
+                    <Badge status="processing" />
+                    {pane.title}
+                  </span>
+                }
+                key={pane.key}
+                closable={pane.closable}
+              >
+                {pane.content}
+              </TabPane>
+            ))}
+          </Tabs>
+        )
+      },
+      {
+        title: "Confirm diversification",
         status: "process",
         content: (
           <Table
             //bordered
-            rowSelection={variantRowSelection}
+            //rowSelection={deviceRowSelection}
             rowKey={record => record.id}
             size="small"
             dataSource={this.props.variants}
             columns={this.variantColumns}
-            pagination={{ pageSize: 50 }}
-            scroll={{ y: true }}
-          />
-        )
-      },
-      {
-        title: "Deployment parameters",
-        status: "process",
-        content: (
-          <DeploymentForm devices={this.props.devices} form={this.props.form} />
-        )
-      },
-      {
-        title: "Affected devices",
-        status: "process",
-        content: (
-          <Table
-            //bordered
-            //rowSelection={rowSelection}
-            rowKey={record => record.id}
-            size="small"
-            dataSource={this.state.matchingDevices}
-            columns={this.deviceColumns}
-            //expandRowByClick={true}
             expandedRowRender={record => (
               <span>
-                <ReactJson src={record} enableClipboard={false} />
                 <Table
-                  columns={this.nestedColumns}
-                  dataSource={
-                    this.props.activeDeployments[record.id]
-                      ? Object.values(this.props.activeDeployments[record.id])
-                      : []
-                  }
+                  columns={this.nestedDeviceColumns}
+                  dataSource={this.props.devices.slice(2, 4)} //TODO ALARM!!!
                   pagination={false}
                 />
               </span>
@@ -185,7 +239,8 @@ class SingleDeploymentArea extends Component {
             <Steps
               current={currentStep}
               type="navigation"
-              onChange={this.onStepChange}
+              onChange={currentStep == 0 ? this.next : this.prev}
+              className="site-navigation-steps"
             >
               {steps.map(item => (
                 <Step key={item.title} title={item.title} />
@@ -196,39 +251,48 @@ class SingleDeploymentArea extends Component {
         <Row type="flex" justify="center">
           <Col span={16}>
             <div className="steps-content">{steps[currentStep].content}</div>
-            <div className="steps-action" align="center">
-              {currentStep > 0 && (
-                <Button onClick={() => this.prev()}>Previous</Button>
-              )}
-              {currentStep < steps.length - 1 && (
-                <Button
-                  style={{ marginLeft: 8 }}
-                  type="primary"
-                  onClick={() => this.next()}
-                >
-                  Next
-                </Button>
-              )}
-              {currentStep === steps.length - 1 && (
-                <Button
-                  style={{ marginLeft: 8 }}
-                  type="primary"
-                  onClick={() => message.success("Processing complete!")}
-                >
-                  Deploy
-                </Button>
-              )}
-            </div>
           </Col>
         </Row>
       </div>
     );
   }
 
+  // const { expandIconPosition } = this.state;
+  // return (
+  //   <div>
+  //     <Collapse
+  //       defaultActiveKey={["1"]}
+  //       onChange={callback}
+  //       expandIconPosition={expandIconPosition}
+  //     >
+  //       <Panel header="Deployment 1" key="1" extra={genExtra()}>
+  //       <MainForm
+  //     variants={this.props.variants}
+  //     devices={this.props.devices}
+  //     tags={this.props.deviceTags}
+  //     form={this.props.form}
+  //     deployments={this.props.deployments}
+  //     activeDeployments={this.props.activeDeployments}
+  //     appliedDevices={this.props.appliedDevices}
+  //     deviceTags={this.props.deviceTags}
+  //     callbackTabChange={this.props.callbackTabChange}
+  //   />
+  //       </Panel>
+  //       <Panel header="Deployment 1" key="2" extra={genExtra()}>
+  //         <div>{text}</div>
+  //       </Panel>
+  //       <Panel header="Deployment 1" key="3" extra={genExtra()}>
+  //         <div>{text}</div>
+  //       </Panel>
+  //     </Collapse>
+  //   </div>
+  // );
+  //}
+
   componentDidMount() {
     //add if needed
-  }  
- 
+  }
+
   /**
    * Tag selected device (e.g. to put it into a safe mode)
    */
@@ -253,5 +317,5 @@ class SingleDeploymentArea extends Component {
   };
 }
 
-const MainForm = Form.create({})(SingleDeploymentArea);
-export default MainForm;
+const MultipleDeploymentForm = Form.create({})(MultipleDeploymentArea);
+export default MultipleDeploymentForm;
