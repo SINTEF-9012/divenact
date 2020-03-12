@@ -1,0 +1,6 @@
+deployments:
+  dp0: {compu_lvl: 3, comm_lvl: 2, dp_acc: acc_none, intlmodule: flexible}
+  dp1: {compu_lvl: 2, comm_lvl: 1, dp_acc: tpu, intlmodule: edge}
+devices:
+  dv0: {dv_acc: acc_none, network: 3g, powersource: ac}
+  dv1: {dv_acc: tpu, network: 4g, powersource: battery}
