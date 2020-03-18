@@ -1,5 +1,7 @@
 from z3 import *
+from diversifier import *
 import yaml
+import json
 
 
 all_names = {}
@@ -9,21 +11,27 @@ def add_name(*names):
             raise NameError('Name %s is used' % v)
         all_names[str(v)] = v
 
-solver = Solver()
+solver = Optimize()
 
-with open('./sample_input.yml', 'r') as inputfile:
-  inputstring = inputfile.read()
-inputdata = yaml.load(inputstring)
+inputformat = 'json'
+#inputformat = 'yml'
+with open('./sample_input.%s' % inputformat, 'r') as inputfile:
+    inputstring = inputfile.read()
+
+if inputformat == 'yml':
+    inputdata = yaml.load(inputstring)
+elif inputformat == 'json':
+    inputdata = json.loads(inputstring)
 
 print(inputdata)
 
-####Generate: device and deployment instances ####
-dp_names = [x for x in inputdata['deployments'].keys()]
+dp_names = [x for x in inputdata['deployments'].keys()] + ['nodp']
 dv_names = [x for x in inputdata['devices'].keys()]
-############
+
 
 #Main types and functions
 Deployment, deployments = EnumSort('Deployment', dp_names)
+nodp = deployments[-1]
 Device, devices = EnumSort('Device', dv_names)
 deploy = Function('deploy', Device, Deployment)
 add_name(deploy)
@@ -66,63 +74,40 @@ acclr = Function('acclr', Device, BoolSort())
 add_name(intledge, acclr)
 
 solver.add(
-    ForAll(dvx, 
-        Implies(network(dvx) == n_3g, comm_lvl_dv(dvx) < 3)
-    ),
-    ForAll([dvx],
+    ForAll(dvx, And(
+        Implies(network(dvx) == n_3g, comm_lvl_dv(dvx) < 3),
         Implies(
-            And(deploy(dvx) == dpx, powersource(dvx) == p_battery),
+            powersource(dvx) == p_battery,
             And(compu_lvl_dv(dvx) == 1, comm_lvl_dv(dvx) == 1)
         )
-    ),
-    ForAll([dvx], 
+    )),
+    ForAll([dvx, dpx], Implies(And(deploy(dvx) == dpx, Not(dpx == nodp)), And(
         comm_lvl_dv(dvx) == If(
-            And(intlmodule(deploy(dvx)) == o_flex, intledge(dvx)),
-            comm_lvl(deploy(dvx)) - 1,
-            comm_lvl(deploy(dvx))
-        )
-    ),
-    ForAll([dvx],
+            And(intlmodule(dpx) == o_flex, intledge(dvx)),
+            comm_lvl(dpx) - 1,
+            comm_lvl(dpx)
+        ),
         compu_lvl_dv(dvx) == If(
-            And(intlmodule(deploy(dvx)) == o_flex, Not(intledge(dvx))),
-            compu_lvl(deploy(dvx)) - 1,
+            And(intlmodule(dpx) == o_flex, Not(intledge(dvx))),
+            compu_lvl(dpx) - 1,
             If(
                 acclr(dvx),
-                compu_lvl(deploy(dvx)) - 1,
-                compu_lvl(deploy(dvx))
+                compu_lvl(dpx) - 1,
+                compu_lvl(dpx)
             )
-        )
-    ),
-    ForAll([dvx],
-        Implies(
-            acclr(dvx), 
-            And(
-                intledge(dvx),
-                dv_acc(dvx) == dp_acc(deploy(dvx))
-            )
-        )
-    ),
-    ForAll([dvx],
+        ),
+        Implies(acclr(dvx), And(intledge(dvx), dv_acc(dvx) == dp_acc(dpx))),
         And(
-            Implies(intlmodule(deploy(dvx)) == o_cloud, Not(intledge(dvx))),
-            Implies(intlmodule(deploy(dvx)) == o_edge, intledge(dvx))
+            Implies(intlmodule(dpx) == o_cloud, Not(intledge(dvx))),
+            Implies(intlmodule(dpx) == o_edge, intledge(dvx))
         )
-    )
+    )))
 )
 
-######Generate System instance ######
-# solver.add(
-#     comm_lvl(deployments[0]) == 2,
-#     compu_lvl(deployments[0]) == 3,
-#     comm_lvl(deployments[1]) == 1,
-#     compu_lvl(deployments[1]) == 2,
-#     intlmodule(deployments[1]) == o_edge,
-#     intlmodule(deployments[0]) == o_flex,
-#     dv_acc(devices[1]) == a_tpu,
-#     powersource(devices[1]) == p_battery,
-#     network(devices[0]) == n_3g
-# )
-##############
+#try your best to assign a deployment to every device
+for dv in devices:
+    solver.add_soft(Not(deploy(dv) == nodp), 100)
+
 for group in inputdata.values():
     for k in group:
         element = group[k]
@@ -137,12 +122,21 @@ for group in inputdata.values():
                 constraint = func(host) == val
             print(constraint)
             solver.add(constraint)
+diversifier = Diversifier(solver, deploy, devices, deployments[:-1])
+#diversifier.mini_dep(deployments[0])
+diversifier.penalty_steps()
 
 #solver.add(Distinct(*(deploy(i) for i in devices)))
 if str(solver.check()) == 'sat':
     m = solver.model()
-    print(solver.model())
-    print(m.eval(intledge(devices[1])))
+    print(m)
+    print('========')
+    for v in dv_names:
+        device = all_names[v]
+        deployment = m.eval(deploy(device))
+        print("{0} <- {1}".format(device, deployment))
+    for p in deployments[:-1]:
+        print("{0} is deployed on {1} devices.".format(p, m.eval(diversifier.count_deploy(p))))
 else:
     print(solver.unsat_core())
 
