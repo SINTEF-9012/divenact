@@ -1,17 +1,14 @@
 {
-    "compilerOptions": {
-      "target": "es2015",
-      "module": "commonjs",
-      "moduleResolution": "node",
-      "removeComments": false,
-      "suppressImplicitAnyIndexErrors": true,
-      "sourceMap": true,
-      "rootDir": "src",
-      "outDir": "build",
-      "esModuleInterop": true,
-      "lib": [
-        "es2017",
-        "dom"
-    ],
-    }
+  "compilerOptions": {
+    "target": "es2015",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "removeComments": false,
+    "suppressImplicitAnyIndexErrors": true,
+    "sourceMap": true,
+    "rootDir": "src",
+    "outDir": "build",
+    "esModuleInterop": true,
+    "lib": ["es2017", "dom"]
   }
+}

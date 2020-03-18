@@ -9,6 +9,7 @@ import { DeploymentArea } from "./DeploymentArea";
 import { DeviceArea } from "./DeviceArea";
 import { ControlArea } from "./ControlArea";
 import { ModelArea } from "./ModelArea";
+import {Z3Area} from "./Z3Area";
 import SingleDeploymentArea from "./SingleDeploymentArea";
 import MultipleDeploymentArea from "./MultipleDeploymentArea";
 
@@ -16,7 +17,7 @@ const { Footer, Content } = Layout;
 // const { Paragraph } = Typography;
 const { TabPane } = Tabs;
 
-const operations = <Button type="danger">Extra Action</Button>;
+//const operations = <Button type="danger">Extra Action</Button>;
 
 // var AreaEnum = {
 //   CONTROL: 1,
@@ -126,7 +127,7 @@ class App extends Component {
               activeKey={activeTab}
               ref={this.Tabs}
               onTabClick={tab => this.handleTableChange(tab)}
-              tabBarExtraContent={operations}
+              // tabBarExtraContent={operations}
             >
               <TabPane
                 disabled
@@ -234,6 +235,17 @@ class App extends Component {
                 key="7"
                 tab={
                   <span>
+                    <Icon type="code" />
+                    Z3
+                  </span>
+                }
+              >
+                <Z3Area />
+              </TabPane>
+              <TabPane
+                key="8"
+                tab={
+                  <span>
                     <Icon type="control" />
                     Single Deployment
                   </span>
@@ -250,7 +262,7 @@ class App extends Component {
                 />
               </TabPane>
               <TabPane
-                key="8"
+                key="9"
                 tab={
                   <span>
                     <Icon type="control" />

@@ -10,6 +10,7 @@ app.use(bodyParser.urlencoded({extended:false}));
 app.use(express.static('./client/build/'));
 
 // mount routes
+app.use('/api/z3', require('./z3-route').router);
 app.use('/api/global/', require('./global-route').router);
 app.use('/api/device/', require('./device-route').router);
 app.use('/api/deployment', require('./deployment-route').router);
