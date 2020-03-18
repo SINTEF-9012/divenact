@@ -13,8 +13,8 @@ def add_name(*names):
 
 solver = Optimize()
 
-inputformat = 'json'
-#inputformat = 'yml'
+#inputformat = 'json'
+inputformat = 'yml'
 with open('./sample_input.%s' % inputformat, 'r') as inputfile:
     inputstring = inputfile.read()
 
@@ -42,9 +42,11 @@ dvx, dvy = Consts('dvx dvy', Device)
 dpx, dpy = Consts('dpx dpy', Deployment)
 
 #Tags
-# Environment, (e_preview, e_production, e_default) = EnumSort('Environment', ('preview', 'production', 'default'))
-# dv_env = Function('dv_evn', Device, Environment)
-# dp_env = Function('dp_env', Deployment, Environment)
+Environment, (e_staging, e_production) = EnumSort('Environment', ('staging', 'production'))
+env = Function('env', Device, Environment)
+Version, (v_development, v_preview, v_release) = EnumSort('Version', ('development', 'preview', 'release'))
+vsn = Function('vsn', Deployment, Version)
+add_name(env, e_staging, e_production, vsn, v_development, v_preview, v_release)
 
 Accelerator, (a_tpu, a_gpu, acc_none) = EnumSort('Accelerator', ('tpu', 'gpu', 'acc_none'))
 dv_acc = Function('dv_acc', Device, Accelerator)
@@ -100,13 +102,39 @@ solver.add(
         And(
             Implies(intlmodule(dpx) == o_cloud, Not(intledge(dvx))),
             Implies(intlmodule(dpx) == o_edge, intledge(dvx))
-        )
+        ),
+        Implies(vsn(dpx) == v_development, env(dvx) == e_staging)
     )))
 )
 
+solver.add(Exists(dvx, deploy(dvx) == all_names['dp3']))
 #try your best to assign a deployment to every device
 for dv in devices:
     solver.add_soft(Not(deploy(dv) == nodp), 100)
+
+elem_by_attr = lambda elem, attr, val: [x
+    for x in inputdata[elem]
+    if inputdata[elem][x][attr] == val
+]
+
+dev_by_env = lambda envstr: elem_by_attr('devices', 'env', envstr)
+
+solver.add_soft(Distinct(*[
+    deploy(all_names[dvs]) 
+    for dvs in dev_by_env('staging')
+]), 50)  #Staging devices should be used for different deployments
+
+products = dev_by_env('production')
+num_prod = len(products)
+
+for prev_dep in elem_by_attr('deployments', 'vsn', 'preview'):
+    solver.add_soft(
+        Sum(*[
+            If(deploy(all_names[devstr]) == all_names[prev_dep], 1, 0) 
+            for devstr in products 
+        ]) == num_prod / 10 + 1,
+        20
+    )
 
 for group in inputdata.values():
     for k in group:

@@ -1,27 +1,27 @@
 deployments:
 deployments:
-  dp0: {compu_lvl: 3, comm_lvl: 2, dp_acc: acc_none, intlmodule: flexible}
-  dp1: {compu_lvl: 2, comm_lvl: 1, dp_acc: tpu, intlmodule: edge}
-  dp2: {compu_lvl: 2, comm_lvl: 1, dp_acc: tpu, intlmodule: edge}
-  dp3: {compu_lvl: 2, comm_lvl: 1, dp_acc: tpu, intlmodule: edge}
+  dp0: {vsn: preview, compu_lvl: 3, comm_lvl: 2, dp_acc: acc_none, intlmodule: flexible}
+  dp1: {vsn: release, compu_lvl: 2, comm_lvl: 1, dp_acc: tpu, intlmodule: edge}
+  dp2: {vsn: release, compu_lvl: 2, comm_lvl: 1, dp_acc: tpu, intlmodule: edge}
+  dp3: {vsn: development, compu_lvl: 2, comm_lvl: 1, dp_acc: tpu, intlmodule: edge}
 devices:
-  dv0: {dv_acc: acc_none, network: 3g, powersource: ac}
-  dv1: {dv_acc: tpu, network: 4g, powersource: battery}
-  dv2: {dv_acc: acc_none, network: 4g, powersource: ac}
-  dv3: {dv_acc: acc_none, network: 4g, powersource: ac}
-  dv4: {dv_acc: acc_none, network: 4g, powersource: ac}
-  dv5: {dv_acc: acc_none, network: 4g, powersource: ac}
-  dv6: {dv_acc: acc_none, network: 4g, powersource: ac}
-  dv7: {dv_acc: acc_none, network: 4g, powersource: ac}
-  dv8: {dv_acc: acc_none, network: 4g, powersource: ac}
-  dv9: {dv_acc: acc_none, network: 4g, powersource: ac}
-  dv10: {dv_acc: acc_none, network: 4g, powersource: ac}
-  dv11: {dv_acc: tpu, network: 4g, powersource: battery}
-  dv12: {dv_acc: acc_none, network: 4g, powersource: ac}
-  dv13: {dv_acc: acc_none, network: 4g, powersource: ac}
-  dv14: {dv_acc: acc_none, network: 4g, powersource: ac}
-  dv15: {dv_acc: acc_none, network: 4g, powersource: ac}
-  dv16: {dv_acc: acc_none, network: 4g, powersource: ac}
-  dv17: {dv_acc: acc_none, network: 4g, powersource: ac}
-  dv18: {dv_acc: acc_none, network: 4g, powersource: ac}
-  dv19: {dv_acc: acc_none, network: 4g, powersource: ac}
+  dv0: {env: staging, dv_acc: acc_none, network: 3g, powersource: ac}
+  dv1: {env: production, dv_acc: tpu, network: 4g, powersource: battery}
+  dv2: {env: staging, dv_acc: acc_none, network: 4g, powersource: ac}
+  dv3: {env: production, dv_acc: acc_none, network: 4g, powersource: ac}
+  dv4: {env: production, dv_acc: acc_none, network: 4g, powersource: ac}
+  dv5: {env: production, dv_acc: acc_none, network: 4g, powersource: ac}
+  dv6: {env: production, dv_acc: acc_none, network: 4g, powersource: ac}
+  dv7: {env: production, dv_acc: acc_none, network: 4g, powersource: ac}
+  dv8: {env: production, dv_acc: acc_none, network: 4g, powersource: ac}
+  dv9: {env: production, dv_acc: acc_none, network: 4g, powersource: ac}
+  dv10: {env: production, dv_acc: acc_none, network: 4g, powersource: ac}
+  dv11: {env: production, dv_acc: tpu, network: 4g, powersource: battery}
+  dv12: {env: production, dv_acc: acc_none, network: 4g, powersource: ac}
+  dv13: {env: production, dv_acc: acc_none, network: 4g, powersource: ac}
+  dv14: {env: production, dv_acc: acc_none, network: 4g, powersource: ac}
+  dv15: {env: production, dv_acc: acc_none, network: 4g, powersource: ac}
+  dv16: {env: production, dv_acc: acc_none, network: 4g, powersource: ac}
+  dv17: {env: production, dv_acc: acc_none, network: 4g, powersource: ac}
+  dv18: {env: production, dv_acc: acc_none, network: 4g, powersource: ac}
+  dv19: {env: production, dv_acc: acc_none, network: 4g, powersource: ac}
