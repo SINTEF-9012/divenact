@@ -10,7 +10,7 @@ import {
   Row,
   Col,
 } from "antd";
-import { solve } from "./WeightedProductModelSolver";
+import { solve } from "./solvers/WeightedProductModelSolver";
 
 const { Option } = Select;
 const { RangePicker } = DatePicker;

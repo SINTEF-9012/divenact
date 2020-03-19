@@ -1,5 +1,7 @@
 import React, { Component } from "react";
-import Axios from "axios";
+import axios from "axios";
+import ReactJson from "react-json-view";
+import { Typography } from "antd";
 import {
   Button,
   Layout,
@@ -12,35 +14,51 @@ import {
   Result
 } from "antd";
 
-const { Content } = Layout;
-const ButtonGroup = Button.Group;
 const { Dragger } = Upload;
-const { ErrorBoundary } = Alert;
+const { Title } = Typography;
 
 export class Z3Area extends Component {
   constructor(props) {
-
     super(props);
     this.state = {
-      result: "Result will be displayed here",
+      result: {},
       selectedFile: null,
-      uploading: false
+      uploading: false,
+      json_model: require("./resources/sample_input.json")
     };
   }
+
+  handleEdit = json => {
+    this.setState({ json_model: json.updated_src });
+    console.log(this.state.json_model);
+  };
+
+  // saveJson = json => {
+  //   fs.writeFile("test.txt", json, function(err) {
+  //     if (err) {
+  //       console.log(err);
+  //     }
+  //   });
+  //   fs.readFile("sample_input.json", (err, data) => {
+  //     if (err) throw err;
+  //     console.log(data);
+  //   });
+  // };
 
   handleUpload = () => {
     const { selectedFile } = this.state;
     const formData = new FormData();
-    formData.append("file", selectedFile);
+    //formData.append("files", selectedFile, "script.py");
+    formData.append("json", JSON.stringify(this.state.json_model));
 
     this.setState({
       uploading: true
     });
 
-    Axios.post("/api/z3", formData)
+    axios
+      .post("/api/z3", formData)
       .then(res => {
-        console.log("res", res.data);
-        this.setState({ result: res.data });
+        this.setState({ result: JSON.parse(res.data.replace(/'/g, '"')) });
       })
       .catch(err => {
         console.log("err", err);
@@ -91,39 +109,54 @@ export class Z3Area extends Component {
     };
 
     return (
-      <span>
-        <Row>
-          <Col span={20} offset={2}>
+      <Row gutter={16}>
+        <Col span={10} offset={2}>
+          <Title level={4}>
+            Input JSON model      
+            <Button type="link" onClick={this.handleUpload}> Run</Button>
+          </Title>
+
+          <ReactJson
+            theme="apathy:inverted"
+            src={this.state.json_model}
+            enableClipboard={true}
+            onEdit={this.handleEdit}
+            onAdd={this.handleEdit}
+            onDelete={this.handleEdit}
+          />
+        </Col>
+        <Col span={10}>
+          <Row>
+            <Title level={4}>Results</Title>
+            <ReactJson
+              src={this.state.result}
+              enableClipboard={false}
+              theme="apathy:inverted"
+            />
+          </Row>
+          {/* <Row>
             <Dragger {...z3_props}>
               <p className="ant-upload-drag-icon">
                 <Icon type="inbox" />
               </p>
               <p className="ant-upload-text">
                 Click or drag fyour Z3 python script to upload
-              </p>              
+              </p>
             </Dragger>
-          </Col>
-        </Row>
-        <Row>
-          <Col span={20} offset={2}>
-            <Result
-              icon={<Icon type="code" theme="twoTone" />}
-              title={<Alert message={this.state.result} type="warning" />}
-              extra={
-                <Button
-                  type="primary"
-                  onClick={this.handleUpload}
-                  disabled={this.state.selectedFile === null}
-                  loading={uploading}
-                  style={{ marginTop: 16 }}
-                >
-                  {uploading ? "Uploading" : "Start Upload"}
-                </Button>
-              }
-            />
-          </Col>
-        </Row>
-      </span>
+          </Row>
+          <Row>
+            <Button
+              type="primary"
+              onClick={this.handleUpload}
+              disabled={this.state.selectedFile === null}
+              loading={uploading}
+              style={{ marginTop: 16 }}
+            >
+              {uploading ? "Uploading" : "Submit"}
+            </Button>
+          </Row> */}
+        </Col>
+      </Row>
     );
   }
 

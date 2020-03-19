@@ -18,22 +18,22 @@ import {
 } from "antd";
 import ReactJson from "react-json-view";
 import moment from "moment";
-import { solve, solveDummy } from "./WeightedProductModelSolver";
+import { solve, solveDummy } from "./solvers/WeightedProductModelSolver";
 
 const { Option } = Select;
 const { RangePicker } = DatePicker;
 const { Step } = Steps;
 const colors = [
-    "blue",
-    "red",
-    "green",
-    "blue",
-    "red",
-    "green",
-    "blue",
-    "red",
-    "green"
-  ];
+  "blue",
+  "red",
+  "green",
+  "blue",
+  "red",
+  "green",
+  "blue",
+  "red",
+  "green"
+];
 
 class MainForm extends Component {
   constructor(props) {
@@ -55,57 +55,57 @@ class MainForm extends Component {
       }
     ];
     this.deviceColumns = [
-        {
-            title: "Device ID",
-            dataIndex: "id",
-            width: 200,
-            render: (text, record) =>
-              this.props.deviceTags[record.id].status === "failed" ? (
-                <span>
-                  <Badge status="error" />
-                  {record.id}
-                </span>
-              ) : (
-                <span>
-                  <Badge status="success" />
-                  {record.id}
-                </span>
-              )
-          },
-          {
-            title: "Tags",
-            dataIndex: "tags",
-            render: (text, record) =>
-              this.props.deviceTags[record.id] &&
-              Object.keys(this.props.deviceTags[record.id]).map((key, i) => (
-                <Tag color={colors[i]}>
-                  {key}: {this.props.deviceTags[record.id][key]}
-                </Tag>
-              )),
-            width: 600
-          }
-    //   {
-    //     title: "Device ID",
-    //     dataIndex: "id",
-    //     width: 200,
-    //     render: (text, record) => <span>{record.id}</span>
-    //   }
+      {
+        title: "Device ID",
+        dataIndex: "id",
+        width: 200,
+        render: (text, record) =>
+          this.props.deviceTags[record.id].status === "failed" ? (
+            <span>
+              <Badge status="error" />
+              {record.id}
+            </span>
+          ) : (
+            <span>
+              <Badge status="success" />
+              {record.id}
+            </span>
+          )
+      },
+      {
+        title: "Tags",
+        dataIndex: "tags",
+        render: (text, record) =>
+          this.props.deviceTags[record.id] &&
+          Object.keys(this.props.deviceTags[record.id]).map((key, i) => (
+            <Tag color={colors[i]}>
+              {key}: {this.props.deviceTags[record.id][key]}
+            </Tag>
+          )),
+        width: 600
+      }
+      //   {
+      //     title: "Device ID",
+      //     dataIndex: "id",
+      //     width: 200,
+      //     render: (text, record) => <span>{record.id}</span>
+      //   }
     ];
     this.nestedDeviceColumns = [
-        {
-          title: "Active deployments",
-          dataIndex: "id",
-          render: (text, record) => (
-            <Button
-              type="link"
-              icon="deployment-unit"
-              onClick={() => this.props.callbackTabChange("3")}
-            >
-              {record}
-            </Button>
-          )
-        }
-      ];
+      {
+        title: "Active deployments",
+        dataIndex: "id",
+        render: (text, record) => (
+          <Button
+            type="link"
+            icon="deployment-unit"
+            onClick={() => this.props.callbackTabChange("3")}
+          >
+            {record}
+          </Button>
+        )
+      }
+    ];
     this.state = {
       //add if needed
       matchingDevices: [],
@@ -1033,21 +1033,19 @@ class MainForm extends Component {
             dataSource={this.state.matchingDevices}
             columns={this.deviceColumns}
             expandedRowRender={record => (
-                <span>
-                  <ReactJson src={record} enableClipboard={false} />
-                  <Table
-                    columns={this.nestedDeviceColumns}
-                    dataSource={
-                      this.props.activeDeployments[record.id]
-                        ? Object.values(
-                            this.props.activeDeployments[record.id]
-                          )
-                        : []
-                    }
-                    pagination={false}
-                  />
-                </span>
-              )}
+              <span>
+                <ReactJson src={record} enableClipboard={false} />
+                <Table
+                  columns={this.nestedDeviceColumns}
+                  dataSource={
+                    this.props.activeDeployments[record.id]
+                      ? Object.values(this.props.activeDeployments[record.id])
+                      : []
+                  }
+                  pagination={false}
+                />
+              </span>
+            )}
             pagination={{ pageSize: 50 }}
           />
         )
@@ -1058,7 +1056,7 @@ class MainForm extends Component {
       <div>
         <Row type="flex" justify="center" style={{ marginBottom: 20 }}>
           <Col span={22}>
-            <Steps 
+            <Steps
               current={currentStep}
               size="small"
               //onChange={this.next}
@@ -1072,10 +1070,7 @@ class MainForm extends Component {
         <Row type="flex" justify="center">
           <Col span={22}>
             <div className="steps-content">{steps[currentStep].content}</div>
-            <div
-              className="steps-action"
-              align="center"
-            >
+            <div className="steps-action" align="center">
               {currentStep > 0 && (
                 <Button onClick={() => this.prev()}>Previous</Button>
               )}

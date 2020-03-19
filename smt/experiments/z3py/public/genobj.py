@@ -15,7 +15,7 @@ solver = Optimize()
 
 inputformat = 'json'
 #inputformat = 'yml'
-with open('./public/sample_input.%s' % inputformat, 'r') as inputfile:
+with open('./sample_input.%s' % inputformat, 'r') as inputfile:
     inputstring = inputfile.read()
 
 if inputformat == 'yml':
