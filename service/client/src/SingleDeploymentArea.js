@@ -17,7 +17,7 @@ import {
   Col,
   message
 } from "antd";
-import { solve } from "./WeightedProductModelSolver";
+import { solve } from "./solvers/WeightedProductModelSolver";
 import { VariantArea } from "./ModelContentArea";
 
 const { Step } = Steps;

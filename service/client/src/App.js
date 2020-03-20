@@ -66,7 +66,7 @@ class App extends Component {
       templateTags: {},
       deviceTags: {},
       activeDeployments: {},
-      activeTab: "1"
+      activeTab: "7"
     };
     this.Tabs = React.createRef();
   }
