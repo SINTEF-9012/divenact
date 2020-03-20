@@ -107,7 +107,7 @@ solver.add(
     )))
 )
 
-solver.add(Exists(dvx, deploy(dvx) == all_names['dp3']))
+
 #try your best to assign a deployment to every device
 for dv in devices:
     solver.add_soft(Not(deploy(dv) == nodp), 100)
@@ -116,7 +116,6 @@ elem_by_attr = lambda elem, attr, val: [x
     for x in inputdata[elem]
     if inputdata[elem][x][attr] == val
 ]
-
 dev_by_env = lambda envstr: elem_by_attr('devices', 'env', envstr)
 
 solver.add_soft(Distinct(*[
@@ -124,9 +123,14 @@ solver.add_soft(Distinct(*[
     for dvs in dev_by_env('staging')
 ]), 50)  #Staging devices should be used for different deployments
 
+#All development versions should be deployed to a device
+for devlp in elem_by_attr('deployments', 'vsn', 'development'):
+    solver.add_soft(Exists(dvx, deploy(dvx) == all_names[devlp]), 30)
+
 products = dev_by_env('production')
 num_prod = len(products)
 
+# Pick up 10% production devices to deploy preview version (like A/B Testing)
 for prev_dep in elem_by_attr('deployments', 'vsn', 'preview'):
     solver.add_soft(
         Sum(*[
@@ -136,6 +140,7 @@ for prev_dep in elem_by_attr('deployments', 'vsn', 'preview'):
         20
     )
 
+#Generate all the attribute values
 for group in inputdata.values():
     for k in group:
         element = group[k]
