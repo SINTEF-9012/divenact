@@ -23,8 +23,8 @@ var upload = multer({ storage: storage });
 
 router.post("/", upload.any(), function(req, res) {
   console.log("Z3 invoked!");
-  console.log(req.body.json);
-  console.log(__dirname);
+  //console.log(req.body.json);
+  //console.log(__dirname);
   fs.writeFileSync('./public/sample_input.json', req.body.json);
 
   var spawn = require("child_process").spawn;

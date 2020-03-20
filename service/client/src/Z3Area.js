@@ -58,7 +58,8 @@ export class Z3Area extends Component {
     axios
       .post("/api/z3", formData)
       .then(res => {
-        this.setState({ result: res.data}) //JSON.parse(res.data.replace(/'/g, '"')) });
+        console.log("res.data", res.data);
+        this.setState({ result: res.data });
       })
       .catch(err => {
         console.log("err", err);
