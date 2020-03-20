@@ -3,6 +3,8 @@ from diversifier import *
 import yaml
 import json
 
+#DEBUG = True # load yml, print results for debuging purpose, and result in a yaml file
+DEBUG = False  # load JSON, clean stdout with only json output
 
 all_names = {}
 def add_name(*names):
@@ -13,17 +15,17 @@ def add_name(*names):
 
 solver = Optimize()
 
-inputformat = 'json'
-#inputformat = 'yml'
-with open('./public/sample_input.%s' % inputformat, 'r') as inputfile:
-    inputstring = inputfile.read()
-
-if inputformat == 'yml':
+if DEBUG:
+    with open('./sample_input.yml', 'r') as inputfile:
+        inputstring = inputfile.read()
     inputdata = yaml.load(inputstring)
-elif inputformat == 'json':
+else:
+    with open('./public/sample_input.json', 'r') as inputfile:
+        inputstring = inputfile.read()
     inputdata = json.loads(inputstring)
 
-print(inputdata)
+if DEBUG:
+    print(inputdata)
 
 dp_names = [x for x in inputdata['deployments'].keys()] + ['nodp']
 dv_names = [x for x in inputdata['devices'].keys()]
@@ -107,7 +109,7 @@ solver.add(
     )))
 )
 
-solver.add(Exists(dvx, deploy(dvx) == all_names['dp3']))
+
 #try your best to assign a deployment to every device
 for dv in devices:
     solver.add_soft(Not(deploy(dv) == nodp), 100)
@@ -116,7 +118,6 @@ elem_by_attr = lambda elem, attr, val: [x
     for x in inputdata[elem]
     if inputdata[elem][x][attr] == val
 ]
-
 dev_by_env = lambda envstr: elem_by_attr('devices', 'env', envstr)
 
 solver.add_soft(Distinct(*[
@@ -124,9 +125,14 @@ solver.add_soft(Distinct(*[
     for dvs in dev_by_env('staging')
 ]), 50)  #Staging devices should be used for different deployments
 
+#All development versions should be deployed to a device
+for devlp in elem_by_attr('deployments', 'vsn', 'development'):
+    solver.add_soft(Exists(dvx, deploy(dvx) == all_names[devlp]), 30)
+
 products = dev_by_env('production')
 num_prod = len(products)
 
+# Pick up 10% production devices to deploy preview version (like A/B Testing)
 for prev_dep in elem_by_attr('deployments', 'vsn', 'preview'):
     solver.add_soft(
         Sum(*[
@@ -136,6 +142,7 @@ for prev_dep in elem_by_attr('deployments', 'vsn', 'preview'):
         20
     )
 
+#Generate all the attribute values
 for group in inputdata.values():
     for k in group:
         element = group[k]
@@ -148,23 +155,43 @@ for group in inputdata.values():
                 constraint = func(host) == all_names[val]
             else:
                 constraint = func(host) == val
-            print(constraint)
+            #print(constraint)
             solver.add(constraint)
 diversifier = Diversifier(solver, deploy, devices, deployments[:-1])
 #diversifier.mini_dep(deployments[0])
 diversifier.penalty_steps()
 
-#solver.add(Distinct(*(deploy(i) for i in devices)))
+def put_result(m, group, elem, func):
+    output_obj = inputdata[group][elem]
+    val = m.eval(all_names[func](all_names[elem]))
+    if isinstance(val, BoolRef):
+        val = str(val) == 'True'
+    elif isinstance(val, IntNumRef):
+        val = int(str(val))
+    else:
+        val = str(val)
+    output_obj[func] = val
+
 if str(solver.check()) == 'sat':
     m = solver.model()
-    print(m)
-    print('========')
-    for v in dv_names:
-        device = all_names[v]
-        deployment = m.eval(deploy(device))
-        print("{0} <- {1}".format(device, deployment))
-    for p in deployments[:-1]:
-        print("{0} is deployed on {1} devices.".format(p, m.eval(diversifier.count_deploy(p))))
+    for func in ['deploy', 'acclr', 'intledge']:
+        for dev in inputdata['devices']:
+            put_result(m, 'devices', dev, func)
+    for dep in inputdata['deployments']:
+        devs = [str(x) for x in devices if str(m.eval(deploy(x))) == dep]
+        inputdata['deployments'][dep]['deployed'] = devs
+    if DEBUG:
+        print(m)
+        for v in dv_names:
+            device = all_names[v]
+            deployment = m.eval(deploy(device))
+            print("{0} <- {1}".format(device, deployment))
+        for p in deployments[:-1]:
+            print("{0} is deployed on {1} devices.".format(p, m.eval(diversifier.count_deploy(p))))
+        with open('./output.json', 'w') as outfile:
+            json.dump(inputdata, outfile, indent=2)
+    else:
+        print(json.dumps(inputdata, indent=2))
 else:
     print(solver.unsat_core())
 

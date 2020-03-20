@@ -8,7 +8,7 @@ var spawn = require("child_process").spawn;
 // E.g : http://localhost:3000/name?firstname=Mike&lastname=Will 
 // so, first name = Mike and last name = Will 
 var process = spawn('python', ["../../public/genobj.py"]);
-console.log(__dirname);
+//console.log(__dirname);
 process.stdout.on('data', (data) => {
     // Do something with the data returned from python script
     console.log(data.toString());

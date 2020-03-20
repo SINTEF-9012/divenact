@@ -3,8 +3,8 @@ from diversifier import *
 import yaml
 import json
 
-DEBUG = True # load yml, print results for debuging purpose, and result in a yaml file
-# DEBUG = False  # load JSON, clean stdout with only json output
+#DEBUG = True # load yml, print results for debuging purpose, and result in a yaml file
+DEBUG = False  # load JSON, clean stdout with only json output
 
 all_names = {}
 def add_name(*names):
@@ -20,7 +20,7 @@ if DEBUG:
         inputstring = inputfile.read()
     inputdata = yaml.load(inputstring)
 else:
-    with open('./public/sample_input.json', 'r') as inputfile:
+    with open('./sample_input.json', 'r') as inputfile:
         inputstring = inputfile.read()
     inputdata = json.loads(inputstring)
 
