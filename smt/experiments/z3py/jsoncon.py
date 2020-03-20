@@ -1,7 +1,7 @@
 import json
 import yaml
 
-with open('./sample_input_simpliest.yml', 'r') as inputfile:
+with open('./sample_input.yml', 'r') as inputfile:
   inputstring = inputfile.read()
 inputdata = yaml.load(inputstring)
 
