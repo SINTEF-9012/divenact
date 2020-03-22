@@ -58,8 +58,25 @@ solver.addEditVariable(suggestedRange, kiwi.Strength.strong);
 solver.suggestValue(suggestedRange, 3);
 
 // Create and add a constraint
-solver.addConstraint(new kiwi.Constraint(new kiwi.Expression([-1,suggestedRange], 3), kiwi.Operator.Eq)); //suggested range is less than or equal to 3
-solver.addConstraint(new kiwi.Constraint(new kiwi.Expression([-1,number1], [-1,number2], [-1,number3], [-1,number4], [-1,number5], 5), kiwi.Operator.Ge));
+solver.addConstraint(
+  new kiwi.Constraint(
+    new kiwi.Expression([-1, suggestedRange], 3),
+    kiwi.Operator.Eq
+  )
+); //suggested range is less than or equal to 3
+solver.addConstraint(
+  new kiwi.Constraint(
+    new kiwi.Expression(
+      [-1, number1],
+      [-1, number2],
+      [-1, number3],
+      [-1, number4],
+      [-1, number5],
+      5
+    ),
+    kiwi.Operator.Ge
+  )
+);
 
 // Solve the constraints
 solver.updateVariables();

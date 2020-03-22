@@ -4,17 +4,12 @@ import ReactJson from "react-json-view";
 import { Typography } from "antd";
 import {
   Button,
-  Layout,
   Col,
   Row,
   Upload,
-  message,
-  Icon,
-  Alert,
-  Result
+  message
 } from "antd";
 
-const { Dragger } = Upload;
 const { Title } = Typography;
 
 export class Z3Area extends Component {
@@ -32,18 +27,6 @@ export class Z3Area extends Component {
     this.setState({ json_model: json.updated_src });
     console.log(this.state.json_model);
   };
-
-  // saveJson = json => {
-  //   fs.writeFile("test.txt", json, function(err) {
-  //     if (err) {
-  //       console.log(err);
-  //     }
-  //   });
-  //   fs.readFile("sample_input.json", (err, data) => {
-  //     if (err) throw err;
-  //     console.log(data);
-  //   });
-  // };
 
   handleUpload = () => {
     const { selectedFile } = this.state;
@@ -113,8 +96,11 @@ export class Z3Area extends Component {
       <Row gutter={16}>
         <Col span={10} offset={2}>
           <Title level={4}>
-            Input JSON model      
-            <Button type="link" onClick={this.handleUpload}> Run</Button>
+            Input JSON model
+            <Button type="link" onClick={this.handleUpload}>
+              {" "}
+              Run
+            </Button>
           </Title>
 
           <ReactJson

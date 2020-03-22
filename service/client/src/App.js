@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import axios from "axios";
-import { Button, Layout, Tabs, Icon } from "antd";
+import { Layout, Tabs, Icon } from "antd";
 
 import { TemplateArea2 } from "./TemplateArea2";
 import { VariantArea2 } from "./VariantArea2";
@@ -9,46 +9,12 @@ import { DeploymentArea } from "./DeploymentArea";
 import { DeviceArea } from "./DeviceArea";
 import { ControlArea } from "./ControlArea";
 import { ModelArea } from "./ModelArea";
-import {Z3Area} from "./Z3Area";
+import { Z3Area } from "./Z3Area";
 import SingleDeploymentArea from "./SingleDeploymentArea";
 import MultipleDeploymentArea from "./MultipleDeploymentArea";
 
 const { Footer, Content } = Layout;
-// const { Paragraph } = Typography;
 const { TabPane } = Tabs;
-
-//const operations = <Button type="danger">Extra Action</Button>;
-
-// var AreaEnum = {
-//   CONTROL: 1,
-//   MODEL: 2,
-//   TEMPLATE: 3,
-//   VARIANT: 4,
-//   DEPLOYMENT: 5,
-//   properties: {
-//     1: {name: "control", value: 1, code: "C"},
-//     2: {name: "model", value: 2, code: "M"},
-//     3: {name: "template", value: 3, code: "T"},
-//     4: {name: "variant", value: 4, code: "V"},
-//     5: {name: "deployment", value: 5, code: "R"}
-//   }
-// };
-
-// class Option1 extends Component{
-//   render(){
-//     return(
-//       <div>I'm One</div>
-//     )
-//   }
-// }
-
-// class Option2 extends Component{
-//   render(){
-//     return(
-//       <div>I'm Two</div>
-//     )
-//   }
-// }
 
 class App extends Component {
   constructor(props) {

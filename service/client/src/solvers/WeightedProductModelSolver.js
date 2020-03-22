@@ -1,13 +1,6 @@
 import moment from "moment";
 
-// const ENV_PRODUCTION = "production";
-// const ENV_TESTING = "testing";
-// const ENV_SAFEMODE = "safe-mode";
-
 function solve(parameters, devices) {
-  //console.log(parameters);
-  //console.log(devices);
-
   var number = parseInt(parameters.number.value);
   delete parameters.number;
 
@@ -81,12 +74,11 @@ function solve(parameters, devices) {
 
 /**
  * Dummy function without any checks.
- * 
- * @param {*} parameters 
- * @param {*} devices 
+ *
+ * @param {*} parameters
+ * @param {*} devices
  */
-function solveDummy(parameters, devices) { 
-
+function solveDummy(parameters, devices) {
   return devices;
 }
 

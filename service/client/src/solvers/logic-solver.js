@@ -1,21 +1,21 @@
-var Logic = require('logic-solver');
+var Logic = require("logic-solver");
 
 var solver = new Logic.Solver();
 
 var device1 = {
-    "range": 1,
-    "device1": 1,
-    "count": 1
+  range: 1,
+  device1: 1,
+  count: 1
 };
 var device2 = {
-    "range": 1,
-    "device2": 1,
-    "count": 1
+  range: 1,
+  device2: 1,
+  count: 1
 };
 var device3 = {
-    "range": 1,
-    "device3": 1,
-    "count": 1
+  range: 1,
+  device3: 1,
+  count: 1
 };
 
 solver.require(Logic.atMostOne(device1, device2));

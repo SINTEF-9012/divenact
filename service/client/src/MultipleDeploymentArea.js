@@ -1,30 +1,19 @@
 import React, { Component } from "react";
 import axios from "axios";
-import ReactJson from "react-json-view";
-import DeploymentForm from "./DeploymentForm";
 import MainForm from "./MainForm";
 import {
   Tabs,
   Icon,
   Collapse,
-  Layout,
   Steps,
   Table,
   Badge,
-  Tag,
   Form,
   Select,
-  DatePicker,
   Button,
   Row,
-  Col,
-  message
+  Col
 } from "antd";
-import { solve } from "./solvers/WeightedProductModelSolver";
-import { VariantArea } from "./ModelContentArea";
-
-const { Panel } = Collapse;
-const { Option } = Select;
 const { Step } = Steps;
 const { TabPane } = Tabs;
 

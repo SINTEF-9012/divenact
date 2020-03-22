@@ -1,6 +1,5 @@
 // copied from https://github.com/lo-enterprise/bkp
 // need to see the license
-
 module.exports.Bounded = function(data, maxWeight) {
   var m = [[0]]; // maximum pack value found so far
   var b = [[0]]; // best combination found so far

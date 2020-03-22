@@ -1,26 +1,9 @@
 import React, { Component } from "react";
 import axios from "axios";
-import ReactJson from "react-json-view";
-import DeploymentForm from "./DeploymentForm";
 import MainForm from "./MainForm";
-import {
-  Layout,
-  Steps,
-  Table,
-  Badge,
-  Tag,
-  Form,
-  Select,
-  DatePicker,
-  Button,
-  Row,
-  Col,
-  message
-} from "antd";
+import { Badge, Tag, Form, Button } from "antd";
 import { solve } from "./solvers/WeightedProductModelSolver";
-import { VariantArea } from "./ModelContentArea";
 
-const { Step } = Steps;
 const colors = ["blue", "red", "green"];
 
 class SingleDeploymentArea extends Component {
@@ -124,77 +107,6 @@ class SingleDeploymentArea extends Component {
         callbackTabChange={this.props.callbackTabChange}
       />
     );
-
-    //const { getFieldDecorator } = this.props.form;
-    //const { myValidateHelp, myValidateStatus } = this.state;
-
-    // const { currentStep } = this.state;
-    // const formItemLayout = {
-    //   labelCol: { span: 8 },
-    //   wrapperCol: { span: 12 }
-    // };
-    // const { selectedVariantRowKeys } = this.state;
-    // const variantRowSelection = {
-    //   selectedVariantRowKeys,
-    //   onChange: this.onVariantSelectChange,
-    //   type: 'radio'
-    // };
-
-    // const steps = [
-    //   {
-    //     title: "Variants",
-    //     status: "process",
-    //     content: (
-    //       <Table
-    //         //bordered
-    //         rowSelection={variantRowSelection}
-    //         rowKey={record => record.id}
-    //         size="small"
-    //         dataSource={this.props.variants}
-    //         columns={this.variantColumns}
-    //         pagination={{ pageSize: 50 }}
-    //         scroll={{ y: true }}
-    //       />
-    //     )
-    //   },
-    //   {
-    //     title: "Deployment parameters",
-    //     status: "process",
-    //     content: (
-    //       <DeploymentForm devices={this.props.devices} form={this.props.form} />
-    //     )
-    //   },
-    //   {
-    //     title: "Affected devices",
-    //     status: "process",
-    //     content: (
-    //       <Table
-    //         //bordered
-    //         //rowSelection={rowSelection}
-    //         rowKey={record => record.id}
-    //         size="small"
-    //         dataSource={this.state.matchingDevices}
-    //         columns={this.deviceColumns}
-    //         //expandRowByClick={true}
-    //         expandedRowRender={record => (
-    //           <span>
-    //             <ReactJson src={record} enableClipboard={false} />
-    //             <Table
-    //               columns={this.nestedColumns}
-    //               dataSource={
-    //                 this.props.activeDeployments[record.id]
-    //                   ? Object.values(this.props.activeDeployments[record.id])
-    //                   : []
-    //               }
-    //               pagination={false}
-    //             />
-    //           </span>
-    //         )}
-    //         pagination={{ pageSize: 50 }}
-    //       />
-    //     )
-    //   }
-    // ];
   }
 
   componentDidMount() {

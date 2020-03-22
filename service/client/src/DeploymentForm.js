@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {  
+import {
   Form,
   Select,
   InputNumber,
@@ -8,7 +8,7 @@ import {
   Slider,
   Button,
   Row,
-  Col,
+  Col
 } from "antd";
 import { solve } from "./solvers/WeightedProductModelSolver";
 
@@ -16,10 +16,8 @@ const { Option } = Select;
 const { RangePicker } = DatePicker;
 
 class DeploymentForm extends Component {
-  
   constructor(props) {
-    
-    super(props); 
+    super(props);
     this.state = {
       //add if needed
       environment: { weight: 5 },
@@ -58,9 +56,8 @@ class DeploymentForm extends Component {
       }
     });
   };
-  
-  render() {
 
+  render() {
     const { getFieldDecorator } = this.props.form;
     const { myValidateHelp, myValidateStatus } = this.state;
     const formItemLayout = {
@@ -70,7 +67,7 @@ class DeploymentForm extends Component {
     const rangeConfig = {
       rules: [{ type: "array", message: "Please select time!" }]
     };
-  
+
     return (
       <Form
         {...formItemLayout}

@@ -11,7 +11,6 @@ import {
   Dropdown,
   Menu
 } from "antd";
-//import { JsonEditor as Editor } from 'jsoneditor-react';
 import ReactJson from "react-json-view";
 import axios from "axios";
 

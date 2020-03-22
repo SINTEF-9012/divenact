@@ -1,10 +1,14 @@
-import React, { Component } from 'react';
-import { Button, Layout, List, Col, Row, Menu, Icon } from 'antd';
-import axios from 'axios';
-import { ContentAreaEnum, DeploymentDeviceArea, ProductionArea, PreviewArea } from './ContentAreas'
-import { ModelContentAreaEnum, TemplateArea, VariantArea} from './ModelContentArea';
+import React, { Component } from "react";
+import { Button, Layout, Menu, Icon } from "antd";
+import axios from "axios";
+import { ContentAreaEnum, PreviewArea } from "./ContentAreas";
+import {
+  ModelContentAreaEnum,
+  TemplateArea,
+  VariantArea
+} from "./ModelContentArea";
 
-const { Header, Footer, Sider, Content } = Layout;
+const { Sider, Content } = Layout;
 
 export class ModelArea extends Component {
   constructor(props) {
@@ -14,20 +18,17 @@ export class ModelArea extends Component {
     };
   }
 
-  componentDidMount() {
-
-  }
+  componentDidMount() {}
 
   render() {
-
-    const { deployments, devices, contentarea } = this.state;
+    const { contentarea } = this.state;
 
     return (
       <div>
         <Layout>
           <Sider>
             {/* Buttons to interact with API */}
-            <Menu defaultSelectedKeys={['1']} mode="inline" theme="dark">
+            <Menu defaultSelectedKeys={["1"]} mode="inline" theme="dark">
               <Menu.Item key="1" onClick={this.templates}>
                 <Icon type="book" />
                 <span>Templates</span>
@@ -44,38 +45,35 @@ export class ModelArea extends Component {
           </Sider>
 
           <Content>
-            {contentarea == ModelContentAreaEnum.TEMPLATE&& <TemplateArea />}
+            {contentarea == ModelContentAreaEnum.TEMPLATE && <TemplateArea />}
             {contentarea == ModelContentAreaEnum.VARIANT && <VariantArea />}
             {contentarea == ContentAreaEnum.PREVIEW && <PreviewArea />}
             {contentarea == ContentAreaEnum.DEFAULT && <Button>Hey</Button>}
           </Content>
         </Layout>
       </div>
-
     );
   }
 
-
-  templates = () =>{
+  templates = () => {
     this.setState({
       contentarea: ModelContentAreaEnum.TEMPLATE
-    })
-  }
+    });
+  };
 
-  variants = () =>{
+  variants = () => {
     this.setState({
       contentarea: ModelContentAreaEnum.VARIANT
-    })
-  }
+    });
+  };
 
   async getDevices() {
-    return (await axios.get('api/device/')).data;
+    return (await axios.get("api/device/")).data;
   }
 
   production = async () => {
     this.setState({
       contentarea: ContentAreaEnum.PRODUCTION
-    })
-  }
-
+    });
+  };
 }
