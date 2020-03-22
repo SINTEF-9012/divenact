@@ -299,7 +299,7 @@ export class DeviceArea extends Component {
    * Tag selected device (e.g. to put it into a safe mode)
    */
   tagDevice = async (device, tags) => {
-    let result = await axios.put("api/device/" + device, tags);
+    await axios.put("api/device/" + device, tags);
   };
 
   /**

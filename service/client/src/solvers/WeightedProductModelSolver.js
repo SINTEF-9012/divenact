@@ -89,9 +89,9 @@ function solveDummy(parameters, devices) {
  * @param {*} endDate target end date
  * @param {*} date input date
  */
-function checkMomentArray(startDate, endDate, date) {
-  return date.isAfter(startDate) && date.isBefore(endDate);
-}
+// function checkMomentArray(startDate, endDate, date) {
+//   return date.isAfter(startDate) && date.isBefore(endDate);
+// }
 
 /**
  * Checks if the device tag is among the specified target parameters.

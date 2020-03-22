@@ -1,43 +1,18 @@
 import React, { Component } from "react";
-import axios from "axios";
 import MainForm from "./MainForm";
-import {
-  Tabs,
-  Icon,
-  Collapse,
-  Steps,
-  Table,
-  Badge,
-  Form,
-  Select,
-  Button,
-  Row,
-  Col
-} from "antd";
+import { Tabs, Steps, Table, Badge, Form, Button, Row, Col } from "antd";
 const { Step } = Steps;
 const { TabPane } = Tabs;
 
-const colors = ["blue", "red", "green"];
-
-function callback(key) {
-  console.log(key);
-}
-
-const text = `
-  A dog is a type of domesticated animal.
-  Known for its loyalty and faithfulness,
-  it can be found as a welcome guest in many households across the world.
-`;
-
-const genExtra = () => (
-  <Icon
-    type="SettingOutlined "
-    onClick={event => {
-      // If you don't want click extra trigger collapse, you can prevent this:
-      event.stopPropagation();
-    }}
-  />
-);
+// const genExtra = () => (
+//   <Icon
+//     type="SettingOutlined "
+//     onClick={event => {
+//       // If you don't want click extra trigger collapse, you can prevent this:
+//       event.stopPropagation();
+//     }}
+//   />
+// );
 
 class MultipleDeploymentArea extends Component {
   constructor(props) {
@@ -228,7 +203,7 @@ class MultipleDeploymentArea extends Component {
             <Steps
               current={currentStep}
               type="navigation"
-              onChange={currentStep == 0 ? this.next : this.prev}
+              onChange={currentStep === 0 ? this.next : this.prev}
             >
               {steps.map(item => (
                 <Step key={item.title} title={item.title} />
@@ -245,64 +220,9 @@ class MultipleDeploymentArea extends Component {
     );
   }
 
-  // const { expandIconPosition } = this.state;
-  // return (
-  //   <div>
-  //     <Collapse
-  //       defaultActiveKey={["1"]}
-  //       onChange={callback}
-  //       expandIconPosition={expandIconPosition}
-  //     >
-  //       <Panel header="Deployment 1" key="1" extra={genExtra()}>
-  //       <MainForm
-  //     variants={this.props.variants}
-  //     devices={this.props.devices}
-  //     tags={this.props.deviceTags}
-  //     form={this.props.form}
-  //     deployments={this.props.deployments}
-  //     activeDeployments={this.props.activeDeployments}
-  //     appliedDevices={this.props.appliedDevices}
-  //     deviceTags={this.props.deviceTags}
-  //     callbackTabChange={this.props.callbackTabChange}
-  //   />
-  //       </Panel>
-  //       <Panel header="Deployment 1" key="2" extra={genExtra()}>
-  //         <div>{text}</div>
-  //       </Panel>
-  //       <Panel header="Deployment 1" key="3" extra={genExtra()}>
-  //         <div>{text}</div>
-  //       </Panel>
-  //     </Collapse>
-  //   </div>
-  // );
-  //}
-
   componentDidMount() {
     //add if needed
   }
-
-  /**
-   * Tag selected device (e.g. to put it into a safe mode)
-   */
-  tagDevice = async (device, tags) => {
-    let result = await axios.put("api/device/" + device, tags);
-  };
-
-  /**
-   * Tag all devices affected by a deployment (e.g. to put it into a safe mode)
-   */
-  tagDevices = async (device, tags) => {
-    let faultyDeployments = this.props.activeDeployments[device];
-    console.log("deployments" + JSON.stringify(faultyDeployments));
-    faultyDeployments.forEach(deployment => {
-      let faultyDevices = this.props.appliedDevices[deployment];
-      console.log(this.props.appliedDevices[deployment]);
-      faultyDevices.forEach(fDevice => {
-        console.log(fDevice.deviceId);
-        this.tagDevice(fDevice.deviceId, tags);
-      });
-    });
-  };
 }
 
 const MultipleDeploymentForm = Form.create({})(MultipleDeploymentArea);

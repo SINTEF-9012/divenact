@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import axios from "axios";
+//import axios from "axios";
 import MainForm from "./MainForm";
 import { Badge, Tag, Form, Button } from "antd";
 import { solve } from "./solvers/WeightedProductModelSolver";
@@ -66,7 +66,7 @@ class SingleDeploymentArea extends Component {
   }
 
   next = () => {
-    if (this.state.currentStep == 1) {
+    if (this.state.currentStep === 1) {
       this.props.form.validateFields((err, values) => {
         if (!err) {
           console.log("Received form values: ", values);
@@ -112,29 +112,6 @@ class SingleDeploymentArea extends Component {
   componentDidMount() {
     //add if needed
   }
-
-  /**
-   * Tag selected device (e.g. to put it into a safe mode)
-   */
-  tagDevice = async (device, tags) => {
-    let result = await axios.put("api/device/" + device, tags);
-  };
-
-  /**
-   * Tag all devices affected by a deployment (e.g. to put it into a safe mode)
-   */
-  tagDevices = async (device, tags) => {
-    let faultyDeployments = this.props.activeDeployments[device];
-    console.log("deployments" + JSON.stringify(faultyDeployments));
-    faultyDeployments.forEach(deployment => {
-      let faultyDevices = this.props.appliedDevices[deployment];
-      console.log(this.props.appliedDevices[deployment]);
-      faultyDevices.forEach(fDevice => {
-        console.log(fDevice.deviceId);
-        this.tagDevice(fDevice.deviceId, tags);
-      });
-    });
-  };
 }
 
 const SingleDeploymentForm = Form.create({})(SingleDeploymentArea);

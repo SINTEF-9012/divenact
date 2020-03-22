@@ -45,10 +45,10 @@ export class ModelArea extends Component {
           </Sider>
 
           <Content>
-            {contentarea == ModelContentAreaEnum.TEMPLATE && <TemplateArea />}
-            {contentarea == ModelContentAreaEnum.VARIANT && <VariantArea />}
-            {contentarea == ContentAreaEnum.PREVIEW && <PreviewArea />}
-            {contentarea == ContentAreaEnum.DEFAULT && <Button>Hey</Button>}
+            {contentarea === ModelContentAreaEnum.TEMPLATE && <TemplateArea />}
+            {contentarea === ModelContentAreaEnum.VARIANT && <VariantArea />}
+            {contentarea === ContentAreaEnum.PREVIEW && <PreviewArea />}
+            {contentarea === ContentAreaEnum.DEFAULT && <Button>Hey</Button>}
           </Content>
         </Layout>
       </div>

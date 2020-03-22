@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import {
   Button,
-  Layout,
   List,
   Col,
   Row,
@@ -104,7 +103,7 @@ export class ProductionArea extends Component {
       window.confirm("Please select a variant first");
       return;
     }
-    let result = await axios.put(`api/global/production/${variant}`);
+    await axios.put(`api/global/production/${variant}`);
     this.setState({
       contentarea: ContentAreaEnum.DEPLOYMENTDEVICE
     });
@@ -120,7 +119,7 @@ export class ProductionArea extends Component {
           <Text> into production. </Text>
           <Button onClick={this.onGoButton}> Go </Button>
         </Row>
-        {this.state.contentarea == ContentAreaEnum.DEPLOYMENTDEVICE && (
+        {this.state.contentarea === ContentAreaEnum.DEPLOYMENTDEVICE && (
           <Row>
             <DeploymentDeviceArea ref={this.deploymentdevice} />
           </Row>
@@ -166,7 +165,7 @@ export class PreviewArea extends Component {
       window.confirm("Please select a variant first");
       return;
     }
-    let result = await axios.put(`api/global/previewold/${variant}`, {
+    await axios.put(`api/global/previewold/${variant}`, {
       random: this.state.number
     });
     this.setState({
@@ -191,7 +190,7 @@ export class PreviewArea extends Component {
           <Text> devices. </Text>
           <Button onClick={this.onGoButton}> Go </Button>
         </Row>
-        {this.state.contentarea == ContentAreaEnum.DEPLOYMENTDEVICE && (
+        {this.state.contentarea === ContentAreaEnum.DEPLOYMENTDEVICE && (
           <Row>
             <DeploymentDeviceArea ref={this.deploymentdevice} />
           </Row>
@@ -224,7 +223,7 @@ export class DiversifyArea extends Component {
       window.confirm("Please select a variant first");
       return;
     }
-    let result = await axios.put(`api/global/shuffle`, { variants: variants });
+    await axios.put(`api/global/shuffle`, { variants: variants });
     this.setState({
       contentarea: ContentAreaEnum.DEPLOYMENTDEVICE
     });
@@ -240,7 +239,7 @@ export class DiversifyArea extends Component {
           <Text> into all devices </Text>
           <Button onClick={this.onGoButton}> Go </Button>
         </Row>
-        {this.state.contentarea == ContentAreaEnum.DEPLOYMENTDEVICE && (
+        {this.state.contentarea === ContentAreaEnum.DEPLOYMENTDEVICE && (
           <Row>
             <DeploymentDeviceArea ref={this.deploymentdevice} />
           </Row>

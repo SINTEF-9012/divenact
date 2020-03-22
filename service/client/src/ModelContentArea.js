@@ -197,7 +197,7 @@ export class VariantArea extends Component {
   saveVariant = async () => {
     const { edited } = this.state;
     if (edited) {
-      let result = await axios.put(`api/variant/${edited.id}`, edited);
+      await axios.put(`api/variant/${edited.id}`, edited);
       this.componentDidMount();
     } else {
       window.confirm("No change to save");

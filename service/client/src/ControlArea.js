@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Layout, Row, Menu, Icon } from "antd";
+import { Button, Layout, Menu, Icon } from "antd";
 import axios from "axios";
 import {
   ContentAreaEnum,
@@ -22,8 +22,6 @@ export class ControlArea extends Component {
   componentDidMount() {}
 
   render() {
-    const { deployments, devices } = this.state;
-
     return (
       <div>
         <Layout>

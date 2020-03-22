@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import {
-  Layout,
   Steps,
   Table,
   Badge,
@@ -18,7 +17,7 @@ import {
 } from "antd";
 import ReactJson from "react-json-view";
 import moment from "moment";
-import { solve, solveDummy } from "./solvers/WeightedProductModelSolver";
+import { solveDummy } from "./solvers/WeightedProductModelSolver";
 
 const { Option } = Select;
 const { RangePicker } = DatePicker;
@@ -264,9 +263,9 @@ class MainForm extends Component {
       labelCol: { span: 8 },
       wrapperCol: { span: 12 }
     };
-    const rangeConfig = {
-      rules: [{ type: "array", message: "Please select time!" }]
-    };
+    // const rangeConfig = {
+    //   rules: [{ type: "array", message: "Please select time!" }]
+    // };
     const { selectedVariantRowKeys } = this.state;
     const variantRowSelection = {
       selectedRowKeys: selectedVariantRowKeys,
