@@ -7,6 +7,7 @@ import {
   Col,
   Row  
 } from "antd";
+import SMTForm from "./SMTForm"
 
 const { Title } = Typography;
 
@@ -91,8 +92,12 @@ export class Z3Area extends Component {
     // };
 
     return (
-      <Row gutter={16}>
-        <Col span={10} offset={2}>
+      <Row gutter={10}>
+        <Col span={10} offset={1}>
+        <Title level={4}>Parameters</Title>
+        <SMTForm/>
+        </Col>
+        <Col span={6}>
           <Title level={4}>
             Input JSON model
             <Button type="link" onClick={this.handleUpload}>
@@ -110,7 +115,7 @@ export class Z3Area extends Component {
             onDelete={this.handleEdit}
           />
         </Col>
-        <Col span={10}>
+        <Col span={6}>
           <Row>
             <Title level={4}>Results</Title>
             <ReactJson
