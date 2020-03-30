@@ -206,7 +206,13 @@ class App extends Component {
                   </span>
                 }
               >
-                <Z3Area />
+                <Z3Area devices={devices}
+                  variants={variants}
+                  deployments={deployments}
+                  activeDeployments={activeDeployments}
+                  appliedDevices={appliedDevices}
+                  deviceTags={deviceTags}
+                  callbackTabChange={this.handleTableChange}/>
               </TabPane>
               <TabPane
                 key="8"
