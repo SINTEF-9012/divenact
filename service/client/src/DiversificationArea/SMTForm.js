@@ -1,5 +1,14 @@
 import React, { Component } from "react";
-import { Form, Select, Switch, Row, Col, Button, message, Modal } from "antd";
+import {
+  Form,
+  Select,
+  Switch,
+  Row,
+  Col,
+  Button,
+  Modal,
+  Input
+} from "antd";
 
 const { Option } = Select;
 
@@ -34,19 +43,19 @@ class SMTForm extends Component {
     };
   }
 
-  handleSubmit = e => {
-    e.preventDefault();
-    //TODO deploy selected variant to selected devices
-    this.props.form.validateFields((err, values) => {
-      if (!err) {
-        values = this.removeDisabledFields(values);
-        console.log("Form submited", values);
-        //TODO return values to the parent
-      } else {
-        message.warning("Please specify the deployment parameters!");
-      }
-    });
-  };
+  // handleSubmit = e => {
+  //   e.preventDefault();
+  //   //TODO deploy selected variant to selected devices
+  //   this.props.form.validateFields((err, values) => {
+  //     if (!err) {
+  //       values = this.removeDisabledFields(values);
+  //       console.log("Form submited", values);
+  //       //TODO return values to the parent
+  //     } else {
+  //       message.warning("Please specify the deployment parameters!");
+  //     }
+  //   });
+  // };
 
   handleReset = e => {
     this.setState({ vsn: null });
@@ -107,6 +116,22 @@ class SMTForm extends Component {
           validateMessages={validateMessages}
           onSubmit={this.handleSubmit}
         >
+          {/* <Form.Item label="Deployment ID">
+            <Row>
+              <Col>
+                {getFieldDecorator("depl_id", {
+                  initialValue: this.state.depl_id,
+                  rules: [
+                    {
+                      required: true,
+                      type: "string"
+                    }
+                  ]
+                })(<Input placeholder="Deployment ID" />)}
+              </Col>
+            </Row>
+          </Form.Item> */}
+
           <Form.Item
             label={
               <span>

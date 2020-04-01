@@ -9,7 +9,7 @@ import { DeploymentArea } from "./DeploymentArea";
 import { DeviceArea } from "./DeviceArea";
 import { ControlArea } from "./ControlArea";
 import { ModelArea } from "./ModelArea";
-import { Z3Area } from "./Z3Area";
+import { DiversificationArea } from "./DiversificationArea/DiversificationArea";
 import SingleDeploymentArea from "./SingleDeploymentArea";
 import MultipleDeploymentArea from "./MultipleDeploymentArea";
 
@@ -62,7 +62,7 @@ class App extends Component {
     //this.getActiveDeployments();
   }
 
-  handleTableChange = tabNo => {
+  handleTabChange = tabNo => {
     this.setState({ activeTab: tabNo });
   };
 
@@ -92,7 +92,7 @@ class App extends Component {
               id="Tabs"
               activeKey={activeTab}
               ref={this.Tabs}
-              onTabClick={tab => this.handleTableChange(tab)}
+              onTabClick={tab => this.handleTabChange(tab)}
               // tabBarExtraContent={operations}
             >
               <TabPane
@@ -121,7 +121,7 @@ class App extends Component {
                   templates={templates}
                   variants={variants}
                   templateTags={templateTags}
-                  callbackTabChange={this.handleTableChange}
+                  callbackTabChange={this.handleTabChange}
                   callbackAddTemplate={this.addTemplate}
                 />
               </TabPane>
@@ -137,7 +137,7 @@ class App extends Component {
                 <VariantArea2
                   variants={variants}
                   templates={templates}
-                  callbackTabChange={this.handleTableChange}
+                  callbackTabChange={this.handleTabChange}
                   callbackAddVariant={this.addVariant}
                 />
               </TabPane>
@@ -154,7 +154,7 @@ class App extends Component {
                   deployments={deployments}
                   appliedDevices={appliedDevices}
                   targetedDevices={targetedDevices}
-                  callbackTabChange={this.handleTableChange}
+                  callbackTabChange={this.handleTabChange}
                 />
               </TabPane>
               <TabPane
@@ -172,7 +172,7 @@ class App extends Component {
                   activeDeployments={activeDeployments}
                   appliedDevices={appliedDevices}
                   deviceTags={deviceTags}
-                  callbackTabChange={this.handleTableChange}
+                  callbackTabChange={this.handleTabChange}
                 />
               </TabPane>
               <TabPane
@@ -206,13 +206,13 @@ class App extends Component {
                   </span>
                 }
               >
-                <Z3Area devices={devices}
+                <DiversificationArea devices={devices}
                   variants={variants}
                   deployments={deployments}
                   activeDeployments={activeDeployments}
                   appliedDevices={appliedDevices}
                   deviceTags={deviceTags}
-                  callbackTabChange={this.handleTableChange}/>
+                  callbackTabChange={this.handleTabChange}/>
               </TabPane>
               <TabPane
                 key="8"
@@ -230,7 +230,7 @@ class App extends Component {
                   activeDeployments={activeDeployments}
                   appliedDevices={appliedDevices}
                   deviceTags={deviceTags}
-                  callbackTabChange={this.handleTableChange}
+                  callbackTabChange={this.handleTabChange}
                 />
               </TabPane>
               <TabPane
@@ -249,7 +249,7 @@ class App extends Component {
                   activeDeployments={activeDeployments}
                   appliedDevices={appliedDevices}
                   deviceTags={deviceTags}
-                  callbackTabChange={this.handleTableChange}
+                  callbackTabChange={this.handleTabChange}
                 />
               </TabPane>
             </Tabs>
