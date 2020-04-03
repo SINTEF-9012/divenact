@@ -1,17 +1,17 @@
 import React, { Component } from "react";
 import axios from "axios";
 import ReactJson from "react-json-view";
-import {
-  Button,
-  Col,
-  Row,
-  Typography,
-  Steps,
-} from "antd";
+import AceEditor from "react-ace";
+import yaml from "js-yaml";
+
+import "ace-builds/src-noconflict/mode-sass";
+import "ace-builds/src-noconflict/theme-github";
+
+import { Col, Row, Typography } from "antd";
 
 const { Title } = Typography;
 
-export class JsonStep extends Component {
+export class JsonYamlStep extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -91,24 +91,39 @@ export class JsonStep extends Component {
     // };
 
     return (
-     
-        <Row>
-          <Col span={18} offset={3}>
-            <Title level={4}>
-              Verify the input JSON model              
-            </Title>
-            <ReactJson
-              src={Object.assign(this.props.json_deployments, this.props.json_devices)}
-              theme="apathy:inverted"
-              collapsed={2}
-              enableClipboard={true}
-              onEdit={this.handleEdit}
-              onAdd={this.handleEdit}
-              onDelete={this.handleEdit}
-            />
-          </Col>
-        </Row>
-      
+      <Row gutter={10}>
+        <Col span={12}>
+          <Title level={4}>Verify the input JSON model</Title>
+          <ReactJson
+            src={Object.assign(
+              this.props.json_deployments,
+              this.props.json_devices
+            )}
+            theme="apathy:inverted"
+            collapsed={2}
+            enableClipboard={true}
+            onEdit={this.handleEdit}
+            onAdd={this.handleEdit}
+            onDelete={this.handleEdit}
+          />
+        </Col>
+        <Col span={12}>
+          <Title level={4}>Verify the input YAML model (Experimental)</Title>
+          <AceEditor
+            mode="sass"
+            //theme="github"
+            //onChange={onChange}
+            name="yaml_view"
+            editorProps={{ $blockScrolling: true }}
+            value={yaml.safeDump(
+              Object.assign(
+                this.props.json_deployments,
+                this.props.json_devices
+              )
+            )}            
+          />          
+        </Col>
+      </Row>
     );
   }
 

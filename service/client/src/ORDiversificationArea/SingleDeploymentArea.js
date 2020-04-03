@@ -2,7 +2,7 @@ import React, { Component } from "react";
 //import axios from "axios";
 import MainForm from "./MainForm";
 import { Badge, Tag, Form, Button } from "antd";
-import { solve } from "./solvers/WeightedProductModelSolver";
+import { solve } from "../solvers/WeightedProductModelSolver";
 
 const colors = ["blue", "red", "green"];
 

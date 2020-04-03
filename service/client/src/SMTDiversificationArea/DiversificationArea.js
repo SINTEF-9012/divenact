@@ -1,17 +1,9 @@
 import React, { Component } from "react";
 import axios from "axios";
-import {
-  Button,
-  Col,
-  Row,
-  Steps,
-  message,
-  Badge,
-  Tag
-} from "antd";
+import { Button, Col, Row, Steps, message, Badge, Tag } from "antd";
 import { VariantStep } from "./VariantStep";
 import { DeviceStep } from "./DeviceStep";
-import { JsonStep } from "./JsonStep";
+import { JsonYamlStep } from "./JsonYamlStep";
 import { Z3Step } from "./Z3Step";
 
 const { Step } = Steps;
@@ -89,7 +81,7 @@ export class DiversificationArea extends Component {
             </Tag>
           )),
         width: 600
-      }      
+      }
     ];
     this.nestedDeviceColumns = [
       {
@@ -110,18 +102,13 @@ export class DiversificationArea extends Component {
       result: {},
       devices: this.props.devices,
       variants: this.props.variants,
-      selected_deployments: new Object(),
-      selected_devices: new Object(),
+      selected_deployments: {},
+      selected_devices: {},
       //selectedFile: null,
       //uploading: false,
       json_model: require("../resources/sample_input.json"),
-
-      ModalText: "Specify deployment paramaters",
-      currentStep: 0,
-      selectedVariantRowKeys: [],
-      selectedDeviceRowKeys: [],
-      visible: false,
-      confirmLoading: false,
+      selected_variant_rowkeys: [],
+      selected_device_rowkeys: [],
       current_step: 0
     };
   }
@@ -130,8 +117,8 @@ export class DiversificationArea extends Component {
     switch (this.state.current_step) {
       case 0: //variants and parameters
         if (
-          Array.isArray(this.state.selectedVariantRowKeys) &&
-          this.state.selectedVariantRowKeys.length > 0
+          Array.isArray(this.state.selected_variant_rowkeys) &&
+          this.state.selected_variant_rowkeys.length > 0
         ) {
           const current_step = this.state.current_step + 1;
           this.setState({ current_step });
@@ -142,8 +129,8 @@ export class DiversificationArea extends Component {
       case 1: //devices
         //check if no of devices >= no of deployments
         if (
-          this.state.selectedVariantRowKeys.length >
-          this.state.selectedDeviceRowKeys.length
+          this.state.selected_device_rowkeys.length >
+          this.state.selected_device_rowkeys.length
         ) {
           message.warning(
             "Number of targeted devices cannot be less than the number of variants to be deployed!"
@@ -155,18 +142,15 @@ export class DiversificationArea extends Component {
         break;
       case 2: //verify and approve
         //TODO
+        this.solve();
         const current_step = this.state.current_step + 1;
         this.setState({ current_step });
         break;
       case 3: //view results
-        if (this.state.selectedDeviceRowKeys.length > 0) {
-          //TODO deploy selected variant to selected devices
-          //console.log(this.state.selectedDeviceRowKeys.length);
-          message.success("Deployment complete!");
-          //this.handleSubmit;
-        } else {
-          message.warning("Please select at least one matching device!");
-        }
+        //TODO deploy selected variant to selected devices
+        //console.log(this.state.selectedDeviceRowKeys.length);
+        message.success("Deployment complete!");
+        //this.handleSubmit;
         break;
       default:
     }
@@ -177,44 +161,27 @@ export class DiversificationArea extends Component {
     this.setState({ current_step });
   };
 
-  onVariantSelectChange = value => {
-    console.log("selectedVariantRowKeys changed: ", value);
-    this.setState({ selectedVariantRowKeys: value });
-  };
-
-  onVariantSelect = (record, selected, selectedRows, nativeEvent) => {
-    console.log(
-      "Selected variant: ",
-      record,
-      selected,
-      selectedRows,
-      nativeEvent
-    );
-    this.setState({
-      visible: selected
-    });
-    console.log("selected keys before", this.state.selectedVariantRowKeys);
-  };
-
-  onDeviceSelectChange = value => {
-    console.log("selectedDeviceRowKeys changed: ", value);
-    this.setState({ selectedDeviceRowKeys: value });
-  };
-
-  handleEdit = json => {
-    this.setState({ json_model: json.updated_src });
-    console.log(this.state.json_model);
-  };
-
-  handleUpload = () => {
+  solve = () => {
     //const { selectedFile } = this.state;
+    console.log(
+      "Solving with: ",
+      this.state.selected_deployments,
+      this.state.selected_devices
+    );
     const formData = new FormData();
     //formData.append("files", selectedFile, "script.py");
-    formData.append("json", JSON.stringify(this.state.json_model));
+    var json = JSON.stringify(
+      Object.assign(
+        this.state.selected_deployments,
+        this.state.selected_devices
+      )
+    );
+    console.log("json", json);
+    formData.append("json", json);
 
-    this.setState({
-      uploading: true
-    });
+    // this.setState({
+    //   uploading: true
+    // });
 
     axios
       .post("/api/z3", formData)
@@ -226,46 +193,100 @@ export class DiversificationArea extends Component {
         console.log("err", err);
       });
 
-    this.setState({
-      uploading: false
-    });
+    // this.setState({
+    //   uploading: false
+    // });
   };
 
-  handleOk = value => {
-    this.setState({
-      visible: false
-    });
-    //TODO
-    console.log();
-  };
+  // onVariantSelectChange = value => {
+  //   console.log("selectedVariantRowKeys changed: ", value);
+  //   this.setState({ selectedVariantRowKeys: value });
+  // };
 
-  handleCancel = () => {
-    console.log("Clicked cancel button");
-    this.setState({
-      visible: false
-    });
-    //TODO deselect row
-    this.state.selectedVariantRowKeys.pop();
-    console.log("selected keys", this.state.selectedVariantRowKeys);
-  };
+  // onVariantSelect = (record, selected, selectedRows, nativeEvent) => {
+  //   console.log(
+  //     "Selected variant: ",
+  //     record,
+  //     selected,
+  //     selectedRows,
+  //     nativeEvent
+  //   );
+  //   this.setState({
+  //     visible: selected
+  //   });
+  //   console.log("selected keys before", this.state.selectedVariantRowKeys);
+  // };
 
-  handleSubmit = e => {
-    e.preventDefault();
-    //TODO deploy selected variant to selected devices
-    const { form } = this.formRef.props;
-    form.validateFields((err, values) => {
-      if (!err) {
-        //values = this.removeDisabledFields(values);
-        console.log("Form submited", values);
-        //TODO return values to the parent
-        this.setState({
-          visible: false
-        });
-      } else {
-        message.warning("Please specify the deployment parameters!");
-      }
-    });
-  };
+  // onDeviceSelectChange = value => {
+  //   console.log("selectedDeviceRowKeys changed: ", value);
+  //   this.setState({ selectedDeviceRowKeys: value });
+  // };
+
+  // handleEdit = json => {
+  //   this.setState({ json_model: json.updated_src });
+  //   console.log(this.state.json_model);
+  // };
+
+  // handleUpload = () => {
+  //   //const { selectedFile } = this.state;
+  //   const formData = new FormData();
+  //   //formData.append("files", selectedFile, "script.py");
+  //   formData.append("json", JSON.stringify(this.state.json_model));
+
+  //   this.setState({
+  //     uploading: true
+  //   });
+
+  //   axios
+  //     .post("/api/z3", formData)
+  //     .then(res => {
+  //       console.log("res.data", res.data);
+  //       this.setState({ result: res.data });
+  //     })
+  //     .catch(err => {
+  //       console.log("err", err);
+  //     });
+
+  //   this.setState({
+  //     uploading: false
+  //   });
+  // };
+
+  // handleOk = value => {
+  //   this.setState({
+  //     visible: false
+  //   });
+  //   //TODO
+  //   console.log();
+  // };
+
+  // handleCancel = () => {
+  //   console.log("Clicked cancel button");
+  //   this.setState({
+  //     visible: false
+  //   });
+  //   //TODO deselect row
+  //   this.state.selectedVariantRowKeys.pop();
+  //   console.log("selected keys", this.state.selectedVariantRowKeys);
+  // };
+
+  // handleSubmit = e => {
+  //   e.preventDefault();
+  //   //TODO deploy selected variant to selected devices
+  //   const { form } = this.formRef.props;
+  //   form.validateFields((err, values) => {
+  //     if (!err) {
+  //       //values = this.removeDisabledFields(values);
+  //       console.log("Form submited", values);
+  //       //TODO return values to the parent
+  //       this.setState({
+  //         visible: false
+  //       });
+  //     } else {
+  //       message.warning("Please specify the deployment parameters!");
+  //     }
+  //   });
+  // };
 
   saveFormRef = formRef => {
     this.formRef = formRef;
@@ -273,17 +294,31 @@ export class DiversificationArea extends Component {
 
   handleVariantSelect = value => {
     console.log("Received variants: ", value);
-    this.setState({ selectedVariantRowKeys: value });
+    this.setState({ selected_variant_rowkeys: value });
   };
 
   handleDeviceSelect = value => {
     console.log("Received devices: ", value);
-    this.setState({ selectedDeviceRowKeys: value });
+    this.setState({ selected_device_rowkeys: value });
   };
 
-  handleDeploymentSelect = value => {
-    console.log("Selected deployments: ", value);
-    this.setState({ selected_deployments: value });
+  handleDeploymentSelect = values => {
+    console.log("Selected deployments: ", values.deployments);
+    this.setState({ selected_deployments: values });
+
+    //TODO update the list of variants with deployment parameters and refresh the table
+    // var variants = this.props.variants;
+    // for (const key in values.deployments) {
+    //   //devices[entry].dep_params = values.deployments[entry];
+    //   console.log("variants", variants);
+    //   console.log("value", values.deployments[key]);
+
+    //   var foundIndex = variants.findIndex(entry => entry.id == key);
+    //   variants[foundIndex].dep_params = values.deployments[key];
+    //   this.props.variants[foundIndex].dep_params = values.deployments[key];
+    //   console.log("updated", variants[foundIndex]);
+    // }
+    // this.setState({ variants: variants });
   };
 
   handleTargetDeviceSelect = value => {
@@ -293,7 +328,7 @@ export class DiversificationArea extends Component {
 
   render() {
     const { current_step } = this.state;
-    
+
     const steps = [
       {
         title: "Variants",
@@ -301,9 +336,10 @@ export class DiversificationArea extends Component {
         content: (
           <VariantStep
             variants={this.props.variants}
+            selectedVariantRowKeys={this.state.selected_variant_rowkeys}
             callbackVariantSelect={this.handleVariantSelect}
             callbackDeploymentSelect={this.handleDeploymentSelect}
-          />          
+          />
         )
       },
       {
@@ -314,16 +350,17 @@ export class DiversificationArea extends Component {
             devices={this.props.devices}
             deviceTags={this.props.deviceTags}
             activeDeployments={this.props.activeDeployments}
+            selectedDeviceRowKeys={this.state.selected_device_rowkeys}
             callbackDeviceSelect={this.handleDeviceSelect}
             callbackTargetDeviceSelect={this.handleTargetDeviceSelect}
-          />          
+          />
         )
       },
       {
         title: "JSON",
         status: "process",
         content: (
-          <JsonStep
+          <JsonYamlStep
             json_deployments={this.state.selected_deployments}
             json_devices={this.state.selected_devices}
           />
@@ -332,9 +369,9 @@ export class DiversificationArea extends Component {
       {
         title: "Z3 results",
         status: "process",
-        content: <Z3Step />
+        content: <Z3Step result={this.state.result} />
       }
-    ];    
+    ];
 
     return (
       <div>
@@ -378,7 +415,7 @@ export class DiversificationArea extends Component {
               )}
             </div>
           </Col>
-        </Row>        
+        </Row>
       </div>
     );
   }

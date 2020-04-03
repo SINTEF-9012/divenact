@@ -17,7 +17,7 @@ import {
 } from "antd";
 import ReactJson from "react-json-view";
 import moment from "moment";
-import { solveDummy } from "./solvers/WeightedProductModelSolver";
+import { solveDummy } from "../solvers/WeightedProductModelSolver";
 
 const { Option } = Select;
 const { RangePicker } = DatePicker;

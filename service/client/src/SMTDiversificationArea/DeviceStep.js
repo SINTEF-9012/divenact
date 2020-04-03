@@ -70,16 +70,16 @@ export class DeviceStep extends Component {
       }
     ];
     this.state = {
-      device_list: { devices: new Object() },
+      device_list: { devices: {} },
       devices: this.props.devices,
-      selected_device_rowkeys: [],
-      visible: false
+      //selected_device_rowkeys: this.props.selected_device_rowkeys,
+      //visible: false
     };
   }
 
   onDeviceSelectChange = value => {
     console.log("selected_device_rowkeys changed: ", value);
-    this.setState({ selected_device_rowkeys: value });
+    //this.setState({ selected_device_rowkeys: value });
     this.props.callbackDeviceSelect(value);
   };
 
@@ -103,7 +103,7 @@ export class DeviceStep extends Component {
 
   render() {    
     const device_row_selection = {
-      selected_rowkeys: this.state.selected_device_rowkeys,
+      selectedRowKeys: this.props.selectedDeviceRowKeys,
       columnTitle: " ", //this line is to hide the "Select all" checkbox
       onChange: this.onDeviceSelectChange,
       onSelect: this.onDeviceSelect

@@ -31,22 +31,22 @@ export class VariantStep extends Component {
               View
             </Button>
           ) : (
-            ""
+            "nothing"
           )
       }
     ];
     this.state = {
-      deployment_list: {deployments: new Object()},
+      deployment_list: { deployments: {} },
       variants: this.props.variants,
-      ModalText: "Specify deployment paramaters",
-      selected_variant_rowkeys: [],
+      //ModalText: "Specify deployment paramaters",
+      //selected_variant_rowkeys: this.props.selectedVariantRowKeys,
       visible: false
     };
   }
 
   onVariantSelectChange = value => {
     //console.log("selectedVariantRowKeys changed: ", value);
-    this.setState({ selected_variant_rowkeys: value });
+    //this.setState({ selected_variant_rowkeys: value });
     this.props.callbackVariantSelect(value);
   };
 
@@ -70,8 +70,8 @@ export class VariantStep extends Component {
       visible: false
     });
     //TODO deselect row - not sure if this is the right way of doing this
-    this.state.selected_variant_rowkeys.pop();
-    console.log("selected keys", this.state.selected_variant_rowkeys);
+    this.props.selected_variant_rowkeys.pop();
+    console.log("selected keys", this.props.selected_variant_rowkeys);
   };
 
   handleSubmit = e => {
@@ -97,10 +97,8 @@ export class VariantStep extends Component {
   parseFormValues = values => {
     var depl_list = this.state.deployment_list;
     //var depl_id = "dp" + depl_list.length;
-    var depl_id = this.state.selected_variant_rowkeys.slice(-1)[0];
-    //var depl = new Object();
+    var depl_id = this.props.selectedVariantRowKeys.slice(-1)[0];
     depl_list.deployments[depl_id] = values;
-    //depl_list.push(depl);
     this.setState({ depl_list: depl_list });
 
     //console.log("state", this.state.deployment_list);
@@ -115,7 +113,7 @@ export class VariantStep extends Component {
     //const { selected_variant_rowkeys } = this.state;
     const variant_row_selection = {
       columnTitle: " ", //this line is to hide the "Select all" checkbox
-      selectedRowKeys: this.state.selected_variant_rowkeys,
+      selectedRowKeys: this.props.selectedVariantRowKeys,
       onChange: this.onVariantSelectChange,
       onSelect: this.onVariantSelect
       //type: "radio"

@@ -9,9 +9,9 @@ import { DeploymentArea } from "./DeploymentArea";
 import { DeviceArea } from "./DeviceArea";
 import { ControlArea } from "./ControlArea";
 import { ModelArea } from "./ModelArea";
-import { DiversificationArea } from "./DiversificationArea/DiversificationArea";
-import SingleDeploymentArea from "./SingleDeploymentArea";
-import MultipleDeploymentArea from "./MultipleDeploymentArea";
+import { DiversificationArea } from "./SMTDiversificationArea/DiversificationArea";
+import SingleDeploymentArea from "./ORDiversificationArea/SingleDeploymentArea";
+import MultipleDeploymentArea from "./ORDiversificationArea/MultipleDeploymentArea";
 
 const { Footer, Content } = Layout;
 const { TabPane } = Tabs;
@@ -214,7 +214,7 @@ class App extends Component {
                   deviceTags={deviceTags}
                   callbackTabChange={this.handleTabChange}/>
               </TabPane>
-              <TabPane
+              {/* <TabPane
                 key="8"
                 tab={
                   <span>
@@ -232,13 +232,13 @@ class App extends Component {
                   deviceTags={deviceTags}
                   callbackTabChange={this.handleTabChange}
                 />
-              </TabPane>
+              </TabPane> */}
               <TabPane
                 key="9"
                 tab={
                   <span>
                     <Icon type="control" />
-                    Multiple Deployments
+                    OR-Tools
                   </span>
                 }
               >

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import ReactJson from "react-json-view";
-import { Button, Col, Row, Typography } from "antd";
+import { Col, Row, Typography } from "antd";
 
 const { Title } = Typography;
 const colors = [
@@ -69,10 +69,10 @@ export class Z3Step extends Component {
 
     return (
       <Row>
-        <Col span={18} offset={3}>
+        <Col span={24}>
           <Title level={4}>Approve the solution for deployment</Title>
           <ReactJson
-            src={this.state.result}
+            src={this.props.result}
             enableClipboard={false}
             collapsed={2}
             theme="apathy:inverted"
