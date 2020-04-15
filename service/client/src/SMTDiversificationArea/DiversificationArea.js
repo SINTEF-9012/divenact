@@ -5,6 +5,7 @@ import { VariantStep } from "./VariantStep";
 import { DeviceStep } from "./DeviceStep";
 import { JsonYamlStep } from "./JsonYamlStep";
 import { Z3Step } from "./Z3Step";
+import { DiversificationContext } from "./DiversificationContext";
 
 const { Step } = Steps;
 const colors = [
@@ -16,7 +17,7 @@ const colors = [
   "green",
   "blue",
   "red",
-  "green"
+  "green",
 ];
 
 export class DiversificationArea extends Component {
@@ -25,7 +26,7 @@ export class DiversificationArea extends Component {
     this.variantColumns = [
       {
         title: "Variant ID",
-        dataIndex: "id"
+        dataIndex: "id",
       },
       {
         title: "Template",
@@ -34,7 +35,7 @@ export class DiversificationArea extends Component {
           <Button type="link" onClick={() => this.props.callbackTabChange("1")}>
             {record.template}
           </Button>
-        )
+        ),
       },
       {
         title: "Deployment parameters",
@@ -49,8 +50,8 @@ export class DiversificationArea extends Component {
             </Button>
           ) : (
             ""
-          )
-      }
+          ),
+      },
     ];
     this.deviceColumns = [
       {
@@ -68,7 +69,7 @@ export class DiversificationArea extends Component {
               <Badge status="success" />
               {record.id}
             </span>
-          )
+          ),
       },
       {
         title: "Tags",
@@ -80,8 +81,8 @@ export class DiversificationArea extends Component {
               {key}: {this.props.deviceTags[record.id][key]}
             </Tag>
           )),
-        width: 600
-      }
+        width: 600,
+      },
     ];
     this.nestedDeviceColumns = [
       {
@@ -95,23 +96,57 @@ export class DiversificationArea extends Component {
           >
             {record}
           </Button>
-        )
-      }
+        ),
+      },
     ];
-    this.state = {
-      result: {},
-      devices: this.props.devices,
-      variants: this.props.variants,
-      selected_deployments: {},
-      selected_devices: {},
+    this.state = {      
+      //selected_variants: {},
+      //selected_devices: {},
+      deployment_list: { deployments: {} },
+      device_list: { devices: {} },
       //selectedFile: null,
       //uploading: false,
       json_model: require("../resources/sample_input.json"),
       selected_variant_rowkeys: [],
       selected_device_rowkeys: [],
-      current_step: 0
+      setSelectedVariantRowKeys: this.setSelectedVariantRowKeys,
+      //setSelectedVariants: this.setSelectedVariants,
+      setDeploymentList: this.setDeploymentList,
+      setSelectedDeviceRowKeys: this.setSelectedDeviceRowKeys,
+      //setSelectedDevices: this.setSelectedDevices,
+      setDeviceList: this.setDeviceList,
+      current_step: 0,  
     };
   }
+
+  ///////////////////////////////
+  //  Setters for the context  //
+  ///////////////////////////////
+
+  setSelectedVariantRowKeys = (value) => {
+    console.log("setSelectedVariantRowKeys", value);
+    this.setState({ selected_variant_rowkeys: value });
+  };
+
+  setDeploymentList = (value) => {
+    console.log("setDeploymentList", value);
+    //var deployments = this.state.selected_variants;
+    //this.setState({ deployment_list: { deployments: deployments } });
+    this.setState({ deployment_list: value });
+  };
+
+  setSelectedDeviceRowKeys = (value) => {
+    console.log("setSelectedDeviceRowKeys", value);
+    this.setState({ selected_device_rowkeys: value });
+  };  
+
+  setDeviceList = (value) => {
+    console.log("setDeviceList", value);
+    this.setState({ device_list: value });
+  };
+
+  ///////////////////////////////
+  ///////////////////////////////
 
   next = () => {
     switch (this.state.current_step) {
@@ -185,145 +220,17 @@ export class DiversificationArea extends Component {
 
     axios
       .post("/api/z3", formData)
-      .then(res => {
+      .then((res) => {
         console.log("res.data", res.data);
         this.setState({ result: res.data });
       })
-      .catch(err => {
+      .catch((err) => {
         console.log("err", err);
       });
 
     // this.setState({
     //   uploading: false
     // });
-  };
-
-  // onVariantSelectChange = value => {
-  //   console.log("selectedVariantRowKeys changed: ", value);
-  //   this.setState({ selectedVariantRowKeys: value });
-  // };
-
-  // onVariantSelect = (record, selected, selectedRows, nativeEvent) => {
-  //   console.log(
-  //     "Selected variant: ",
-  //     record,
-  //     selected,
-  //     selectedRows,
-  //     nativeEvent
-  //   );
-  //   this.setState({
-  //     visible: selected
-  //   });
-  //   console.log("selected keys before", this.state.selectedVariantRowKeys);
-  // };
-
-  // onDeviceSelectChange = value => {
-  //   console.log("selectedDeviceRowKeys changed: ", value);
-  //   this.setState({ selectedDeviceRowKeys: value });
-  // };
-
-  // handleEdit = json => {
-  //   this.setState({ json_model: json.updated_src });
-  //   console.log(this.state.json_model);
-  // };
-
-  // handleUpload = () => {
-  //   //const { selectedFile } = this.state;
-  //   const formData = new FormData();
-  //   //formData.append("files", selectedFile, "script.py");
-  //   formData.append("json", JSON.stringify(this.state.json_model));
-
-  //   this.setState({
-  //     uploading: true
-  //   });
-
-  //   axios
-  //     .post("/api/z3", formData)
-  //     .then(res => {
-  //       console.log("res.data", res.data);
-  //       this.setState({ result: res.data });
-  //     })
-  //     .catch(err => {
-  //       console.log("err", err);
-  //     });
-
-  //   this.setState({
-  //     uploading: false
-  //   });
-  // };
-
-  // handleOk = value => {
-  //   this.setState({
-  //     visible: false
-  //   });
-  //   //TODO
-  //   console.log();
-  // };
-
-  // handleCancel = () => {
-  //   console.log("Clicked cancel button");
-  //   this.setState({
-  //     visible: false
-  //   });
-  //   //TODO deselect row
-  //   this.state.selectedVariantRowKeys.pop();
-  //   console.log("selected keys", this.state.selectedVariantRowKeys);
-  // };
-
-  // handleSubmit = e => {
-  //   e.preventDefault();
-  //   //TODO deploy selected variant to selected devices
-  //   const { form } = this.formRef.props;
-  //   form.validateFields((err, values) => {
-  //     if (!err) {
-  //       //values = this.removeDisabledFields(values);
-  //       console.log("Form submited", values);
-  //       //TODO return values to the parent
-  //       this.setState({
-  //         visible: false
-  //       });
-  //     } else {
-  //       message.warning("Please specify the deployment parameters!");
-  //     }
-  //   });
-  // };
-
-  saveFormRef = formRef => {
-    this.formRef = formRef;
-  };
-
-  handleVariantSelect = value => {
-    console.log("Received variants: ", value);
-    this.setState({ selected_variant_rowkeys: value });
-  };
-
-  handleDeviceSelect = value => {
-    console.log("Received devices: ", value);
-    this.setState({ selected_device_rowkeys: value });
-  };
-
-  handleDeploymentSelect = values => {
-    console.log("Selected deployments: ", values.deployments);
-    this.setState({ selected_deployments: values });
-
-    //TODO update the list of variants with deployment parameters and refresh the table
-    // var variants = this.props.variants;
-    // for (const key in values.deployments) {
-    //   //devices[entry].dep_params = values.deployments[entry];
-    //   console.log("variants", variants);
-    //   console.log("value", values.deployments[key]);
-
-    //   var foundIndex = variants.findIndex(entry => entry.id == key);
-    //   variants[foundIndex].dep_params = values.deployments[key];
-    //   this.props.variants[foundIndex].dep_params = values.deployments[key];
-    //   console.log("updated", variants[foundIndex]);
-    // }
-    // this.setState({ variants: variants });
-  };
-
-  handleTargetDeviceSelect = value => {
-    console.log("Selected devices!!!: ", value);
-    this.setState({ selected_devices: value });
   };
 
   render() {
@@ -334,27 +241,17 @@ export class DiversificationArea extends Component {
         title: "Variants",
         status: "process",
         content: (
-          <VariantStep
-            variants={this.props.variants}
-            selectedVariantRowKeys={this.state.selected_variant_rowkeys}
-            callbackVariantSelect={this.handleVariantSelect}
-            callbackDeploymentSelect={this.handleDeploymentSelect}
-          />
-        )
+          <DiversificationContext.Provider value={this.state}>
+            <VariantStep wrappedComponentRef={this.saveFormRef} callbackTabChange={this.props.callbackTabChange}/>
+          </DiversificationContext.Provider>
+        ),
       },
       {
         title: "Devices",
         status: "process",
         content: (
-          <DeviceStep
-            devices={this.props.devices}
-            deviceTags={this.props.deviceTags}
-            activeDeployments={this.props.activeDeployments}
-            selectedDeviceRowKeys={this.state.selected_device_rowkeys}
-            callbackDeviceSelect={this.handleDeviceSelect}
-            callbackTargetDeviceSelect={this.handleTargetDeviceSelect}
-          />
-        )
+          <DeviceStep callbackTabChange={this.props.callbackTabChange} />
+        ),
       },
       {
         title: "JSON",
@@ -364,63 +261,67 @@ export class DiversificationArea extends Component {
             json_deployments={this.state.selected_deployments}
             json_devices={this.state.selected_devices}
           />
-        )
+        ),
       },
       {
         title: "Z3 results",
         status: "process",
-        content: <Z3Step result={this.state.result} />
-      }
+        content: <Z3Step result={this.state.result} />,
+      },
     ];
 
     return (
-      <div>
-        <Row type="flex" justify="center" style={{ marginBottom: 20 }}>
-          <Col span={22}>
-            <Steps
-              current={current_step}
-              size="small"
-              //onChange={this.next}
-            >
-              {steps.map(item => (
-                <Step key={item.title} title={item.title} />
-              ))}
-            </Steps>
-          </Col>
-        </Row>
-        <Row type="flex" justify="center">
-          <Col span={22}>
-            <div className="steps-content">{steps[current_step].content}</div>
-            <div className="steps-action" align="center">
-              {current_step > 0 && (
-                <Button onClick={() => this.prev()}>Previous</Button>
-              )}
-              {current_step < 3 && (
-                <Button
-                  style={{ marginLeft: 8 }}
-                  type="primary"
-                  onClick={() => this.next()}
-                >
-                  Next
-                </Button>
-              )}
-              {current_step === 3 && (
-                <Button
-                  style={{ marginLeft: 8 }}
-                  type="primary"
-                  onClick={() => this.next()}
-                >
-                  Deploy
-                </Button>
-              )}
-            </div>
-          </Col>
-        </Row>
-      </div>
+      <DiversificationContext.Provider value={this.state}>
+        <div>
+          <Row type="flex" justify="center" style={{ marginBottom: 20 }}>
+            <Col span={22}>
+              <Steps
+                current={current_step}
+                size="small"
+                //onChange={this.next}
+              >
+                {steps.map((item) => (
+                  <Step key={item.title} title={item.title} />
+                ))}
+              </Steps>
+            </Col>
+          </Row>
+          <Row type="flex" justify="center">
+            <Col span={22}>
+              <div className="steps-content">{steps[current_step].content}</div>
+              <div className="steps-action" align="center">
+                {current_step > 0 && (
+                  <Button onClick={() => this.prev()}>Previous</Button>
+                )}
+                {current_step < 3 && (
+                  <Button
+                    style={{ marginLeft: 8 }}
+                    type="primary"
+                    onClick={() => this.next()}
+                  >
+                    Next
+                  </Button>
+                )}
+                {current_step === 3 && (
+                  <Button
+                    style={{ marginLeft: 8 }}
+                    type="primary"
+                    onClick={() => this.next()}
+                  >
+                    Deploy
+                  </Button>
+                )}
+              </div>
+            </Col>
+          </Row>
+        </div>
+      </DiversificationContext.Provider>
     );
   }
 
   componentDidMount() {
     //TODO
+    //this.setState({ variants: this.props.variants });
+    //console.log("TESTING", this.props.variants);
   }
 }

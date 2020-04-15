@@ -12,6 +12,7 @@ import { ModelArea } from "./ModelArea";
 import { DiversificationArea } from "./SMTDiversificationArea/DiversificationArea";
 import SingleDeploymentArea from "./ORDiversificationArea/SingleDeploymentArea";
 import MultipleDeploymentArea from "./ORDiversificationArea/MultipleDeploymentArea";
+import { GlobalContext } from "./GlobalContext";
 
 const { Footer, Content } = Layout;
 const { TabPane } = Tabs;
@@ -32,37 +33,38 @@ class App extends Component {
       templateTags: {},
       deviceTags: {},
       activeDeployments: {},
-      activeTab: "7"
+      activeTab: "7",
+      handleTabChange: this.handleTabChange,
     };
     this.Tabs = React.createRef();
   }
 
   componentDidMount() {
     this.getDeployments()
-      .then(result => this.setState({ deployments: result }))
+      .then((result) => this.setState({ deployments: result }))
       .then(() => this.getAppliedDevices())
-      .then(result => this.setState({ appliedDevices: result }))
+      .then((result) => this.setState({ appliedDevices: result }))
       .then(() => this.getTargetedDevices())
-      .then(result => this.setState({ targetedDevices: result }))
+      .then((result) => this.setState({ targetedDevices: result }))
       .then(() => this.getActiveDeployments())
-      .then(result => this.setState({ activeDeployments: result }));
+      .then((result) => this.setState({ activeDeployments: result }));
     this.getDevices()
-      .then(result => this.setState({ devices: result }))
+      .then((result) => this.setState({ devices: result }))
       .then(() => this.getDeviceTags())
-      .then(result => this.setState({ deviceTags: result }));
+      .then((result) => this.setState({ deviceTags: result }));
     this.getTemplates()
-      .then(result => {
+      .then((result) => {
         this.setState({ templates: result });
       })
       .then(() => this.getTemplateTags())
-      .then(result => this.setState({ templateTags: result }));
-    this.getVariants().then(result => {
+      .then((result) => this.setState({ templateTags: result }));
+    this.getVariants().then((result) => {
       this.setState({ variants: result });
     });
     //this.getActiveDeployments();
   }
 
-  handleTabChange = tabNo => {
+  handleTabChange = (tabNo) => {
     this.setState({ activeTab: tabNo });
   };
 
@@ -77,144 +79,141 @@ class App extends Component {
       activeDeployments,
       templateTags,
       deviceTags,
-      activeTab
+      activeTab,
     } = this.state;
 
     return (
-      <div className="App">
-        <Layout style={{ minHeight: "100vh" }}>
-          {/* <Header></Header> */}
+      <GlobalContext.Provider value={this.state}>
+        <div className="App">
+          <Layout style={{ minHeight: "100vh" }}>
+            {/* <Header></Header> */}
 
-          <Content
-            style={{ background: "#fff", padding: 0, textAlign: "left" }}
-          >
-            <Tabs
-              id="Tabs"
-              activeKey={activeTab}
-              ref={this.Tabs}
-              onTabClick={tab => this.handleTabChange(tab)}
-              // tabBarExtraContent={operations}
+            <Content
+              style={{ background: "#fff", padding: 0, textAlign: "left" }}
             >
-              <TabPane
-                disabled
-                key="logo"
-                tab={
-                  <span>
-                    <img
-                      style={{ height: "40px" }}
-                      src="https://enact-project.eu/img/logo-enact-blue2.png"
-                      alt="logo enact"
-                    />
-                  </span>
-                }
-              ></TabPane>
-              <TabPane
-                key="1"
-                tab={
-                  <span>
-                    <Icon type="book" />
-                    Templates
-                  </span>
-                }
+              <Tabs
+                id="Tabs"
+                activeKey={activeTab}
+                ref={this.Tabs}
+                onTabClick={(tab) => this.handleTabChange(tab)}
+                // tabBarExtraContent={operations}
               >
-                <TemplateArea2
-                  templates={templates}
-                  variants={variants}
-                  templateTags={templateTags}
-                  callbackTabChange={this.handleTabChange}
-                  callbackAddTemplate={this.addTemplate}
-                />
-              </TabPane>
-              <TabPane
-                key="2"
-                tab={
-                  <span>
-                    <Icon type="branches" />
-                    Variants
-                  </span>
-                }
-              >
-                <VariantArea2
-                  variants={variants}
-                  templates={templates}
-                  callbackTabChange={this.handleTabChange}
-                  callbackAddVariant={this.addVariant}
-                />
-              </TabPane>
-              <TabPane
-                key="3"
-                tab={
-                  <span>
-                    <Icon type="deployment-unit" />
-                    Deployments
-                  </span>
-                }
-              >
-                <DeploymentArea
-                  deployments={deployments}
-                  appliedDevices={appliedDevices}
-                  targetedDevices={targetedDevices}
-                  callbackTabChange={this.handleTabChange}
-                />
-              </TabPane>
-              <TabPane
-                key="4"
-                tab={
-                  <span>
-                    <Icon type="bulb" />
-                    Devices
-                  </span>
-                }
-              >
-                <DeviceArea
-                  devices={devices}
-                  deployments={deployments}
-                  activeDeployments={activeDeployments}
-                  appliedDevices={appliedDevices}
-                  deviceTags={deviceTags}
-                  callbackTabChange={this.handleTabChange}
-                />
-              </TabPane>
-              <TabPane
-                key="5"
-                tab={
-                  <span>
-                    <Icon type="control" />
-                    Control
-                  </span>
-                }
-              >
-                <ControlArea />
-              </TabPane>
-              <TabPane
-                key="6"
-                tab={
-                  <span>
-                    <Icon type="profile" />
-                    Repository
-                  </span>
-                }
-              >
-                <ModelArea />
-              </TabPane>
-              <TabPane
-                key="7"
-                tab={
-                  <span>
-                    <Icon type="code" />
-                    Z3
-                  </span>
-                }
-              >
-                <DiversificationArea devices={devices}
-                  variants={variants}
-                  deployments={deployments}
-                  activeDeployments={activeDeployments}
-                  appliedDevices={appliedDevices}
-                  deviceTags={deviceTags}
-                  callbackTabChange={this.handleTabChange}/>
-              </TabPane>
-              {/* <TabPane
+                <TabPane
+                  disabled
+                  key="logo"
+                  tab={
+                    <span>
+                      <img
+                        style={{ height: "40px" }}
+                        src="https://enact-project.eu/img/logo-enact-blue2.png"
+                        alt="logo enact"
+                      />
+                    </span>
+                  }
+                ></TabPane>
+                <TabPane
+                  key="1"
+                  tab={
+                    <span>
+                      <Icon type="book" />
+                      Templates
+                    </span>
+                  }
+                >
+                  <TemplateArea2
+                    templates={templates}
+                    variants={variants}
+                    templateTags={templateTags}
+                    callbackTabChange={this.handleTabChange}
+                    callbackAddTemplate={this.addTemplate}
+                  />
+                </TabPane>
+                <TabPane
+                  key="2"
+                  tab={
+                    <span>
+                      <Icon type="branches" />
+                      Variants
+                    </span>
+                  }
+                >
+                  <VariantArea2
+                    variants={variants}
+                    templates={templates}
+                    callbackTabChange={this.handleTabChange}
+                    callbackAddVariant={this.addVariant}
+                  />
+                </TabPane>
+                <TabPane
+                  key="3"
+                  tab={
+                    <span>
+                      <Icon type="deployment-unit" />
+                      Deployments
+                    </span>
+                  }
+                >
+                  <DeploymentArea
+                    deployments={deployments}
+                    appliedDevices={appliedDevices}
+                    targetedDevices={targetedDevices}
+                    callbackTabChange={this.handleTabChange}
+                  />
+                </TabPane>
+                <TabPane
+                  key="4"
+                  tab={
+                    <span>
+                      <Icon type="bulb" />
+                      Devices
+                    </span>
+                  }
+                >
+                  <DeviceArea
+                    devices={devices}
+                    deployments={deployments}
+                    activeDeployments={activeDeployments}
+                    appliedDevices={appliedDevices}
+                    deviceTags={deviceTags}
+                    callbackTabChange={this.handleTabChange}
+                  />
+                </TabPane>
+                <TabPane
+                  key="5"
+                  tab={
+                    <span>
+                      <Icon type="control" />
+                      Control
+                    </span>
+                  }
+                >
+                  <ControlArea />
+                </TabPane>
+                <TabPane
+                  key="6"
+                  tab={
+                    <span>
+                      <Icon type="profile" />
+                      Repository
+                    </span>
+                  }
+                >
+                  <ModelArea />
+                </TabPane>
+                <TabPane
+                  key="7"
+                  tab={
+                    <span>
+                      <Icon type="code" />
+                      Z3
+                    </span>
+                  }
+                >
+                  <DiversificationArea
+                    callbackTabChange={this.handleTabChange}
+                  />
+                </TabPane>
+                {/* <TabPane
                 key="8"
                 tab={
                   <span>
@@ -233,44 +232,45 @@ class App extends Component {
                   callbackTabChange={this.handleTabChange}
                 />
               </TabPane> */}
-              <TabPane
-                key="9"
-                tab={
-                  <span>
-                    <Icon type="control" />
-                    OR-Tools
-                  </span>
-                }
-              >
-                <MultipleDeploymentArea
-                  devices={devices}
-                  variants={variants}
-                  deployments={deployments}
-                  activeDeployments={activeDeployments}
-                  appliedDevices={appliedDevices}
-                  deviceTags={deviceTags}
-                  callbackTabChange={this.handleTabChange}
-                />
-              </TabPane>
-            </Tabs>
-          </Content>
+                <TabPane
+                  key="9"
+                  tab={
+                    <span>
+                      <Icon type="control" />
+                      OR-Tools
+                    </span>
+                  }
+                >
+                  <MultipleDeploymentArea
+                    devices={devices}
+                    variants={variants}
+                    deployments={deployments}
+                    activeDeployments={activeDeployments}
+                    appliedDevices={appliedDevices}
+                    deviceTags={deviceTags}
+                    callbackTabChange={this.handleTabChange}
+                  />
+                </TabPane>
+              </Tabs>
+            </Content>
 
-          <Footer>
-            <p>
-              This work is supported by{" "}
-              <a href="https://www.enact-project.eu/">ENACT</a>.
-            </p>
-            <p>
-              {" "}
-              Please visit{" "}
-              <a href="https://github.com/SINTEF-9012/divenact">
-                <Icon type="github" />
-              </a>{" "}
-              for further details.
-            </p>
-          </Footer>
-        </Layout>
-      </div>
+            <Footer>
+              <p>
+                This work is supported by{" "}
+                <a href="https://www.enact-project.eu/">ENACT</a>.
+              </p>
+              <p>
+                {" "}
+                Please visit{" "}
+                <a href="https://github.com/SINTEF-9012/divenact">
+                  <Icon type="github" />
+                </a>{" "}
+                for further details.
+              </p>
+            </Footer>
+          </Layout>
+        </div>
+      </GlobalContext.Provider>
     );
   }
 
@@ -279,12 +279,12 @@ class App extends Component {
     if (!deployment) return;
     axios
       .post("/api/deployments/create", { deployment })
-      .then(res =>
+      .then((res) =>
         this.setState({
-          deployments: [...this.state.deployments, res.data.newDeployment]
+          deployments: [...this.state.deployments, res.data.newDeployment],
         })
       )
-      .catch(err =>
+      .catch((err) =>
         alert(`Failed to create deployment\n${JSON.stringify(err)}`)
       );
   };
@@ -295,8 +295,8 @@ class App extends Component {
     if (!doDelete) return;
     axios
       .delete("/api/deployments/")
-      .then(res => this.setState({ deployments: [] }))
-      .catch(err =>
+      .then((res) => this.setState({ deployments: [] }))
+      .catch((err) =>
         alert(`Failed to delete all deployments\n${JSON.stringify(err)}`)
       );
   };
@@ -349,12 +349,12 @@ class App extends Component {
   getActiveDeployments = async () => {
     let result = {};
     //let deployments = (await axios.get('api/deployment')).data;
-    this.state.deployments.forEach(async deployment => {
+    this.state.deployments.forEach(async (deployment) => {
       //result[deployment.id]
       let devices = (
         await axios.get("api/deployment/" + deployment.id + "/applied")
       ).data;
-      devices.forEach(device => {
+      devices.forEach((device) => {
         result[device.deviceId] = [deployment.id];
       });
     });
@@ -368,7 +368,7 @@ class App extends Component {
   getAppliedDevices = async () => {
     let result = {};
     //let deployments = (await axios.get('api/deployment')).data;
-    this.state.deployments.forEach(async deployment => {
+    this.state.deployments.forEach(async (deployment) => {
       result[deployment.id] = (
         await axios.get("api/deployment/" + deployment.id + "/applied")
       ).data;
@@ -382,7 +382,7 @@ class App extends Component {
   getTargetedDevices = async () => {
     let result = {};
     //let deployments = (await axios.get('api/deployment')).data;
-    this.state.deployments.forEach(async deployment => {
+    this.state.deployments.forEach(async (deployment) => {
       result[deployment.id] = (
         await axios.get("api/deployment/" + deployment.id + "/targeted")
       ).data;
@@ -395,7 +395,7 @@ class App extends Component {
    */
   getTemplateTags = async () => {
     let result = {};
-    this.state.templates.forEach(template => {
+    this.state.templates.forEach((template) => {
       result[template.id] = template.property.predefinedtag;
     });
     return result;
@@ -406,7 +406,7 @@ class App extends Component {
    */
   getDeviceTags = async () => {
     let result = {};
-    this.state.devices.forEach(device => {
+    this.state.devices.forEach((device) => {
       result[device.id] = device.tags;
     });
     //console.log(result);
@@ -416,18 +416,18 @@ class App extends Component {
   /**
    * Add new template (either by copying or creating a new one)
    */
-  addTemplate = async newTemplate => {
+  addTemplate = async (newTemplate) => {
     this.setState({
-      templates: [...this.state.templates, newTemplate]
+      templates: [...this.state.templates, newTemplate],
     });
   };
 
   /**
    * Add new variant (either by copying or creating a new one)
    */
-  addVariant = async newVariant => {
+  addVariant = async (newVariant) => {
     this.setState({
-      variants: [...this.state.variants, newVariant]
+      variants: [...this.state.variants, newVariant],
     });
   };
 }

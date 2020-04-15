@@ -84,7 +84,7 @@ class SMTForm extends Component {
   };
 
   render() {
-    const { visible, onCancel, onCreate } = this.props;
+    const { visible, onCancel, onOk } = this.props;
     const { getFieldDecorator } = this.props.form;
     const formItemLayout = {
       labelCol: { span: 8 },
@@ -106,15 +106,15 @@ class SMTForm extends Component {
             </Button>
           </div>
         }
-        okText="Submit"
+        okText="OK"
         onCancel={onCancel}
-        onOk={onCreate}
+        onOk={onOk}
         width={650}
       >
         <Form
           {...formItemLayout}
           validateMessages={validateMessages}
-          onSubmit={this.handleSubmit}
+          //onSubmit={this.handleSubmit}
         >
           {/* <Form.Item label="Deployment ID">
             <Row>

@@ -3,6 +3,8 @@ import axios from "axios";
 import ReactJson from "react-json-view";
 import AceEditor from "react-ace";
 import yaml from "js-yaml";
+import { DiversificationContext } from "./DiversificationContext";
+import { GlobalContext } from "../GlobalContext";
 
 import "ace-builds/src-noconflict/mode-sass";
 import "ace-builds/src-noconflict/theme-github";
@@ -12,16 +14,16 @@ import { Col, Row, Typography } from "antd";
 const { Title } = Typography;
 
 export class JsonYamlStep extends Component {
+  static contextType = DiversificationContext;
+
   constructor(props) {
     super(props);
     this.state = {
-      devices: this.props.devices,
-      variants: this.props.variants,
-      json_model: require("../resources/sample_input.json")
+      json_model: require("../resources/sample_input.json"),
     };
   }
 
-  handleEdit = json => {
+  handleEdit = (json) => {
     this.setState({ json_model: json.updated_src });
     console.log(this.state.json_model);
   };
@@ -33,21 +35,21 @@ export class JsonYamlStep extends Component {
     formData.append("json", JSON.stringify(this.state.json_model));
 
     this.setState({
-      uploading: true
+      uploading: true,
     });
 
     axios
       .post("/api/z3", formData)
-      .then(res => {
+      .then((res) => {
         console.log("res.data", res.data);
         this.setState({ result: res.data });
       })
-      .catch(err => {
+      .catch((err) => {
         console.log("err", err);
       });
 
     this.setState({
-      uploading: false
+      uploading: false,
     });
   };
 
@@ -96,8 +98,8 @@ export class JsonYamlStep extends Component {
           <Title level={4}>Verify the input JSON model</Title>
           <ReactJson
             src={Object.assign(
-              this.props.json_deployments,
-              this.props.json_devices
+              this.context.deployment_list,
+              this.context.device_list
             )}
             theme="apathy:inverted"
             collapsed={2}
@@ -117,11 +119,11 @@ export class JsonYamlStep extends Component {
             editorProps={{ $blockScrolling: true }}
             value={yaml.safeDump(
               Object.assign(
-                this.props.json_deployments,
-                this.props.json_devices
+                this.context.deployment_list,
+                this.context.device_list
               )
-            )}            
-          />          
+            )}
+          />
         </Col>
       </Row>
     );

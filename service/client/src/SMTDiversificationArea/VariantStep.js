@@ -1,14 +1,18 @@
 import React, { Component } from "react";
 import { Button, message, Table } from "antd";
 import SMTForm from "./SMTForm";
+import { DiversificationContext } from "./DiversificationContext";
+import { GlobalContext } from "../GlobalContext";
 
 export class VariantStep extends Component {
+  static contextType = DiversificationContext;
+
   constructor(props) {
     super(props);
     this.variant_columns = [
       {
         title: "Variant ID",
-        dataIndex: "id"
+        dataIndex: "id",
       },
       {
         title: "Template",
@@ -17,76 +21,70 @@ export class VariantStep extends Component {
           <Button type="link" onClick={() => this.props.callbackTabChange("1")}>
             {record.template}
           </Button>
-        )
+        ),
       },
       {
         title: "Deployment parameters",
         dataIndex: "params",
         render: (text, record) =>
-          record.dep_params === null ? (
+          this.context.deployment_list.deployments[record.id] ? (
             <Button
               type="link"
-              onClick={() => message.success("Deployment parameters")}
+              onClick={() =>
+                message.success(
+                  "Deployment parameters: " +
+                    JSON.stringify(
+                      this.context.deployment_list.deployments[record.id]
+                    )
+                )
+              }
             >
               View
             </Button>
           ) : (
-            "nothing"
-          )
-      }
+            ""
+          ),
+      },
     ];
     this.state = {
-      deployment_list: { deployments: {} },
-      variants: this.props.variants,
-      //ModalText: "Specify deployment paramaters",
-      //selected_variant_rowkeys: this.props.selectedVariantRowKeys,
-      visible: false
+      visible: false,
     };
   }
 
-  onVariantSelectChange = value => {
-    //console.log("selectedVariantRowKeys changed: ", value);
-    //this.setState({ selected_variant_rowkeys: value });
-    this.props.callbackVariantSelect(value);
+  handleVariantSelectChange = (value) => {
+    console.log("Selected variants changed: ", value);
+    this.context.setSelectedVariantRowKeys(value);
   };
 
-  onVariantSelect = (record, selected, selectedRows, nativeEvent) => {
+  handleVariantSelect = (record, selected, selectedRows, nativeEvent) => {
     this.setState({
-      visible: selected
+      visible: selected,
     });
-  };
-
-  handleOk = value => {
-    this.setState({
-      visible: false
-    });
-    //TODO
-    console.log();
+    if (!selected) {
+      var deployment_list = this.context.deployment_list;
+      delete deployment_list.deployments[record.id];
+      this.context.setDeploymentList(deployment_list);
+    }
   };
 
   handleCancel = () => {
-    console.log("Clicked cancel button");
+    //TODO form.reset()
     this.setState({
-      visible: false
+      visible: false,
     });
-    //TODO deselect row - not sure if this is the right way of doing this
-    this.props.selected_variant_rowkeys.pop();
-    console.log("selected keys", this.props.selected_variant_rowkeys);
+    var selected_variant_rowkeys = this.context.selected_variant_rowkeys;
+    selected_variant_rowkeys.pop();
+    this.context.setSelectedVariantRowKeys(selected_variant_rowkeys);
   };
 
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     e.preventDefault();
-    //TODO deploy selected variant to selected devices
     const { form } = this.formRef.props;
     form.validateFields((err, values) => {
       if (!err) {
-        //values = this.removeDisabledFields(values);
-        console.log("Form submited!!!!", values);
-        //TODO pack form values into an object
         this.parseFormValues(values);
-        this.props.callbackDeploymentSelect(this.state.deployment_list);
         this.setState({
-          visible: false
+          visible: false,
         });
       } else {
         message.warning("Please specify the deployment parameters!");
@@ -94,58 +92,85 @@ export class VariantStep extends Component {
     });
   };
 
-  parseFormValues = values => {
-    var depl_list = this.state.deployment_list;
+  parseFormValues = (values) => {
+    var deployment_list = this.context.deployment_list;
     //var depl_id = "dp" + depl_list.length;
-    var depl_id = this.props.selectedVariantRowKeys.slice(-1)[0];
-    depl_list.deployments[depl_id] = values;
-    this.setState({ depl_list: depl_list });
-
-    //console.log("state", this.state.deployment_list);
-    //console.log("result", depl_list);
+    var deployment_id = this.context.selected_variant_rowkeys.slice(-1)[0];
+    deployment_list.deployments[deployment_id] = values;
+    this.context.setDeploymentList(deployment_list);
   };
 
-  saveFormRef = formRef => {
+  handleReset = (e) => {
+    this.setState({ vsn: null });
+    this.setState({ vsn_toggle: false });
+    this.setState({ compu_level: null });
+    this.setState({ compu_level_toggle: false });
+    this.setState({ comm_level: null });
+    this.setState({ comm_level_toggle: false });
+    this.setState({ dp_acc: null });
+    this.setState({ dp_acc_toggle: false });
+    this.setState({ intlmodule: null });
+    this.setState({ intlmodule_toggle: false });
+
+    this.props.form.resetFields();
+    console.log("Form cleared!");
+  };
+
+  removeDisabledFields = (values) => {
+    //add more fields if needed
+    if (this.state.vsn_toggle) delete values.vsn;
+    if (this.state.compu_level_toggle) delete values.compu_level;
+    if (this.state.comm_level_toggle) delete values.comm_level;
+    if (this.state.dp_acc_toggle) delete values.dp_acc;
+    if (this.state.intlmodule_toggle) delete values.intlmodule;
+    return values;
+  };
+
+  saveFormRef = (formRef) => {
     this.formRef = formRef;
   };
 
   render() {
-    //const { selected_variant_rowkeys } = this.state;
     const variant_row_selection = {
       columnTitle: " ", //this line is to hide the "Select all" checkbox
-      selectedRowKeys: this.props.selectedVariantRowKeys,
-      onChange: this.onVariantSelectChange,
-      onSelect: this.onVariantSelect
+      selectedRowKeys: this.context.selected_variant_rowkeys,
+      onChange: this.handleVariantSelectChange,
+      onSelect: this.handleVariantSelect,
       //type: "radio"
     };
 
+    const formItemLayout = {
+      labelCol: { span: 8 },
+      wrapperCol: { span: 16 },
+    };
+
+    const validateMessages = {
+      required: "'${name}' is a required field!",
+    };
+
     return (
-      <div>
-        <Table
-          //bordered
-          rowSelection={variant_row_selection}
-          rowKey={record => record.id}
-          size="small"
-          dataSource={this.props.variants}
-          columns={this.variant_columns}
-          pagination={{ pageSize: 50 }}
-          scroll={{ y: true }}
-        />
-        {/* <Modal
-              title={"Specify deployment parameters"}
-              visible={visible}
-              onOk={this.handleOk}
-              confirmLoading={confirmLoading}
+      <GlobalContext.Consumer>
+        {({ variants }) => (
+          <div>
+            <Table
+              //bordered
+              rowSelection={variant_row_selection}
+              rowKey={(record) => record.id}
+              size="small"
+              dataSource={variants}
+              columns={this.variant_columns}
+              pagination={{ pageSize: 50 }}
+              scroll={{ y: true }}
+            />
+            <SMTForm
+              wrappedComponentRef={this.saveFormRef}
+              visible={this.state.visible}
               onCancel={this.handleCancel}
-            > */}
-        <SMTForm
-          wrappedComponentRef={this.saveFormRef}
-          visible={this.state.visible}
-          onCancel={this.handleCancel}
-          onCreate={this.handleSubmit}
-        />
-        {/* </Modal> */}
-      </div>
+              onOk={this.handleSubmit}
+            />
+          </div>
+        )}
+      </GlobalContext.Consumer>
     );
   }
 
