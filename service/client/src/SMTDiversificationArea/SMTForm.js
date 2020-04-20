@@ -1,14 +1,5 @@
 import React, { Component } from "react";
-import {
-  Form,
-  Select,
-  Switch,
-  Row,
-  Col,
-  Button,
-  Modal,
-  Input
-} from "antd";
+import { Form, Select, Switch, Row, Col, Button, Modal } from "antd";
 
 const { Option } = Select;
 
@@ -17,10 +8,6 @@ class SMTForm extends Component {
     super(props);
 
     this.state = {
-      //parameters passed from the parent
-      matchingDevices: [],
-      devices: this.props.devices,
-
       //formValues: {
       vsn: null,
       vsn_toggle: false,
@@ -39,7 +26,7 @@ class SMTForm extends Component {
 
       //validation messages
       myValidateHelp: "",
-      myValidateStatus: ""
+      myValidateStatus: "",
     };
   }
 
@@ -57,7 +44,7 @@ class SMTForm extends Component {
   //   });
   // };
 
-  handleReset = e => {
+  handleReset = (e) => {
     this.setState({ vsn: null });
     this.setState({ vsn_toggle: false });
     this.setState({ compu_level: null });
@@ -73,7 +60,7 @@ class SMTForm extends Component {
     console.log("Form cleared!");
   };
 
-  removeDisabledFields = values => {
+  removeDisabledFields = (values) => {
     //add more fields if needed
     if (this.state.vsn_toggle) delete values.vsn;
     if (this.state.compu_level_toggle) delete values.compu_level;
@@ -88,11 +75,7 @@ class SMTForm extends Component {
     const { getFieldDecorator } = this.props.form;
     const formItemLayout = {
       labelCol: { span: 8 },
-      wrapperCol: { span: 16 }
-    };
-
-    const validateMessages = {
-      required: "'${name}' is a required field!"
+      wrapperCol: { span: 16 },
     };
 
     return (
@@ -113,7 +96,7 @@ class SMTForm extends Component {
       >
         <Form
           {...formItemLayout}
-          validateMessages={validateMessages}
+          //validateMessages={validateMessages}
           //onSubmit={this.handleSubmit}
         >
           {/* <Form.Item label="Deployment ID">
@@ -136,12 +119,12 @@ class SMTForm extends Component {
             label={
               <span>
                 <Switch
-                  //defaultChecked
-                  checked={!this.state.vsn_toggle}
+                  defaultChecked
+                  //checked={!this.state.vsn_toggle}
                   size="small"
                   onClick={() => {
                     this.setState({
-                      vsn_toggle: !this.state.vsn_toggle
+                      vsn_toggle: !this.state.vsn_toggle,
                     });
                   }}
                 />{" "}
@@ -153,19 +136,19 @@ class SMTForm extends Component {
               <Col>
                 {getFieldDecorator("vsn", {
                   hidden: this.state.vsn_toggle,
-                  initialValue: this.state.vsn,
+                  //initialValue: this.state.vsn,
                   rules: [
                     {
                       required: true,
-                      type: "string"
-                    }
-                  ]
+                      type: "string",
+                    },
+                  ],
                 })(
                   <Select
                     mode="single"
                     placeholder="Please select version"
                     disabled={this.state.vsn_toggle}
-                    onChange={value => this.setState({ vsn: value })}
+                    onChange={(value) => this.setState({ vsn: value })}
                   >
                     <Option value="release">Release</Option>
                     <Option value="development">Development</Option>
@@ -179,11 +162,12 @@ class SMTForm extends Component {
             label={
               <span>
                 <Switch
-                  checked={!this.state.compu_level_toggle}
+                  defaultChecked
+                  //checked={!this.state.compu_level_toggle}
                   size="small"
                   onClick={() => {
                     this.setState({
-                      compu_level_toggle: !this.state.compu_level_toggle
+                      compu_level_toggle: !this.state.compu_level_toggle,
                     });
                   }}
                 />{" "}
@@ -195,19 +179,19 @@ class SMTForm extends Component {
               <Col>
                 {getFieldDecorator("compu_level", {
                   hidden: this.state.compu_level_toggle,
-                  initialValue: this.state.compu_level,
+                  //initialValue: this.state.compu_level,
                   rules: [
                     {
                       required: true,
-                      type: "integer"
-                    }
-                  ]
+                      type: "integer",
+                    },
+                  ],
                 })(
                   <Select
                     mode="single"
                     placeholder="Please select computation level"
                     disabled={this.state.compu_level_toggle}
-                    onChange={value => this.setState({ compu_level: value })}
+                    onChange={(value) => this.setState({ compu_level: value })}
                   >
                     <Option value={1}>1</Option>
                     <Option value={2}>2</Option>
@@ -221,11 +205,12 @@ class SMTForm extends Component {
             label={
               <span>
                 <Switch
-                  checked={!this.state.comm_level_toggle}
+                  defaultChecked
+                  //checked={!this.state.comm_level_toggle}
                   size="small"
                   onClick={() => {
                     this.setState({
-                      comm_level_toggle: !this.state.comm_level_toggle
+                      comm_level_toggle: !this.state.comm_level_toggle,
                     });
                   }}
                 />{" "}
@@ -237,19 +222,19 @@ class SMTForm extends Component {
               <Col>
                 {getFieldDecorator("comm_level", {
                   hidden: this.state.comm_level_toggle,
-                  initialValue: this.state.comm_level,
+                  //initialValue: this.state.comm_level,
                   rules: [
                     {
                       required: true,
-                      type: "integer"
-                    }
-                  ]
+                      type: "integer",
+                    },
+                  ],
                 })(
                   <Select
                     mode="single"
                     placeholder="Please select communication level"
                     disabled={this.state.comm_level_toggle}
-                    onChange={value => this.setState({ comm_level: value })}
+                    onChange={(value) => this.setState({ comm_level: value })}
                   >
                     <Option value={1}>1</Option>
                     <Option value={2}>2</Option>
@@ -263,11 +248,12 @@ class SMTForm extends Component {
             label={
               <span>
                 <Switch
-                  checked={!this.state.dp_acc_toggle}
+                  defaultChecked
+                  //checked={!this.state.dp_acc_toggle}
                   size="small"
                   onClick={() => {
                     this.setState({
-                      dp_acc_toggle: !this.state.dp_acc_toggle
+                      dp_acc_toggle: !this.state.dp_acc_toggle,
                     });
                   }}
                 />{" "}
@@ -279,19 +265,19 @@ class SMTForm extends Component {
               <Col>
                 {getFieldDecorator("dp_acc", {
                   hidden: this.state.dp_acc_toggle,
-                  initialValue: this.state.dp_acc,
+                  //initialValue: this.state.dp_acc,
                   rules: [
                     {
                       required: true,
-                      type: "string"
-                    }
-                  ]
+                      type: "string",
+                    },
+                  ],
                 })(
                   <Select
                     mode="single"
                     placeholder="Please select hardware acceleration"
                     disabled={this.state.dp_acc_toggle}
-                    onChange={value => this.setState({ dp_acc: value })}
+                    onChange={(value) => this.setState({ dp_acc: value })}
                   >
                     <Option value="acc_none">None</Option>
                     <Option value="tpu">TPU</Option>
@@ -304,11 +290,12 @@ class SMTForm extends Component {
             label={
               <span>
                 <Switch
-                  checked={!this.state.intlmodule_toggle}
+                  defaultChecked
+                  //checked={!this.state.intlmodule_toggle}
                   size="small"
                   onClick={() => {
                     this.setState({
-                      intlmodule_toggle: !this.state.intlmodule_toggle
+                      intlmodule_toggle: !this.state.intlmodule_toggle,
                     });
                   }}
                 />{" "}
@@ -320,19 +307,19 @@ class SMTForm extends Component {
               <Col>
                 {getFieldDecorator("intlmodule", {
                   hidden: this.state.intlmodule_toggle,
-                  initialValue: this.state.intlmodule,
+                  //initialValue: this.state.intlmodule,
                   rules: [
                     {
                       required: true,
-                      type: "string"
-                    }
-                  ]
+                      type: "string",
+                    },
+                  ],
                 })(
                   <Select
                     mode="single"
                     placeholder="Please select intelligence module"
                     disabled={this.state.intlmodule_toggle}
-                    onChange={value => this.setState({ intlmodule: value })}
+                    onChange={(value) => this.setState({ intlmodule: value })}
                   >
                     <Option value="edge">Edge</Option>
                     <Option value="cloud">Cloud</Option>
@@ -362,4 +349,7 @@ class SMTForm extends Component {
   }
 }
 
-export default Form.create({ name: "smt_form" })(SMTForm);
+export default Form.create({
+  name: "smt_form",
+  //validateMEssages: { required: "'${name}' is a required field!" },
+})(SMTForm);

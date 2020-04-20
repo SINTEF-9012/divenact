@@ -64,7 +64,8 @@ export class VariantStep extends Component {
   };
 
   handleCancel = () => {
-    //TODO form.reset()
+    const { form } = this.formRef.props;
+    form.resetFields();
     this.setState({
       visible: false,
     });
@@ -79,6 +80,7 @@ export class VariantStep extends Component {
     form.validateFields((err, values) => {
       if (!err) {
         this.parseFormValues(values);
+        form.resetFields();
         this.setState({
           visible: false,
         });
