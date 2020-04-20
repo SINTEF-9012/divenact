@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import { Button, message, Table } from "antd";
+import { Button, message, Table, Modal } from "antd";
 import SMTForm from "./SMTForm";
 import { DiversificationContext } from "./DiversificationContext";
 import { GlobalContext } from "../GlobalContext";
+import ReactJson from "react-json-view";
 
 export class VariantStep extends Component {
   static contextType = DiversificationContext;
@@ -31,12 +32,7 @@ export class VariantStep extends Component {
             <Button
               type="link"
               onClick={() =>
-                message.success(
-                  "Deployment parameters: " +
-                    JSON.stringify(
-                      this.context.deployment_list.deployments[record.id]
-                    )
-                )
+                this.showParameters(record)                
               }
             >
               View
@@ -128,6 +124,20 @@ export class VariantStep extends Component {
 
   saveFormRef = (formRef) => {
     this.formRef = formRef;
+  };
+
+  showParameters = (record) => {
+    Modal.info({
+      title: 'Deployment parameters for: ' + record.id,
+      content: (
+        <ReactJson
+            src={this.context.deployment_list.deployments[record.id]}
+            theme="apathy:inverted"            
+          />
+      ),
+      onOk() {},
+
+    });
   };
 
   render() {
