@@ -21,5 +21,8 @@ class Diversifier:
     def penalty_steps(self):
         expect = (len(self.devices)+0.0) / len(self.deployments)
         threshold = int(expect * 0.75)
+        upthreashold = int(expect * 1.25)
         for dp in self.deployments:
-            self.solver.add_soft(self.count_deploy(dp) > threshold, 1)
+            None
+            self.solver.add_soft(self.count_deploy(dp) > threshold, 20)
+            #self.solver.add_soft(self.count_deploy(dp) < upthreashold, 20)

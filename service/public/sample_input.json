@@ -1,1 +1,1 @@
-{"deployments":{"text-hat-hello":{"vsn":"release","compu_level":1,"comm_level":1,"dp_acc":"acc_none","intlmodule":"flexible"}},"devices":{"dv0":{"env":"production","dv_acc":"acc_none","network":"4g","powersource":"ac"}}}
+{"deployments":{"text-hat-hello":{"vsn":"release","compu_level":2,"comm_level":3,"dp_acc":"tpu","intlmodule":"flexible"}},"devices":{"PiEdge5":{"environment":"shuffle_hat-red","capability":"sensehat"}}}
