@@ -200,15 +200,15 @@ export class DiversificationArea extends Component {
     //const { selectedFile } = this.state;
     console.log(
       "Solving with: ",
-      this.state.selected_deployments,
-      this.state.selected_devices
+      this.state.deployment_list,
+      this.state.device_list
     );
     const formData = new FormData();
-    //formData.append("files", selectedFile, "script.py");
+    //formData.append("files", selectedFile, "script.py");    
     var json = JSON.stringify(
       Object.assign(
-        this.state.selected_deployments,
-        this.state.selected_devices
+        this.state.deployment_list,
+        this.state.device_list
       )
     );
     console.log("json", json);
