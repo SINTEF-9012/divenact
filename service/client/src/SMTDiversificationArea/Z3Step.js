@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import ReactJson from "react-json-view";
-import { Col, Row, Typography } from "antd";
+import { Col, Row, Typography, Input, Spin } from "antd";
+import { DiversificationContext } from "./DiversificationContext";
 
+const { TextArea } = Input;
 const { Title } = Typography;
 const colors = [
   "blue",
@@ -12,18 +14,18 @@ const colors = [
   "green",
   "blue",
   "red",
-  "green"
+  "green",
 ];
 
 export class Z3Step extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      json_model: require("../resources/sample_input.json")
+      json_model: require("../resources/sample_input.json"),
     };
   }
 
-  handleEdit = json => {
+  handleEdit = (json) => {
     this.setState({ json_model: json.updated_src });
     console.log(this.state.json_model);
   };
@@ -68,17 +70,23 @@ export class Z3Step extends Component {
     // };
 
     return (
-      <Row>
-        <Col span={24}>
-          <Title level={4}>Approve the solution for deployment</Title>
-          <ReactJson
-            src={this.props.result}
-            enableClipboard={false}
-            collapsed={2}
-            theme="apathy:inverted"
-          />
+      <DiversificationContext.Consumer>
+        {({ z3_solution }) => (
+          <Row>
+            <Col span={24}>
+              <Title level={4}>Approve the solution for deployment</Title>
+              <Spin tip="Loading..." spinning={z3_solution===""}>
+              <TextArea rows={20} value={z3_solution} />
+              </Spin>
+              
+              {/* <ReactJson
+                src={this.props.result}
+                enableClipboard={false}
+                collapsed={2}
+                theme="apathy:inverted"
+              /> */}
 
-          {/* <Row>
+              {/* <Row>
             <Dragger {...z3_props}>
               <p className="ant-upload-drag-icon">
                 <Icon type="inbox" />
@@ -99,8 +107,10 @@ export class Z3Step extends Component {
               {uploading ? "Uploading" : "Submit"}
             </Button>
           </Row> */}
-        </Col>
-      </Row>
+            </Col>
+          </Row>
+        )}
+      </DiversificationContext.Consumer>
     );
   }
 

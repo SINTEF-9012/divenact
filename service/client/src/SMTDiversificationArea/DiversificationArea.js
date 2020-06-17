@@ -99,11 +99,12 @@ export class DiversificationArea extends Component {
         ),
       },
     ];
-    this.state = {      
+    this.state = {
       //selected_variants: {},
       //selected_devices: {},
       deployment_list: { deployments: {} },
       device_list: { devices: {} },
+      z3_solution: "",
       //selectedFile: null,
       //uploading: false,
       json_model: require("../resources/sample_input.json"),
@@ -115,7 +116,9 @@ export class DiversificationArea extends Component {
       setSelectedDeviceRowKeys: this.setSelectedDeviceRowKeys,
       //setSelectedDevices: this.setSelectedDevices,
       setDeviceList: this.setDeviceList,
-      current_step: 0,  
+      setZ3Solution: this.setZ3Solution,
+      current_step: 0,
+      result: "",
     };
   }
 
@@ -138,11 +141,16 @@ export class DiversificationArea extends Component {
   setSelectedDeviceRowKeys = (value) => {
     console.log("setSelectedDeviceRowKeys", value);
     this.setState({ selected_device_rowkeys: value });
-  };  
+  };
 
   setDeviceList = (value) => {
     console.log("setDeviceList", value);
     this.setState({ device_list: value });
+  };
+
+  setZ3Solution = (value) => {
+    console.log("setZ3Solution", value);
+    this.setState({ z3_solution: value });
   };
 
   ///////////////////////////////
@@ -204,12 +212,9 @@ export class DiversificationArea extends Component {
       this.state.device_list
     );
     const formData = new FormData();
-    //formData.append("files", selectedFile, "script.py");    
+    //formData.append("files", selectedFile, "script.py");
     var json = JSON.stringify(
-      Object.assign(
-        this.state.deployment_list,
-        this.state.device_list
-      )
+      Object.assign(this.state.deployment_list, this.state.device_list)
     );
     console.log("json", json);
     formData.append("json", json);
@@ -223,6 +228,7 @@ export class DiversificationArea extends Component {
       .then((res) => {
         console.log("res.data", res.data);
         this.setState({ result: res.data });
+        this.setState({ z3_solution: res.data });
       })
       .catch((err) => {
         console.log("err", err);
@@ -242,7 +248,10 @@ export class DiversificationArea extends Component {
         status: "process",
         content: (
           <DiversificationContext.Provider value={this.state}>
-            <VariantStep wrappedComponentRef={this.saveFormRef} callbackTabChange={this.props.callbackTabChange}/>
+            <VariantStep
+              wrappedComponentRef={this.saveFormRef}
+              callbackTabChange={this.props.callbackTabChange}
+            />
           </DiversificationContext.Provider>
         ),
       },
@@ -257,10 +266,12 @@ export class DiversificationArea extends Component {
         title: "JSON",
         status: "process",
         content: (
-          <JsonYamlStep
-            json_deployments={this.state.selected_deployments}
-            json_devices={this.state.selected_devices}
-          />
+          <DiversificationContext.Provider value={this.state}>
+            <JsonYamlStep
+              json_deployments={this.state.selected_deployments}
+              json_devices={this.state.selected_devices}
+            />
+          </DiversificationContext.Provider>
         ),
       },
       {

@@ -3,13 +3,15 @@ import axios from "axios";
 import ReactJson from "react-json-view";
 import AceEditor from "react-ace";
 import yaml from "js-yaml";
+import readYaml from 'read-yaml';
+import yaml_model from '../resources/sample_input.yml';
 import { DiversificationContext } from "./DiversificationContext";
 import { GlobalContext } from "../GlobalContext";
 
 import "ace-builds/src-noconflict/mode-sass";
 import "ace-builds/src-noconflict/theme-github";
 
-import { Col, Row, Typography } from "antd";
+import { Col, Row, Typography, Button, Icon } from "antd";
 
 const { Title } = Typography;
 
@@ -20,6 +22,7 @@ export class JsonYamlStep extends Component {
     super(props);
     this.state = {
       json_model: require("../resources/sample_input.json"),
+      yaml_model: require("../resources/sample_input.yml"),
     };
   }
 
@@ -42,7 +45,8 @@ export class JsonYamlStep extends Component {
       .post("/api/z3", formData)
       .then((res) => {
         console.log("res.data", res.data);
-        this.setState({ result: res.data });
+        //this.setState({ result: res.data });
+        this.context.setZ3Solution(res.data);
       })
       .catch((err) => {
         console.log("err", err);
@@ -52,6 +56,21 @@ export class JsonYamlStep extends Component {
       uploading: false,
     });
   };
+
+  handleLoadLocalFile = () => {
+    // let fileContents = fs.readFileSync('C:/Users/rustemd/divenact/service/public/sample_input.yml', 'utf8');
+    // let data = yaml.safeLoad(fileContents);
+    // this.setState({yaml_model: data});
+    
+    // let fr = new FileReader();
+    // fr.readAsText("../resources/sample_input.yml");
+    console.log("Model already loaded");
+    
+    // readYaml("../resources/sample_input.yml", function(err, data) {
+    //   if (err) throw err;
+    //   console.log(data);
+    // });
+  }
 
   render() {
     //const { selectedFile } = this.state;
@@ -92,10 +111,15 @@ export class JsonYamlStep extends Component {
     //   }
     // };
 
+    console.log(yaml_model.toString())
+    console.log(this.state.yaml_model)
+    console.log(this.state.yaml_model.toString())
+
     return (
       <Row gutter={10}>
         <Col span={12}>
           <Title level={4}>Verify the input JSON model</Title>
+          <div id="" style={{overflow: "scroll", height: "400px"}} >
           <ReactJson
             src={Object.assign(
               this.context.deployment_list,
@@ -108,9 +132,11 @@ export class JsonYamlStep extends Component {
             onAdd={this.handleEdit}
             onDelete={this.handleEdit}
           />
+          </div>
         </Col>
-        <Col span={12}>
-          <Title level={4}>Verify the input YAML model (Experimental)</Title>
+        {/* <Col span={6}>
+          <Title level={4}>Verify the input YAML model</Title>
+          <div id="" style={{overflow: "scroll", height: "400px"}} >
           <AceEditor
             mode="sass"
             //theme="github"
@@ -124,6 +150,21 @@ export class JsonYamlStep extends Component {
               )
             )}
           />
+          </div>
+        </Col> */}
+        <Col span={12}>
+          <Title level={4}><Icon type="experiment" theme="twoTone" />[DEMO - 9.6.2020] JSON model for the experiments <Button type="link" onClick={this.handleLoadLocalFile}>Load model</Button></Title>
+          <div id="" style={{overflow: "scroll", height: "400px"}} >
+          <ReactJson
+            src={this.state.json_model}
+            theme="apathy:inverted"
+            collapsed={2}
+            enableClipboard={true}
+            onEdit={this.handleEdit}
+            onAdd={this.handleEdit}
+            onDelete={this.handleEdit}
+          />
+          </div>
         </Col>
       </Row>
     );

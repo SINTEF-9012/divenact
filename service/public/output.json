@@ -1,0 +1,1035 @@
+{
+  "deployments": {
+    "C": {
+      "comm_lvl": 1,
+      "compu_lvl": 3,
+      "dp_acc": "acc_none",
+      "intlmodule": "edge",
+      "vsn": "release",
+      "deployed": [
+        "dv13a1",
+        "dv13a2",
+        "dv13a3",
+        "dv16a1",
+        "dv16a2",
+        "dv16a3",
+        "dv23a3",
+        "dv4",
+        "dv5a1",
+        "dv5a3",
+        "dv7",
+        "dv7a1",
+        "dv8",
+        "dv8a1",
+        "dv8a2",
+        "dv8a3"
+      ]
+    },
+    "D": {
+      "comm_lvl": 3,
+      "compu_lvl": 3,
+      "dp_acc": "acc_none",
+      "intlmodule": "flexible",
+      "vsn": "release",
+      "deployed": [
+        "dv0a2",
+        "dv0a3",
+        "dv11a2",
+        "dv12a1",
+        "dv12a3",
+        "dv14a1",
+        "dv14a3",
+        "dv23a1",
+        "dv2a3",
+        "dv4a2",
+        "dv4a3",
+        "dv5",
+        "dv7a2",
+        "dv7a3",
+        "dv9a1",
+        "dv9a3"
+      ]
+    },
+    "E": {
+      "comm_lvl": 1,
+      "compu_lvl": 3,
+      "dp_acc": "tpu",
+      "intlmodule": "edge",
+      "vsn": "release",
+      "deployed": [
+        "dv0",
+        "dv0a1",
+        "dv11a1",
+        "dv11a3",
+        "dv13",
+        "dv16",
+        "dv17",
+        "dv17a1",
+        "dv17a2",
+        "dv17a3",
+        "dv1a2",
+        "dv2",
+        "dv23",
+        "dv2a1",
+        "dv4a1",
+        "dv5a2"
+      ]
+    },
+    "F": {
+      "comm_lvl": 3,
+      "compu_lvl": 3,
+      "dp_acc": "tpu",
+      "intlmodule": "flexible",
+      "vsn": "release",
+      "deployed": [
+        "dv1",
+        "dv11",
+        "dv12",
+        "dv12a2",
+        "dv14",
+        "dv14a2",
+        "dv18",
+        "dv18a1",
+        "dv18a2",
+        "dv18a3",
+        "dv1a1",
+        "dv1a3",
+        "dv23a2",
+        "dv2a2",
+        "dv9",
+        "dv9a2"
+      ]
+    },
+    "G": {
+      "comm_lvl": 1,
+      "compu_lvl": 2,
+      "dp_acc": "tpu",
+      "intlmodule": "edge",
+      "vsn": "release",
+      "deployed": [
+        "dv10",
+        "dv10a1",
+        "dv10a2",
+        "dv10a3",
+        "dv20",
+        "dv20a1",
+        "dv20a2",
+        "dv20a3",
+        "dv21",
+        "dv21a1",
+        "dv21a2",
+        "dv21a3",
+        "dv22",
+        "dv22a1",
+        "dv22a2",
+        "dv22a3",
+        "dv6",
+        "dv6a1",
+        "dv6a2",
+        "dv6a3"
+      ]
+    }
+  },
+  "devices": {
+    "dv0": {
+      "dv_acc": "acc_none",
+      "env": "staging",
+      "network": "wifi",
+      "powersource": "fixed",
+      "deploy": "E",
+      "acclr": false,
+      "intledge": true
+    },
+    "dv0a1": {
+      "dv_acc": "acc_none",
+      "env": "staging",
+      "network": "wifi",
+      "powersource": "fixed",
+      "deploy": "E",
+      "acclr": false,
+      "intledge": true
+    },
+    "dv0a2": {
+      "dv_acc": "acc_none",
+      "env": "staging",
+      "network": "wifi",
+      "powersource": "fixed",
+      "deploy": "D",
+      "acclr": false,
+      "intledge": false
+    },
+    "dv0a3": {
+      "dv_acc": "acc_none",
+      "env": "staging",
+      "network": "wifi",
+      "powersource": "fixed",
+      "deploy": "D",
+      "acclr": false,
+      "intledge": true
+    },
+    "dv1": {
+      "dv_acc": "tpu",
+      "env": "staging",
+      "network": "4g",
+      "powersource": "ac",
+      "deploy": "F",
+      "acclr": true,
+      "intledge": true
+    },
+    "dv10": {
+      "dv_acc": "acc_none",
+      "env": "production",
+      "network": "4g",
+      "powersource": "ac",
+      "deploy": "G",
+      "acclr": false,
+      "intledge": true
+    },
+    "dv10a1": {
+      "dv_acc": "acc_none",
+      "env": "production",
+      "network": "4g",
+      "powersource": "ac",
+      "deploy": "G",
+      "acclr": false,
+      "intledge": true
+    },
+    "dv10a2": {
+      "dv_acc": "acc_none",
+      "env": "production",
+      "network": "4g",
+      "powersource": "ac",
+      "deploy": "G",
+      "acclr": false,
+      "intledge": true
+    },
+    "dv10a3": {
+      "dv_acc": "acc_none",
+      "env": "production",
+      "network": "4g",
+      "powersource": "ac",
+      "deploy": "G",
+      "acclr": false,
+      "intledge": true
+    },
+    "dv11": {
+      "dv_acc": "tpu",
+      "env": "production",
+      "network": "wifi",
+      "powersource": "ac",
+      "deploy": "F",
+      "acclr": false,
+      "intledge": false
+    },
+    "dv11a1": {
+      "dv_acc": "tpu",
+      "env": "production",
+      "network": "wifi",
+      "powersource": "ac",
+      "deploy": "E",
+      "acclr": true,
+      "intledge": true
+    },
+    "dv11a2": {
+      "dv_acc": "tpu",
+      "env": "production",
+      "network": "wifi",
+      "powersource": "ac",
+      "deploy": "D",
+      "acclr": false,
+      "intledge": false
+    },
+    "dv11a3": {
+      "dv_acc": "tpu",
+      "env": "production",
+      "network": "wifi",
+      "powersource": "ac",
+      "deploy": "E",
+      "acclr": true,
+      "intledge": true
+    },
+    "dv12": {
+      "dv_acc": "acc_none",
+      "env": "production",
+      "network": "4g",
+      "powersource": "fixed",
+      "deploy": "F",
+      "acclr": false,
+      "intledge": true
+    },
+    "dv12a1": {
+      "dv_acc": "acc_none",
+      "env": "production",
+      "network": "4g",
+      "powersource": "fixed",
+      "deploy": "D",
+      "acclr": false,
+      "intledge": true
+    },
+    "dv12a2": {
+      "dv_acc": "acc_none",
+      "env": "production",
+      "network": "4g",
+      "powersource": "fixed",
+      "deploy": "F",
+      "acclr": false,
+      "intledge": true
+    },
+    "dv12a3": {
+      "dv_acc": "acc_none",
+      "env": "production",
+      "network": "4g",
+      "powersource": "fixed",
+      "deploy": "D",
+      "acclr": false,
+      "intledge": true
+    },
+    "dv13": {
+      "dv_acc": "tpu",
+      "env": "production",
+      "network": "3g",
+      "powersource": "fixed",
+      "deploy": "E",
+      "acclr": false,
+      "intledge": true
+    },
+    "dv13a1": {
+      "dv_acc": "tpu",
+      "env": "production",
+      "network": "3g",
+      "powersource": "fixed",
+      "deploy": "C",
+      "acclr": false,
+      "intledge": true
+    },
+    "dv13a2": {
+      "dv_acc": "tpu",
+      "env": "production",
+      "network": "3g",
+      "powersource": "fixed",
+      "deploy": "C",
+      "acclr": false,
+      "intledge": true
+    },
+    "dv13a3": {
+      "dv_acc": "tpu",
+      "env": "production",
+      "network": "3g",
+      "powersource": "fixed",
+      "deploy": "C",
+      "acclr": false,
+      "intledge": true
+    },
+    "dv14": {
+      "dv_acc": "tpu",
+      "env": "production",
+      "network": "wifi",
+      "powersource": "fixed",
+      "deploy": "F",
+      "acclr": false,
+      "intledge": false
+    },
+    "dv14a1": {
+      "dv_acc": "tpu",
+      "env": "production",
+      "network": "wifi",
+      "powersource": "fixed",
+      "deploy": "D",
+      "acclr": false,
+      "intledge": false
+    },
+    "dv14a2": {
+      "dv_acc": "tpu",
+      "env": "production",
+      "network": "wifi",
+      "powersource": "fixed",
+      "deploy": "F",
+      "acclr": false,
+      "intledge": false
+    },
+    "dv14a3": {
+      "dv_acc": "tpu",
+      "env": "production",
+      "network": "wifi",
+      "powersource": "fixed",
+      "deploy": "D",
+      "acclr": false,
+      "intledge": false
+    },
+    "dv15": {
+      "dv_acc": "acc_none",
+      "env": "production",
+      "network": "wifi",
+      "powersource": "battery",
+      "deploy": "nodp",
+      "acclr": false,
+      "intledge": false
+    },
+    "dv15a1": {
+      "dv_acc": "acc_none",
+      "env": "production",
+      "network": "wifi",
+      "powersource": "battery",
+      "deploy": "nodp",
+      "acclr": false,
+      "intledge": false
+    },
+    "dv15a2": {
+      "dv_acc": "acc_none",
+      "env": "production",
+      "network": "wifi",
+      "powersource": "battery",
+      "deploy": "nodp",
+      "acclr": false,
+      "intledge": false
+    },
+    "dv15a3": {
+      "dv_acc": "acc_none",
+      "env": "production",
+      "network": "wifi",
+      "powersource": "battery",
+      "deploy": "nodp",
+      "acclr": false,
+      "intledge": false
+    },
+    "dv16": {
+      "dv_acc": "acc_none",
+      "env": "production",
+      "network": "3g",
+      "powersource": "fixed",
+      "deploy": "E",
+      "acclr": false,
+      "intledge": true
+    },
+    "dv16a1": {
+      "dv_acc": "acc_none",
+      "env": "production",
+      "network": "3g",
+      "powersource": "fixed",
+      "deploy": "C",
+      "acclr": false,
+      "intledge": true
+    },
+    "dv16a2": {
+      "dv_acc": "acc_none",
+      "env": "production",
+      "network": "3g",
+      "powersource": "fixed",
+      "deploy": "C",
+      "acclr": false,
+      "intledge": true
+    },
+    "dv16a3": {
+      "dv_acc": "acc_none",
+      "env": "production",
+      "network": "3g",
+      "powersource": "fixed",
+      "deploy": "C",
+      "acclr": false,
+      "intledge": true
+    },
+    "dv17": {
+      "dv_acc": "tpu",
+      "env": "production",
+      "network": "3g",
+      "powersource": "ac",
+      "deploy": "E",
+      "acclr": true,
+      "intledge": true
+    },
+    "dv17a1": {
+      "dv_acc": "tpu",
+      "env": "production",
+      "network": "3g",
+      "powersource": "ac",
+      "deploy": "E",
+      "acclr": true,
+      "intledge": true
+    },
+    "dv17a2": {
+      "dv_acc": "tpu",
+      "env": "production",
+      "network": "3g",
+      "powersource": "ac",
+      "deploy": "E",
+      "acclr": true,
+      "intledge": true
+    },
+    "dv17a3": {
+      "dv_acc": "tpu",
+      "env": "production",
+      "network": "3g",
+      "powersource": "ac",
+      "deploy": "E",
+      "acclr": true,
+      "intledge": true
+    },
+    "dv18": {
+      "dv_acc": "tpu",
+      "env": "production",
+      "network": "4g",
+      "powersource": "ac",
+      "deploy": "F",
+      "acclr": true,
+      "intledge": true
+    },
+    "dv18a1": {
+      "dv_acc": "tpu",
+      "env": "production",
+      "network": "4g",
+      "powersource": "ac",
+      "deploy": "F",
+      "acclr": true,
+      "intledge": true
+    },
+    "dv18a2": {
+      "dv_acc": "tpu",
+      "env": "production",
+      "network": "4g",
+      "powersource": "ac",
+      "deploy": "F",
+      "acclr": true,
+      "intledge": true
+    },
+    "dv18a3": {
+      "dv_acc": "tpu",
+      "env": "production",
+      "network": "4g",
+      "powersource": "ac",
+      "deploy": "F",
+      "acclr": true,
+      "intledge": true
+    },
+    "dv19": {
+      "dv_acc": "acc_none",
+      "env": "production",
+      "network": "wifi",
+      "powersource": "battery",
+      "deploy": "nodp",
+      "acclr": false,
+      "intledge": false
+    },
+    "dv19a1": {
+      "dv_acc": "acc_none",
+      "env": "production",
+      "network": "wifi",
+      "powersource": "battery",
+      "deploy": "nodp",
+      "acclr": false,
+      "intledge": false
+    },
+    "dv19a2": {
+      "dv_acc": "acc_none",
+      "env": "production",
+      "network": "wifi",
+      "powersource": "battery",
+      "deploy": "nodp",
+      "acclr": false,
+      "intledge": false
+    },
+    "dv19a3": {
+      "dv_acc": "acc_none",
+      "env": "production",
+      "network": "wifi",
+      "powersource": "battery",
+      "deploy": "nodp",
+      "acclr": false,
+      "intledge": false
+    },
+    "dv1a1": {
+      "dv_acc": "tpu",
+      "env": "staging",
+      "network": "4g",
+      "powersource": "ac",
+      "deploy": "F",
+      "acclr": true,
+      "intledge": true
+    },
+    "dv1a2": {
+      "dv_acc": "tpu",
+      "env": "staging",
+      "network": "4g",
+      "powersource": "ac",
+      "deploy": "E",
+      "acclr": true,
+      "intledge": true
+    },
+    "dv1a3": {
+      "dv_acc": "tpu",
+      "env": "staging",
+      "network": "4g",
+      "powersource": "ac",
+      "deploy": "F",
+      "acclr": true,
+      "intledge": true
+    },
+    "dv2": {
+      "dv_acc": "tpu",
+      "env": "staging",
+      "network": "wifi",
+      "powersource": "ac",
+      "deploy": "E",
+      "acclr": true,
+      "intledge": true
+    },
+    "dv20": {
+      "dv_acc": "tpu",
+      "env": "production",
+      "network": "4g",
+      "powersource": "battery",
+      "deploy": "G",
+      "acclr": true,
+      "intledge": true
+    },
+    "dv20a1": {
+      "dv_acc": "tpu",
+      "env": "production",
+      "network": "4g",
+      "powersource": "battery",
+      "deploy": "G",
+      "acclr": true,
+      "intledge": true
+    },
+    "dv20a2": {
+      "dv_acc": "tpu",
+      "env": "production",
+      "network": "4g",
+      "powersource": "battery",
+      "deploy": "G",
+      "acclr": true,
+      "intledge": true
+    },
+    "dv20a3": {
+      "dv_acc": "tpu",
+      "env": "production",
+      "network": "4g",
+      "powersource": "battery",
+      "deploy": "G",
+      "acclr": true,
+      "intledge": true
+    },
+    "dv21": {
+      "dv_acc": "tpu",
+      "env": "production",
+      "network": "3g",
+      "powersource": "battery",
+      "deploy": "G",
+      "acclr": true,
+      "intledge": true
+    },
+    "dv21a1": {
+      "dv_acc": "tpu",
+      "env": "production",
+      "network": "3g",
+      "powersource": "battery",
+      "deploy": "G",
+      "acclr": true,
+      "intledge": true
+    },
+    "dv21a2": {
+      "dv_acc": "tpu",
+      "env": "production",
+      "network": "3g",
+      "powersource": "battery",
+      "deploy": "G",
+      "acclr": true,
+      "intledge": true
+    },
+    "dv21a3": {
+      "dv_acc": "tpu",
+      "env": "production",
+      "network": "3g",
+      "powersource": "battery",
+      "deploy": "G",
+      "acclr": true,
+      "intledge": true
+    },
+    "dv22": {
+      "dv_acc": "acc_none",
+      "env": "production",
+      "network": "4g",
+      "powersource": "ac",
+      "deploy": "G",
+      "acclr": false,
+      "intledge": true
+    },
+    "dv22a1": {
+      "dv_acc": "acc_none",
+      "env": "production",
+      "network": "4g",
+      "powersource": "ac",
+      "deploy": "G",
+      "acclr": false,
+      "intledge": true
+    },
+    "dv22a2": {
+      "dv_acc": "acc_none",
+      "env": "production",
+      "network": "4g",
+      "powersource": "ac",
+      "deploy": "G",
+      "acclr": false,
+      "intledge": true
+    },
+    "dv22a3": {
+      "dv_acc": "acc_none",
+      "env": "production",
+      "network": "4g",
+      "powersource": "ac",
+      "deploy": "G",
+      "acclr": false,
+      "intledge": true
+    },
+    "dv23": {
+      "dv_acc": "tpu",
+      "env": "production",
+      "network": "4g",
+      "powersource": "fixed",
+      "deploy": "E",
+      "acclr": false,
+      "intledge": true
+    },
+    "dv23a1": {
+      "dv_acc": "tpu",
+      "env": "production",
+      "network": "4g",
+      "powersource": "fixed",
+      "deploy": "D",
+      "acclr": false,
+      "intledge": true
+    },
+    "dv23a2": {
+      "dv_acc": "tpu",
+      "env": "production",
+      "network": "4g",
+      "powersource": "fixed",
+      "deploy": "F",
+      "acclr": false,
+      "intledge": true
+    },
+    "dv23a3": {
+      "dv_acc": "tpu",
+      "env": "production",
+      "network": "4g",
+      "powersource": "fixed",
+      "deploy": "C",
+      "acclr": false,
+      "intledge": true
+    },
+    "dv24": {
+      "dv_acc": "acc_none",
+      "env": "production",
+      "network": "3g",
+      "powersource": "battery",
+      "deploy": "nodp",
+      "acclr": false,
+      "intledge": false
+    },
+    "dv24a1": {
+      "dv_acc": "acc_none",
+      "env": "production",
+      "network": "3g",
+      "powersource": "battery",
+      "deploy": "nodp",
+      "acclr": false,
+      "intledge": false
+    },
+    "dv24a2": {
+      "dv_acc": "acc_none",
+      "env": "production",
+      "network": "3g",
+      "powersource": "battery",
+      "deploy": "nodp",
+      "acclr": false,
+      "intledge": false
+    },
+    "dv24a3": {
+      "dv_acc": "acc_none",
+      "env": "production",
+      "network": "3g",
+      "powersource": "battery",
+      "deploy": "nodp",
+      "acclr": false,
+      "intledge": false
+    },
+    "dv2a1": {
+      "dv_acc": "tpu",
+      "env": "staging",
+      "network": "wifi",
+      "powersource": "ac",
+      "deploy": "E",
+      "acclr": true,
+      "intledge": true
+    },
+    "dv2a2": {
+      "dv_acc": "tpu",
+      "env": "staging",
+      "network": "wifi",
+      "powersource": "ac",
+      "deploy": "F",
+      "acclr": false,
+      "intledge": false
+    },
+    "dv2a3": {
+      "dv_acc": "tpu",
+      "env": "staging",
+      "network": "wifi",
+      "powersource": "ac",
+      "deploy": "D",
+      "acclr": false,
+      "intledge": false
+    },
+    "dv3": {
+      "dv_acc": "acc_none",
+      "env": "staging",
+      "network": "3g",
+      "powersource": "battery",
+      "deploy": "nodp",
+      "acclr": false,
+      "intledge": false
+    },
+    "dv3a1": {
+      "dv_acc": "acc_none",
+      "env": "staging",
+      "network": "3g",
+      "powersource": "battery",
+      "deploy": "nodp",
+      "acclr": false,
+      "intledge": false
+    },
+    "dv3a2": {
+      "dv_acc": "acc_none",
+      "env": "staging",
+      "network": "3g",
+      "powersource": "battery",
+      "deploy": "nodp",
+      "acclr": false,
+      "intledge": false
+    },
+    "dv3a3": {
+      "dv_acc": "acc_none",
+      "env": "staging",
+      "network": "3g",
+      "powersource": "battery",
+      "deploy": "nodp",
+      "acclr": false,
+      "intledge": false
+    },
+    "dv4": {
+      "dv_acc": "tpu",
+      "env": "production",
+      "network": "4g",
+      "powersource": "fixed",
+      "deploy": "C",
+      "acclr": false,
+      "intledge": true
+    },
+    "dv4a1": {
+      "dv_acc": "tpu",
+      "env": "production",
+      "network": "4g",
+      "powersource": "fixed",
+      "deploy": "E",
+      "acclr": false,
+      "intledge": true
+    },
+    "dv4a2": {
+      "dv_acc": "tpu",
+      "env": "production",
+      "network": "4g",
+      "powersource": "fixed",
+      "deploy": "D",
+      "acclr": false,
+      "intledge": true
+    },
+    "dv4a3": {
+      "dv_acc": "tpu",
+      "env": "production",
+      "network": "4g",
+      "powersource": "fixed",
+      "deploy": "D",
+      "acclr": false,
+      "intledge": true
+    },
+    "dv5": {
+      "dv_acc": "acc_none",
+      "env": "production",
+      "network": "wifi",
+      "powersource": "fixed",
+      "deploy": "D",
+      "acclr": false,
+      "intledge": false
+    },
+    "dv5a1": {
+      "dv_acc": "acc_none",
+      "env": "production",
+      "network": "wifi",
+      "powersource": "fixed",
+      "deploy": "C",
+      "acclr": false,
+      "intledge": true
+    },
+    "dv5a2": {
+      "dv_acc": "acc_none",
+      "env": "production",
+      "network": "wifi",
+      "powersource": "fixed",
+      "deploy": "E",
+      "acclr": false,
+      "intledge": true
+    },
+    "dv5a3": {
+      "dv_acc": "acc_none",
+      "env": "production",
+      "network": "wifi",
+      "powersource": "fixed",
+      "deploy": "C",
+      "acclr": false,
+      "intledge": true
+    },
+    "dv6": {
+      "dv_acc": "acc_none",
+      "env": "production",
+      "network": "4g",
+      "powersource": "ac",
+      "deploy": "G",
+      "acclr": false,
+      "intledge": true
+    },
+    "dv6a1": {
+      "dv_acc": "acc_none",
+      "env": "production",
+      "network": "4g",
+      "powersource": "ac",
+      "deploy": "G",
+      "acclr": false,
+      "intledge": true
+    },
+    "dv6a2": {
+      "dv_acc": "acc_none",
+      "env": "production",
+      "network": "4g",
+      "powersource": "ac",
+      "deploy": "G",
+      "acclr": false,
+      "intledge": true
+    },
+    "dv6a3": {
+      "dv_acc": "acc_none",
+      "env": "production",
+      "network": "4g",
+      "powersource": "ac",
+      "deploy": "G",
+      "acclr": false,
+      "intledge": true
+    },
+    "dv7": {
+      "dv_acc": "gpu",
+      "env": "production",
+      "network": "4g",
+      "powersource": "fixed",
+      "deploy": "C",
+      "acclr": false,
+      "intledge": true
+    },
+    "dv7a1": {
+      "dv_acc": "gpu",
+      "env": "production",
+      "network": "4g",
+      "powersource": "fixed",
+      "deploy": "C",
+      "acclr": false,
+      "intledge": true
+    },
+    "dv7a2": {
+      "dv_acc": "gpu",
+      "env": "production",
+      "network": "4g",
+      "powersource": "fixed",
+      "deploy": "D",
+      "acclr": false,
+      "intledge": true
+    },
+    "dv7a3": {
+      "dv_acc": "gpu",
+      "env": "production",
+      "network": "4g",
+      "powersource": "fixed",
+      "deploy": "D",
+      "acclr": false,
+      "intledge": true
+    },
+    "dv8": {
+      "dv_acc": "acc_none",
+      "env": "production",
+      "network": "4g",
+      "powersource": "fixed",
+      "deploy": "C",
+      "acclr": false,
+      "intledge": true
+    },
+    "dv8a1": {
+      "dv_acc": "acc_none",
+      "env": "production",
+      "network": "4g",
+      "powersource": "fixed",
+      "deploy": "C",
+      "acclr": false,
+      "intledge": true
+    },
+    "dv8a2": {
+      "dv_acc": "acc_none",
+      "env": "production",
+      "network": "4g",
+      "powersource": "fixed",
+      "deploy": "C",
+      "acclr": false,
+      "intledge": true
+    },
+    "dv8a3": {
+      "dv_acc": "acc_none",
+      "env": "production",
+      "network": "4g",
+      "powersource": "fixed",
+      "deploy": "C",
+      "acclr": false,
+      "intledge": true
+    },
+    "dv9": {
+      "dv_acc": "acc_none",
+      "env": "production",
+      "network": "wifi",
+      "powersource": "ac",
+      "deploy": "F",
+      "acclr": false,
+      "intledge": false
+    },
+    "dv9a1": {
+      "dv_acc": "acc_none",
+      "env": "production",
+      "network": "wifi",
+      "powersource": "ac",
+      "deploy": "D",
+      "acclr": false,
+      "intledge": false
+    },
+    "dv9a2": {
+      "dv_acc": "acc_none",
+      "env": "production",
+      "network": "wifi",
+      "powersource": "ac",
+      "deploy": "F",
+      "acclr": false,
+      "intledge": false
+    },
+    "dv9a3": {
+      "dv_acc": "acc_none",
+      "env": "production",
+      "network": "wifi",
+      "powersource": "ac",
+      "deploy": "D",
+      "acclr": false,
+      "intledge": false
+    }
+  }
+}
