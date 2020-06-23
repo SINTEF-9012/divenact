@@ -32,8 +32,8 @@ router.post("/", upload.any(), function(req, res) {
   //TODO: On my side, I have to run python3. I don't know if Z3 works properly under Python2
   //Is there a way to check if process works well? If "python" doesn't work, we can 
   //try again "python3"
-  //var process = spawn("python3", [folder_name + "/" + python_file]);
-  var process = spawn("python", ["C:/Users/rustemd/divenact/service/public/genobj.py"]);  
+  var process = spawn("python3", [folder_name + "/" + python_file]);
+  //var process = spawn("python", ["C:/Users/rustemd/divenact/service/public/genobj.py"]);  
   process.stdout.on("data", data => {
     // Do something with the data returned from python script
     console.log("from stdout");
