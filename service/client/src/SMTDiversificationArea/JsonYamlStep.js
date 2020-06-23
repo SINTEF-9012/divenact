@@ -55,22 +55,7 @@ export class JsonYamlStep extends Component {
     this.setState({
       uploading: false,
     });
-  };
-
-  handleLoadLocalFile = () => {
-    // let fileContents = fs.readFileSync('C:/Users/rustemd/divenact/service/public/sample_input.yml', 'utf8');
-    // let data = yaml.safeLoad(fileContents);
-    // this.setState({yaml_model: data});
-    
-    // let fr = new FileReader();
-    // fr.readAsText("../resources/sample_input.yml");
-    console.log("Model already loaded");
-    
-    // readYaml("../resources/sample_input.yml", function(err, data) {
-    //   if (err) throw err;
-    //   console.log(data);
-    // });
-  }
+  };  
 
   render() {
     //const { selectedFile } = this.state;
@@ -134,7 +119,7 @@ export class JsonYamlStep extends Component {
           />
           </div>
         </Col>
-        {/* <Col span={6}>
+        <Col span={12}>
           <Title level={4}>Verify the input YAML model</Title>
           <div id="" style={{overflow: "scroll", height: "400px"}} >
           <AceEditor
@@ -151,21 +136,7 @@ export class JsonYamlStep extends Component {
             )}
           />
           </div>
-        </Col> */}
-        <Col span={12}>
-          <Title level={4}><Icon type="experiment" theme="twoTone" />[DEMO - 9.6.2020] JSON model for the experiments <Button type="link" onClick={this.handleLoadLocalFile}>Load model</Button></Title>
-          <div id="" style={{overflow: "scroll", height: "400px"}} >
-          <ReactJson
-            src={this.state.json_model}
-            theme="apathy:inverted"
-            collapsed={2}
-            enableClipboard={true}
-            onEdit={this.handleEdit}
-            onAdd={this.handleEdit}
-            onDelete={this.handleEdit}
-          />
-          </div>
-        </Col>
+        </Col>        
       </Row>
     );
   }
