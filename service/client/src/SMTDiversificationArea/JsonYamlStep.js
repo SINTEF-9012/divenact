@@ -22,20 +22,27 @@ export class JsonYamlStep extends Component {
     super(props);
     this.state = {
       json_model: require("../resources/sample_input.json"),
-      yaml_model: require("../resources/sample_input.yml"),
+      yaml_model: ""
     };
   }
 
   handleEdit = (json) => {
     this.setState({ json_model: json.updated_src });
     console.log(this.state.json_model);
+    console.log(this.yaml_model);
   };
+
+  handleYamlChange = (value) => {
+    this.setState( {yaml_model: value})
+    this.props.handleYamlChange(value)
+  }
 
   handleUpload = () => {
     //const { selectedFile } = this.state;
     const formData = new FormData();
     //formData.append("files", selectedFile, "script.py");
     formData.append("json", JSON.stringify(this.state.json_model));
+    formData.append("yaml", this.state.yaml_model)
 
     this.setState({
       uploading: true,
@@ -96,9 +103,6 @@ export class JsonYamlStep extends Component {
     //   }
     // };
 
-    console.log(yaml_model.toString())
-    console.log(this.state.yaml_model)
-    console.log(this.state.yaml_model.toString())
 
     return (
       <Row gutter={10}>
@@ -125,15 +129,15 @@ export class JsonYamlStep extends Component {
           <AceEditor
             mode="sass"
             //theme="github"
-            //onChange={onChange}
+            onChange={this.handleYamlChange}
             name="yaml_view"
             editorProps={{ $blockScrolling: true }}
-            value={yaml.safeDump(
-              Object.assign(
-                this.context.deployment_list,
-                this.context.device_list
-              )
-            )}
+            value={this.state.yaml_model}
+            //   Object.assign(
+            //     this.context.deployment_list,
+            //     this.context.device_list
+            //   )
+            // )}
           />
           </div>
         </Col>        

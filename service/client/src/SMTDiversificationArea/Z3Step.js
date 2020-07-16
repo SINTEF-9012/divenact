@@ -76,15 +76,16 @@ export class Z3Step extends Component {
             <Col span={24}>
               <Title level={4}>Approve the solution for deployment</Title>
               <Spin tip="Loading..." spinning={z3_solution===""}>
-              <TextArea rows={20} value={z3_solution} />
-              </Spin>
-              
-              {/* <ReactJson
-                src={this.props.result}
+              {/*<TextArea rows={20} value={z3_solution} />*/}
+              <ReactJson
+                src={z3_solution}
                 enableClipboard={false}
                 collapsed={2}
                 theme="apathy:inverted"
-              /> */}
+              /> 
+              </Spin>
+              
+              
 
               {/* <Row>
             <Dragger {...z3_props}>

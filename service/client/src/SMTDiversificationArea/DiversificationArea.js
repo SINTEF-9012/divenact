@@ -117,8 +117,9 @@ export class DiversificationArea extends Component {
       //setSelectedDevices: this.setSelectedDevices,
       setDeviceList: this.setDeviceList,
       setZ3Solution: this.setZ3Solution,
-      current_step: 0,
+      current_step: 2,
       result: "",
+      yaml_model: ""
     };
   }
 
@@ -152,6 +153,11 @@ export class DiversificationArea extends Component {
     console.log("setZ3Solution", value);
     this.setState({ z3_solution: value });
   };
+
+  handleYamlChange = (model) =>{
+    console.log(model)
+    this.setState({yaml_model: model})
+  }
 
   ///////////////////////////////
   ///////////////////////////////
@@ -206,6 +212,7 @@ export class DiversificationArea extends Component {
 
   solve = () => {
     //const { selectedFile } = this.state;
+    console.log(this.state.yaml_model)
     console.log(
       "Solving with: ",
       this.state.deployment_list,
@@ -218,6 +225,9 @@ export class DiversificationArea extends Component {
     );
     console.log("json", json);
     formData.append("json", json);
+    formData.append("yaml", this.state.yaml_model)
+
+    console.log(formData)
 
     // this.setState({
     //   uploading: true
@@ -270,6 +280,7 @@ export class DiversificationArea extends Component {
             <JsonYamlStep
               json_deployments={this.state.selected_deployments}
               json_devices={this.state.selected_devices}
+              handleYamlChange={this.handleYamlChange}
             />
           </DiversificationContext.Provider>
         ),
