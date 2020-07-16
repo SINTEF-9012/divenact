@@ -7,154 +7,22 @@
       "intlmodule": "edge",
       "vsn": "release",
       "deployed": [
-        "dv0a10",
-        "dv0a11",
-        "dv0a12",
-        "dv0a14",
-        "dv0a18",
-        "dv0a2",
-        "dv0a3",
-        "dv0a4",
-        "dv0a6",
-        "dv0a8",
-        "dv0a9",
-        "dv12",
-        "dv12a10",
-        "dv12a12",
-        "dv12a13",
-        "dv12a15",
-        "dv12a16",
-        "dv12a17",
-        "dv12a18",
-        "dv12a19",
-        "dv12a3",
-        "dv12a4",
-        "dv12a7",
-        "dv12a8",
-        "dv12a9",
-        "dv13a11",
-        "dv13a12",
-        "dv13a13",
-        "dv13a14",
-        "dv13a15",
-        "dv13a19",
+        "dv13a1",
         "dv13a2",
-        "dv13a6",
-        "dv13a7",
-        "dv13a9",
-        "dv14",
-        "dv14a1",
-        "dv14a10",
-        "dv14a11",
-        "dv14a16",
-        "dv14a17",
-        "dv14a19",
-        "dv14a4",
-        "dv14a5",
-        "dv14a6",
-        "dv14a7",
-        "dv16",
+        "dv13a3",
         "dv16a1",
-        "dv16a10",
-        "dv16a11",
-        "dv16a12",
-        "dv16a13",
-        "dv16a14",
-        "dv16a16",
-        "dv16a17",
-        "dv16a18",
-        "dv16a19",
         "dv16a2",
         "dv16a3",
-        "dv16a4",
-        "dv16a6",
-        "dv16a7",
-        "dv16a8",
-        "dv16a9",
-        "dv23",
-        "dv23a1",
-        "dv23a10",
-        "dv23a11",
-        "dv23a12",
-        "dv23a13",
-        "dv23a14",
-        "dv23a15",
-        "dv23a16",
-        "dv23a18",
-        "dv23a2",
         "dv23a3",
-        "dv23a4",
-        "dv23a5",
-        "dv23a6",
-        "dv23a7",
-        "dv23a8",
-        "dv23a9",
         "dv4",
-        "dv4a11",
-        "dv4a12",
-        "dv4a13",
-        "dv4a14",
-        "dv4a15",
-        "dv4a17",
-        "dv4a19",
-        "dv4a2",
-        "dv4a3",
-        "dv4a4",
-        "dv4a7",
-        "dv4a8",
-        "dv4a9",
-        "dv5",
         "dv5a1",
-        "dv5a10",
-        "dv5a11",
-        "dv5a12",
-        "dv5a13",
-        "dv5a14",
-        "dv5a16",
-        "dv5a18",
-        "dv5a19",
-        "dv5a2",
         "dv5a3",
-        "dv5a4",
-        "dv5a5",
-        "dv5a6",
-        "dv5a7",
-        "dv5a8",
-        "dv5a9",
         "dv7",
-        "dv7a10",
-        "dv7a11",
-        "dv7a12",
-        "dv7a14",
-        "dv7a15",
-        "dv7a16",
-        "dv7a17",
-        "dv7a18",
-        "dv7a19",
-        "dv7a2",
-        "dv7a3",
-        "dv7a4",
-        "dv7a5",
-        "dv7a6",
-        "dv7a7",
-        "dv7a8",
-        "dv7a9",
+        "dv7a1",
         "dv8",
         "dv8a1",
-        "dv8a11",
-        "dv8a12",
-        "dv8a13",
-        "dv8a14",
-        "dv8a15",
-        "dv8a16",
-        "dv8a17",
-        "dv8a18",
-        "dv8a19",
         "dv8a2",
-        "dv8a5",
-        "dv8a6",
-        "dv8a7",
-        "dv8a8"
+        "dv8a3"
       ]
     },
     "D": {
@@ -164,77 +32,22 @@
       "intlmodule": "flexible",
       "vsn": "release",
       "deployed": [
-        "dv0",
-        "dv0a1",
-        "dv0a13",
-        "dv0a15",
-        "dv0a16",
-        "dv0a19",
-        "dv0a7",
-        "dv11",
-        "dv11a11",
-        "dv11a13",
-        "dv11a15",
-        "dv11a19",
+        "dv0a2",
+        "dv0a3",
         "dv11a2",
-        "dv11a3",
-        "dv11a4",
-        "dv11a9",
-        "dv12a11",
-        "dv12a2",
-        "dv12a5",
-        "dv12a6",
-        "dv14a12",
-        "dv14a13",
-        "dv14a14",
-        "dv14a15",
-        "dv14a18",
+        "dv12a1",
+        "dv12a3",
+        "dv14a1",
         "dv14a3",
-        "dv14a8",
-        "dv14a9",
-        "dv2",
-        "dv2a1",
-        "dv2a10",
-        "dv2a11",
-        "dv2a12",
-        "dv2a15",
-        "dv2a16",
-        "dv2a17",
-        "dv2a19",
-        "dv2a2",
+        "dv23a1",
         "dv2a3",
-        "dv2a4",
-        "dv2a5",
-        "dv2a6",
-        "dv2a7",
-        "dv2a8",
-        "dv2a9",
-        "dv4a16",
-        "dv4a6",
-        "dv5a15",
-        "dv5a17",
-        "dv7a1",
-        "dv7a13",
-        "dv8a3",
-        "dv8a4",
-        "dv9",
+        "dv4a2",
+        "dv4a3",
+        "dv5",
+        "dv7a2",
+        "dv7a3",
         "dv9a1",
-        "dv9a11",
-        "dv9a12",
-        "dv9a13",
-        "dv9a14",
-        "dv9a15",
-        "dv9a16",
-        "dv9a17",
-        "dv9a18",
-        "dv9a19",
-        "dv9a2",
-        "dv9a4",
-        "dv9a5",
-        "dv9a6",
-        "dv9a7",
-        "dv9a8",
-        "dv9a9"
+        "dv9a3"
       ]
     },
     "E": {
@@ -244,64 +57,22 @@
       "intlmodule": "edge",
       "vsn": "release",
       "deployed": [
-        "dv1",
-        "dv11a16",
-        "dv11a17",
-        "dv11a6",
-        "dv11a7",
+        "dv0",
+        "dv0a1",
+        "dv11a1",
+        "dv11a3",
         "dv13",
-        "dv13a4",
-        "dv16a5",
+        "dv16",
         "dv17",
         "dv17a1",
-        "dv17a10",
-        "dv17a11",
-        "dv17a12",
-        "dv17a13",
-        "dv17a14",
-        "dv17a15",
-        "dv17a16",
-        "dv17a17",
-        "dv17a18",
         "dv17a2",
-        "dv17a4",
-        "dv17a5",
-        "dv17a6",
-        "dv17a7",
-        "dv17a8",
-        "dv17a9",
-        "dv18",
-        "dv18a1",
-        "dv18a10",
-        "dv18a11",
-        "dv18a12",
-        "dv18a13",
-        "dv18a14",
-        "dv18a15",
-        "dv18a16",
-        "dv18a17",
-        "dv18a18",
-        "dv18a19",
-        "dv18a2",
-        "dv18a5",
-        "dv18a7",
-        "dv18a8",
-        "dv18a9",
-        "dv1a1",
-        "dv1a11",
-        "dv1a12",
-        "dv1a13",
-        "dv1a14",
-        "dv1a15",
-        "dv1a16",
-        "dv1a19",
-        "dv1a3",
-        "dv1a5",
-        "dv1a6",
-        "dv1a7",
-        "dv1a8",
-        "dv1a9",
-        "dv2a18"
+        "dv17a3",
+        "dv1a2",
+        "dv2",
+        "dv23",
+        "dv2a1",
+        "dv4a1",
+        "dv5a2"
       ]
     },
     "F": {
@@ -311,11 +82,22 @@
       "intlmodule": "flexible",
       "vsn": "release",
       "deployed": [
-        "dv0a17",
-        "dv11a8",
+        "dv1",
+        "dv11",
+        "dv12",
+        "dv12a2",
+        "dv14",
+        "dv14a2",
+        "dv18",
+        "dv18a1",
+        "dv18a2",
         "dv18a3",
-        "dv23a19",
-        "dv9a3"
+        "dv1a1",
+        "dv1a3",
+        "dv23a2",
+        "dv2a2",
+        "dv9",
+        "dv9a2"
       ]
     },
     "G": {
@@ -325,144 +107,26 @@
       "intlmodule": "edge",
       "vsn": "release",
       "deployed": [
-        "dv0a5",
         "dv10",
         "dv10a1",
-        "dv10a10",
-        "dv10a11",
-        "dv10a12",
-        "dv10a13",
-        "dv10a14",
-        "dv10a15",
-        "dv10a16",
-        "dv10a17",
-        "dv10a18",
-        "dv10a19",
         "dv10a2",
         "dv10a3",
-        "dv10a4",
-        "dv10a5",
-        "dv10a6",
-        "dv10a7",
-        "dv10a8",
-        "dv10a9",
-        "dv11a1",
-        "dv11a10",
-        "dv11a12",
-        "dv11a14",
-        "dv11a18",
-        "dv11a5",
-        "dv12a1",
-        "dv12a14",
-        "dv13a1",
-        "dv13a10",
-        "dv13a16",
-        "dv13a17",
-        "dv13a18",
-        "dv13a3",
-        "dv13a5",
-        "dv13a8",
-        "dv14a2",
-        "dv16a15",
-        "dv17a19",
-        "dv17a3",
-        "dv18a4",
-        "dv18a6",
-        "dv1a10",
-        "dv1a17",
-        "dv1a18",
-        "dv1a2",
-        "dv1a4",
         "dv20",
         "dv20a1",
-        "dv20a10",
-        "dv20a11",
-        "dv20a12",
-        "dv20a13",
-        "dv20a14",
-        "dv20a15",
-        "dv20a16",
-        "dv20a17",
-        "dv20a18",
-        "dv20a19",
         "dv20a2",
         "dv20a3",
-        "dv20a4",
-        "dv20a5",
-        "dv20a6",
-        "dv20a7",
-        "dv20a8",
-        "dv20a9",
         "dv21",
         "dv21a1",
-        "dv21a10",
-        "dv21a11",
-        "dv21a12",
-        "dv21a13",
-        "dv21a14",
-        "dv21a15",
-        "dv21a16",
-        "dv21a17",
-        "dv21a18",
-        "dv21a19",
         "dv21a2",
         "dv21a3",
-        "dv21a4",
-        "dv21a5",
-        "dv21a6",
-        "dv21a7",
-        "dv21a8",
-        "dv21a9",
         "dv22",
         "dv22a1",
-        "dv22a10",
-        "dv22a11",
-        "dv22a12",
-        "dv22a13",
-        "dv22a14",
-        "dv22a15",
-        "dv22a16",
-        "dv22a17",
-        "dv22a18",
-        "dv22a19",
         "dv22a2",
         "dv22a3",
-        "dv22a4",
-        "dv22a5",
-        "dv22a6",
-        "dv22a7",
-        "dv22a8",
-        "dv22a9",
-        "dv23a17",
-        "dv2a13",
-        "dv2a14",
-        "dv4a1",
-        "dv4a10",
-        "dv4a18",
-        "dv4a5",
         "dv6",
         "dv6a1",
-        "dv6a10",
-        "dv6a11",
-        "dv6a12",
-        "dv6a13",
-        "dv6a14",
-        "dv6a15",
-        "dv6a16",
-        "dv6a17",
-        "dv6a18",
-        "dv6a19",
         "dv6a2",
-        "dv6a3",
-        "dv6a4",
-        "dv6a5",
-        "dv6a6",
-        "dv6a7",
-        "dv6a8",
-        "dv6a9",
-        "dv8a10",
-        "dv8a9",
-        "dv9a10"
+        "dv6a3"
       ]
     }
   },
@@ -472,178 +136,34 @@
       "env": "staging",
       "network": "wifi",
       "powersource": "fixed",
-      "deploy": "D",
+      "deploy": "E",
       "acclr": false,
-      "intledge": false
+      "intledge": true
     },
     "dv0a1": {
       "dv_acc": "acc_none",
       "env": "staging",
       "network": "wifi",
       "powersource": "fixed",
-      "deploy": "D",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv0a10": {
-      "dv_acc": "acc_none",
-      "env": "staging",
-      "network": "wifi",
-      "powersource": "fixed",
-      "deploy": "C",
+      "deploy": "E",
       "acclr": false,
       "intledge": true
-    },
-    "dv0a11": {
-      "dv_acc": "acc_none",
-      "env": "staging",
-      "network": "wifi",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv0a12": {
-      "dv_acc": "acc_none",
-      "env": "staging",
-      "network": "wifi",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv0a13": {
-      "dv_acc": "acc_none",
-      "env": "staging",
-      "network": "wifi",
-      "powersource": "fixed",
-      "deploy": "D",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv0a14": {
-      "dv_acc": "acc_none",
-      "env": "staging",
-      "network": "wifi",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv0a15": {
-      "dv_acc": "acc_none",
-      "env": "staging",
-      "network": "wifi",
-      "powersource": "fixed",
-      "deploy": "D",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv0a16": {
-      "dv_acc": "acc_none",
-      "env": "staging",
-      "network": "wifi",
-      "powersource": "fixed",
-      "deploy": "D",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv0a17": {
-      "dv_acc": "acc_none",
-      "env": "staging",
-      "network": "wifi",
-      "powersource": "fixed",
-      "deploy": "F",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv0a18": {
-      "dv_acc": "acc_none",
-      "env": "staging",
-      "network": "wifi",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv0a19": {
-      "dv_acc": "acc_none",
-      "env": "staging",
-      "network": "wifi",
-      "powersource": "fixed",
-      "deploy": "D",
-      "acclr": false,
-      "intledge": false
     },
     "dv0a2": {
       "dv_acc": "acc_none",
       "env": "staging",
       "network": "wifi",
       "powersource": "fixed",
-      "deploy": "C",
+      "deploy": "D",
       "acclr": false,
-      "intledge": true
+      "intledge": false
     },
     "dv0a3": {
       "dv_acc": "acc_none",
       "env": "staging",
       "network": "wifi",
       "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv0a4": {
-      "dv_acc": "acc_none",
-      "env": "staging",
-      "network": "wifi",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv0a5": {
-      "dv_acc": "acc_none",
-      "env": "staging",
-      "network": "wifi",
-      "powersource": "fixed",
-      "deploy": "G",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv0a6": {
-      "dv_acc": "acc_none",
-      "env": "staging",
-      "network": "wifi",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv0a7": {
-      "dv_acc": "acc_none",
-      "env": "staging",
-      "network": "wifi",
-      "powersource": "fixed",
       "deploy": "D",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv0a8": {
-      "dv_acc": "acc_none",
-      "env": "staging",
-      "network": "wifi",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv0a9": {
-      "dv_acc": "acc_none",
-      "env": "staging",
-      "network": "wifi",
-      "powersource": "fixed",
-      "deploy": "C",
       "acclr": false,
       "intledge": true
     },
@@ -652,7 +172,7 @@
       "env": "staging",
       "network": "4g",
       "powersource": "ac",
-      "deploy": "E",
+      "deploy": "F",
       "acclr": true,
       "intledge": true
     },
@@ -666,96 +186,6 @@
       "intledge": true
     },
     "dv10a1": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "4g",
-      "powersource": "ac",
-      "deploy": "G",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv10a10": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "4g",
-      "powersource": "ac",
-      "deploy": "G",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv10a11": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "4g",
-      "powersource": "ac",
-      "deploy": "G",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv10a12": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "4g",
-      "powersource": "ac",
-      "deploy": "G",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv10a13": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "4g",
-      "powersource": "ac",
-      "deploy": "G",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv10a14": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "4g",
-      "powersource": "ac",
-      "deploy": "G",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv10a15": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "4g",
-      "powersource": "ac",
-      "deploy": "G",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv10a16": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "4g",
-      "powersource": "ac",
-      "deploy": "G",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv10a17": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "4g",
-      "powersource": "ac",
-      "deploy": "G",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv10a18": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "4g",
-      "powersource": "ac",
-      "deploy": "G",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv10a19": {
       "dv_acc": "acc_none",
       "env": "production",
       "network": "4g",
@@ -782,66 +212,12 @@
       "acclr": false,
       "intledge": true
     },
-    "dv10a4": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "4g",
-      "powersource": "ac",
-      "deploy": "G",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv10a5": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "4g",
-      "powersource": "ac",
-      "deploy": "G",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv10a6": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "4g",
-      "powersource": "ac",
-      "deploy": "G",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv10a7": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "4g",
-      "powersource": "ac",
-      "deploy": "G",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv10a8": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "4g",
-      "powersource": "ac",
-      "deploy": "G",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv10a9": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "4g",
-      "powersource": "ac",
-      "deploy": "G",
-      "acclr": false,
-      "intledge": true
-    },
     "dv11": {
       "dv_acc": "tpu",
       "env": "production",
       "network": "wifi",
       "powersource": "ac",
-      "deploy": "D",
+      "deploy": "F",
       "acclr": false,
       "intledge": false
     },
@@ -850,99 +226,9 @@
       "env": "production",
       "network": "wifi",
       "powersource": "ac",
-      "deploy": "G",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv11a10": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "ac",
-      "deploy": "G",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv11a11": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "ac",
-      "deploy": "D",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv11a12": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "ac",
-      "deploy": "G",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv11a13": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "ac",
-      "deploy": "D",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv11a14": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "ac",
-      "deploy": "G",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv11a15": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "ac",
-      "deploy": "D",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv11a16": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "ac",
       "deploy": "E",
       "acclr": true,
       "intledge": true
-    },
-    "dv11a17": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "ac",
-      "deploy": "E",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv11a18": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "ac",
-      "deploy": "G",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv11a19": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "ac",
-      "deploy": "D",
-      "acclr": false,
-      "intledge": false
     },
     "dv11a2": {
       "dv_acc": "tpu",
@@ -958,70 +244,16 @@
       "env": "production",
       "network": "wifi",
       "powersource": "ac",
-      "deploy": "D",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv11a4": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "ac",
-      "deploy": "D",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv11a5": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "ac",
-      "deploy": "G",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv11a6": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "ac",
       "deploy": "E",
       "acclr": true,
       "intledge": true
-    },
-    "dv11a7": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "ac",
-      "deploy": "E",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv11a8": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "ac",
-      "deploy": "F",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv11a9": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "ac",
-      "deploy": "D",
-      "acclr": false,
-      "intledge": false
     },
     "dv12": {
       "dv_acc": "acc_none",
       "env": "production",
       "network": "4g",
       "powersource": "fixed",
-      "deploy": "C",
+      "deploy": "F",
       "acclr": false,
       "intledge": true
     },
@@ -1030,97 +262,7 @@
       "env": "production",
       "network": "4g",
       "powersource": "fixed",
-      "deploy": "G",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv12a10": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "4g",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv12a11": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "4g",
-      "powersource": "fixed",
       "deploy": "D",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv12a12": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "4g",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv12a13": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "4g",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv12a14": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "4g",
-      "powersource": "fixed",
-      "deploy": "G",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv12a15": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "4g",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv12a16": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "4g",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv12a17": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "4g",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv12a18": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "4g",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv12a19": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "4g",
-      "powersource": "fixed",
-      "deploy": "C",
       "acclr": false,
       "intledge": true
     },
@@ -1129,7 +271,7 @@
       "env": "production",
       "network": "4g",
       "powersource": "fixed",
-      "deploy": "D",
+      "deploy": "F",
       "acclr": false,
       "intledge": true
     },
@@ -1138,61 +280,7 @@
       "env": "production",
       "network": "4g",
       "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv12a4": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "4g",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv12a5": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "4g",
-      "powersource": "fixed",
       "deploy": "D",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv12a6": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "4g",
-      "powersource": "fixed",
-      "deploy": "D",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv12a7": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "4g",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv12a8": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "4g",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv12a9": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "4g",
-      "powersource": "fixed",
-      "deploy": "C",
       "acclr": false,
       "intledge": true
     },
@@ -1206,96 +294,6 @@
       "intledge": true
     },
     "dv13a1": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "3g",
-      "powersource": "fixed",
-      "deploy": "G",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv13a10": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "3g",
-      "powersource": "fixed",
-      "deploy": "G",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv13a11": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "3g",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv13a12": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "3g",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv13a13": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "3g",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv13a14": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "3g",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv13a15": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "3g",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv13a16": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "3g",
-      "powersource": "fixed",
-      "deploy": "G",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv13a17": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "3g",
-      "powersource": "fixed",
-      "deploy": "G",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv13a18": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "3g",
-      "powersource": "fixed",
-      "deploy": "G",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv13a19": {
       "dv_acc": "tpu",
       "env": "production",
       "network": "3g",
@@ -1318,60 +316,6 @@
       "env": "production",
       "network": "3g",
       "powersource": "fixed",
-      "deploy": "G",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv13a4": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "3g",
-      "powersource": "fixed",
-      "deploy": "E",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv13a5": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "3g",
-      "powersource": "fixed",
-      "deploy": "G",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv13a6": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "3g",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv13a7": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "3g",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv13a8": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "3g",
-      "powersource": "fixed",
-      "deploy": "G",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv13a9": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "3g",
-      "powersource": "fixed",
       "deploy": "C",
       "acclr": false,
       "intledge": true
@@ -1381,173 +325,29 @@
       "env": "production",
       "network": "wifi",
       "powersource": "fixed",
-      "deploy": "C",
+      "deploy": "F",
       "acclr": false,
-      "intledge": true
+      "intledge": false
     },
     "dv14a1": {
       "dv_acc": "tpu",
       "env": "production",
       "network": "wifi",
       "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv14a10": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv14a11": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv14a12": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "fixed",
       "deploy": "D",
       "acclr": false,
       "intledge": false
-    },
-    "dv14a13": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "fixed",
-      "deploy": "D",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv14a14": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "fixed",
-      "deploy": "D",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv14a15": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "fixed",
-      "deploy": "D",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv14a16": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv14a17": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv14a18": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "fixed",
-      "deploy": "D",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv14a19": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
     },
     "dv14a2": {
       "dv_acc": "tpu",
       "env": "production",
       "network": "wifi",
       "powersource": "fixed",
-      "deploy": "G",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv14a3": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "fixed",
-      "deploy": "D",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv14a4": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv14a5": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv14a6": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv14a7": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv14a8": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "fixed",
-      "deploy": "D",
+      "deploy": "F",
       "acclr": false,
       "intledge": false
     },
-    "dv14a9": {
+    "dv14a3": {
       "dv_acc": "tpu",
       "env": "production",
       "network": "wifi",
@@ -1574,96 +374,6 @@
       "acclr": false,
       "intledge": false
     },
-    "dv15a10": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "battery",
-      "deploy": "nodp",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv15a11": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "battery",
-      "deploy": "nodp",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv15a12": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "battery",
-      "deploy": "nodp",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv15a13": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "battery",
-      "deploy": "nodp",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv15a14": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "battery",
-      "deploy": "nodp",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv15a15": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "battery",
-      "deploy": "nodp",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv15a16": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "battery",
-      "deploy": "nodp",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv15a17": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "battery",
-      "deploy": "nodp",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv15a18": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "battery",
-      "deploy": "nodp",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv15a19": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "battery",
-      "deploy": "nodp",
-      "acclr": false,
-      "intledge": false
-    },
     "dv15a2": {
       "dv_acc": "acc_none",
       "env": "production",
@@ -1682,160 +392,16 @@
       "acclr": false,
       "intledge": false
     },
-    "dv15a4": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "battery",
-      "deploy": "nodp",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv15a5": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "battery",
-      "deploy": "nodp",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv15a6": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "battery",
-      "deploy": "nodp",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv15a7": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "battery",
-      "deploy": "nodp",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv15a8": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "battery",
-      "deploy": "nodp",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv15a9": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "battery",
-      "deploy": "nodp",
-      "acclr": false,
-      "intledge": false
-    },
     "dv16": {
       "dv_acc": "acc_none",
       "env": "production",
       "network": "3g",
       "powersource": "fixed",
-      "deploy": "C",
+      "deploy": "E",
       "acclr": false,
       "intledge": true
     },
     "dv16a1": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "3g",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv16a10": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "3g",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv16a11": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "3g",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv16a12": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "3g",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv16a13": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "3g",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv16a14": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "3g",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv16a15": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "3g",
-      "powersource": "fixed",
-      "deploy": "G",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv16a16": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "3g",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv16a17": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "3g",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv16a18": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "3g",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv16a19": {
       "dv_acc": "acc_none",
       "env": "production",
       "network": "3g",
@@ -1862,60 +428,6 @@
       "acclr": false,
       "intledge": true
     },
-    "dv16a4": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "3g",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv16a5": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "3g",
-      "powersource": "fixed",
-      "deploy": "E",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv16a6": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "3g",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv16a7": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "3g",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv16a8": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "3g",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv16a9": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "3g",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
     "dv17": {
       "dv_acc": "tpu",
       "env": "production",
@@ -1934,96 +446,6 @@
       "acclr": true,
       "intledge": true
     },
-    "dv17a10": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "3g",
-      "powersource": "ac",
-      "deploy": "E",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv17a11": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "3g",
-      "powersource": "ac",
-      "deploy": "E",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv17a12": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "3g",
-      "powersource": "ac",
-      "deploy": "E",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv17a13": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "3g",
-      "powersource": "ac",
-      "deploy": "E",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv17a14": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "3g",
-      "powersource": "ac",
-      "deploy": "E",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv17a15": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "3g",
-      "powersource": "ac",
-      "deploy": "E",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv17a16": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "3g",
-      "powersource": "ac",
-      "deploy": "E",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv17a17": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "3g",
-      "powersource": "ac",
-      "deploy": "E",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv17a18": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "3g",
-      "powersource": "ac",
-      "deploy": "E",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv17a19": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "3g",
-      "powersource": "ac",
-      "deploy": "G",
-      "acclr": true,
-      "intledge": true
-    },
     "dv17a2": {
       "dv_acc": "tpu",
       "env": "production",
@@ -2038,60 +460,6 @@
       "env": "production",
       "network": "3g",
       "powersource": "ac",
-      "deploy": "G",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv17a4": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "3g",
-      "powersource": "ac",
-      "deploy": "E",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv17a5": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "3g",
-      "powersource": "ac",
-      "deploy": "E",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv17a6": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "3g",
-      "powersource": "ac",
-      "deploy": "E",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv17a7": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "3g",
-      "powersource": "ac",
-      "deploy": "E",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv17a8": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "3g",
-      "powersource": "ac",
-      "deploy": "E",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv17a9": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "3g",
-      "powersource": "ac",
       "deploy": "E",
       "acclr": true,
       "intledge": true
@@ -2101,7 +469,7 @@
       "env": "production",
       "network": "4g",
       "powersource": "ac",
-      "deploy": "E",
+      "deploy": "F",
       "acclr": true,
       "intledge": true
     },
@@ -2110,97 +478,7 @@
       "env": "production",
       "network": "4g",
       "powersource": "ac",
-      "deploy": "E",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv18a10": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "4g",
-      "powersource": "ac",
-      "deploy": "E",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv18a11": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "4g",
-      "powersource": "ac",
-      "deploy": "E",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv18a12": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "4g",
-      "powersource": "ac",
-      "deploy": "E",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv18a13": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "4g",
-      "powersource": "ac",
-      "deploy": "E",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv18a14": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "4g",
-      "powersource": "ac",
-      "deploy": "E",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv18a15": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "4g",
-      "powersource": "ac",
-      "deploy": "E",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv18a16": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "4g",
-      "powersource": "ac",
-      "deploy": "E",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv18a17": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "4g",
-      "powersource": "ac",
-      "deploy": "E",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv18a18": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "4g",
-      "powersource": "ac",
-      "deploy": "E",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv18a19": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "4g",
-      "powersource": "ac",
-      "deploy": "E",
+      "deploy": "F",
       "acclr": true,
       "intledge": true
     },
@@ -2209,7 +487,7 @@
       "env": "production",
       "network": "4g",
       "powersource": "ac",
-      "deploy": "E",
+      "deploy": "F",
       "acclr": true,
       "intledge": true
     },
@@ -2219,60 +497,6 @@
       "network": "4g",
       "powersource": "ac",
       "deploy": "F",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv18a4": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "4g",
-      "powersource": "ac",
-      "deploy": "G",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv18a5": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "4g",
-      "powersource": "ac",
-      "deploy": "E",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv18a6": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "4g",
-      "powersource": "ac",
-      "deploy": "G",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv18a7": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "4g",
-      "powersource": "ac",
-      "deploy": "E",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv18a8": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "4g",
-      "powersource": "ac",
-      "deploy": "E",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv18a9": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "4g",
-      "powersource": "ac",
-      "deploy": "E",
       "acclr": true,
       "intledge": true
     },
@@ -2286,96 +510,6 @@
       "intledge": false
     },
     "dv19a1": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "battery",
-      "deploy": "nodp",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv19a10": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "battery",
-      "deploy": "nodp",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv19a11": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "battery",
-      "deploy": "nodp",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv19a12": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "battery",
-      "deploy": "nodp",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv19a13": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "battery",
-      "deploy": "nodp",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv19a14": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "battery",
-      "deploy": "nodp",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv19a15": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "battery",
-      "deploy": "nodp",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv19a16": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "battery",
-      "deploy": "nodp",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv19a17": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "battery",
-      "deploy": "nodp",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv19a18": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "battery",
-      "deploy": "nodp",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv19a19": {
       "dv_acc": "acc_none",
       "env": "production",
       "network": "wifi",
@@ -2402,156 +536,12 @@
       "acclr": false,
       "intledge": false
     },
-    "dv19a4": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "battery",
-      "deploy": "nodp",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv19a5": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "battery",
-      "deploy": "nodp",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv19a6": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "battery",
-      "deploy": "nodp",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv19a7": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "battery",
-      "deploy": "nodp",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv19a8": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "battery",
-      "deploy": "nodp",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv19a9": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "battery",
-      "deploy": "nodp",
-      "acclr": false,
-      "intledge": false
-    },
     "dv1a1": {
       "dv_acc": "tpu",
       "env": "staging",
       "network": "4g",
       "powersource": "ac",
-      "deploy": "E",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv1a10": {
-      "dv_acc": "tpu",
-      "env": "staging",
-      "network": "4g",
-      "powersource": "ac",
-      "deploy": "G",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv1a11": {
-      "dv_acc": "tpu",
-      "env": "staging",
-      "network": "4g",
-      "powersource": "ac",
-      "deploy": "E",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv1a12": {
-      "dv_acc": "tpu",
-      "env": "staging",
-      "network": "4g",
-      "powersource": "ac",
-      "deploy": "E",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv1a13": {
-      "dv_acc": "tpu",
-      "env": "staging",
-      "network": "4g",
-      "powersource": "ac",
-      "deploy": "E",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv1a14": {
-      "dv_acc": "tpu",
-      "env": "staging",
-      "network": "4g",
-      "powersource": "ac",
-      "deploy": "E",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv1a15": {
-      "dv_acc": "tpu",
-      "env": "staging",
-      "network": "4g",
-      "powersource": "ac",
-      "deploy": "E",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv1a16": {
-      "dv_acc": "tpu",
-      "env": "staging",
-      "network": "4g",
-      "powersource": "ac",
-      "deploy": "E",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv1a17": {
-      "dv_acc": "tpu",
-      "env": "staging",
-      "network": "4g",
-      "powersource": "ac",
-      "deploy": "G",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv1a18": {
-      "dv_acc": "tpu",
-      "env": "staging",
-      "network": "4g",
-      "powersource": "ac",
-      "deploy": "G",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv1a19": {
-      "dv_acc": "tpu",
-      "env": "staging",
-      "network": "4g",
-      "powersource": "ac",
-      "deploy": "E",
+      "deploy": "F",
       "acclr": true,
       "intledge": true
     },
@@ -2560,8 +550,8 @@
       "env": "staging",
       "network": "4g",
       "powersource": "ac",
-      "deploy": "G",
-      "acclr": false,
+      "deploy": "E",
+      "acclr": true,
       "intledge": true
     },
     "dv1a3": {
@@ -2569,61 +559,7 @@
       "env": "staging",
       "network": "4g",
       "powersource": "ac",
-      "deploy": "E",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv1a4": {
-      "dv_acc": "tpu",
-      "env": "staging",
-      "network": "4g",
-      "powersource": "ac",
-      "deploy": "G",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv1a5": {
-      "dv_acc": "tpu",
-      "env": "staging",
-      "network": "4g",
-      "powersource": "ac",
-      "deploy": "E",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv1a6": {
-      "dv_acc": "tpu",
-      "env": "staging",
-      "network": "4g",
-      "powersource": "ac",
-      "deploy": "E",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv1a7": {
-      "dv_acc": "tpu",
-      "env": "staging",
-      "network": "4g",
-      "powersource": "ac",
-      "deploy": "E",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv1a8": {
-      "dv_acc": "tpu",
-      "env": "staging",
-      "network": "4g",
-      "powersource": "ac",
-      "deploy": "E",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv1a9": {
-      "dv_acc": "tpu",
-      "env": "staging",
-      "network": "4g",
-      "powersource": "ac",
-      "deploy": "E",
+      "deploy": "F",
       "acclr": true,
       "intledge": true
     },
@@ -2632,9 +568,9 @@
       "env": "staging",
       "network": "wifi",
       "powersource": "ac",
-      "deploy": "D",
-      "acclr": false,
-      "intledge": false
+      "deploy": "E",
+      "acclr": true,
+      "intledge": true
     },
     "dv20": {
       "dv_acc": "tpu",
@@ -2646,96 +582,6 @@
       "intledge": true
     },
     "dv20a1": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "4g",
-      "powersource": "battery",
-      "deploy": "G",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv20a10": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "4g",
-      "powersource": "battery",
-      "deploy": "G",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv20a11": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "4g",
-      "powersource": "battery",
-      "deploy": "G",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv20a12": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "4g",
-      "powersource": "battery",
-      "deploy": "G",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv20a13": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "4g",
-      "powersource": "battery",
-      "deploy": "G",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv20a14": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "4g",
-      "powersource": "battery",
-      "deploy": "G",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv20a15": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "4g",
-      "powersource": "battery",
-      "deploy": "G",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv20a16": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "4g",
-      "powersource": "battery",
-      "deploy": "G",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv20a17": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "4g",
-      "powersource": "battery",
-      "deploy": "G",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv20a18": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "4g",
-      "powersource": "battery",
-      "deploy": "G",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv20a19": {
       "dv_acc": "tpu",
       "env": "production",
       "network": "4g",
@@ -2762,60 +608,6 @@
       "acclr": true,
       "intledge": true
     },
-    "dv20a4": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "4g",
-      "powersource": "battery",
-      "deploy": "G",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv20a5": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "4g",
-      "powersource": "battery",
-      "deploy": "G",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv20a6": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "4g",
-      "powersource": "battery",
-      "deploy": "G",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv20a7": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "4g",
-      "powersource": "battery",
-      "deploy": "G",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv20a8": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "4g",
-      "powersource": "battery",
-      "deploy": "G",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv20a9": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "4g",
-      "powersource": "battery",
-      "deploy": "G",
-      "acclr": true,
-      "intledge": true
-    },
     "dv21": {
       "dv_acc": "tpu",
       "env": "production",
@@ -2826,96 +618,6 @@
       "intledge": true
     },
     "dv21a1": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "3g",
-      "powersource": "battery",
-      "deploy": "G",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv21a10": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "3g",
-      "powersource": "battery",
-      "deploy": "G",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv21a11": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "3g",
-      "powersource": "battery",
-      "deploy": "G",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv21a12": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "3g",
-      "powersource": "battery",
-      "deploy": "G",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv21a13": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "3g",
-      "powersource": "battery",
-      "deploy": "G",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv21a14": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "3g",
-      "powersource": "battery",
-      "deploy": "G",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv21a15": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "3g",
-      "powersource": "battery",
-      "deploy": "G",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv21a16": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "3g",
-      "powersource": "battery",
-      "deploy": "G",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv21a17": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "3g",
-      "powersource": "battery",
-      "deploy": "G",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv21a18": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "3g",
-      "powersource": "battery",
-      "deploy": "G",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv21a19": {
       "dv_acc": "tpu",
       "env": "production",
       "network": "3g",
@@ -2942,60 +644,6 @@
       "acclr": true,
       "intledge": true
     },
-    "dv21a4": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "3g",
-      "powersource": "battery",
-      "deploy": "G",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv21a5": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "3g",
-      "powersource": "battery",
-      "deploy": "G",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv21a6": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "3g",
-      "powersource": "battery",
-      "deploy": "G",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv21a7": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "3g",
-      "powersource": "battery",
-      "deploy": "G",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv21a8": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "3g",
-      "powersource": "battery",
-      "deploy": "G",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv21a9": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "3g",
-      "powersource": "battery",
-      "deploy": "G",
-      "acclr": true,
-      "intledge": true
-    },
     "dv22": {
       "dv_acc": "acc_none",
       "env": "production",
@@ -3006,96 +654,6 @@
       "intledge": true
     },
     "dv22a1": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "4g",
-      "powersource": "ac",
-      "deploy": "G",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv22a10": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "4g",
-      "powersource": "ac",
-      "deploy": "G",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv22a11": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "4g",
-      "powersource": "ac",
-      "deploy": "G",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv22a12": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "4g",
-      "powersource": "ac",
-      "deploy": "G",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv22a13": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "4g",
-      "powersource": "ac",
-      "deploy": "G",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv22a14": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "4g",
-      "powersource": "ac",
-      "deploy": "G",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv22a15": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "4g",
-      "powersource": "ac",
-      "deploy": "G",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv22a16": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "4g",
-      "powersource": "ac",
-      "deploy": "G",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv22a17": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "4g",
-      "powersource": "ac",
-      "deploy": "G",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv22a18": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "4g",
-      "powersource": "ac",
-      "deploy": "G",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv22a19": {
       "dv_acc": "acc_none",
       "env": "production",
       "network": "4g",
@@ -3122,66 +680,12 @@
       "acclr": false,
       "intledge": true
     },
-    "dv22a4": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "4g",
-      "powersource": "ac",
-      "deploy": "G",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv22a5": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "4g",
-      "powersource": "ac",
-      "deploy": "G",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv22a6": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "4g",
-      "powersource": "ac",
-      "deploy": "G",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv22a7": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "4g",
-      "powersource": "ac",
-      "deploy": "G",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv22a8": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "4g",
-      "powersource": "ac",
-      "deploy": "G",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv22a9": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "4g",
-      "powersource": "ac",
-      "deploy": "G",
-      "acclr": false,
-      "intledge": true
-    },
     "dv23": {
       "dv_acc": "tpu",
       "env": "production",
       "network": "4g",
       "powersource": "fixed",
-      "deploy": "C",
+      "deploy": "E",
       "acclr": false,
       "intledge": true
     },
@@ -3190,97 +694,7 @@
       "env": "production",
       "network": "4g",
       "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv23a10": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "4g",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv23a11": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "4g",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv23a12": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "4g",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv23a13": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "4g",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv23a14": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "4g",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv23a15": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "4g",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv23a16": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "4g",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv23a17": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "4g",
-      "powersource": "fixed",
-      "deploy": "G",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv23a18": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "4g",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv23a19": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "4g",
-      "powersource": "fixed",
-      "deploy": "F",
+      "deploy": "D",
       "acclr": false,
       "intledge": true
     },
@@ -3289,65 +703,11 @@
       "env": "production",
       "network": "4g",
       "powersource": "fixed",
-      "deploy": "C",
+      "deploy": "F",
       "acclr": false,
       "intledge": true
     },
     "dv23a3": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "4g",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv23a4": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "4g",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv23a5": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "4g",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv23a6": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "4g",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv23a7": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "4g",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv23a8": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "4g",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv23a9": {
       "dv_acc": "tpu",
       "env": "production",
       "network": "4g",
@@ -3374,96 +734,6 @@
       "acclr": false,
       "intledge": false
     },
-    "dv24a10": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "3g",
-      "powersource": "battery",
-      "deploy": "nodp",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv24a11": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "3g",
-      "powersource": "battery",
-      "deploy": "nodp",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv24a12": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "3g",
-      "powersource": "battery",
-      "deploy": "nodp",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv24a13": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "3g",
-      "powersource": "battery",
-      "deploy": "nodp",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv24a14": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "3g",
-      "powersource": "battery",
-      "deploy": "nodp",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv24a15": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "3g",
-      "powersource": "battery",
-      "deploy": "nodp",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv24a16": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "3g",
-      "powersource": "battery",
-      "deploy": "nodp",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv24a17": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "3g",
-      "powersource": "battery",
-      "deploy": "nodp",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv24a18": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "3g",
-      "powersource": "battery",
-      "deploy": "nodp",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv24a19": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "3g",
-      "powersource": "battery",
-      "deploy": "nodp",
-      "acclr": false,
-      "intledge": false
-    },
     "dv24a2": {
       "dv_acc": "acc_none",
       "env": "production",
@@ -3482,142 +752,7 @@
       "acclr": false,
       "intledge": false
     },
-    "dv24a4": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "3g",
-      "powersource": "battery",
-      "deploy": "nodp",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv24a5": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "3g",
-      "powersource": "battery",
-      "deploy": "nodp",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv24a6": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "3g",
-      "powersource": "battery",
-      "deploy": "nodp",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv24a7": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "3g",
-      "powersource": "battery",
-      "deploy": "nodp",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv24a8": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "3g",
-      "powersource": "battery",
-      "deploy": "nodp",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv24a9": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "3g",
-      "powersource": "battery",
-      "deploy": "nodp",
-      "acclr": false,
-      "intledge": false
-    },
     "dv2a1": {
-      "dv_acc": "tpu",
-      "env": "staging",
-      "network": "wifi",
-      "powersource": "ac",
-      "deploy": "D",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv2a10": {
-      "dv_acc": "tpu",
-      "env": "staging",
-      "network": "wifi",
-      "powersource": "ac",
-      "deploy": "D",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv2a11": {
-      "dv_acc": "tpu",
-      "env": "staging",
-      "network": "wifi",
-      "powersource": "ac",
-      "deploy": "D",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv2a12": {
-      "dv_acc": "tpu",
-      "env": "staging",
-      "network": "wifi",
-      "powersource": "ac",
-      "deploy": "D",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv2a13": {
-      "dv_acc": "tpu",
-      "env": "staging",
-      "network": "wifi",
-      "powersource": "ac",
-      "deploy": "G",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv2a14": {
-      "dv_acc": "tpu",
-      "env": "staging",
-      "network": "wifi",
-      "powersource": "ac",
-      "deploy": "G",
-      "acclr": true,
-      "intledge": true
-    },
-    "dv2a15": {
-      "dv_acc": "tpu",
-      "env": "staging",
-      "network": "wifi",
-      "powersource": "ac",
-      "deploy": "D",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv2a16": {
-      "dv_acc": "tpu",
-      "env": "staging",
-      "network": "wifi",
-      "powersource": "ac",
-      "deploy": "D",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv2a17": {
-      "dv_acc": "tpu",
-      "env": "staging",
-      "network": "wifi",
-      "powersource": "ac",
-      "deploy": "D",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv2a18": {
       "dv_acc": "tpu",
       "env": "staging",
       "network": "wifi",
@@ -3626,79 +761,16 @@
       "acclr": true,
       "intledge": true
     },
-    "dv2a19": {
-      "dv_acc": "tpu",
-      "env": "staging",
-      "network": "wifi",
-      "powersource": "ac",
-      "deploy": "D",
-      "acclr": false,
-      "intledge": false
-    },
     "dv2a2": {
       "dv_acc": "tpu",
       "env": "staging",
       "network": "wifi",
       "powersource": "ac",
-      "deploy": "D",
+      "deploy": "F",
       "acclr": false,
       "intledge": false
     },
     "dv2a3": {
-      "dv_acc": "tpu",
-      "env": "staging",
-      "network": "wifi",
-      "powersource": "ac",
-      "deploy": "D",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv2a4": {
-      "dv_acc": "tpu",
-      "env": "staging",
-      "network": "wifi",
-      "powersource": "ac",
-      "deploy": "D",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv2a5": {
-      "dv_acc": "tpu",
-      "env": "staging",
-      "network": "wifi",
-      "powersource": "ac",
-      "deploy": "D",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv2a6": {
-      "dv_acc": "tpu",
-      "env": "staging",
-      "network": "wifi",
-      "powersource": "ac",
-      "deploy": "D",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv2a7": {
-      "dv_acc": "tpu",
-      "env": "staging",
-      "network": "wifi",
-      "powersource": "ac",
-      "deploy": "D",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv2a8": {
-      "dv_acc": "tpu",
-      "env": "staging",
-      "network": "wifi",
-      "powersource": "ac",
-      "deploy": "D",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv2a9": {
       "dv_acc": "tpu",
       "env": "staging",
       "network": "wifi",
@@ -3725,96 +797,6 @@
       "acclr": false,
       "intledge": false
     },
-    "dv3a10": {
-      "dv_acc": "acc_none",
-      "env": "staging",
-      "network": "3g",
-      "powersource": "battery",
-      "deploy": "nodp",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv3a11": {
-      "dv_acc": "acc_none",
-      "env": "staging",
-      "network": "3g",
-      "powersource": "battery",
-      "deploy": "nodp",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv3a12": {
-      "dv_acc": "acc_none",
-      "env": "staging",
-      "network": "3g",
-      "powersource": "battery",
-      "deploy": "nodp",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv3a13": {
-      "dv_acc": "acc_none",
-      "env": "staging",
-      "network": "3g",
-      "powersource": "battery",
-      "deploy": "nodp",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv3a14": {
-      "dv_acc": "acc_none",
-      "env": "staging",
-      "network": "3g",
-      "powersource": "battery",
-      "deploy": "nodp",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv3a15": {
-      "dv_acc": "acc_none",
-      "env": "staging",
-      "network": "3g",
-      "powersource": "battery",
-      "deploy": "nodp",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv3a16": {
-      "dv_acc": "acc_none",
-      "env": "staging",
-      "network": "3g",
-      "powersource": "battery",
-      "deploy": "nodp",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv3a17": {
-      "dv_acc": "acc_none",
-      "env": "staging",
-      "network": "3g",
-      "powersource": "battery",
-      "deploy": "nodp",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv3a18": {
-      "dv_acc": "acc_none",
-      "env": "staging",
-      "network": "3g",
-      "powersource": "battery",
-      "deploy": "nodp",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv3a19": {
-      "dv_acc": "acc_none",
-      "env": "staging",
-      "network": "3g",
-      "powersource": "battery",
-      "deploy": "nodp",
-      "acclr": false,
-      "intledge": false
-    },
     "dv3a2": {
       "dv_acc": "acc_none",
       "env": "staging",
@@ -3825,60 +807,6 @@
       "intledge": false
     },
     "dv3a3": {
-      "dv_acc": "acc_none",
-      "env": "staging",
-      "network": "3g",
-      "powersource": "battery",
-      "deploy": "nodp",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv3a4": {
-      "dv_acc": "acc_none",
-      "env": "staging",
-      "network": "3g",
-      "powersource": "battery",
-      "deploy": "nodp",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv3a5": {
-      "dv_acc": "acc_none",
-      "env": "staging",
-      "network": "3g",
-      "powersource": "battery",
-      "deploy": "nodp",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv3a6": {
-      "dv_acc": "acc_none",
-      "env": "staging",
-      "network": "3g",
-      "powersource": "battery",
-      "deploy": "nodp",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv3a7": {
-      "dv_acc": "acc_none",
-      "env": "staging",
-      "network": "3g",
-      "powersource": "battery",
-      "deploy": "nodp",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv3a8": {
-      "dv_acc": "acc_none",
-      "env": "staging",
-      "network": "3g",
-      "powersource": "battery",
-      "deploy": "nodp",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv3a9": {
       "dv_acc": "acc_none",
       "env": "staging",
       "network": "3g",
@@ -3901,97 +829,7 @@
       "env": "production",
       "network": "4g",
       "powersource": "fixed",
-      "deploy": "G",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv4a10": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "4g",
-      "powersource": "fixed",
-      "deploy": "G",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv4a11": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "4g",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv4a12": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "4g",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv4a13": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "4g",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv4a14": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "4g",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv4a15": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "4g",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv4a16": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "4g",
-      "powersource": "fixed",
-      "deploy": "D",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv4a17": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "4g",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv4a18": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "4g",
-      "powersource": "fixed",
-      "deploy": "G",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv4a19": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "4g",
-      "powersource": "fixed",
-      "deploy": "C",
+      "deploy": "E",
       "acclr": false,
       "intledge": true
     },
@@ -4000,7 +838,7 @@
       "env": "production",
       "network": "4g",
       "powersource": "fixed",
-      "deploy": "C",
+      "deploy": "D",
       "acclr": false,
       "intledge": true
     },
@@ -4009,61 +847,7 @@
       "env": "production",
       "network": "4g",
       "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv4a4": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "4g",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv4a5": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "4g",
-      "powersource": "fixed",
-      "deploy": "G",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv4a6": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "4g",
-      "powersource": "fixed",
       "deploy": "D",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv4a7": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "4g",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv4a8": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "4g",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv4a9": {
-      "dv_acc": "tpu",
-      "env": "production",
-      "network": "4g",
-      "powersource": "fixed",
-      "deploy": "C",
       "acclr": false,
       "intledge": true
     },
@@ -4072,101 +856,11 @@
       "env": "production",
       "network": "wifi",
       "powersource": "fixed",
-      "deploy": "C",
+      "deploy": "D",
       "acclr": false,
-      "intledge": true
+      "intledge": false
     },
     "dv5a1": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv5a10": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv5a11": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv5a12": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv5a13": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv5a14": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv5a15": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "fixed",
-      "deploy": "D",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv5a16": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv5a17": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "fixed",
-      "deploy": "D",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv5a18": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv5a19": {
       "dv_acc": "acc_none",
       "env": "production",
       "network": "wifi",
@@ -4180,65 +874,11 @@
       "env": "production",
       "network": "wifi",
       "powersource": "fixed",
-      "deploy": "C",
+      "deploy": "E",
       "acclr": false,
       "intledge": true
     },
     "dv5a3": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv5a4": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv5a5": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv5a6": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv5a7": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv5a8": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv5a9": {
       "dv_acc": "acc_none",
       "env": "production",
       "network": "wifi",
@@ -4265,96 +905,6 @@
       "acclr": false,
       "intledge": true
     },
-    "dv6a10": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "4g",
-      "powersource": "ac",
-      "deploy": "G",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv6a11": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "4g",
-      "powersource": "ac",
-      "deploy": "G",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv6a12": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "4g",
-      "powersource": "ac",
-      "deploy": "G",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv6a13": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "4g",
-      "powersource": "ac",
-      "deploy": "G",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv6a14": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "4g",
-      "powersource": "ac",
-      "deploy": "G",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv6a15": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "4g",
-      "powersource": "ac",
-      "deploy": "G",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv6a16": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "4g",
-      "powersource": "ac",
-      "deploy": "G",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv6a17": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "4g",
-      "powersource": "ac",
-      "deploy": "G",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv6a18": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "4g",
-      "powersource": "ac",
-      "deploy": "G",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv6a19": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "4g",
-      "powersource": "ac",
-      "deploy": "G",
-      "acclr": false,
-      "intledge": true
-    },
     "dv6a2": {
       "dv_acc": "acc_none",
       "env": "production",
@@ -4365,60 +915,6 @@
       "intledge": true
     },
     "dv6a3": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "4g",
-      "powersource": "ac",
-      "deploy": "G",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv6a4": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "4g",
-      "powersource": "ac",
-      "deploy": "G",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv6a5": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "4g",
-      "powersource": "ac",
-      "deploy": "G",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv6a6": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "4g",
-      "powersource": "ac",
-      "deploy": "G",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv6a7": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "4g",
-      "powersource": "ac",
-      "deploy": "G",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv6a8": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "4g",
-      "powersource": "ac",
-      "deploy": "G",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv6a9": {
       "dv_acc": "acc_none",
       "env": "production",
       "network": "4g",
@@ -4441,96 +937,6 @@
       "env": "production",
       "network": "4g",
       "powersource": "fixed",
-      "deploy": "D",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv7a10": {
-      "dv_acc": "gpu",
-      "env": "production",
-      "network": "4g",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv7a11": {
-      "dv_acc": "gpu",
-      "env": "production",
-      "network": "4g",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv7a12": {
-      "dv_acc": "gpu",
-      "env": "production",
-      "network": "4g",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv7a13": {
-      "dv_acc": "gpu",
-      "env": "production",
-      "network": "4g",
-      "powersource": "fixed",
-      "deploy": "D",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv7a14": {
-      "dv_acc": "gpu",
-      "env": "production",
-      "network": "4g",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv7a15": {
-      "dv_acc": "gpu",
-      "env": "production",
-      "network": "4g",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv7a16": {
-      "dv_acc": "gpu",
-      "env": "production",
-      "network": "4g",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv7a17": {
-      "dv_acc": "gpu",
-      "env": "production",
-      "network": "4g",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv7a18": {
-      "dv_acc": "gpu",
-      "env": "production",
-      "network": "4g",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv7a19": {
-      "dv_acc": "gpu",
-      "env": "production",
-      "network": "4g",
-      "powersource": "fixed",
       "deploy": "C",
       "acclr": false,
       "intledge": true
@@ -4540,7 +946,7 @@
       "env": "production",
       "network": "4g",
       "powersource": "fixed",
-      "deploy": "C",
+      "deploy": "D",
       "acclr": false,
       "intledge": true
     },
@@ -4549,61 +955,7 @@
       "env": "production",
       "network": "4g",
       "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv7a4": {
-      "dv_acc": "gpu",
-      "env": "production",
-      "network": "4g",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv7a5": {
-      "dv_acc": "gpu",
-      "env": "production",
-      "network": "4g",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv7a6": {
-      "dv_acc": "gpu",
-      "env": "production",
-      "network": "4g",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv7a7": {
-      "dv_acc": "gpu",
-      "env": "production",
-      "network": "4g",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv7a8": {
-      "dv_acc": "gpu",
-      "env": "production",
-      "network": "4g",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv7a9": {
-      "dv_acc": "gpu",
-      "env": "production",
-      "network": "4g",
-      "powersource": "fixed",
-      "deploy": "C",
+      "deploy": "D",
       "acclr": false,
       "intledge": true
     },
@@ -4617,96 +969,6 @@
       "intledge": true
     },
     "dv8a1": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "4g",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv8a10": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "4g",
-      "powersource": "fixed",
-      "deploy": "G",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv8a11": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "4g",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv8a12": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "4g",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv8a13": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "4g",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv8a14": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "4g",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv8a15": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "4g",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv8a16": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "4g",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv8a17": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "4g",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv8a18": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "4g",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv8a19": {
       "dv_acc": "acc_none",
       "env": "production",
       "network": "4g",
@@ -4729,61 +991,7 @@
       "env": "production",
       "network": "4g",
       "powersource": "fixed",
-      "deploy": "D",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv8a4": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "4g",
-      "powersource": "fixed",
-      "deploy": "D",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv8a5": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "4g",
-      "powersource": "fixed",
       "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv8a6": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "4g",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv8a7": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "4g",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv8a8": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "4g",
-      "powersource": "fixed",
-      "deploy": "C",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv8a9": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "4g",
-      "powersource": "fixed",
-      "deploy": "G",
       "acclr": false,
       "intledge": true
     },
@@ -4792,101 +1000,11 @@
       "env": "production",
       "network": "wifi",
       "powersource": "ac",
-      "deploy": "D",
+      "deploy": "F",
       "acclr": false,
       "intledge": false
     },
     "dv9a1": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "ac",
-      "deploy": "D",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv9a10": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "ac",
-      "deploy": "G",
-      "acclr": false,
-      "intledge": true
-    },
-    "dv9a11": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "ac",
-      "deploy": "D",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv9a12": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "ac",
-      "deploy": "D",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv9a13": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "ac",
-      "deploy": "D",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv9a14": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "ac",
-      "deploy": "D",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv9a15": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "ac",
-      "deploy": "D",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv9a16": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "ac",
-      "deploy": "D",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv9a17": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "ac",
-      "deploy": "D",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv9a18": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "ac",
-      "deploy": "D",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv9a19": {
       "dv_acc": "acc_none",
       "env": "production",
       "network": "wifi",
@@ -4900,65 +1018,11 @@
       "env": "production",
       "network": "wifi",
       "powersource": "ac",
-      "deploy": "D",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv9a3": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "ac",
       "deploy": "F",
       "acclr": false,
       "intledge": false
     },
-    "dv9a4": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "ac",
-      "deploy": "D",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv9a5": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "ac",
-      "deploy": "D",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv9a6": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "ac",
-      "deploy": "D",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv9a7": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "ac",
-      "deploy": "D",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv9a8": {
-      "dv_acc": "acc_none",
-      "env": "production",
-      "network": "wifi",
-      "powersource": "ac",
-      "deploy": "D",
-      "acclr": false,
-      "intledge": false
-    },
-    "dv9a9": {
+    "dv9a3": {
       "dv_acc": "acc_none",
       "env": "production",
       "network": "wifi",
