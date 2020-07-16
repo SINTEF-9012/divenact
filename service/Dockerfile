@@ -17,4 +17,4 @@ RUN pip3 install \
     npm install
 
 ENTRYPOINT ["/usr/bin/python3", "start.py"]
-CMD ["--connection=''", "--no-db"]
+CMD ["--no-db"]
