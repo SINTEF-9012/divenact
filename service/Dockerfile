@@ -16,5 +16,5 @@ RUN pip3 install \
     cd client && \
     npm install
 
-ENTRYPOINT ["/bin/python3", "start.py"]
+ENTRYPOINT ["/usr/bin/python3", "start.py"]
 CMD ["--connection=''", "--no-db"]
