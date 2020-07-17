@@ -1,26 +1,44 @@
-# DivENACT
-Diversity-aware fleet management of Edge devices, based on Azure IoT Hub.
+# DivENACT: Diversity-Aware Fleet Management of Edge Devices
 
-The main part of DivEnact is an online service with a browser-based GUI, which manages a fleet of Edge deivces (gateways). To use the full function of this service, you need an Azure IoT Hub instance and a number of devices registered to the hub. The first two pre-installation steps explains hwo to obtain the IoT Hub instance and how to prepare the devices. The third section explains the installation and usage of the DivEnact service itself.
-
-If you want to quickly check how the tool looks and try the fleet assignment function (which is relatively independent to the devices and the IoT Hub), you can skip the first two sections and directly go to [a really quick start tutorial](#Really-quick-start) to see how the GUI looks like and try one of the core functions for fleet assignment without any real devices.
-
-## Functionality
-
-There are currently 8 active tabs in DivENACT:
+DivENACT is an online tool for managing a fleet of Edge devices (gateways) based on Azure IoT Hub. The functionality is currently distributed across 8 tabs in the GUI:
 
 ![DivENACT tabs](https://user-images.githubusercontent.com/12085160/87779909-e5a37600-c82d-11ea-9067-89eeeecca1d5.png)
 
-- **Templates**:
-- **Variants**:
-- **Deployments**:
-- **Devices**:
-- **Control**:
-- **Repository**:
-- **Z3**:
-- **OR-Tools**:
+- **Templates**: lists the available deployment templates, stored on the local MongoDB. The tab also provides basic editing functionality to modify templates.
+- **Variants**: lists the available variants (linked to templates) that can be parameterised and pushed for deployment to Azure IoT Hub. The tab also provides basic editing functionality to modify variants.
+- **Deployments**: lists the deployments, as fetched from Azure IoT Hub. 
+- **Devices**: lists the edge devices, as fecthed from Azure IoT Hub. The tab also provides basic editing functionality to tag devices with certain properties.
+- **Control**: provides some basic functionality for instantiating varinats based on abailable templates, diversifying them and pushing for deployment to Azure IoT Hub (**NB: for testing purposes only**).
+- **Repository**: lists all entities stored on the local MongoDB (**NB: for testing purposes only**).
+- **Z3**: provides functionality for designing assignment parameters based on template/variant parameters and device properties. The designed assignment logic is fed to Z3 solver for solving and, upon approval, is finally pushed to Azure IoT Hub for deployment.
+- **OR-Tools**: provides functionality for designing assignment parameters based on template/variant parameters and device properties. The designed assignment logic is fed to OR-Tools solver for solving and, upon approval, is finally pushed to Azure IoT Hub for deployment (**NB: for testing purposes only**).
+
+## Features
+
+### Short term
+
+| id | name | dep | status |
+|---|---|---|---|
+| 1 | create a deployment| | done |
+| 2 | set tag to one device | | done |
+| 3 | update a deployment with condition | | |
+| 4 | create (or appoint) a production deployment | 1 | done? |
+| 5 | create a preview deployment | 1 | |
+| 6 | tag _n_ devices to preview | 2 | |
+| 7 | a separate daemon to send device info | | hard? |
+| 8 | a listener of device info | 7 | |
+| 9 | monitor lifecycle of devices | | |
+| 10 | keep _n_ devices for preview | 9 | | |
+| 11 | move all devices to product | 4, 6 | | |
+| 12 | command line UI in node | | |
+| 13 | track devices installed on edge | 7 | |
+| 14 | shuffle devices among diverse versions | 1, 2 | |
 
 # Getting started
+
+The main part of DivENACT is an online service with a browser-based GUI, which manages a fleet of Edge devices (gateways). To use the full functionality of this service, you need an Azure IoT Hub instance and a number of virtual devices registered in the hub. The first two pre-installation steps explain hwo to obtain the IoT Hub instance and how to prepare the devices. The third section explains the installation and usage of the DivENACT service itself.
+
+If you want to quickly check how the tool looks and try the fleet assignment function (which is relatively independent to the devices and the IoT Hub), you can skip the first two sections and directly go to Section 3 and install DivENACT via Docker.
 
 ## Create cloud resources
 
@@ -44,7 +62,7 @@ Alternative way:
 
 ## Execute diversity management services
 
-## Really-quick-start
+### Really quick start
 This subsection provides a quick way to run a lite version of DivEnact without the requistion of Azure IoT Hub, real (or simulated) IoT devices, nor the document database. All you need is Docker 19.03 or above. You can use this way to see how the DivEnact GUI looks like, and have a taste of what functions it could provide you, without being able to actually see any devices or deploy anything, since it relies on Azure IoT Hub. But you can try one of the core functions, i.e., the *fleet assignment* of multiple deployments on a fleet of many devices, since it is relevantly independent to the real devices.
 
 Launch DivEnact with one comment:
@@ -181,24 +199,3 @@ provisioning:
 ```systemctl restart iotedge```
 - After some time your device will be registered in your IoT Hub (using either ```registration_id``` or ```device_id```). 
 - If specified tags match one of the deployments target conditions, the device will also be assigned with that deployment.
-
-## Features
-
-### Short term
-
-| id | name | dep | status |
-|---|---|---|---|
-| 1 | create a deployment| | done |
-| 2 | set tag to one device | | done |
-| 3 | update a deployment with condition | | |
-| 4 | create (or appoint) a production deployment | 1 | done? |
-| 5 | create a preview deployment | 1 | |
-| 6 | tag _n_ devices to preview | 2 | |
-| 7 | a separate daemon to send device info | | hard? |
-| 8 | a listener of device info | 7 | |
-| 9 | monitor lifecycle of devices | | |
-| 10 | keep _n_ devices for preview | 9 | | |
-| 11 | move all devices to product | 4, 6 | | |
-| 12 | command line UI in node | | |
-| 13 | track devices installed on edge | 7 | |
-| *14* | shuffle devices among diverse versions | 1, 2 | |
