@@ -1,4 +1,4 @@
-# divenact
+# DivENACT
 Diversity-aware fleet management of Edge devices, based on Azure IoT Hub.
 
 The main part of DivEnact is an online service with a browser-based GUI, which manages a fleet of Edge deivces (gateways). To use the full function of this service, you need an Azure IoT Hub instance and a number of devices registered to the hub. The first two pre-installation steps explains hwo to obtain the IoT Hub instance and how to prepare the devices. The third section explains the installation and usage of the DivEnact service itself.
