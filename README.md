@@ -5,6 +5,21 @@ The main part of DivEnact is an online service with a browser-based GUI, which m
 
 If you want to quickly check how the tool looks and try the fleet assignment function (which is relatively independent to the devices and the IoT Hub), you can skip the first two sections and directly go to Section 3 and install DivEnact via Docker.
 
+## Functionality
+
+There are currently 8 active tabs in DivENACT:
+
+![DivENACT tabs](https://user-images.githubusercontent.com/12085160/87779909-e5a37600-c82d-11ea-9067-89eeeecca1d5.png)
+
+- **Templates**:
+- **Variants**:
+- **Deployments**:
+- **Devices**:
+- **Control**:
+- **Repository**:
+- **Z3**:
+- **OR-Tools**:
+
 # Getting started
 
 ## Create cloud resources
