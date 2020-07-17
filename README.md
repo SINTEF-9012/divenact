@@ -44,21 +44,21 @@ Alternative way:
 ## Execute diversity management services
 
 ### Really quick start
-This subsection provides a quick way to run a lite version of DivEnact that does not require Azure IoT Hub, real (or simulated) IoT devices, nor the document database. All you need is **Docker 19.03 or above**. Using this version, you can see how the DivEnact GUI looks like, and have a taste of what functions it can provide you, without being able to actually see any devices or deploy anything (since these features relies on Azure IoT Hub). But you can try one of the core functions, i.e., the *fleet assignment* of multiple deployments on a fleet of many devices, since it is relevantly independent to the real devices.
+This subsection provides a quick way to run a lite version of DivEnact that does not require Azure IoT Hub, real (or simulated) IoT devices, nor the document database. All you need is **Docker 19.03 or above**. Using this version, you can see how the DivEnact GUI looks like, and have a taste of what functions it can provide you, without being able to actually see any devices or deploy anything (since these features relies on Azure IoT Hub). But you can try one of the core functions, i.e., the **fleet assignment** of multiple deployments on a fleet of many devices, since it is relatively independent to the real devices.
 
-Launch DivEnact with one comment:
+Launch DivEnact with one single command:
 ```
 docker run -p 5001:5001 songhui/divenact:models20 --no-db
 ```
-It takes a couple of minutes to launch, and you will see some logs indicating the progress (do not run with ```-d``` for this purpose). When you see "Successfully connected to the memory DB", it is ready to open the GUI.
+It takes a couple of minutes to launch, and you will see some logs indicating the progress (do not run with ```-d``` for this purpose). When you see "Successfully connected to the memory DB", it is ready to provide the GUI.
 
-To access to the DivEnact GUI, open your preferred browser and go to ```http://localhost:5001/```. You will be directly guided to the page for fleet assignment. All the other pages for device listing, deployment checking, etc., are available, and you are free to check them out, but there are not any devices or deployments, since we are not connected to Azure IoT Hub. Be prepared to see some error messages in the terminal where you run Docker -- DivEnact is trying to get the devices via a non-existing Azure IoT connection string. But don't panic, normally the system will not crash.
+To access to the DivEnact GUI, open your preferred browser and go to ```http://localhost:5001/```. You will be directly guided to the page for fleet assignment. All the other pages for device listing, deployment checking, etc., are available, and you are free to check them out, but there are not any devices or deployments, since we are not connected to Azure IoT Hub. Be prepared to see some error messages in the terminal where you run Docker -- DivEnact is trying to get the devices via a none-existing Azure IoT connection string. But don't panic, normally the system will not crash.
 
 The fleet assigment function is working well. We need mockup model for devices and deployments, some examples can be found in this [folder](smt/sample_data). Open one of the .yml files, copy the text and paste it into the "Verify the input YAML model" text area. After that press the "Next" button. In a few seconds (or minutes), you will see a new page of the assignment result.
 
 ![Assignment input snapshot](doc/img/assignment-input.PNG), ![Assignment output snapshot](doc/img/assignment-output.PNG). 
 
-In the output, you can see the output snapshot that Deployment B is assigned to 3 devices.
+In the output, you can see in the output snapshot that Deployment B is assigned to 3 devices.
 
 ### Installation
 The main DivEnact service is developed in JavaScript based on the React and Ant.Design. It can be installed in most environments supporting Node.js. However, we recommend to run it as a Docker container, and will only explain how to install and run it using Docker. Installation on other environments is possible, and the [Dockerfile](service/Dockerfile) provides a reference for the installation in Debian/Ubuntu.
