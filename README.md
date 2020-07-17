@@ -44,11 +44,7 @@ Alternative way:
 
 ## Execute diversity management services
 
-<<<<<<< HEAD
 ## Really-quick-start
-=======
-### Really quick start
->>>>>>> 02c62dd08a18bc4eefcb6b17d2d7e38163f49fe3
 This subsection provides a quick way to run a lite version of DivEnact without the requistion of Azure IoT Hub, real (or simulated) IoT devices, nor the document database. All you need is Docker 19.03 or above. You can use this way to see how the DivEnact GUI looks like, and have a taste of what functions it could provide you, without being able to actually see any devices or deploy anything, since it relies on Azure IoT Hub. But you can try one of the core functions, i.e., the *fleet assignment* of multiple deployments on a fleet of many devices, since it is relevantly independent to the real devices.
 
 Launch DivEnact with one comment:
