@@ -66,7 +66,9 @@ Alternative way:
 This subsection provides a quick way to run a lite version of DivEnact without the requistion of Azure IoT Hub, real (or simulated) IoT devices, nor the document database. All you need is Docker 19.03 or above. You can use this way to see how the DivEnact GUI looks like, and have a taste of what functions it could provide you, without being able to actually see any devices or deploy anything, since it relies on Azure IoT Hub. But you can try one of the core functions, i.e., the *fleet assignment* of multiple deployments on a fleet of many devices, since it is relevantly independent to the real devices.
 
 Launch DivEnact with one comment:
-```docker run -p 5001:5001 songhui/divenact:models20 --no-db```
+```
+docker run -p 5001:5001 songhui/divenact:models20 --no-db
+```
 It takes a couple of minutes to launch, and you will see some logs indicating the progress (do not run with ```-d``` for this purpose). When you see "Successfully connected to the memory DB", it is ready to open the GUI.
 
 In your favorate browser, go to ```http://localhost:5001/```. You will be directly guided to the page for fleet assignment. All the other pages for device listing, deployment checking, etc., are available, and you are free to check them out, but there are not any devices or deployments, since we are not connected to Azure IoT Hub. Be prepared to see some error messages in the terminal where you run Docker -- DivEnact is trying to get the devices via a non-existing Azure IoT connection string. But don't panic, normally the system will not crash.
