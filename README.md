@@ -10,8 +10,8 @@ DivENACT is an online tool for managing a fleet of Edge devices (gateways) based
 - **Devices**: lists the edge devices, as fecthed from Azure IoT Hub. The tab also provides basic editing functionality to tag devices with certain properties.
 - **Control**: provides some basic functionality for instantiating varinats based on abailable templates, diversifying them and pushing for deployment to Azure IoT Hub (**NB: for testing purposes only**).
 - **Repository**: lists all entities stored on the local MongoDB (**NB: for testing purposes only**).
-- **Z3**: provides functionality for designing assignment parameters based on template/variant parameters and device properties. The designed assignment logic is fed to Z3 solver for solving and, upon approval, is finally pushed to Azure IoT Hub for deployment.
-- **OR-Tools**: provides functionality for designing assignment parameters based on template/variant parameters and device properties. The designed assignment logic is fed to OR-Tools solver for solving and, upon approval, is finally pushed to Azure IoT Hub for deployment (**NB: for testing purposes only**).
+- **Z3**: provides functionality for designing assignment based on template/variant parameters and device properties. The designed assignment logic is fed to Z3 solver for solving and, upon approval, is finally pushed to Azure IoT Hub for deployment.
+- **OR-Tools**: provides functionality for designing assignment based on template/variant parameters and device properties. The designed assignment logic is fed to OR-Tools solver for solving and, upon approval, is finally pushed to Azure IoT Hub for deployment (**NB: for testing purposes only**).
 
 ## Features
 
