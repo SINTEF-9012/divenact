@@ -5,7 +5,9 @@ The main part of DivEnact is an online service with a browser-based GUI, which m
 
 If you want to quickly check how the tool looks and try the fleet assignment function (which is relatively independent to the devices and the IoT Hub), you can skip the first two sections and directly go to Section 3 and install DivEnact via Docker.
 
-# Create cloud resources
+# Getting started
+
+## Create cloud resources
 
 Follow [this tutorial](https://docs.microsoft.com/en-us/azure/iot-edge/quickstart-linux) to create an Azure IoT hub and add one (or more) *IoT Edge Devices*. Skip the steps for creating virtual machine (we will use real device) and deploy modules (this is what this tool will do, in a programmatic way).
 
@@ -13,7 +15,7 @@ Remember the following credentials:
 - IoT hub connection string
 - The edge device's connection string
 
-# Bootstrap edge device
+## Bootstrap edge device
 
 - Upload the [edge/bootstrap] directory the device (Raspberry Pi). 
 - Create a empty ```connection.credential``` file, or ```cp connection.credential.bak connection.credential```. Copy the connection string into this file
@@ -25,9 +27,9 @@ Alternative way:
 - ```echo '<Your device connection string>'>connection.credential```
 - ```sudo bash ./setup.sh```
 
-# Execute diversity management services
+## Execute diversity management services
 
-## Really quick start
+### Really quick start
 This subsection provides a quick way to run a lite version of DivEnact without the requistion of Azure IoT Hub, real (or simulated) IoT devices, nor the document database. All you need is Docker 19.03 or above. You can use this way to see how the DivEnact GUI looks like, and have a taste of what functions it could provide you, without being able to actually see any devices or deploy anything, since it relies on Azure IoT Hub. But you can try one of the core functions, i.e., the *fleet assignment* of multiple deployments on a fleet of many devices, since it is relevantly independent to the real devices.
 
 Launch DivEnact with one comment:
@@ -42,12 +44,12 @@ The fleet assigment function is working well. We need mockup model for devices a
 
 In the output, you can see the output snapshot that Deployment B is assigned to 3 devices.
 
-## Installation
+### Installation
 The main DivEnact service is developed in JavaScript based on the React and Ant.Design. It can be installed in most environments supporting Node.js. However, we recommend to run it as a Docker container, and will only explain how to install and run it using Docker. Installation on other environments is possible, and the [Dockerfile](service/Dockerfile) provides a reference for the installation in Debian/Ubuntu.
 
 If you want to build the latest version of DivEnact, please download the source code and build the Docker image following the next instruction. Otherwise, we have a pre-built image based on the release 1.0 in Docker Hub. You can skip the building step
 
-### Building the Docker image
+#### Building the Docker image
 ```
 git clone https://github.com/SINTEF-9012/divenact
 cd divenact/service
@@ -55,18 +57,18 @@ docker build -t <divenact-image-tag> .
 ```
 Building takes up to 5 minutes.
 
-### Pull pre-built image
+#### Pull pre-built image
 Alternatively, you can directly pull the DivEnact image from Docker Hub. 
 ```docker pull songhui/divenact:models20```
 
-## Launching DivEnact with full functions
+### Launching DivEnact with full functions
 DivEnact needs a Azure IoT Hub connection string and a document database. 
 ```
 docker run -d -p 27017:27107 -v ~/data:/data/db mongo
 docker run -p 5001:5001 <divenact-image-tag> --connection=<IoTHub-connection-string> --database=mongodb://localhost:27017/test
 ```
 
-## Commandline interface
+### Commandline interface
 
 ```node ./build/main.js <command> [--version] [--help]```
 
@@ -119,7 +121,7 @@ Commands:
         -h, --help                 output usage information
 ```
 
-# Auto-provisioning via Azure Device Provisioning Service (using symmetric keys)
+## Auto-provisioning via Azure Device Provisioning Service (using symmetric keys)
 
 - Create an instance of Device Provisioning Service (DPS) and link it your existing Iot Hub as described [here](https://docs.microsoft.com/en-us/azure/iot-dps/quick-setup-auto-provision)
 - Create and save an individual enrollment with the following parameters:
@@ -165,9 +167,9 @@ provisioning:
 - After some time your device will be registered in your IoT Hub (using either ```registration_id``` or ```device_id```). 
 - If specified tags match one of the deployments target conditions, the device will also be assigned with that deployment.
 
-# Features
+## Features
 
-## Short term
+### Short term
 
 | id | name | dep | status |
 |---|---|---|---|
