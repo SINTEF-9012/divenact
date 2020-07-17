@@ -3,7 +3,7 @@ Diversity-aware fleet management of Edge devices, based on Azure IoT Hub.
 
 The main part of DivEnact is an online service with a browser-based GUI, which manages a fleet of Edge deivces (gateways). To use the full function of this service, you need an Azure IoT Hub instance and a number of devices registered to the hub. The first two pre-installation steps explains hwo to obtain the IoT Hub instance and how to prepare the devices. The third section explains the installation and usage of the DivEnact service itself.
 
-If you want to quickly check how the tool looks and try the fleet assignment function (which is relatively independent to the devices and the IoT Hub), you can skip the first two sections and directly go to Section 3 and install DivEnact via Docker.
+If you want to quickly check how the tool looks and try the fleet assignment function (which is relatively independent to the devices and the IoT Hub), you can skip the first two sections and directly go to [a really quick start tutorial](#Really-quick-start) to see how the GUI looks like and try one of the core functions for fleet assignment without any real devices.
 
 # Create cloud resources
 
@@ -27,7 +27,7 @@ Alternative way:
 
 # Execute diversity management services
 
-## Really quick start
+## Really-quick-start
 This subsection provides a quick way to run a lite version of DivEnact without the requistion of Azure IoT Hub, real (or simulated) IoT devices, nor the document database. All you need is Docker 19.03 or above. You can use this way to see how the DivEnact GUI looks like, and have a taste of what functions it could provide you, without being able to actually see any devices or deploy anything, since it relies on Azure IoT Hub. But you can try one of the core functions, i.e., the *fleet assignment* of multiple deployments on a fleet of many devices, since it is relevantly independent to the real devices.
 
 Launch DivEnact with one comment:
