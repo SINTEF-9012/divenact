@@ -96,7 +96,7 @@ const myConfig = {
   },
 };
 
-export class Z3Step extends Component {
+export class ApproveStep extends Component {
   constructor(props) {
     super(props);
     this.state = {

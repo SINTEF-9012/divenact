@@ -4,7 +4,8 @@ import { Button, Col, Row, Steps, message, Badge, Tag } from "antd";
 import { VariantStep } from "./VariantStep";
 import { DeviceStep } from "./DeviceStep";
 import { JsonYamlStep } from "./JsonYamlStep";
-import { Z3Step } from "./Z3Step";
+import { SMTStep } from "./SMTStep";
+import { ApproveStep } from "./ApproveStep";
 import { DiversificationContext } from "./DiversificationContext";
 
 const { Step } = Steps;
@@ -119,7 +120,7 @@ export class DiversificationArea extends Component {
       setZ3Solution: this.setZ3Solution,
       current_step: 2,
       result: "",
-      yaml_model: ""
+      yaml_model: "",
     };
   }
 
@@ -154,10 +155,10 @@ export class DiversificationArea extends Component {
     this.setState({ z3_solution: value });
   };
 
-  handleYamlChange = (model) =>{
-    console.log(model)
-    this.setState({yaml_model: model})
-  }
+  handleYamlChange = (model) => {
+    console.log(model);
+    this.setState({ yaml_model: model });
+  };
 
   ///////////////////////////////
   ///////////////////////////////
@@ -189,13 +190,20 @@ export class DiversificationArea extends Component {
           this.setState({ current_step });
         }
         break;
-      case 2: //verify and approve
+      case 2: //design SMT logic
+        //TODO
+        if (true) { // check if SMT editor is not empty
+          const current_step = this.state.current_step + 1;
+          this.setState({ current_step });
+        }
+        break;
+      case 3: //verify and approve
         //TODO
         this.solve();
         const current_step = this.state.current_step + 1;
         this.setState({ current_step });
         break;
-      case 3: //view results
+      case 4: //view results
         //TODO deploy selected variant to selected devices
         //console.log(this.state.selectedDeviceRowKeys.length);
         message.success("Deployment complete!");
@@ -212,7 +220,7 @@ export class DiversificationArea extends Component {
 
   solve = () => {
     //const { selectedFile } = this.state;
-    console.log(this.state.yaml_model)
+    console.log(this.state.yaml_model);
     console.log(
       "Solving with: ",
       this.state.deployment_list,
@@ -225,9 +233,9 @@ export class DiversificationArea extends Component {
     );
     console.log("json", json);
     formData.append("json", json);
-    formData.append("yaml", this.state.yaml_model)
+    formData.append("yaml", this.state.yaml_model);
 
-    console.log(formData)
+    console.log(formData);
 
     // this.setState({
     //   uploading: true
@@ -273,6 +281,11 @@ export class DiversificationArea extends Component {
         ),
       },
       {
+        title: "SMT",
+        status: "process",
+        content: <SMTStep callbackTabChange={this.props.callbackTabChange} />,
+      },
+      {
         title: "JSON",
         status: "process",
         content: (
@@ -288,7 +301,7 @@ export class DiversificationArea extends Component {
       {
         title: "Z3 results",
         status: "process",
-        content: <Z3Step result={this.state.result} />,
+        content: <ApproveStep result={this.state.result} />,
       },
     ];
 
@@ -315,7 +328,7 @@ export class DiversificationArea extends Component {
                 {current_step > 0 && (
                   <Button onClick={() => this.prev()}>Previous</Button>
                 )}
-                {current_step < 3 && (
+                {current_step < 4 && (
                   <Button
                     style={{ marginLeft: 8 }}
                     type="primary"
@@ -324,13 +337,13 @@ export class DiversificationArea extends Component {
                     Next
                   </Button>
                 )}
-                {current_step === 3 && (
+                {current_step === 4 && (
                   <Button
                     style={{ marginLeft: 8 }}
                     type="primary"
                     onClick={() => this.next()}
                   >
-                    Deploy
+                    Approve ànd Deploy
                   </Button>
                 )}
               </div>
