@@ -279,12 +279,7 @@ export class DiversificationArea extends Component {
         content: (
           <DeviceStep callbackTabChange={this.props.callbackTabChange} />
         ),
-      },
-      {
-        title: "SMT",
-        status: "process",
-        content: <SMTStep callbackTabChange={this.props.callbackTabChange} />,
-      },
+      },      
       {
         title: "JSON",
         status: "process",
@@ -297,6 +292,11 @@ export class DiversificationArea extends Component {
             />
           </DiversificationContext.Provider>
         ),
+      },
+      {
+        title: "SMT",
+        status: "process",
+        content: <SMTStep callbackTabChange={this.props.callbackTabChange} />,
       },
       {
         title: "Z3 results",
