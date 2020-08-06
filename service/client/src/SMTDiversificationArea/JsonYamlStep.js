@@ -1,17 +1,16 @@
 import React, { Component } from "react";
-import axios from "axios";
 import ReactJson from "react-json-view";
 import AceEditor from "react-ace";
 import yaml from "js-yaml";
-import readYaml from 'read-yaml';
-import yaml_model from '../resources/sample_input.yml';
+import readYaml from "read-yaml";
+import yaml_model from "../resources/sample_input.yml";
 import { DiversificationContext } from "./DiversificationContext";
 import { GlobalContext } from "../GlobalContext";
 
 import "ace-builds/src-noconflict/mode-sass";
 import "ace-builds/src-noconflict/theme-github";
 
-import { Col, Row, Typography, Button, Icon } from "antd";
+import { Col, Row, Typography, Upload, Button, Icon } from "antd";
 
 const { Title } = Typography;
 
@@ -21,131 +20,116 @@ export class JsonYamlStep extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      // TODO: get rid of locally stored variables, everything should be managed through the Global/Diversification contexts!
       json_model: require("../resources/sample_input.json"),
-      yaml_model: ""
     };
   }
 
-  handleEdit = (json) => {
-    this.setState({ json_model: json.updated_src });
+  handleEdit = (value) => {
+    this.setState({ json_model: value.updated_src });
+    this.context.setJsonInput(value);
     console.log(this.state.json_model);
-    console.log(this.yaml_model);
+  };
+
+  handleJsonChange = (value) => {
+    //this.setState({ json_model: value });
+    this.context.setJsonInput(value);
   };
 
   handleYamlChange = (value) => {
-    this.setState( {yaml_model: value})
-    this.props.handleYamlChange(value)
-  }
-
-  handleUpload = () => {
-    //const { selectedFile } = this.state;
-    const formData = new FormData();
-    //formData.append("files", selectedFile, "script.py");
-    formData.append("json", JSON.stringify(this.state.json_model));
-    formData.append("yaml", this.state.yaml_model)
-
-    this.setState({
-      uploading: true,
-    });
-
-    axios
-      .post("/api/z3", formData)
-      .then((res) => {
-        console.log("res.data", res.data);
-        //this.setState({ result: res.data });
-        this.context.setZ3Solution(res.data);
-      })
-      .catch((err) => {
-        console.log("err", err);
-      });
-
-    this.setState({
-      uploading: false,
-    });
-  };  
+    //this.setState({ yaml_model: value });
+    this.context.setYamlInput(value);
+  };
 
   render() {
-    //const { selectedFile } = this.state;
-    // const z3_props = {
-    //   name: "z3-file",
-    //   accept: ".py",
-    //   multiple: false,
-    //   // onRemove: file => {
-    //   //   this.setState(state => {
-    //   //     const index = state.fileList.indexOf(file);
-    //   //     const newFileList = state.fileList.slice();
-    //   //     newFileList.splice(index, 1);
-    //   //     return {
-    //   //       fileList: newFileList
-    //   //     };
-    //   //   });
-    //   // },
-    //   beforeUpload: file => {
-    //     this.setState(state => ({
-    //       selectedFile: file
-    //     }));
-    //     return false;
-    //   },
-    //   selectedFile,
-    //   //action: "/api/z3/",
-    //   onChange(info) {
-    //     const { status } = info.file;
-    //     if (status !== "uploading") {
-    //       console.log(info.file);
-    //     }
-    //     if (status === "done") {
-    //       this.setState({ selectedFile: info.file });
-    //       message.success(`${info.file.name} file uploaded successfully.`);
-    //       console.log(this.state.selectedFile);
-    //     } else if (status === "error") {
-    //       message.error(`${info.file.name} file upload failed.`);
-    //     }
-    //   }
-    // };
+    
+    const json_upload_props = {
+      name: "json-input",
+      accept: ".json",
+      multiple: false,
+      beforeUpload: (file) => {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          console.log(e.target.result);
+          this.context.setJsonInput(e.target.result);
+        };
+        reader.readAsText(file);
 
+        // Prevent upload
+        return false;
+      },
+    };
+
+    const yaml_upload_props = {
+      name: "yaml-input",
+      accept: ".yaml,.yml",
+      multiple: false,
+      beforeUpload: (file) => {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          console.log(e.target.result);
+          this.context.setYamlInput(e.target.result);
+        };
+        reader.readAsText(file);
+
+        // Prevent upload
+        return false;
+      },
+    };
 
     return (
       <Row gutter={10}>
         <Col span={12}>
-          <Title level={4}>Verify the input JSON model</Title>
-          <div id="" style={{overflow: "scroll", height: "400px"}} >
+          <Title level={4}>
+            Verify the input JSON model{"  "}
+            <Upload {...json_upload_props}>
+              <Button>
+                <Icon type="upload" /> Upload new
+              </Button>
+            </Upload>
+          </Title>
+          {/* <div id="" style={{overflow: "scroll", height: "400px"}} > */}
           <ReactJson
-            src={Object.assign(
-              this.context.deployment_list,
-              this.context.device_list
-            )}
+          //FIXME: fix the source for json editor
+            src={Object.assign(this.context.deployment_list,this.context.device_list)}
             theme="apathy:inverted"
             collapsed={2}
             enableClipboard={true}
-            onEdit={this.handleEdit}
-            onAdd={this.handleEdit}
-            onDelete={this.handleEdit}
+            onEdit={this.handleEdit} //handleJsonChange
+            onAdd={this.handleEdit} //handleJsonChange
+            onDelete={this.handleEdit} //handleJsonChange
           />
-          </div>
+          {/* </div> */}
         </Col>
         <Col span={12}>
-          <Title level={4}>Verify the input YAML model</Title>
-          <div id="" style={{overflow: "scroll", height: "400px"}} >
+          <Title level={4}>Verify the input YAML model{"  "}
+            <Upload {...yaml_upload_props}>
+              <Button>
+                <Icon type="upload" /> Upload new
+              </Button>
+            </Upload></Title>
+          {/* <div id="" style={{overflow: "scroll", height: "400px"}} > */}
           <AceEditor
             mode="sass"
             //theme="github"
+            width="100%"
             onChange={this.handleYamlChange}
             name="yaml_view"
             editorProps={{ $blockScrolling: true }}
-            value={this.state.yaml_model}
+            value={this.context.yaml_input}
             //   Object.assign(
             //     this.context.deployment_list,
             //     this.context.device_list
             //   )
             // )}
           />
-          </div>
-        </Col>        
+          {/* </div> */}
+        </Col>
       </Row>
     );
   }
 
   componentDidMount() {
-    //TODO
+    //TODO:
   }
 }

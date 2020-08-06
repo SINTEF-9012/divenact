@@ -4,19 +4,7 @@ import { Col, Row, Typography, Input, Spin } from "antd";
 import { DiversificationContext } from "./DiversificationContext";
 import { Graph } from "react-d3-graph";
 
-const { TextArea } = Input;
 const { Title } = Typography;
-const colors = [
-  "blue",
-  "red",
-  "green",
-  "blue",
-  "red",
-  "green",
-  "blue",
-  "red",
-  "green",
-];
 
 const data = {
   nodes: [

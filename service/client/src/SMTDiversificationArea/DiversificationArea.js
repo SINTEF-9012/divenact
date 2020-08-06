@@ -118,9 +118,18 @@ export class DiversificationArea extends Component {
       //setSelectedDevices: this.setSelectedDevices,
       setDeviceList: this.setDeviceList,
       setZ3Solution: this.setZ3Solution,
+      setJsonInput: this.setJsonInput,
+      setYamlInput: this.setYamlInput,
+      setSmtInput: this.setSmtInput,      
+      json_input: "",
+      yaml_input: "",
+      //FIXME: load default SMT logic for editing
+      smt_input: `function add(a, b) {
+        return a + b;
+      }
+      `,
       current_step: 2,
       result: "",
-      yaml_model: "",
     };
   }
 
@@ -151,13 +160,23 @@ export class DiversificationArea extends Component {
   };
 
   setZ3Solution = (value) => {
-    console.log("setZ3Solution", value);
+    console.log("Z3 Solution", value);
     this.setState({ z3_solution: value });
   };
 
-  handleYamlChange = (model) => {
-    console.log(model);
-    this.setState({ yaml_model: model });
+  setYamlInput = (value) => {
+    console.log(value);
+    this.setState({ yaml_input: value });
+  };
+
+  setJsonInput = (value) => {
+    console.log(value);
+    this.setState({ json_input: value });
+  };
+
+  setSmtInput = (value) => {
+    console.log(value);
+    this.setState({ smt_input: value });
   };
 
   ///////////////////////////////
@@ -192,7 +211,8 @@ export class DiversificationArea extends Component {
         break;
       case 2: //design SMT logic
         //TODO
-        if (true) { // check if SMT editor is not empty
+        if (true) {
+          // check if SMT editor is not empty
           const current_step = this.state.current_step + 1;
           this.setState({ current_step });
         }
@@ -220,7 +240,9 @@ export class DiversificationArea extends Component {
 
   solve = () => {
     //const { selectedFile } = this.state;
-    console.log(this.state.yaml_model);
+    console.log("YAML: ", this.state.yaml_input);
+    console.log("JSON: ", this.state.json_input);
+    console.log("SMT: ", this.state.smt_input);
     console.log(
       "Solving with: ",
       this.state.deployment_list,
@@ -231,9 +253,15 @@ export class DiversificationArea extends Component {
     var json = JSON.stringify(
       Object.assign(this.state.deployment_list, this.state.device_list)
     );
+    this.setState({ json_input: json });
+    
     console.log("json", json);
+    console.log("yaml", this.state.yaml_input);
+    console.log("smt", this.state.smt_input);
+
     formData.append("json", json);
-    formData.append("yaml", this.state.yaml_model);
+    formData.append("yaml", this.state.yaml_input);
+    formData.append("smt", this.state.smt_input);
 
     console.log(formData);
 
@@ -279,7 +307,7 @@ export class DiversificationArea extends Component {
         content: (
           <DeviceStep callbackTabChange={this.props.callbackTabChange} />
         ),
-      },      
+      },
       {
         title: "JSON",
         status: "process",
@@ -343,7 +371,7 @@ export class DiversificationArea extends Component {
                     type="primary"
                     onClick={() => this.next()}
                   >
-                    Approve ànd Deploy
+                    Approve and Deploy
                   </Button>
                 )}
               </div>

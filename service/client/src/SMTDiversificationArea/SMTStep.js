@@ -14,7 +14,7 @@ import {
   Upload,
   Icon,
   Radio,
-  Collapse
+  Collapse,
 } from "antd";
 import { DiversificationContext } from "./DiversificationContext";
 
@@ -22,18 +22,20 @@ const { Title } = Typography;
 
 const { Panel } = Collapse;
 
+//TODO: load default SMT logic as a template for modifications
 const code = `function add(a, b) {
   return a + b;
 }
 `;
 
 export class SMTStep extends Component {
+  static contextType = DiversificationContext;
+
   constructor(props) {
     super(props);
     this.state = {
-      json_model: require("../resources/sample_input.json"),
       radioValue: 0,
-      code: code,
+      //code: code,
     };
   }
 
@@ -41,8 +43,13 @@ export class SMTStep extends Component {
     this.setState({ radioValue: e.target.value });
   };
 
+  handleCodeChange = (value) => {
+    this.setState({ value });
+    this.context.setSmtInput(value);
+  };
+
   render() {
-    const { selectedFile } = this.state;
+    //const { selectedFile } = this.state;
     const radioStyle = {
       display: "block",
       height: "30px",
@@ -63,35 +70,35 @@ export class SMTStep extends Component {
       //   });
       // },
       beforeUpload: (file) => {
-        this.setState((state) => ({
-          selectedFile: file,
-        }));
+        //this.setState((state) => ({
+        //  selectedFile: file,
+        //}));
 
         const reader = new FileReader();
         reader.onload = (e) => {
           console.log(e.target.result);
-          this.setState({ code: e.target.result });
+          this.context.setSmtInput(e.target.result);
         };
         reader.readAsText(file);
 
         // Prevent upload
         return false;
       },
-      selectedFile,
+      //selectedFile,
       //action: "/api/z3/",
-      onChange(info) {
-        const { status } = info.file;
-        if (status !== "uploading") {
-          console.log(info.file);
-        }
-        if (status === "done") {
-          this.setState({ selectedFile: info.file });
-          message.success(`${info.file.name} file uploaded successfully.`);
-          console.log(this.state.selectedFile);
-        } else if (status === "error") {
-          message.error(`${info.file.name} file upload failed.`);
-        }
-      },
+      // onChange(info) {
+      //   const { status } = info.file;
+      //   if (status !== "uploading") {
+      //     console.log(info.file);
+      //   }
+      //   if (status === "done") {
+      //     this.setState({ selectedFile: info.file });
+      //     message.success(`${info.file.name} file uploaded successfully.`);
+      //     console.log(this.state.selectedFile);
+      //   } else if (status === "error") {
+      //     message.error(`${info.file.name} file upload failed.`);
+      //   }
+      // },
     };
 
     return (
@@ -114,19 +121,25 @@ export class SMTStep extends Component {
               </Radio.Group>
 
               <Collapse ghost activeKey={this.state.radioValue}>
-                <Panel header={<Upload {...props}>
-                    <Button disabled={!this.state.radioValue}>
-                      <Icon type="upload" /> Click to Upload
-                    </Button>
-                  </Upload>} key="1" disabled={!this.state.radioValue}>
+                <Panel
+                  header={
+                    <Upload {...props}>
+                      <Button disabled={!this.state.radioValue}>
+                        <Icon type="upload" /> Click to Upload
+                      </Button>
+                    </Upload>
+                  }
+                  key="1"
+                  disabled={!this.state.radioValue}
+                >
                   <Editor
-                    value={this.state.code}
-                    onValueChange={(code) => this.setState({ code })}
+                    value={this.context.smt_input}
+                    onValueChange={(code) => this.handleCodeChange(code)} //this.setState({ code })}
                     highlight={(code) => highlight(code, languages.py)}
                     padding={10}
                     style={{
                       fontFamily: '"Fira code", "Fira Mono", monospace',
-                      fontSize: 12
+                      fontSize: 12,
                     }}
                   />
                 </Panel>
