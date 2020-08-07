@@ -70,7 +70,7 @@ export class DeviceStep extends Component {
   };
 
   handleDeviceSelect = (record, selected, selectedRows, nativeEvent) => {
-    //TODO convert selected array into object
+    //TODO: convert selected array into object
     // selectedRows.forEach((item, index) => {
     //     console.log(item, index);
     //   });
@@ -88,7 +88,7 @@ export class DeviceStep extends Component {
   render() {
     const device_row_selection = {
       selectedRowKeys: this.context.selected_device_rowkeys,
-      columnTitle: " ", //this line is to hide the "Select all" checkbox
+      columnTitle: " ", //FIXME: this line is to hide the "Select all" checkbox
       onChange: this.handleDeviceSelectChange,
       onSelect: this.handleDeviceSelect,
       //type: "radio"

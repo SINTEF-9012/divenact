@@ -117,10 +117,10 @@ export class DiversificationArea extends Component {
       setSelectedDeviceRowKeys: this.setSelectedDeviceRowKeys,
       //setSelectedDevices: this.setSelectedDevices,
       setDeviceList: this.setDeviceList,
-      setZ3Solution: this.setZ3Solution,
+      setZ3Output: this.setZ3Output,
       setJsonInput: this.setJsonInput,
       setYamlInput: this.setYamlInput,
-      setSmtInput: this.setSmtInput,      
+      setSmtInput: this.setSmtInput,
       json_input: "",
       yaml_input: "",
       //FIXME: load default SMT logic for editing
@@ -159,7 +159,7 @@ export class DiversificationArea extends Component {
     this.setState({ device_list: value });
   };
 
-  setZ3Solution = (value) => {
+  setZ3Output = (value) => {
     console.log("Z3 Solution", value);
     this.setState({ z3_solution: value });
   };
@@ -209,19 +209,19 @@ export class DiversificationArea extends Component {
           this.setState({ current_step });
         }
         break;
-      case 2: //design SMT logic
-        //TODO
-        if (true) {
-          // check if SMT editor is not empty
-          const current_step = this.state.current_step + 1;
-          this.setState({ current_step });
-        }
-        break;
-      case 3: //verify and approve
+      case 2: //verify and approve
         //TODO
         this.solve();
         const current_step = this.state.current_step + 1;
         this.setState({ current_step });
+        break;
+      case 3: //design SMT logic
+        //TODO
+        if (true) {
+          // TODO: check if SMT editor is not empty
+          const current_step = this.state.current_step + 1;
+          this.setState({ current_step });
+        }
         break;
       case 4: //view results
         //TODO deploy selected variant to selected devices
@@ -254,7 +254,7 @@ export class DiversificationArea extends Component {
       Object.assign(this.state.deployment_list, this.state.device_list)
     );
     this.setState({ json_input: json });
-    
+
     console.log("json", json);
     console.log("yaml", this.state.yaml_input);
     console.log("smt", this.state.smt_input);
@@ -309,7 +309,7 @@ export class DiversificationArea extends Component {
         ),
       },
       {
-        title: "JSON",
+        title: "JSON/YAML",
         status: "process",
         content: (
           <DiversificationContext.Provider value={this.state}>
