@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import ReactJson from "react-json-view";
-import { Col, Row, Typography, Input, Spin } from "antd";
+import { Col, Row, Typography, Spin } from "antd";
 import { DiversificationContext } from "./DiversificationContext";
 import { Graph } from "react-d3-graph";
 
 const { Title } = Typography;
 
+//FIXME: this is just some dummy values to plot the graph
 const data = {
   nodes: [
     { id: "C", x: 50, y: 200 },
@@ -97,44 +98,7 @@ export class ApproveStep extends Component {
     console.log(this.state.json_model);
   };
 
-  render() {
-    //const { selectedFile } = this.state;
-    // const z3_props = {
-    //   name: "z3-file",
-    //   accept: ".py",
-    //   multiple: false,
-    //   // onRemove: file => {
-    //   //   this.setState(state => {
-    //   //     const index = state.fileList.indexOf(file);
-    //   //     const newFileList = state.fileList.slice();
-    //   //     newFileList.splice(index, 1);
-    //   //     return {
-    //   //       fileList: newFileList
-    //   //     };
-    //   //   });
-    //   // },
-    //   beforeUpload: file => {
-    //     this.setState(state => ({
-    //       selectedFile: file
-    //     }));
-    //     return false;
-    //   },
-    //   selectedFile,
-    //   //action: "/api/z3/",
-    //   onChange(info) {
-    //     const { status } = info.file;
-    //     if (status !== "uploading") {
-    //       console.log(info.file);
-    //     }
-    //     if (status === "done") {
-    //       this.setState({ selectedFile: info.file });
-    //       message.success(`${info.file.name} file uploaded successfully.`);
-    //       console.log(this.state.selectedFile);
-    //     } else if (status === "error") {
-    //       message.error(`${info.file.name} file upload failed.`);
-    //     }
-    //   }
-    // };
+  render() {    
 
     return (
       <DiversificationContext.Consumer>
@@ -150,31 +114,9 @@ export class ApproveStep extends Component {
                   collapsed={2}
                   theme="apathy:inverted"
                 />
-              </Spin>
-
-              {/* <Row>
-            <Dragger {...z3_props}>
-              <p className="ant-upload-drag-icon">
-                <Icon type="inbox" />
-              </p>
-              <p className="ant-upload-text">
-                Click or drag fyour Z3 python script to upload
-              </p>
-            </Dragger>
-          </Row>
-          <Row>
-            <Button
-              type="primary"
-              onClick={this.handleUpload}
-              disabled={this.state.selectedFile === null}
-              loading={uploading}
-              style={{ marginTop: 16 }}
-            >
-              {uploading ? "Uploading" : "Submit"}
-            </Button>
-          </Row> */}
+              </Spin>              
             </Col>
-            {/* @Hui do we need some visual representation for the assignment? Or maybe even an editor? E.g. we can finlaise the assignment by some final fine tuning */}
+            {/* @Hui do we need some visual representation for the assignment? Or maybe even an editor? E.g. we can finalise the assignment by some final fine tuning */}
             <Col span={12}>
               <Graph
                 id="graph-id" // id is mandatory, if no id is defined rd3g will throw an error

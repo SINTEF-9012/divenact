@@ -5,7 +5,6 @@ import yaml from "js-yaml";
 import readYaml from "read-yaml";
 import yaml_model from "../resources/sample_input.yml";
 import { DiversificationContext } from "./DiversificationContext";
-import { GlobalContext } from "../GlobalContext";
 
 import "ace-builds/src-noconflict/mode-sass";
 import "ace-builds/src-noconflict/theme-github";

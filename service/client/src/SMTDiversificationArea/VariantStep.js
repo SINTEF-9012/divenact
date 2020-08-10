@@ -19,7 +19,7 @@ export class VariantStep extends Component {
         title: "Template",
         dataIndex: "template",
         render: (text, record) => (
-          <Button type="link" onClick={() => this.props.callbackTabChange("1")}>
+          <Button type="link" onClick={() => this.context.callbackTabChange("1")}>
             {record.template}
           </Button>
         ),

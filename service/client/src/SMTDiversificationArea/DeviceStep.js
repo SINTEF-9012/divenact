@@ -17,7 +17,7 @@ const colors = [
 ];
 
 export class DeviceStep extends Component {
-  static contextType = DiversificationContext;
+  static contextType = DiversificationContext;  
 
   constructor(props) {
     super(props);
@@ -49,7 +49,7 @@ export class DeviceStep extends Component {
           <Button
             type="link"
             icon="deployment-unit"
-            onClick={() => this.props.callbackTabChange("3")}
+            onClick={() => this.context.handleTabChange("3")}
           >
             {record}
           </Button>

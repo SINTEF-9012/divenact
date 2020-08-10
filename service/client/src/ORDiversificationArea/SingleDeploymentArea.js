@@ -3,10 +3,13 @@ import React, { Component } from "react";
 import MainForm from "./MainForm";
 import { Badge, Tag, Form, Button } from "antd";
 import { solve } from "../solvers/WeightedProductModelSolver";
+import { GlobalContext } from "../GlobalContext";
 
 const colors = ["blue", "red", "green"];
 
 class SingleDeploymentArea extends Component {
+  static contextType = GlobalContext;
+
   constructor(props) {
     super(props);
     this.variantColumns = [
@@ -18,7 +21,7 @@ class SingleDeploymentArea extends Component {
         title: "Template",
         dataIndex: "template",
         render: (text, record) => (
-          <Button type="link" onClick={() => this.props.callbackTabChange("1")}>
+          <Button type="link" onClick={() => this.context.handleTabChange("1")}>
             {record.template}
           </Button>
         )
@@ -104,7 +107,7 @@ class SingleDeploymentArea extends Component {
         activeDeployments={this.props.activeDeployments}
         appliedDevices={this.props.appliedDevices}
         deviceTags={this.props.deviceTags}
-        callbackTabChange={this.props.callbackTabChange}
+        callbackTabChange={this.context.handleTabChange}
       />
     );
   }

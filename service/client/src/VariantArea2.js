@@ -13,11 +13,14 @@ import {
 import axios from "axios";
 import { JsonEditor as Editor } from "jsoneditor-react";
 import "jsoneditor-react/es/editor.min.css";
+import { GlobalContext } from "./GlobalContext";
 
 const { Content } = Layout;
 const ButtonGroup = Button.Group;
 
 export class VariantArea2 extends Component {
+  static contextType = GlobalContext;
+
   constructor(props) {
     super(props);
     this.columns = [
@@ -29,7 +32,7 @@ export class VariantArea2 extends Component {
         title: "Template",
         dataIndex: "template",
         render: (text, record) => (
-          <Button type="link" onClick={() => this.props.callbackTabChange("1")}>
+          <Button type="link" onClick={() => this.context.handleTabChange("1")}>
             {record.template}
           </Button>
         )
@@ -149,7 +152,7 @@ export class VariantArea2 extends Component {
                 //bordered
                 rowKey={record => record.id}
                 size="small"
-                dataSource={this.props.variants}
+                dataSource={this.context.variants}
                 columns={this.columns}
                 pagination={{ pageSize: 50 }}
                 scroll={{ y: true }}
@@ -218,7 +221,7 @@ export class VariantArea2 extends Component {
     if (!id) return;
     let newVariant = { ...record, id: id };
     delete newVariant._id;
-    this.props.callbackAddVariant(newVariant);
+    this.context.addVariant(newVariant);
     this.setState({
       //variants: [...this.state.variants, newVariant],
       edited: newVariant,

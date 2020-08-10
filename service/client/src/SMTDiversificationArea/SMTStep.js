@@ -22,12 +22,6 @@ const { Title } = Typography;
 
 const { Panel } = Collapse;
 
-//TODO: load default SMT logic as a template for modifications
-const code = `function add(a, b) {
-  return a + b;
-}
-`;
-
 export class SMTStep extends Component {
   static contextType = DiversificationContext;
 

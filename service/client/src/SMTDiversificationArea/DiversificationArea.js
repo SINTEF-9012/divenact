@@ -7,6 +7,8 @@ import { JsonYamlStep } from "./JsonYamlStep";
 import { SMTStep } from "./SMTStep";
 import { ApproveStep } from "./ApproveStep";
 import { DiversificationContext } from "./DiversificationContext";
+import { GlobalContext } from "../GlobalContext";
+import DefaultSMT from "../resources/default_smt";
 
 const { Step } = Steps;
 const colors = [
@@ -22,6 +24,8 @@ const colors = [
 ];
 
 export class DiversificationArea extends Component {
+  static contextType = GlobalContext;
+
   constructor(props) {
     super(props);
     this.variantColumns = [
@@ -33,7 +37,10 @@ export class DiversificationArea extends Component {
         title: "Template",
         dataIndex: "template",
         render: (text, record) => (
-          <Button type="link" onClick={() => this.props.callbackTabChange("1")}>
+          <Button
+            type="link"
+            onClick={() => this.context.callbackTabChange("1")}
+          >
             {record.template}
           </Button>
         ),
@@ -93,7 +100,7 @@ export class DiversificationArea extends Component {
           <Button
             type="link"
             icon="deployment-unit"
-            onClick={() => this.props.callbackTabChange("3")}
+            onClick={() => this.context.callbackTabChange("3")}
           >
             {record}
           </Button>
@@ -111,6 +118,7 @@ export class DiversificationArea extends Component {
       json_model: require("../resources/sample_input.json"),
       selected_variant_rowkeys: [],
       selected_device_rowkeys: [],
+      handleTabChange: this.handleTabChange, //FIXME: how to pass global context values into diversification context?
       setSelectedVariantRowKeys: this.setSelectedVariantRowKeys,
       //setSelectedVariants: this.setSelectedVariants,
       setDeploymentList: this.setDeploymentList,
@@ -123,13 +131,9 @@ export class DiversificationArea extends Component {
       setSmtInput: this.setSmtInput,
       json_input: "",
       yaml_input: "",
-      //FIXME: load default SMT logic for editing
-      smt_input: `function add(a, b) {
-        return a + b;
-      }
-      `,
+      smt_input: DefaultSMT,
       current_step: 2,
-      result: "",
+      result: "",      
     };
   }
 
@@ -137,11 +141,21 @@ export class DiversificationArea extends Component {
   //  Setters for the context  //
   ///////////////////////////////
 
+  /**
+   * Sets selected deployment records in the table.
+   *
+   * @param value selected deployment records in the table.
+   */
   setSelectedVariantRowKeys = (value) => {
     console.log("setSelectedVariantRowKeys", value);
     this.setState({ selected_variant_rowkeys: value });
   };
 
+  /**
+   * Sets deployment list.
+   *
+   * @param value list of deployments to be assigned.
+   */
   setDeploymentList = (value) => {
     console.log("setDeploymentList", value);
     //var deployments = this.state.selected_variants;
@@ -149,39 +163,81 @@ export class DiversificationArea extends Component {
     this.setState({ deployment_list: value });
   };
 
+  /**
+   * Sets selected device records in the table.
+   *
+   * @param value selected device records in the table.
+   */
   setSelectedDeviceRowKeys = (value) => {
     console.log("setSelectedDeviceRowKeys", value);
     this.setState({ selected_device_rowkeys: value });
   };
 
+  /**
+   * Sets device list.
+   *
+   * @param value list of target devices.
+   */
   setDeviceList = (value) => {
     console.log("setDeviceList", value);
     this.setState({ device_list: value });
   };
 
+  /**
+   * Sets input model as JSON to be sent to the solver
+   *
+   * @param {string} value output string containing rezults from the Z3 solver in JSON.
+   */
   setZ3Output = (value) => {
     console.log("Z3 Solution", value);
     this.setState({ z3_solution: value });
   };
 
+  /**
+   * Sets input model as YAML
+   *
+   * @param {string} value input string containing YAML model.
+   */
   setYamlInput = (value) => {
     console.log(value);
     this.setState({ yaml_input: value });
   };
 
+  /**
+   * Sets input model as JSON
+   *
+   * @param {string} value input string containing JSON model.
+   */
   setJsonInput = (value) => {
     console.log(value);
     this.setState({ json_input: value });
   };
 
+  /**
+   * Sets SMT logic
+   *
+   * @param {string} value input string containing SMT logic in the form of a python script.
+   */
   setSmtInput = (value) => {
     console.log(value);
     this.setState({ smt_input: value });
   };
 
+  /**
+   * Copies function from Global Context to the local state and then to Diversification Context.
+   * 
+   * @param {string} value number of the tab to make active.
+   */
+  handleTabChange = (value) => {
+    this.context.handleTabChange(value);
+  };
+
   ///////////////////////////////
   ///////////////////////////////
 
+  /**
+   * Goes to the next tab.
+   */
   next = () => {
     switch (this.state.current_step) {
       case 0: //variants and parameters
@@ -218,7 +274,7 @@ export class DiversificationArea extends Component {
       case 3: //design SMT logic
         //TODO
         if (true) {
-          // TODO: check if SMT editor is not empty
+          // TODO: check that SMT editor is not empty
           const current_step = this.state.current_step + 1;
           this.setState({ current_step });
         }
@@ -233,6 +289,9 @@ export class DiversificationArea extends Component {
     }
   };
 
+  /**
+   * Goes to previous tab.
+   */
   prev = () => {
     const current_step = this.state.current_step - 1;
     this.setState({ current_step });
@@ -285,7 +344,19 @@ export class DiversificationArea extends Component {
     // });
   };
 
-  render() {
+  /**
+   * Pushed Z3 results for deployment to Azure IoT.
+   */
+  deploy = () => {
+    //TODO: this is where we pass the solution to Azure. 
+    //Decide on the format and modify the server side TypeScript accordingly.
+
+  };
+
+  /**
+   * Renders the page.
+   */
+  render = () => {
     const { current_step } = this.state;
 
     const steps = [
@@ -295,8 +366,7 @@ export class DiversificationArea extends Component {
         content: (
           <DiversificationContext.Provider value={this.state}>
             <VariantStep
-              wrappedComponentRef={this.saveFormRef}
-              callbackTabChange={this.props.callbackTabChange}
+              wrappedComponentRef={this.saveFormRef}              
             />
           </DiversificationContext.Provider>
         ),
@@ -304,9 +374,7 @@ export class DiversificationArea extends Component {
       {
         title: "Devices",
         status: "process",
-        content: (
-          <DeviceStep callbackTabChange={this.props.callbackTabChange} />
-        ),
+        content: <DeviceStep />,
       },
       {
         title: "JSON/YAML",
@@ -324,7 +392,7 @@ export class DiversificationArea extends Component {
       {
         title: "SMT",
         status: "process",
-        content: <SMTStep callbackTabChange={this.props.callbackTabChange} />,
+        content: <SMTStep />,
       },
       {
         title: "Z3 results",
@@ -380,11 +448,12 @@ export class DiversificationArea extends Component {
         </div>
       </DiversificationContext.Provider>
     );
-  }
+  };
 
+  /**
+   * Contains some initialisation code, if needed.
+   */
   componentDidMount() {
-    //TODO
-    //this.setState({ variants: this.props.variants });
-    //console.log("TESTING", this.props.variants);
+    //TODO:
   }
 }

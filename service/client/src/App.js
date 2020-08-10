@@ -35,6 +35,8 @@ class App extends Component {
       activeDeployments: {},
       activeTab: "7",
       handleTabChange: this.handleTabChange,
+      addVariant: this.addVariant,
+      addTemplate: this.addTemplate,
     };
     this.Tabs = React.createRef();
   }
@@ -121,11 +123,11 @@ class App extends Component {
                   }
                 >
                   <TemplateArea2
-                    templates={templates}
-                    variants={variants}
-                    templateTags={templateTags}
-                    callbackTabChange={this.handleTabChange}
-                    callbackAddTemplate={this.addTemplate}
+                    //templates={templates}
+                    //variants={variants}
+                    //templateTags={templateTags}
+                    //callbackTabChange={this.handleTabChange}
+                    //callbackAddTemplate={this.addTemplate}
                   />
                 </TabPane>
                 <TabPane
@@ -138,10 +140,10 @@ class App extends Component {
                   }
                 >
                   <VariantArea2
-                    variants={variants}
-                    templates={templates}
-                    callbackTabChange={this.handleTabChange}
-                    callbackAddVariant={this.addVariant}
+                    //variants={variants}
+                    //templates={templates}
+                    //callbackTabChange={this.handleTabChange}
+                    //callbackAddVariant={this.addVariant}
                   />
                 </TabPane>
                 <TabPane
@@ -154,10 +156,10 @@ class App extends Component {
                   }
                 >
                   <DeploymentArea
-                    deployments={deployments}
-                    appliedDevices={appliedDevices}
-                    targetedDevices={targetedDevices}
-                    callbackTabChange={this.handleTabChange}
+                    //deployments={deployments}
+                    //appliedDevices={appliedDevices}
+                    //targetedDevices={targetedDevices}
+                    //callbackTabChange={this.handleTabChange}
                   />
                 </TabPane>
                 <TabPane
@@ -170,12 +172,12 @@ class App extends Component {
                   }
                 >
                   <DeviceArea
-                    devices={devices}
-                    deployments={deployments}
-                    activeDeployments={activeDeployments}
-                    appliedDevices={appliedDevices}
-                    deviceTags={deviceTags}
-                    callbackTabChange={this.handleTabChange}
+                    //devices={devices}
+                    //deployments={deployments}
+                    //activeDeployments={activeDeployments}
+                    //appliedDevices={appliedDevices}
+                    //deviceTags={deviceTags}
+                    //callbackTabChange={this.handleTabChange}
                   />
                 </TabPane>
                 <TabPane
@@ -210,7 +212,7 @@ class App extends Component {
                   }
                 >
                   <DiversificationArea
-                    callbackTabChange={this.handleTabChange}
+                    //callbackTabChange={this.handleTabChange}
                   />
                 </TabPane>
                 {/* <TabPane
@@ -223,13 +225,13 @@ class App extends Component {
                 }
               >
                 <SingleDeploymentArea
-                  devices={devices}
-                  variants={variants}
-                  deployments={deployments}
-                  activeDeployments={activeDeployments}
-                  appliedDevices={appliedDevices}
-                  deviceTags={deviceTags}
-                  callbackTabChange={this.handleTabChange}
+                  //devices={devices}
+                  //variants={variants}
+                  //deployments={deployments}
+                  //activeDeployments={activeDeployments}
+                  //appliedDevices={appliedDevices}
+                  //deviceTags={deviceTags}
+                  //callbackTabChange={this.handleTabChange}
                 />
               </TabPane> */}
                 <TabPane
@@ -242,13 +244,13 @@ class App extends Component {
                   }
                 >
                   <MultipleDeploymentArea
-                    devices={devices}
-                    variants={variants}
-                    deployments={deployments}
-                    activeDeployments={activeDeployments}
-                    appliedDevices={appliedDevices}
-                    deviceTags={deviceTags}
-                    callbackTabChange={this.handleTabChange}
+                    //devices={devices}
+                    //variants={variants}
+                    //deployments={deployments}
+                    //activeDeployments={activeDeployments}
+                    //appliedDevices={appliedDevices}
+                    //deviceTags={deviceTags}
+                    //callbackTabChange={this.handleTabChange}
                   />
                 </TabPane>
               </Tabs>
