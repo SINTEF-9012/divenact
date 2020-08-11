@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Button, Col, Row, Steps, message, Badge, Tag } from "antd";
+import yaml from "json2yaml";
 import { VariantStep } from "./VariantStep";
 import { DeviceStep } from "./DeviceStep";
 import { JsonYamlStep } from "./JsonYamlStep";
@@ -113,12 +114,13 @@ export class DiversificationArea extends Component {
       deployment_list: { deployments: {} },
       device_list: { devices: {} },
       z3_solution: "",
+      graph_data: { nodes: [{id: ""}]},
       //selectedFile: null,
       //uploading: false,
       json_model: require("../resources/sample_input.json"),
       selected_variant_rowkeys: [],
       selected_device_rowkeys: [],
-      handleTabChange: this.handleTabChange, //FIXME: how to pass global context values into diversification context?
+      handleTabChange: this.handleTabChange, //FIXME: how to correctly copy global context values to diversification context?
       setSelectedVariantRowKeys: this.setSelectedVariantRowKeys,
       //setSelectedVariants: this.setSelectedVariants,
       setDeploymentList: this.setDeploymentList,
@@ -132,8 +134,8 @@ export class DiversificationArea extends Component {
       json_input: "",
       yaml_input: "",
       smt_input: DefaultSMT,
-      current_step: 2,
-      result: "",      
+      current_step: 0,
+      result: "",
     };
   }
 
@@ -161,6 +163,10 @@ export class DiversificationArea extends Component {
     //var deployments = this.state.selected_variants;
     //this.setState({ deployment_list: { deployments: deployments } });
     this.setState({ deployment_list: value });
+    this.setJsonInput(
+      Object.assign(this.state.deployment_list, this.state.device_list)
+    );
+    this.setYamlInput(yaml.stringify(this.state.json_input));
   };
 
   /**
@@ -181,6 +187,10 @@ export class DiversificationArea extends Component {
   setDeviceList = (value) => {
     console.log("setDeviceList", value);
     this.setState({ device_list: value });
+    this.setJsonInput(
+      Object.assign(this.state.deployment_list, this.state.device_list)
+    );
+    this.setYamlInput(yaml.stringify(this.state.json_input));
   };
 
   /**
@@ -225,7 +235,7 @@ export class DiversificationArea extends Component {
 
   /**
    * Copies function from Global Context to the local state and then to Diversification Context.
-   * 
+   *
    * @param {string} value number of the tab to make active.
    */
   handleTabChange = (value) => {
@@ -265,14 +275,12 @@ export class DiversificationArea extends Component {
           this.setState({ current_step });
         }
         break;
-      case 2: //verify and approve
-        //TODO
-        this.solve();
+      case 2: //verify the input                
         const current_step = this.state.current_step + 1;
         this.setState({ current_step });
         break;
-      case 3: //design SMT logic
-        //TODO
+      case 3: //design SMT logic and solve 
+      this.solve();            
         if (true) {
           // TODO: check that SMT editor is not empty
           const current_step = this.state.current_step + 1;
@@ -297,6 +305,9 @@ export class DiversificationArea extends Component {
     this.setState({ current_step });
   };
 
+  /**
+   * Sends input data to the server and invokes Z3 solver
+   */
   solve = () => {
     //const { selectedFile } = this.state;
     console.log("YAML: ", this.state.yaml_input);
@@ -334,6 +345,7 @@ export class DiversificationArea extends Component {
         console.log("res.data", res.data);
         this.setState({ result: res.data });
         this.setState({ z3_solution: res.data });
+        this.populateGraph(res.data);
       })
       .catch((err) => {
         console.log("err", err);
@@ -345,12 +357,38 @@ export class DiversificationArea extends Component {
   };
 
   /**
+   * Parses output assignment data for visualisation as a bipartite graph. 
+   * FIXME: coordinates are hard-coded
+   * 
+   * @param {*} input_json 
+   */
+  populateGraph = (input_json) => {
+    console.log("Z3 solution: ", input_json);
+    var nodes = [];
+    Object.keys(input_json.deployments).forEach(function (key, index) {
+      nodes.push({ id: key, x: 50, y: 200 + 50 * index });
+    });
+    Object.keys(input_json.devices).forEach(function (key, index) {
+      nodes.push({ id: key, x: 500, y: 50 + 30 * index });
+    });
+
+    var links = [];
+    //links.push({ source: "G", target: "dv6" });
+    Object.keys(input_json.devices).forEach(function (key, index) {
+      links.push({ source: input_json.devices[key].deploy, target: key });
+    });
+
+    this.setState({ graph_data: { nodes: nodes, links: links } });
+
+    console.log("graph_data", this.state.graph_data);
+  };
+
+  /**
    * Pushed Z3 results for deployment to Azure IoT.
    */
   deploy = () => {
-    //TODO: this is where we pass the solution to Azure. 
+    //TODO: this is where we pass the solution to Azure.
     //Decide on the format and modify the server side TypeScript accordingly.
-
   };
 
   /**
@@ -365,9 +403,7 @@ export class DiversificationArea extends Component {
         status: "process",
         content: (
           <DiversificationContext.Provider value={this.state}>
-            <VariantStep
-              wrappedComponentRef={this.saveFormRef}              
-            />
+            <VariantStep wrappedComponentRef={this.saveFormRef} />
           </DiversificationContext.Provider>
         ),
       },

@@ -90,7 +90,7 @@ export class JsonYamlStep extends Component {
           {/* <div id="" style={{overflow: "scroll", height: "400px"}} > */}
           <ReactJson
           //FIXME: fix the source for json editor
-            src={Object.assign(this.context.deployment_list,this.context.device_list)}
+            src={this.context.json_input} //{Object.assign(this.context.deployment_list,this.context.device_list)}
             theme="apathy:inverted"
             collapsed={2}
             enableClipboard={true}

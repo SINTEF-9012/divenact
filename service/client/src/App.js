@@ -234,7 +234,7 @@ class App extends Component {
                   //callbackTabChange={this.handleTabChange}
                 />
               </TabPane> */}
-                <TabPane
+                {/* <TabPane
                   key="9"
                   tab={
                     <span>
@@ -252,7 +252,7 @@ class App extends Component {
                     //deviceTags={deviceTags}
                     //callbackTabChange={this.handleTabChange}
                   />
-                </TabPane>
+                </TabPane> */}
               </Tabs>
             </Content>
 

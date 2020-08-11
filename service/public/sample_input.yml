@@ -1,4 +1,6 @@
 deployments:
+  A: {vsn: release, compu_lvl: 1, comm_lvl: 1, dp_acc: acc_none, intlmodule: edge}
+  B: {vsn: release, compu_lvl: 2, comm_lvl: 3, dp_acc: acc_none, intlmodule: cloud}
   C: {vsn: release, compu_lvl: 3, comm_lvl: 1, dp_acc: acc_none, intlmodule: edge}
   D: {vsn: release, compu_lvl: 3, comm_lvl: 3, dp_acc: acc_none, intlmodule: flexible}
   E: {vsn: release, compu_lvl: 3, comm_lvl: 1, dp_acc: tpu, intlmodule: edge}

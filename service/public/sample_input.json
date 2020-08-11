@@ -1,1 +1,1 @@
-{"deployments":{},"devices":{}}
+{"deployments":{"text-hat-hello":{"vsn":"release","compu_level":1,"comm_level":1,"dp_acc":"acc_none","intlmodule":"edge"}},"devices":{"GenesisRaspberry2":{"environment":"safe-mode","status":"running","capability":"sensehat","range":"5","cpu":"700","storage":"4","ram":"256"}}}
