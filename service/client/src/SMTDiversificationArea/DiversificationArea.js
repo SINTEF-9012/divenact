@@ -384,11 +384,27 @@ export class DiversificationArea extends Component {
   };
 
   /**
-   * Pushed Z3 results for deployment to Azure IoT.
+   * Pushes Z3 assignment results for deployment to Azure IoT.
    */
   deploy = () => {
     //TODO: this is where we pass the solution to Azure.
-    //Decide on the format and modify the server side TypeScript accordingly.
+    //TODO: Decide on the format and modify the server side TypeScript accordingly.
+    //TODO: Add corresponding methods in deploymnet-route.ts or maybe variant-route.ts
+    
+    const formData = new FormData();
+
+    formData.append("assignment_json", "assignment_json");
+    formData.append("yaassignment_yaml", "yaassignment_yaml");
+    
+    axios
+      .post("/api/deployment", formData)
+      .then((res) => {
+        console.log("res.data", res.data);        
+      })
+      .catch((err) => {
+        console.log("err", err);
+      });
+
   };
 
   /**
