@@ -1,20 +1,18 @@
 #!/bin/bash
 
-#https://github.com/MicrosoftDocs/azure-docs/blob/master/articles/iot-edge/how-to-install-iot-edge-linux-arm.md 
+#https://docs.microsoft.com/en-us/azure/iot-edge/how-to-install-iot-edge-linux
 
-curl -L https://aka.ms/moby-engine-armhf-latest -o moby_engine.deb
-dpkg -i ./moby_engine.deb
+curl https://packages.microsoft.com/config/debian/stretch/multiarch/prod.list > ./microsoft-prod.list
+sudo cp ./microsoft-prod.list /etc/apt/sources.list.d/
+curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
+sudo cp ./microsoft.gpg /etc/apt/trusted.gpg.d/
+sudo apt-get update
+sudo apt-get install moby-engine
+sudo apt-get install moby-cli
 
-curl -L https://aka.ms/moby-cli-armhf-latest -o moby_cli.deb
-dpkg -i ./moby_cli.deb
+sudo apt-get update
+sudo apt-get install iotedge
 
-
-curl -L https://aka.ms/libiothsm-std-linux-armhf-latest -o libiothsm-std.deb
-dpkg -i ./libiothsm-std.deb
-curl -L https://aka.ms/iotedged-linux-armhf-latest -o iotedge.deb
-dpkg -i ./iotedge.deb
-
-apt-get install -f
 
 connection=$(<connection.credential)
 # Check the indention
