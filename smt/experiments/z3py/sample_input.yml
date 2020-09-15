@@ -1,9 +1,15 @@
 deployments:
-  C:
+  A:
     comm_lvl: 1
-    compu_lvl: 3
+    compu_lvl: 1
     dp_acc: acc_none
     intlmodule: edge
+    vsn: release
+  B:
+    comm_lvl: 3
+    compu_lvl: 2
+    dp_acc: acc_none
+    intlmodule: cloud
     vsn: release
   D:
     comm_lvl: 3
@@ -23,12 +29,6 @@ deployments:
     dp_acc: tpu
     intlmodule: flexible
     vsn: release
-  G:
-    comm_lvl: 1
-    compu_lvl: 2
-    dp_acc: tpu
-    intlmodule: edge
-    vsn: release
 devices:
   dv0:
     dv_acc: acc_none
@@ -40,12 +40,72 @@ devices:
     env: staging
     network: wifi
     powersource: fixed
+  dv0a1a2:
+    dv_acc: acc_none
+    env: staging
+    network: wifi
+    powersource: fixed
+  dv0a1a2a3:
+    dv_acc: acc_none
+    env: staging
+    network: wifi
+    powersource: fixed
+  dv0a1a2a3a4:
+    dv_acc: acc_none
+    env: staging
+    network: wifi
+    powersource: fixed
+  dv0a1a2a4:
+    dv_acc: acc_none
+    env: staging
+    network: wifi
+    powersource: fixed
+  dv0a1a3:
+    dv_acc: acc_none
+    env: staging
+    network: wifi
+    powersource: fixed
+  dv0a1a3a4:
+    dv_acc: acc_none
+    env: staging
+    network: wifi
+    powersource: fixed
+  dv0a1a4:
+    dv_acc: acc_none
+    env: staging
+    network: wifi
+    powersource: fixed
   dv0a2:
     dv_acc: acc_none
     env: staging
     network: wifi
     powersource: fixed
+  dv0a2a3:
+    dv_acc: acc_none
+    env: staging
+    network: wifi
+    powersource: fixed
+  dv0a2a3a4:
+    dv_acc: acc_none
+    env: staging
+    network: wifi
+    powersource: fixed
+  dv0a2a4:
+    dv_acc: acc_none
+    env: staging
+    network: wifi
+    powersource: fixed
   dv0a3:
+    dv_acc: acc_none
+    env: staging
+    network: wifi
+    powersource: fixed
+  dv0a3a4:
+    dv_acc: acc_none
+    env: staging
+    network: wifi
+    powersource: fixed
+  dv0a4:
     dv_acc: acc_none
     env: staging
     network: wifi
@@ -65,12 +125,72 @@ devices:
     env: production
     network: 4g
     powersource: ac
+  dv10a1a2:
+    dv_acc: acc_none
+    env: production
+    network: 4g
+    powersource: ac
+  dv10a1a2a3:
+    dv_acc: acc_none
+    env: production
+    network: 4g
+    powersource: ac
+  dv10a1a2a3a4:
+    dv_acc: acc_none
+    env: production
+    network: 4g
+    powersource: ac
+  dv10a1a2a4:
+    dv_acc: acc_none
+    env: production
+    network: 4g
+    powersource: ac
+  dv10a1a3:
+    dv_acc: acc_none
+    env: production
+    network: 4g
+    powersource: ac
+  dv10a1a3a4:
+    dv_acc: acc_none
+    env: production
+    network: 4g
+    powersource: ac
+  dv10a1a4:
+    dv_acc: acc_none
+    env: production
+    network: 4g
+    powersource: ac
   dv10a2:
     dv_acc: acc_none
     env: production
     network: 4g
     powersource: ac
+  dv10a2a3:
+    dv_acc: acc_none
+    env: production
+    network: 4g
+    powersource: ac
+  dv10a2a3a4:
+    dv_acc: acc_none
+    env: production
+    network: 4g
+    powersource: ac
+  dv10a2a4:
+    dv_acc: acc_none
+    env: production
+    network: 4g
+    powersource: ac
   dv10a3:
+    dv_acc: acc_none
+    env: production
+    network: 4g
+    powersource: ac
+  dv10a3a4:
+    dv_acc: acc_none
+    env: production
+    network: 4g
+    powersource: ac
+  dv10a4:
     dv_acc: acc_none
     env: production
     network: 4g
@@ -85,12 +205,72 @@ devices:
     env: production
     network: wifi
     powersource: ac
+  dv11a1a2:
+    dv_acc: tpu
+    env: production
+    network: wifi
+    powersource: ac
+  dv11a1a2a3:
+    dv_acc: tpu
+    env: production
+    network: wifi
+    powersource: ac
+  dv11a1a2a3a4:
+    dv_acc: tpu
+    env: production
+    network: wifi
+    powersource: ac
+  dv11a1a2a4:
+    dv_acc: tpu
+    env: production
+    network: wifi
+    powersource: ac
+  dv11a1a3:
+    dv_acc: tpu
+    env: production
+    network: wifi
+    powersource: ac
+  dv11a1a3a4:
+    dv_acc: tpu
+    env: production
+    network: wifi
+    powersource: ac
+  dv11a1a4:
+    dv_acc: tpu
+    env: production
+    network: wifi
+    powersource: ac
   dv11a2:
     dv_acc: tpu
     env: production
     network: wifi
     powersource: ac
+  dv11a2a3:
+    dv_acc: tpu
+    env: production
+    network: wifi
+    powersource: ac
+  dv11a2a3a4:
+    dv_acc: tpu
+    env: production
+    network: wifi
+    powersource: ac
+  dv11a2a4:
+    dv_acc: tpu
+    env: production
+    network: wifi
+    powersource: ac
   dv11a3:
+    dv_acc: tpu
+    env: production
+    network: wifi
+    powersource: ac
+  dv11a3a4:
+    dv_acc: tpu
+    env: production
+    network: wifi
+    powersource: ac
+  dv11a4:
     dv_acc: tpu
     env: production
     network: wifi
@@ -105,12 +285,72 @@ devices:
     env: production
     network: 4g
     powersource: fixed
+  dv12a1a2:
+    dv_acc: acc_none
+    env: production
+    network: 4g
+    powersource: fixed
+  dv12a1a2a3:
+    dv_acc: acc_none
+    env: production
+    network: 4g
+    powersource: fixed
+  dv12a1a2a3a4:
+    dv_acc: acc_none
+    env: production
+    network: 4g
+    powersource: fixed
+  dv12a1a2a4:
+    dv_acc: acc_none
+    env: production
+    network: 4g
+    powersource: fixed
+  dv12a1a3:
+    dv_acc: acc_none
+    env: production
+    network: 4g
+    powersource: fixed
+  dv12a1a3a4:
+    dv_acc: acc_none
+    env: production
+    network: 4g
+    powersource: fixed
+  dv12a1a4:
+    dv_acc: acc_none
+    env: production
+    network: 4g
+    powersource: fixed
   dv12a2:
     dv_acc: acc_none
     env: production
     network: 4g
     powersource: fixed
+  dv12a2a3:
+    dv_acc: acc_none
+    env: production
+    network: 4g
+    powersource: fixed
+  dv12a2a3a4:
+    dv_acc: acc_none
+    env: production
+    network: 4g
+    powersource: fixed
+  dv12a2a4:
+    dv_acc: acc_none
+    env: production
+    network: 4g
+    powersource: fixed
   dv12a3:
+    dv_acc: acc_none
+    env: production
+    network: 4g
+    powersource: fixed
+  dv12a3a4:
+    dv_acc: acc_none
+    env: production
+    network: 4g
+    powersource: fixed
+  dv12a4:
     dv_acc: acc_none
     env: production
     network: 4g
@@ -125,12 +365,72 @@ devices:
     env: production
     network: 3g
     powersource: fixed
+  dv13a1a2:
+    dv_acc: tpu
+    env: production
+    network: 3g
+    powersource: fixed
+  dv13a1a2a3:
+    dv_acc: tpu
+    env: production
+    network: 3g
+    powersource: fixed
+  dv13a1a2a3a4:
+    dv_acc: tpu
+    env: production
+    network: 3g
+    powersource: fixed
+  dv13a1a2a4:
+    dv_acc: tpu
+    env: production
+    network: 3g
+    powersource: fixed
+  dv13a1a3:
+    dv_acc: tpu
+    env: production
+    network: 3g
+    powersource: fixed
+  dv13a1a3a4:
+    dv_acc: tpu
+    env: production
+    network: 3g
+    powersource: fixed
+  dv13a1a4:
+    dv_acc: tpu
+    env: production
+    network: 3g
+    powersource: fixed
   dv13a2:
     dv_acc: tpu
     env: production
     network: 3g
     powersource: fixed
+  dv13a2a3:
+    dv_acc: tpu
+    env: production
+    network: 3g
+    powersource: fixed
+  dv13a2a3a4:
+    dv_acc: tpu
+    env: production
+    network: 3g
+    powersource: fixed
+  dv13a2a4:
+    dv_acc: tpu
+    env: production
+    network: 3g
+    powersource: fixed
   dv13a3:
+    dv_acc: tpu
+    env: production
+    network: 3g
+    powersource: fixed
+  dv13a3a4:
+    dv_acc: tpu
+    env: production
+    network: 3g
+    powersource: fixed
+  dv13a4:
     dv_acc: tpu
     env: production
     network: 3g
@@ -145,12 +445,72 @@ devices:
     env: production
     network: wifi
     powersource: fixed
+  dv14a1a2:
+    dv_acc: tpu
+    env: production
+    network: wifi
+    powersource: fixed
+  dv14a1a2a3:
+    dv_acc: tpu
+    env: production
+    network: wifi
+    powersource: fixed
+  dv14a1a2a3a4:
+    dv_acc: tpu
+    env: production
+    network: wifi
+    powersource: fixed
+  dv14a1a2a4:
+    dv_acc: tpu
+    env: production
+    network: wifi
+    powersource: fixed
+  dv14a1a3:
+    dv_acc: tpu
+    env: production
+    network: wifi
+    powersource: fixed
+  dv14a1a3a4:
+    dv_acc: tpu
+    env: production
+    network: wifi
+    powersource: fixed
+  dv14a1a4:
+    dv_acc: tpu
+    env: production
+    network: wifi
+    powersource: fixed
   dv14a2:
     dv_acc: tpu
     env: production
     network: wifi
     powersource: fixed
+  dv14a2a3:
+    dv_acc: tpu
+    env: production
+    network: wifi
+    powersource: fixed
+  dv14a2a3a4:
+    dv_acc: tpu
+    env: production
+    network: wifi
+    powersource: fixed
+  dv14a2a4:
+    dv_acc: tpu
+    env: production
+    network: wifi
+    powersource: fixed
   dv14a3:
+    dv_acc: tpu
+    env: production
+    network: wifi
+    powersource: fixed
+  dv14a3a4:
+    dv_acc: tpu
+    env: production
+    network: wifi
+    powersource: fixed
+  dv14a4:
     dv_acc: tpu
     env: production
     network: wifi
@@ -165,12 +525,72 @@ devices:
     env: production
     network: wifi
     powersource: battery
+  dv15a1a2:
+    dv_acc: acc_none
+    env: production
+    network: wifi
+    powersource: battery
+  dv15a1a2a3:
+    dv_acc: acc_none
+    env: production
+    network: wifi
+    powersource: battery
+  dv15a1a2a3a4:
+    dv_acc: acc_none
+    env: production
+    network: wifi
+    powersource: battery
+  dv15a1a2a4:
+    dv_acc: acc_none
+    env: production
+    network: wifi
+    powersource: battery
+  dv15a1a3:
+    dv_acc: acc_none
+    env: production
+    network: wifi
+    powersource: battery
+  dv15a1a3a4:
+    dv_acc: acc_none
+    env: production
+    network: wifi
+    powersource: battery
+  dv15a1a4:
+    dv_acc: acc_none
+    env: production
+    network: wifi
+    powersource: battery
   dv15a2:
     dv_acc: acc_none
     env: production
     network: wifi
     powersource: battery
+  dv15a2a3:
+    dv_acc: acc_none
+    env: production
+    network: wifi
+    powersource: battery
+  dv15a2a3a4:
+    dv_acc: acc_none
+    env: production
+    network: wifi
+    powersource: battery
+  dv15a2a4:
+    dv_acc: acc_none
+    env: production
+    network: wifi
+    powersource: battery
   dv15a3:
+    dv_acc: acc_none
+    env: production
+    network: wifi
+    powersource: battery
+  dv15a3a4:
+    dv_acc: acc_none
+    env: production
+    network: wifi
+    powersource: battery
+  dv15a4:
     dv_acc: acc_none
     env: production
     network: wifi
@@ -185,12 +605,72 @@ devices:
     env: production
     network: 3g
     powersource: fixed
+  dv16a1a2:
+    dv_acc: acc_none
+    env: production
+    network: 3g
+    powersource: fixed
+  dv16a1a2a3:
+    dv_acc: acc_none
+    env: production
+    network: 3g
+    powersource: fixed
+  dv16a1a2a3a4:
+    dv_acc: acc_none
+    env: production
+    network: 3g
+    powersource: fixed
+  dv16a1a2a4:
+    dv_acc: acc_none
+    env: production
+    network: 3g
+    powersource: fixed
+  dv16a1a3:
+    dv_acc: acc_none
+    env: production
+    network: 3g
+    powersource: fixed
+  dv16a1a3a4:
+    dv_acc: acc_none
+    env: production
+    network: 3g
+    powersource: fixed
+  dv16a1a4:
+    dv_acc: acc_none
+    env: production
+    network: 3g
+    powersource: fixed
   dv16a2:
     dv_acc: acc_none
     env: production
     network: 3g
     powersource: fixed
+  dv16a2a3:
+    dv_acc: acc_none
+    env: production
+    network: 3g
+    powersource: fixed
+  dv16a2a3a4:
+    dv_acc: acc_none
+    env: production
+    network: 3g
+    powersource: fixed
+  dv16a2a4:
+    dv_acc: acc_none
+    env: production
+    network: 3g
+    powersource: fixed
   dv16a3:
+    dv_acc: acc_none
+    env: production
+    network: 3g
+    powersource: fixed
+  dv16a3a4:
+    dv_acc: acc_none
+    env: production
+    network: 3g
+    powersource: fixed
+  dv16a4:
     dv_acc: acc_none
     env: production
     network: 3g
@@ -205,12 +685,72 @@ devices:
     env: production
     network: 3g
     powersource: ac
+  dv17a1a2:
+    dv_acc: tpu
+    env: production
+    network: 3g
+    powersource: ac
+  dv17a1a2a3:
+    dv_acc: tpu
+    env: production
+    network: 3g
+    powersource: ac
+  dv17a1a2a3a4:
+    dv_acc: tpu
+    env: production
+    network: 3g
+    powersource: ac
+  dv17a1a2a4:
+    dv_acc: tpu
+    env: production
+    network: 3g
+    powersource: ac
+  dv17a1a3:
+    dv_acc: tpu
+    env: production
+    network: 3g
+    powersource: ac
+  dv17a1a3a4:
+    dv_acc: tpu
+    env: production
+    network: 3g
+    powersource: ac
+  dv17a1a4:
+    dv_acc: tpu
+    env: production
+    network: 3g
+    powersource: ac
   dv17a2:
     dv_acc: tpu
     env: production
     network: 3g
     powersource: ac
+  dv17a2a3:
+    dv_acc: tpu
+    env: production
+    network: 3g
+    powersource: ac
+  dv17a2a3a4:
+    dv_acc: tpu
+    env: production
+    network: 3g
+    powersource: ac
+  dv17a2a4:
+    dv_acc: tpu
+    env: production
+    network: 3g
+    powersource: ac
   dv17a3:
+    dv_acc: tpu
+    env: production
+    network: 3g
+    powersource: ac
+  dv17a3a4:
+    dv_acc: tpu
+    env: production
+    network: 3g
+    powersource: ac
+  dv17a4:
     dv_acc: tpu
     env: production
     network: 3g
@@ -225,12 +765,72 @@ devices:
     env: production
     network: 4g
     powersource: ac
+  dv18a1a2:
+    dv_acc: tpu
+    env: production
+    network: 4g
+    powersource: ac
+  dv18a1a2a3:
+    dv_acc: tpu
+    env: production
+    network: 4g
+    powersource: ac
+  dv18a1a2a3a4:
+    dv_acc: tpu
+    env: production
+    network: 4g
+    powersource: ac
+  dv18a1a2a4:
+    dv_acc: tpu
+    env: production
+    network: 4g
+    powersource: ac
+  dv18a1a3:
+    dv_acc: tpu
+    env: production
+    network: 4g
+    powersource: ac
+  dv18a1a3a4:
+    dv_acc: tpu
+    env: production
+    network: 4g
+    powersource: ac
+  dv18a1a4:
+    dv_acc: tpu
+    env: production
+    network: 4g
+    powersource: ac
   dv18a2:
     dv_acc: tpu
     env: production
     network: 4g
     powersource: ac
+  dv18a2a3:
+    dv_acc: tpu
+    env: production
+    network: 4g
+    powersource: ac
+  dv18a2a3a4:
+    dv_acc: tpu
+    env: production
+    network: 4g
+    powersource: ac
+  dv18a2a4:
+    dv_acc: tpu
+    env: production
+    network: 4g
+    powersource: ac
   dv18a3:
+    dv_acc: tpu
+    env: production
+    network: 4g
+    powersource: ac
+  dv18a3a4:
+    dv_acc: tpu
+    env: production
+    network: 4g
+    powersource: ac
+  dv18a4:
     dv_acc: tpu
     env: production
     network: 4g
@@ -245,7 +845,57 @@ devices:
     env: production
     network: wifi
     powersource: battery
+  dv19a1a2:
+    dv_acc: acc_none
+    env: production
+    network: wifi
+    powersource: battery
+  dv19a1a2a3:
+    dv_acc: acc_none
+    env: production
+    network: wifi
+    powersource: battery
+  dv19a1a2a3a4:
+    dv_acc: acc_none
+    env: production
+    network: wifi
+    powersource: battery
+  dv19a1a2a4:
+    dv_acc: acc_none
+    env: production
+    network: wifi
+    powersource: battery
+  dv19a1a3:
+    dv_acc: acc_none
+    env: production
+    network: wifi
+    powersource: battery
+  dv19a1a3a4:
+    dv_acc: acc_none
+    env: production
+    network: wifi
+    powersource: battery
+  dv19a1a4:
+    dv_acc: acc_none
+    env: production
+    network: wifi
+    powersource: battery
   dv19a2:
+    dv_acc: acc_none
+    env: production
+    network: wifi
+    powersource: battery
+  dv19a2a3:
+    dv_acc: acc_none
+    env: production
+    network: wifi
+    powersource: battery
+  dv19a2a3a4:
+    dv_acc: acc_none
+    env: production
+    network: wifi
+    powersource: battery
+  dv19a2a4:
     dv_acc: acc_none
     env: production
     network: wifi
@@ -255,7 +905,52 @@ devices:
     env: production
     network: wifi
     powersource: battery
+  dv19a3a4:
+    dv_acc: acc_none
+    env: production
+    network: wifi
+    powersource: battery
+  dv19a4:
+    dv_acc: acc_none
+    env: production
+    network: wifi
+    powersource: battery
   dv1a1:
+    dv_acc: tpu
+    env: staging
+    network: 4g
+    powersource: ac
+  dv1a1a2:
+    dv_acc: tpu
+    env: staging
+    network: 4g
+    powersource: ac
+  dv1a1a2a3:
+    dv_acc: tpu
+    env: staging
+    network: 4g
+    powersource: ac
+  dv1a1a2a3a4:
+    dv_acc: tpu
+    env: staging
+    network: 4g
+    powersource: ac
+  dv1a1a2a4:
+    dv_acc: tpu
+    env: staging
+    network: 4g
+    powersource: ac
+  dv1a1a3:
+    dv_acc: tpu
+    env: staging
+    network: 4g
+    powersource: ac
+  dv1a1a3a4:
+    dv_acc: tpu
+    env: staging
+    network: 4g
+    powersource: ac
+  dv1a1a4:
     dv_acc: tpu
     env: staging
     network: 4g
@@ -265,7 +960,32 @@ devices:
     env: staging
     network: 4g
     powersource: ac
+  dv1a2a3:
+    dv_acc: tpu
+    env: staging
+    network: 4g
+    powersource: ac
+  dv1a2a3a4:
+    dv_acc: tpu
+    env: staging
+    network: 4g
+    powersource: ac
+  dv1a2a4:
+    dv_acc: tpu
+    env: staging
+    network: 4g
+    powersource: ac
   dv1a3:
+    dv_acc: tpu
+    env: staging
+    network: 4g
+    powersource: ac
+  dv1a3a4:
+    dv_acc: tpu
+    env: staging
+    network: 4g
+    powersource: ac
+  dv1a4:
     dv_acc: tpu
     env: staging
     network: 4g
@@ -285,12 +1005,72 @@ devices:
     env: production
     network: 4g
     powersource: battery
+  dv20a1a2:
+    dv_acc: tpu
+    env: production
+    network: 4g
+    powersource: battery
+  dv20a1a2a3:
+    dv_acc: tpu
+    env: production
+    network: 4g
+    powersource: battery
+  dv20a1a2a3a4:
+    dv_acc: tpu
+    env: production
+    network: 4g
+    powersource: battery
+  dv20a1a2a4:
+    dv_acc: tpu
+    env: production
+    network: 4g
+    powersource: battery
+  dv20a1a3:
+    dv_acc: tpu
+    env: production
+    network: 4g
+    powersource: battery
+  dv20a1a3a4:
+    dv_acc: tpu
+    env: production
+    network: 4g
+    powersource: battery
+  dv20a1a4:
+    dv_acc: tpu
+    env: production
+    network: 4g
+    powersource: battery
   dv20a2:
     dv_acc: tpu
     env: production
     network: 4g
     powersource: battery
+  dv20a2a3:
+    dv_acc: tpu
+    env: production
+    network: 4g
+    powersource: battery
+  dv20a2a3a4:
+    dv_acc: tpu
+    env: production
+    network: 4g
+    powersource: battery
+  dv20a2a4:
+    dv_acc: tpu
+    env: production
+    network: 4g
+    powersource: battery
   dv20a3:
+    dv_acc: tpu
+    env: production
+    network: 4g
+    powersource: battery
+  dv20a3a4:
+    dv_acc: tpu
+    env: production
+    network: 4g
+    powersource: battery
+  dv20a4:
     dv_acc: tpu
     env: production
     network: 4g
@@ -305,12 +1085,72 @@ devices:
     env: production
     network: 3g
     powersource: battery
+  dv21a1a2:
+    dv_acc: tpu
+    env: production
+    network: 3g
+    powersource: battery
+  dv21a1a2a3:
+    dv_acc: tpu
+    env: production
+    network: 3g
+    powersource: battery
+  dv21a1a2a3a4:
+    dv_acc: tpu
+    env: production
+    network: 3g
+    powersource: battery
+  dv21a1a2a4:
+    dv_acc: tpu
+    env: production
+    network: 3g
+    powersource: battery
+  dv21a1a3:
+    dv_acc: tpu
+    env: production
+    network: 3g
+    powersource: battery
+  dv21a1a3a4:
+    dv_acc: tpu
+    env: production
+    network: 3g
+    powersource: battery
+  dv21a1a4:
+    dv_acc: tpu
+    env: production
+    network: 3g
+    powersource: battery
   dv21a2:
     dv_acc: tpu
     env: production
     network: 3g
     powersource: battery
+  dv21a2a3:
+    dv_acc: tpu
+    env: production
+    network: 3g
+    powersource: battery
+  dv21a2a3a4:
+    dv_acc: tpu
+    env: production
+    network: 3g
+    powersource: battery
+  dv21a2a4:
+    dv_acc: tpu
+    env: production
+    network: 3g
+    powersource: battery
   dv21a3:
+    dv_acc: tpu
+    env: production
+    network: 3g
+    powersource: battery
+  dv21a3a4:
+    dv_acc: tpu
+    env: production
+    network: 3g
+    powersource: battery
+  dv21a4:
     dv_acc: tpu
     env: production
     network: 3g
@@ -325,12 +1165,72 @@ devices:
     env: production
     network: 4g
     powersource: ac
+  dv22a1a2:
+    dv_acc: acc_none
+    env: production
+    network: 4g
+    powersource: ac
+  dv22a1a2a3:
+    dv_acc: acc_none
+    env: production
+    network: 4g
+    powersource: ac
+  dv22a1a2a3a4:
+    dv_acc: acc_none
+    env: production
+    network: 4g
+    powersource: ac
+  dv22a1a2a4:
+    dv_acc: acc_none
+    env: production
+    network: 4g
+    powersource: ac
+  dv22a1a3:
+    dv_acc: acc_none
+    env: production
+    network: 4g
+    powersource: ac
+  dv22a1a3a4:
+    dv_acc: acc_none
+    env: production
+    network: 4g
+    powersource: ac
+  dv22a1a4:
+    dv_acc: acc_none
+    env: production
+    network: 4g
+    powersource: ac
   dv22a2:
     dv_acc: acc_none
     env: production
     network: 4g
     powersource: ac
+  dv22a2a3:
+    dv_acc: acc_none
+    env: production
+    network: 4g
+    powersource: ac
+  dv22a2a3a4:
+    dv_acc: acc_none
+    env: production
+    network: 4g
+    powersource: ac
+  dv22a2a4:
+    dv_acc: acc_none
+    env: production
+    network: 4g
+    powersource: ac
   dv22a3:
+    dv_acc: acc_none
+    env: production
+    network: 4g
+    powersource: ac
+  dv22a3a4:
+    dv_acc: acc_none
+    env: production
+    network: 4g
+    powersource: ac
+  dv22a4:
     dv_acc: acc_none
     env: production
     network: 4g
@@ -345,12 +1245,72 @@ devices:
     env: production
     network: 4g
     powersource: fixed
+  dv23a1a2:
+    dv_acc: tpu
+    env: production
+    network: 4g
+    powersource: fixed
+  dv23a1a2a3:
+    dv_acc: tpu
+    env: production
+    network: 4g
+    powersource: fixed
+  dv23a1a2a3a4:
+    dv_acc: tpu
+    env: production
+    network: 4g
+    powersource: fixed
+  dv23a1a2a4:
+    dv_acc: tpu
+    env: production
+    network: 4g
+    powersource: fixed
+  dv23a1a3:
+    dv_acc: tpu
+    env: production
+    network: 4g
+    powersource: fixed
+  dv23a1a3a4:
+    dv_acc: tpu
+    env: production
+    network: 4g
+    powersource: fixed
+  dv23a1a4:
+    dv_acc: tpu
+    env: production
+    network: 4g
+    powersource: fixed
   dv23a2:
     dv_acc: tpu
     env: production
     network: 4g
     powersource: fixed
+  dv23a2a3:
+    dv_acc: tpu
+    env: production
+    network: 4g
+    powersource: fixed
+  dv23a2a3a4:
+    dv_acc: tpu
+    env: production
+    network: 4g
+    powersource: fixed
+  dv23a2a4:
+    dv_acc: tpu
+    env: production
+    network: 4g
+    powersource: fixed
   dv23a3:
+    dv_acc: tpu
+    env: production
+    network: 4g
+    powersource: fixed
+  dv23a3a4:
+    dv_acc: tpu
+    env: production
+    network: 4g
+    powersource: fixed
+  dv23a4:
     dv_acc: tpu
     env: production
     network: 4g
@@ -365,7 +1325,57 @@ devices:
     env: production
     network: 3g
     powersource: battery
+  dv24a1a2:
+    dv_acc: acc_none
+    env: production
+    network: 3g
+    powersource: battery
+  dv24a1a2a3:
+    dv_acc: acc_none
+    env: production
+    network: 3g
+    powersource: battery
+  dv24a1a2a3a4:
+    dv_acc: acc_none
+    env: production
+    network: 3g
+    powersource: battery
+  dv24a1a2a4:
+    dv_acc: acc_none
+    env: production
+    network: 3g
+    powersource: battery
+  dv24a1a3:
+    dv_acc: acc_none
+    env: production
+    network: 3g
+    powersource: battery
+  dv24a1a3a4:
+    dv_acc: acc_none
+    env: production
+    network: 3g
+    powersource: battery
+  dv24a1a4:
+    dv_acc: acc_none
+    env: production
+    network: 3g
+    powersource: battery
   dv24a2:
+    dv_acc: acc_none
+    env: production
+    network: 3g
+    powersource: battery
+  dv24a2a3:
+    dv_acc: acc_none
+    env: production
+    network: 3g
+    powersource: battery
+  dv24a2a3a4:
+    dv_acc: acc_none
+    env: production
+    network: 3g
+    powersource: battery
+  dv24a2a4:
     dv_acc: acc_none
     env: production
     network: 3g
@@ -375,7 +1385,52 @@ devices:
     env: production
     network: 3g
     powersource: battery
+  dv24a3a4:
+    dv_acc: acc_none
+    env: production
+    network: 3g
+    powersource: battery
+  dv24a4:
+    dv_acc: acc_none
+    env: production
+    network: 3g
+    powersource: battery
   dv2a1:
+    dv_acc: tpu
+    env: staging
+    network: wifi
+    powersource: ac
+  dv2a1a2:
+    dv_acc: tpu
+    env: staging
+    network: wifi
+    powersource: ac
+  dv2a1a2a3:
+    dv_acc: tpu
+    env: staging
+    network: wifi
+    powersource: ac
+  dv2a1a2a3a4:
+    dv_acc: tpu
+    env: staging
+    network: wifi
+    powersource: ac
+  dv2a1a2a4:
+    dv_acc: tpu
+    env: staging
+    network: wifi
+    powersource: ac
+  dv2a1a3:
+    dv_acc: tpu
+    env: staging
+    network: wifi
+    powersource: ac
+  dv2a1a3a4:
+    dv_acc: tpu
+    env: staging
+    network: wifi
+    powersource: ac
+  dv2a1a4:
     dv_acc: tpu
     env: staging
     network: wifi
@@ -385,7 +1440,32 @@ devices:
     env: staging
     network: wifi
     powersource: ac
+  dv2a2a3:
+    dv_acc: tpu
+    env: staging
+    network: wifi
+    powersource: ac
+  dv2a2a3a4:
+    dv_acc: tpu
+    env: staging
+    network: wifi
+    powersource: ac
+  dv2a2a4:
+    dv_acc: tpu
+    env: staging
+    network: wifi
+    powersource: ac
   dv2a3:
+    dv_acc: tpu
+    env: staging
+    network: wifi
+    powersource: ac
+  dv2a3a4:
+    dv_acc: tpu
+    env: staging
+    network: wifi
+    powersource: ac
+  dv2a4:
     dv_acc: tpu
     env: staging
     network: wifi
@@ -400,12 +1480,72 @@ devices:
     env: staging
     network: 3g
     powersource: battery
+  dv3a1a2:
+    dv_acc: acc_none
+    env: staging
+    network: 3g
+    powersource: battery
+  dv3a1a2a3:
+    dv_acc: acc_none
+    env: staging
+    network: 3g
+    powersource: battery
+  dv3a1a2a3a4:
+    dv_acc: acc_none
+    env: staging
+    network: 3g
+    powersource: battery
+  dv3a1a2a4:
+    dv_acc: acc_none
+    env: staging
+    network: 3g
+    powersource: battery
+  dv3a1a3:
+    dv_acc: acc_none
+    env: staging
+    network: 3g
+    powersource: battery
+  dv3a1a3a4:
+    dv_acc: acc_none
+    env: staging
+    network: 3g
+    powersource: battery
+  dv3a1a4:
+    dv_acc: acc_none
+    env: staging
+    network: 3g
+    powersource: battery
   dv3a2:
     dv_acc: acc_none
     env: staging
     network: 3g
     powersource: battery
+  dv3a2a3:
+    dv_acc: acc_none
+    env: staging
+    network: 3g
+    powersource: battery
+  dv3a2a3a4:
+    dv_acc: acc_none
+    env: staging
+    network: 3g
+    powersource: battery
+  dv3a2a4:
+    dv_acc: acc_none
+    env: staging
+    network: 3g
+    powersource: battery
   dv3a3:
+    dv_acc: acc_none
+    env: staging
+    network: 3g
+    powersource: battery
+  dv3a3a4:
+    dv_acc: acc_none
+    env: staging
+    network: 3g
+    powersource: battery
+  dv3a4:
     dv_acc: acc_none
     env: staging
     network: 3g
@@ -420,12 +1560,72 @@ devices:
     env: production
     network: 4g
     powersource: fixed
+  dv4a1a2:
+    dv_acc: tpu
+    env: production
+    network: 4g
+    powersource: fixed
+  dv4a1a2a3:
+    dv_acc: tpu
+    env: production
+    network: 4g
+    powersource: fixed
+  dv4a1a2a3a4:
+    dv_acc: tpu
+    env: production
+    network: 4g
+    powersource: fixed
+  dv4a1a2a4:
+    dv_acc: tpu
+    env: production
+    network: 4g
+    powersource: fixed
+  dv4a1a3:
+    dv_acc: tpu
+    env: production
+    network: 4g
+    powersource: fixed
+  dv4a1a3a4:
+    dv_acc: tpu
+    env: production
+    network: 4g
+    powersource: fixed
+  dv4a1a4:
+    dv_acc: tpu
+    env: production
+    network: 4g
+    powersource: fixed
   dv4a2:
     dv_acc: tpu
     env: production
     network: 4g
     powersource: fixed
+  dv4a2a3:
+    dv_acc: tpu
+    env: production
+    network: 4g
+    powersource: fixed
+  dv4a2a3a4:
+    dv_acc: tpu
+    env: production
+    network: 4g
+    powersource: fixed
+  dv4a2a4:
+    dv_acc: tpu
+    env: production
+    network: 4g
+    powersource: fixed
   dv4a3:
+    dv_acc: tpu
+    env: production
+    network: 4g
+    powersource: fixed
+  dv4a3a4:
+    dv_acc: tpu
+    env: production
+    network: 4g
+    powersource: fixed
+  dv4a4:
     dv_acc: tpu
     env: production
     network: 4g
@@ -440,12 +1640,72 @@ devices:
     env: production
     network: wifi
     powersource: fixed
+  dv5a1a2:
+    dv_acc: acc_none
+    env: production
+    network: wifi
+    powersource: fixed
+  dv5a1a2a3:
+    dv_acc: acc_none
+    env: production
+    network: wifi
+    powersource: fixed
+  dv5a1a2a3a4:
+    dv_acc: acc_none
+    env: production
+    network: wifi
+    powersource: fixed
+  dv5a1a2a4:
+    dv_acc: acc_none
+    env: production
+    network: wifi
+    powersource: fixed
+  dv5a1a3:
+    dv_acc: acc_none
+    env: production
+    network: wifi
+    powersource: fixed
+  dv5a1a3a4:
+    dv_acc: acc_none
+    env: production
+    network: wifi
+    powersource: fixed
+  dv5a1a4:
+    dv_acc: acc_none
+    env: production
+    network: wifi
+    powersource: fixed
   dv5a2:
     dv_acc: acc_none
     env: production
     network: wifi
     powersource: fixed
+  dv5a2a3:
+    dv_acc: acc_none
+    env: production
+    network: wifi
+    powersource: fixed
+  dv5a2a3a4:
+    dv_acc: acc_none
+    env: production
+    network: wifi
+    powersource: fixed
+  dv5a2a4:
+    dv_acc: acc_none
+    env: production
+    network: wifi
+    powersource: fixed
   dv5a3:
+    dv_acc: acc_none
+    env: production
+    network: wifi
+    powersource: fixed
+  dv5a3a4:
+    dv_acc: acc_none
+    env: production
+    network: wifi
+    powersource: fixed
+  dv5a4:
     dv_acc: acc_none
     env: production
     network: wifi
@@ -460,12 +1720,72 @@ devices:
     env: production
     network: 4g
     powersource: ac
+  dv6a1a2:
+    dv_acc: acc_none
+    env: production
+    network: 4g
+    powersource: ac
+  dv6a1a2a3:
+    dv_acc: acc_none
+    env: production
+    network: 4g
+    powersource: ac
+  dv6a1a2a3a4:
+    dv_acc: acc_none
+    env: production
+    network: 4g
+    powersource: ac
+  dv6a1a2a4:
+    dv_acc: acc_none
+    env: production
+    network: 4g
+    powersource: ac
+  dv6a1a3:
+    dv_acc: acc_none
+    env: production
+    network: 4g
+    powersource: ac
+  dv6a1a3a4:
+    dv_acc: acc_none
+    env: production
+    network: 4g
+    powersource: ac
+  dv6a1a4:
+    dv_acc: acc_none
+    env: production
+    network: 4g
+    powersource: ac
   dv6a2:
     dv_acc: acc_none
     env: production
     network: 4g
     powersource: ac
+  dv6a2a3:
+    dv_acc: acc_none
+    env: production
+    network: 4g
+    powersource: ac
+  dv6a2a3a4:
+    dv_acc: acc_none
+    env: production
+    network: 4g
+    powersource: ac
+  dv6a2a4:
+    dv_acc: acc_none
+    env: production
+    network: 4g
+    powersource: ac
   dv6a3:
+    dv_acc: acc_none
+    env: production
+    network: 4g
+    powersource: ac
+  dv6a3a4:
+    dv_acc: acc_none
+    env: production
+    network: 4g
+    powersource: ac
+  dv6a4:
     dv_acc: acc_none
     env: production
     network: 4g
@@ -480,12 +1800,72 @@ devices:
     env: production
     network: 4g
     powersource: fixed
+  dv7a1a2:
+    dv_acc: gpu
+    env: production
+    network: 4g
+    powersource: fixed
+  dv7a1a2a3:
+    dv_acc: gpu
+    env: production
+    network: 4g
+    powersource: fixed
+  dv7a1a2a3a4:
+    dv_acc: gpu
+    env: production
+    network: 4g
+    powersource: fixed
+  dv7a1a2a4:
+    dv_acc: gpu
+    env: production
+    network: 4g
+    powersource: fixed
+  dv7a1a3:
+    dv_acc: gpu
+    env: production
+    network: 4g
+    powersource: fixed
+  dv7a1a3a4:
+    dv_acc: gpu
+    env: production
+    network: 4g
+    powersource: fixed
+  dv7a1a4:
+    dv_acc: gpu
+    env: production
+    network: 4g
+    powersource: fixed
   dv7a2:
     dv_acc: gpu
     env: production
     network: 4g
     powersource: fixed
+  dv7a2a3:
+    dv_acc: gpu
+    env: production
+    network: 4g
+    powersource: fixed
+  dv7a2a3a4:
+    dv_acc: gpu
+    env: production
+    network: 4g
+    powersource: fixed
+  dv7a2a4:
+    dv_acc: gpu
+    env: production
+    network: 4g
+    powersource: fixed
   dv7a3:
+    dv_acc: gpu
+    env: production
+    network: 4g
+    powersource: fixed
+  dv7a3a4:
+    dv_acc: gpu
+    env: production
+    network: 4g
+    powersource: fixed
+  dv7a4:
     dv_acc: gpu
     env: production
     network: 4g
@@ -500,12 +1880,72 @@ devices:
     env: production
     network: 4g
     powersource: fixed
+  dv8a1a2:
+    dv_acc: acc_none
+    env: production
+    network: 4g
+    powersource: fixed
+  dv8a1a2a3:
+    dv_acc: acc_none
+    env: production
+    network: 4g
+    powersource: fixed
+  dv8a1a2a3a4:
+    dv_acc: acc_none
+    env: production
+    network: 4g
+    powersource: fixed
+  dv8a1a2a4:
+    dv_acc: acc_none
+    env: production
+    network: 4g
+    powersource: fixed
+  dv8a1a3:
+    dv_acc: acc_none
+    env: production
+    network: 4g
+    powersource: fixed
+  dv8a1a3a4:
+    dv_acc: acc_none
+    env: production
+    network: 4g
+    powersource: fixed
+  dv8a1a4:
+    dv_acc: acc_none
+    env: production
+    network: 4g
+    powersource: fixed
   dv8a2:
     dv_acc: acc_none
     env: production
     network: 4g
     powersource: fixed
+  dv8a2a3:
+    dv_acc: acc_none
+    env: production
+    network: 4g
+    powersource: fixed
+  dv8a2a3a4:
+    dv_acc: acc_none
+    env: production
+    network: 4g
+    powersource: fixed
+  dv8a2a4:
+    dv_acc: acc_none
+    env: production
+    network: 4g
+    powersource: fixed
   dv8a3:
+    dv_acc: acc_none
+    env: production
+    network: 4g
+    powersource: fixed
+  dv8a3a4:
+    dv_acc: acc_none
+    env: production
+    network: 4g
+    powersource: fixed
+  dv8a4:
     dv_acc: acc_none
     env: production
     network: 4g
@@ -520,12 +1960,72 @@ devices:
     env: production
     network: wifi
     powersource: ac
+  dv9a1a2:
+    dv_acc: acc_none
+    env: production
+    network: wifi
+    powersource: ac
+  dv9a1a2a3:
+    dv_acc: acc_none
+    env: production
+    network: wifi
+    powersource: ac
+  dv9a1a2a3a4:
+    dv_acc: acc_none
+    env: production
+    network: wifi
+    powersource: ac
+  dv9a1a2a4:
+    dv_acc: acc_none
+    env: production
+    network: wifi
+    powersource: ac
+  dv9a1a3:
+    dv_acc: acc_none
+    env: production
+    network: wifi
+    powersource: ac
+  dv9a1a3a4:
+    dv_acc: acc_none
+    env: production
+    network: wifi
+    powersource: ac
+  dv9a1a4:
+    dv_acc: acc_none
+    env: production
+    network: wifi
+    powersource: ac
   dv9a2:
     dv_acc: acc_none
     env: production
     network: wifi
     powersource: ac
+  dv9a2a3:
+    dv_acc: acc_none
+    env: production
+    network: wifi
+    powersource: ac
+  dv9a2a3a4:
+    dv_acc: acc_none
+    env: production
+    network: wifi
+    powersource: ac
+  dv9a2a4:
+    dv_acc: acc_none
+    env: production
+    network: wifi
+    powersource: ac
   dv9a3:
+    dv_acc: acc_none
+    env: production
+    network: wifi
+    powersource: ac
+  dv9a3a4:
+    dv_acc: acc_none
+    env: production
+    network: wifi
+    powersource: ac
+  dv9a4:
     dv_acc: acc_none
     env: production
     network: wifi

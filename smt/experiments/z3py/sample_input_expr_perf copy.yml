@@ -1,9 +1,8 @@
 deployments:
-  A: {vsn: release, compu_lvl: 1, comm_lvl: 1, dp_acc: acc_none, intlmodule: edge}
-  B: {vsn: release, compu_lvl: 2, comm_lvl: 3, dp_acc: acc_none, intlmodule: cloud}
   D: {vsn: release, compu_lvl: 3, comm_lvl: 3, dp_acc: acc_none, intlmodule: flexible}
   E: {vsn: release, compu_lvl: 3, comm_lvl: 1, dp_acc: tpu, intlmodule: edge}
   F: {vsn: release, compu_lvl: 3, comm_lvl: 3, dp_acc: tpu, intlmodule: flexible}
+  G: {vsn: release, compu_lvl: 2, comm_lvl: 1, dp_acc: tpu, intlmodule: edge}
 devices:
   dv0: {env: staging, dv_acc: acc_none, network: wifi, powersource: fixed}
   dv1: {env: staging, dv_acc: tpu, network: 4g, powersource: ac}

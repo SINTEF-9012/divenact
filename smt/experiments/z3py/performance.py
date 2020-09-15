@@ -15,11 +15,12 @@ def run():
         documents = yaml.dump(inputdata, file)
     os.system('python3 genobj.py')
 
-#run();
+run();
 
-for i in range(1,4):
+for i in range(1,5):
+    devices = copy.deepcopy(inputdata['devices'])
     for k in devices:
         inputdata['devices']["%sa%i"%(k, i)] = copy.deepcopy(devices[k])
 
-print("Number of devices:%d"%len(inputdata['devices']))
-run()
+    print("Number of devices:%d"%len(inputdata['devices']))
+    run()
