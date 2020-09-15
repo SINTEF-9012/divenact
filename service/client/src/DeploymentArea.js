@@ -2,10 +2,13 @@ import React, { Component } from "react";
 import { Button, Layout, Col, Row, Table, Badge } from "antd";
 import ReactJson from "react-json-view";
 import Axios from "axios";
+import { GlobalContext } from "./GlobalContext";
 
 const { Content } = Layout;
 
 export class DeploymentArea extends Component {
+  static contextType = GlobalContext;
+
   constructor(props) {
     super(props);
     this.columns = [
@@ -13,8 +16,8 @@ export class DeploymentArea extends Component {
         title: "Deployment ID",
         dataIndex: "id",
         render: record =>
-          this.props.appliedDevices[record] ? (
-            <Badge count={this.props.appliedDevices[record].length}>
+          this.context.appliedDevices[record] ? (
+            <Badge count={this.context.appliedDevices[record].length}>
               {record}
             </Badge>
           ) : (
@@ -30,7 +33,7 @@ export class DeploymentArea extends Component {
           <Button
             type="link"
             icon="bulb"
-            onClick={() => this.props.callbackTabChange("4")}
+            onClick={() => this.context.handleTabChange("4")}
           >
             {record.deviceId}
           </Button>
@@ -64,7 +67,7 @@ export class DeploymentArea extends Component {
                 //bordered
                 rowKey={record => record.id}
                 size="small"
-                dataSource={this.props.deployments}
+                dataSource={this.context.deployments}
                 columns={this.columns}
                 expandRowByClick={true}
                 expandedRowRender={record => (
@@ -73,7 +76,7 @@ export class DeploymentArea extends Component {
                     <Table
                       rowKey={record => record.id}
                       columns={this.nestedColumnsApplied}
-                      dataSource={this.props.appliedDevices[record.id]}
+                      dataSource={this.context.appliedDevices[record.id]}
                       pagination={false}
                     />
                     {/* <Table rowKey={record => record.id} columns={this.nestedColumnsTargeted} dataSource={this.props.targetedDevices[record.id]} pagination={false}/> */}

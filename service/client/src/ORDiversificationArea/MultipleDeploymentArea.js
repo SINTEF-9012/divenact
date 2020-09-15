@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import MainForm from "./MainForm";
 import { Tabs, Steps, Table, Badge, Form, Button, Row, Col } from "antd";
+import { GlobalContext } from "../GlobalContext";
+
 const { Step } = Steps;
 const { TabPane } = Tabs;
 
@@ -15,6 +17,8 @@ const { TabPane } = Tabs;
 // );
 
 class MultipleDeploymentArea extends Component {
+  static contextType = GlobalContext;
+
   constructor(props) {
     super(props);
     this.newTabIndex = 0;
@@ -33,7 +37,7 @@ class MultipleDeploymentArea extends Component {
           <Button
             type="link"
             icon="branches"
-            onClick={() => this.props.callbackTabChange("2")}
+            onClick={() => this.context.handleTabChange("2")}
           >
             {record.id}
           </Button>
@@ -45,15 +49,15 @@ class MultipleDeploymentArea extends Component {
         title: "Deployment 1",
         content: (
           <MainForm
-            variants={this.props.variants}
-            devices={this.props.devices}
-            tags={this.props.deviceTags}
-            form={this.props.form}
-            deployments={this.props.deployments}
-            activeDeployments={this.props.activeDeployments}
-            appliedDevices={this.props.appliedDevices}
-            deviceTags={this.props.deviceTags}
-            callbackTabChange={this.props.callbackTabChange}
+            variants={this.context.variants}
+            devices={this.context.devices}
+            tags={this.context.deviceTags}
+            form={this.context.form}
+            deployments={this.context.deployments}
+            activeDeployments={this.context.activeDeployments}
+            appliedDevices={this.context.appliedDevices}
+            deviceTags={this.context.deviceTags}
+            callbackTabChange={this.context.handleTabChange}
           />
         ),
         key: "1"
@@ -62,7 +66,7 @@ class MultipleDeploymentArea extends Component {
     this.state = {
       //add if needed
       matchingDevices: [],
-      devices: this.props.devices,
+      devices: this.context.devices,
       currentStep: 0,
       selectedVariantRowKeys: [],
       expandIconPosition: "left",
@@ -105,15 +109,15 @@ class MultipleDeploymentArea extends Component {
       title: "Deployment " + (panes.length + 1),
       content: (
         <MainForm
-          variants={this.props.variants}
-          devices={this.props.devices}
-          tags={this.props.deviceTags}
-          form={this.props.form}
-          deployments={this.props.deployments}
-          activeDeployments={this.props.activeDeployments}
-          appliedDevices={this.props.appliedDevices}
-          deviceTags={this.props.deviceTags}
-          callbackTabChange={this.props.callbackTabChange}
+          variants={this.context.variants}
+          devices={this.context.devices}
+          tags={this.context.deviceTags}
+          form={this.context.form}
+          deployments={this.context.deployments}
+          activeDeployments={this.context.activeDeployments}
+          appliedDevices={this.context.appliedDevices}
+          deviceTags={this.context.deviceTags}
+          callbackTabChange={this.context.handleTabChange}
         />
       ),
       key: activeKey
@@ -179,13 +183,13 @@ class MultipleDeploymentArea extends Component {
             //rowSelection={deviceRowSelection}
             rowKey={record => record.id}
             size="small"
-            dataSource={this.props.variants}
+            dataSource={this.context.variants}
             columns={this.variantColumns}
             expandedRowRender={record => (
               <span>
                 <Table
                   columns={this.nestedDeviceColumns}
-                  dataSource={this.props.devices.slice(2, 4)} //TODO ALARM!!!
+                  dataSource={this.context.devices.slice(2, 4)} //TODO: ALARM!!!
                   pagination={false}
                 />
               </span>

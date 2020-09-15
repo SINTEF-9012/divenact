@@ -19,7 +19,7 @@ export class VariantStep extends Component {
         title: "Template",
         dataIndex: "template",
         render: (text, record) => (
-          <Button type="link" onClick={() => this.props.callbackTabChange("1")}>
+          <Button type="link" onClick={() => this.context.handleTabChange("1")}>
             {record.template}
           </Button>
         ),
@@ -115,7 +115,7 @@ export class VariantStep extends Component {
   };
 
   removeDisabledFields = (values) => {
-    //add more fields if needed
+    //TODO: add more fields if needed
     if (this.state.vsn_toggle) delete values.vsn;
     if (this.state.compu_level_toggle) delete values.compu_level;
     if (this.state.comm_level_toggle) delete values.comm_level;
@@ -144,7 +144,7 @@ export class VariantStep extends Component {
 
   render() {
     const variant_row_selection = {
-      columnTitle: " ", //this line is to hide the "Select all" checkbox
+      columnTitle: " ", //FIXME: this line is to hide the "Select all" checkbox
       selectedRowKeys: this.context.selected_variant_rowkeys,
       onChange: this.handleVariantSelectChange,
       onSelect: this.handleVariantSelect,

@@ -1,4 +1,3 @@
-cvdeployments:
 deployments:
   dp0: {vsn: preview, compu_lvl: 3, comm_lvl: 2, dp_acc: acc_none, intlmodule: flexible}
   dp1: {vsn: release, compu_lvl: 2, comm_lvl: 1, dp_acc: tpu, intlmodule: edge}

@@ -7,11 +7,12 @@ import {
   Table,
   Popconfirm,
   Tooltip,
-  Tag
+  Tag,
 } from "antd";
 import axios from "axios";
 import { JsonEditor as Editor } from "jsoneditor-react";
 import "jsoneditor-react/es/editor.min.css";
+import { GlobalContext } from "./GlobalContext";
 
 const { Content } = Layout;
 const colors = [
@@ -23,7 +24,7 @@ const colors = [
   "green",
   "blue",
   "red",
-  "green"
+  "green",
 ];
 
 const ButtonGroup = Button.Group;
@@ -106,25 +107,27 @@ const ButtonGroup = Button.Group;
 // }
 
 export class TemplateArea2 extends Component {
+  static contextType = GlobalContext;
+
   constructor(props) {
     super(props);
     this.columns = [
       {
         title: "Template ID",
         dataIndex: "id",
-        width: 200
+        width: 200,
       },
       {
         title: "Tags",
         dataIndex: "tags",
         render: (text, record) =>
-          this.props.templateTags[record.id] &&
-          Object.keys(this.props.templateTags[record.id]).map((key, i) => (
+          this.context.templateTags[record.id] &&
+          Object.keys(this.context.templateTags[record.id]).map((key, i) => (
             <Tag color={colors[i]}>
-              {key}: {this.props.templateTags[record.id][key]}
+              {key}: {this.context.templateTags[record.id][key]}
             </Tag>
           )),
-        width: 500
+        width: 500,
       },
       {
         title: "Actions",
@@ -178,8 +181,8 @@ export class TemplateArea2 extends Component {
               </Tooltip>
             </ButtonGroup>
           </span>
-        )
-      }
+        ),
+      },
     ];
     this.nestedColumnsVariants = [
       {
@@ -189,18 +192,18 @@ export class TemplateArea2 extends Component {
           <Button
             type="link"
             icon="branches"
-            onClick={() => this.props.callbackTabChange("2")}
+            onClick={() => this.context.handleTabChange("2")}
           >
             {record.id}
           </Button>
-        )
-      }
+        ),
+      },
     ];
     this.state = {
       //templates: [],
       tags: {},
       forEdit: null,
-      edited: null
+      edited: null,
     };
     this.editor = React.createRef();
   }
@@ -215,15 +218,15 @@ export class TemplateArea2 extends Component {
             <Col span={14}>
               <Table
                 //bordered
-                rowKey={record => record.id}
+                rowKey={(record) => record.id}
                 size="small"
-                dataSource={this.props.templates}
+                dataSource={this.context.templates}
                 columns={this.columns}
-                expandedRowRender={record => (
+                expandedRowRender={(record) => (
                   <span>
                     <Table
                       columns={this.nestedColumnsVariants}
-                      dataSource={this.props.variants.filter(item => {
+                      dataSource={this.context.variants.filter((item) => {
                         return item.template === record.id;
                       })}
                       pagination={false}
@@ -253,7 +256,7 @@ export class TemplateArea2 extends Component {
     //this.getTags().then(result => {this.setState({tags: result})});
   }
 
-  handleChange = value => {
+  handleChange = (value) => {
     this.setState({ edited: value });
   };
 
@@ -269,27 +272,27 @@ export class TemplateArea2 extends Component {
     return result;
   };
 
-  editTemplate = record => {
+  editTemplate = (record) => {
     this.setState({ forEdit: record }, () => {
       this.editor.current.componentDidMount();
     });
   };
 
-  copyTemplate = async record => {
+  copyTemplate = async (record) => {
     const id = prompt("Enter new id");
 
     if (!id) return;
     let newTemplate = { ...record, id: id };
     delete newTemplate._id;
-    this.props.callbackAddTemplate(newTemplate);
+    this.context.addTemplate(newTemplate);
     this.setState({
       //templates: [...this.state.templates, newTemplate],
       edited: newTemplate,
-      foredit: newTemplate
+      foredit: newTemplate,
     });
   };
 
-  deleteTemplate = templateid => {
+  deleteTemplate = (templateid) => {
     axios.delete(`api/template/${templateid}`);
     this.componentDidMount();
   };
