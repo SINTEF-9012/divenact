@@ -1,5 +1,8 @@
 import program from "commander";
 import {createEdgeDeploymentByEnvironment, listDeployments, triggerDeployment, createEdgeDeploymentByDevice, clearDeployments, removeDeployment, queryModules, queryDevices} from './deployment'
+import {readFileSync} from "fs"
+import {join} from "path"
+import { registry } from "./registry";
 
 program
     .command('list').alias('ls')
@@ -14,6 +17,13 @@ program
             }
         })
         
+    })
+
+program
+    .command('get <id>')
+    .action(async (id, cmd) => {
+        let dep = await registry.getConfiguration(id)
+        console.log(dep.responseBody)
     })
 
 program
@@ -33,6 +43,40 @@ program
                 console.log("Create device-specific deployment wrong: " + err);
             })
             
+        }
+    })
+
+program
+    .command('create <id>')
+    .option('-f --file <value>', 'local file path')
+    .action(async (id, cmd)=>{
+        try{
+            let localfile = ''
+            if('file' in cmd){
+                localfile = cmd.file
+            }
+            else{
+                console.log('no input specified')
+                return
+            }
+            let baseDeployment = JSON.parse(readFileSync('./base_deployment.json', 'utf-8'));
+            let content = readFileSync(join(__dirname, localfile), "utf-8")
+            console.log(content.substring(0, 100))
+            let jsonContent = JSON.parse(content)
+            baseDeployment.id = id
+            baseDeployment.content.modulesContent.$edgeAgent['properties.desired'].modules 
+                = jsonContent.modulesContent.$edgeAgent['properties.desired'].modules;
+            try{
+                await registry.removeConfiguration(id)
+                console.log("Existing deployment " + id + " removed")
+            }
+            catch(err){
+                console.log(id + " not found. No need to remove");
+            }
+            let res = await registry.addConfiguration(baseDeployment)  
+            console.log(res.responseBody)
+        }catch(error){
+            console.log(error)
         }
     })
 
