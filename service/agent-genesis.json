@@ -62,8 +62,8 @@
             "status": "running",
             "restartPolicy": "always",
             "settings": {
-              "image": "rdautov/genesis:latest",
-              "createOptions": "{\"ExposedPorts\":{\"8880/tcp\":{}},\"HostConfig\":{\"Privileged\":true,\"PortBindings\":{\"8880/tcp\":[{\"HostPort\":\"8880\"}]}}}"
+              "image": "enactproject/genesis:arm",
+              "createOptions": "{\"ExposedPorts\":{\"8880/tcp\":{}},\"HostConfig\":{\"Privileged\":true,\"PortBindings\":{\"8880/tcp\":[{\"HostPort\":\"8880\"}], \"9001/tcp\":[{\"HostPort\":\"9001\"}], \"8000/tcp\":[{\"HostPort\":\"8000\"}], \"8081/tcp\":[{\"HostPort\":\"8081\"}]}}}"
             }
           },
           "GenesisBroker": {
