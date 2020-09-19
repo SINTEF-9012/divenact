@@ -63,7 +63,7 @@
             "restartPolicy": "always",
             "settings": {
               "image": "enactproject/genesis:arm",
-              "createOptions": "{\"ExposedPorts\":{\"8880/tcp\":{}},\"HostConfig\":{\"Privileged\":true,\"NetworkMode\":\"host\",\"PortBindings\":{\"8880/tcp\":[{\"HostPort\":\"8880\"}], \"9001/tcp\":[{\"HostPort\":\"9001\"}], \"8000/tcp\":[{\"HostPort\":\"8000\"}], \"8081/tcp\":[{\"HostPort\":\"8081\"}]}}}"
+              "createOptions": "{\"NetworkingConfig\":{\"EndpointsConfig\":{\"host\":{}}},\"HostConfig\":{\"Privileged\":true,\"NetworkMode\":\"host\",\"PortBindings\":{\"8880/tcp\":[{\"HostPort\":\"8880\"}], \"9001/tcp\":[{\"HostPort\":\"9001\"}], \"8000/tcp\":[{\"HostPort\":\"8000\"}], \"8081/tcp\":[{\"HostPort\":\"8081\"}]}}}"
             }
           },
           "GenesisBroker": {
