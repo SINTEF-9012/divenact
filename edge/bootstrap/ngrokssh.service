@@ -1,0 +1,9 @@
+[Unit]
+Description=Example systemd service.
+
+[Service]
+Type=simple
+ExecStart=/opt/ngrok tcp 22
+
+[Install]
+WantedBy=multi-user.target

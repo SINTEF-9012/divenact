@@ -5,5 +5,6 @@ unzip ngrok-stable-linux-arm.zip
 sudo cp ./ngrok /opt/
 /opt/ngrok authtoken $(<ngrok.credential)
 
-sudo cp ngrok-ssh /etc/init.d/
-sudo chmod a+x /etc/init.d/ngrok-ssh
+sudo cp ./ngrokssh.service /etc/systemd/system/ngrokssh.service
+sudo sudo chmod 644 /etc/systemd/system/ngrokssh.service
+sudo systemctl enable ngrokssh
