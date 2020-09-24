@@ -19,13 +19,12 @@ sudo apt-get install -y iotedge
 
 connection=$(<connection.credential)
 # Check the indention
-sudo sed -i.bak "s@.*device_connection_string:.*@  device_connection_string: $connection@" /etc/iotedge/config.yaml 
-
+sudo sed -i.bak "s@.*device_connection_string:.*@  device_connection_string: $connection@" "/etc/iotedge/config.yaml"
 sudo systemctl restart iotedge
 
 # Enable Docker remote engine
 sudo mkdir -p /etc/systemd/system/docker.service.d/
-sudo echo "[Service]\nExecStart=\nExecStart=/usr/bin/dockerd -H tcp://0.0.0.0:2376 -H unix:///var/run/docker.sock" > /etc/systemd/system/docker.service.d/startup_options.conf
+sudo printf "[Service]\nExecStart=\nExecStart=/usr/bin/dockerd -H tcp://0.0.0.0:2376 -H unix:///var/run/docker.sock" > /etc/systemd/system/docker.service.d/startup_options.conf
 
 sudo systemctl daemon-reload
 sudo systemctl restart docker.service
