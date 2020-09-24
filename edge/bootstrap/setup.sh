@@ -5,6 +5,8 @@
 # Use Docker instead of Moby
 curl -sSL https://get.docker.com | sh
 
+sudo apt-get update
+sudo apt-get install libssl1.0.2
 # Install iotedge
 curl https://packages.microsoft.com/config/debian/stretch/multiarch/prod.list > ./microsoft-prod.list
 sudo cp ./microsoft-prod.list /etc/apt/sources.list.d/
